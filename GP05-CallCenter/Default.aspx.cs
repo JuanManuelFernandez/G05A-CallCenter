@@ -13,5 +13,13 @@ namespace GP05_CallCenter
         {
 
         }
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Registro.aspx");
+        }
+        protected void btnLogIn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("LogIn.aspx");
+        }
     }
 }
