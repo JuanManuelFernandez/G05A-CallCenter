@@ -4,39 +4,21 @@
 
     <main>
         <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-            <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+            <h1 id="aspnetTitle" class="text-center mb-4">Call Center UTN</h1>
+            <%--aclaracion: mb = margin bot (margin de abajo) mt = margin top (margin de arriba)--%>
+            <p class="text-center mb-4">Bienvenido a nuestro centro de soporte. Tomaremos tu reclamo con mucho gusto, te esperamos.</p>
         </section>
 
-        <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-                <p>
-                    ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-                A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-                </p>
+        <div>
+            <h2 class="text-center mb-4">Primero lo primero</h2>
+        </div>
+        <div class="row justify-content-center">
+            <section class="col-md-2" aria-labelledby="gettingStartedTitle">
+                <button class="btn btn-primary btn-lg mx-3">Registrate</button>
+                <%--btn-primary da el color azul (tengo entedido que es el que boostrap da por default) btn-leg los hace más grandes y el nombre btn es el--%>
             </section>
-            <section class="col-md-4" aria-labelledby="librariesTitle">
-                <h2 id="librariesTitle">Get more libraries</h2>
-                <p>
-                    NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="hostingTitle">
-                <h2 id="hostingTitle">Web Hosting</h2>
-                <p>
-                    You can easily find a web hosting company that offers the right mix of features and price for your applications.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-                </p>
+            <section class="col-md-2" aria-labelledby="hostingTitle">
+                <button class="btn btn-primary btn-lg mx-3">Inicia sesión</button>
             </section>
         </div>
     </main>
