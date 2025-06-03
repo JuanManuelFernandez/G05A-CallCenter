@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}|GP05-CallCenter\\GP05-CallCenter.csproj|c:\\users\\facundo\\documents\\github\\g05a-callcenter\\gp05-callcenter\\incidencia.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}|GP05-CallCenter\\GP05-CallCenter.csproj|solutionrelative:gp05-callcenter\\incidencia.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}|GP05-CallCenter\\GP05-CallCenter.csproj|c:\\users\\facundo\\documents\\github\\g05a-callcenter\\gp05-callcenter\\incidencia.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}|GP05-CallCenter\\GP05-CallCenter.csproj|solutionrelative:gp05-callcenter\\incidencia.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE96385A-9E03-4B27-9C4E-EF1C8B51589E}|Datos\\Datos.csproj|c:\\users\\facundo\\documents\\github\\g05a-callcenter\\datos\\accesoincidencias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE96385A-9E03-4B27-9C4E-EF1C8B51589E}|Datos\\Datos.csproj|solutionrelative:datos\\accesoincidencias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}|GP05-CallCenter\\GP05-CallCenter.csproj|c:\\users\\facundo\\documents\\github\\g05a-callcenter\\gp05-callcenter\\formularios.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}|GP05-CallCenter\\GP05-CallCenter.csproj|solutionrelative:gp05-callcenter\\formularios.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}|GP05-CallCenter\\GP05-CallCenter.csproj|c:\\users\\facundo\\documents\\github\\g05a-callcenter\\gp05-callcenter\\formularios.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}|GP05-CallCenter\\GP05-CallCenter.csproj|solutionrelative:gp05-callcenter\\formularios.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccesoIncidencias.cs",
+              "DocumentMoniker": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\Datos\\AccesoIncidencias.cs",
+              "RelativeDocumentMoniker": "Datos\\AccesoIncidencias.cs",
+              "ToolTip": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\Datos\\AccesoIncidencias.cs",
+              "RelativeToolTip": "Datos\\AccesoIncidencias.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAADwvyMAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T22:27:01.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Incidencia.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\GP05-CallCenter\\Incidencia.aspx.cs",
+              "RelativeDocumentMoniker": "GP05-CallCenter\\Incidencia.aspx.cs",
+              "ToolTip": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\GP05-CallCenter\\Incidencia.aspx.cs",
+              "RelativeToolTip": "GP05-CallCenter\\Incidencia.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T22:01:13.548Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Incidencia.aspx",
+              "DocumentMoniker": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\GP05-CallCenter\\Incidencia.aspx",
+              "RelativeDocumentMoniker": "GP05-CallCenter\\Incidencia.aspx",
+              "ToolTip": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\GP05-CallCenter\\Incidencia.aspx",
+              "RelativeToolTip": "GP05-CallCenter\\Incidencia.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-06-03T21:59:40.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Formularios.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\GP05-CallCenter\\Formularios.aspx.cs",
+              "RelativeDocumentMoniker": "GP05-CallCenter\\Formularios.aspx.cs",
+              "ToolTip": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\GP05-CallCenter\\Formularios.aspx.cs",
+              "RelativeToolTip": "GP05-CallCenter\\Formularios.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T21:19:48.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Formularios.aspx",
+              "DocumentMoniker": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\GP05-CallCenter\\Formularios.aspx",
+              "RelativeDocumentMoniker": "GP05-CallCenter\\Formularios.aspx",
+              "ToolTip": "C:\\Users\\Facundo\\Documents\\GitHub\\G05A-CallCenter\\GP05-CallCenter\\Formularios.aspx",
+              "RelativeToolTip": "GP05-CallCenter\\Formularios.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-06-03T21:00:39.744Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -18,7 +18,7 @@
                 <%--btn-primary da el color azul (tengo entedido que es el que boostrap da por default) btn-leg los hace más grandes y el nombre btn es el--%>
             </section>
             <section class="col-md-2" aria-labelledby="hostingTitle">
-                <asp:Button ID="Button2" runat="server" Text="Inicia sesión" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnLogIn_Click"/>
+                <asp:Button ID="btnLogin" runat="server" Text="Inicia sesión" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnLogIn_Click"/>
             </section>
         </div>
     </main>

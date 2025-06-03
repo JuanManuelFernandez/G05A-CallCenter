@@ -120,7 +120,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Formularios.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Incidencia.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -208,8 +210,22 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Formularios.aspx.cs">
+      <DependentUpon>Formularios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formularios.aspx.designer.cs">
+      <DependentUpon>Formularios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Incidencia.aspx.cs">
+      <DependentUpon>Incidencia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Incidencia.aspx.designer.cs">
+      <DependentUpon>Incidencia.aspx</DependentUpon>
     </Compile>
     <Compile Include="LogIn.aspx.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
@@ -261,6 +277,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Datos\Datos.csproj">
+      <Project>{fe96385a-9e03-4b27-9c4e-ef1c8b51589e}</Project>
+      <Name>Datos</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

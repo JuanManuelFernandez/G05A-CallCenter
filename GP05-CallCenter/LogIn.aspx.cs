@@ -13,5 +13,10 @@ namespace GP05_CallCenter
         {
 
         }
+
+        protected void btnIngresar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Formularios.aspx");
+        }
     }
 }

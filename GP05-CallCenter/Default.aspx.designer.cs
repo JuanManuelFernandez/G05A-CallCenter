@@ -24,12 +24,12 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.Button btnRegister;
 
         /// <summary>
-        /// Control Button2.
+        /// Control btnLogin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnLogin;
     }
 }

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="GP05_CallCenter.Registro" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main>
         <h1 class="text-center">¡Bienvenido!</h1>
@@ -20,6 +21,11 @@
             </div>
             <div class="mt-3">
                 <asp:TextBox ID="TextBox5" runat="server" Placeholder="Telefono"></asp:TextBox>
+            </div>
+            <div class="row justify-content-center">
+                <section class="col-md-3" aria-labelledby="hostingTitle">
+                    <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnRegistrar_Click" />
+                </section>
             </div>
         </div>
     </main>
