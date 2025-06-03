@@ -1,0 +1,6 @@
+CREATE DATABASE TPI_CallCenter
+GO
+USE TPI_CallCenter
+GO
+
+CREATE TABLE 
