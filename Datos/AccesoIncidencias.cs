@@ -26,9 +26,13 @@ namespace Datos
                     aux.IdIncidencia = (int)datos.Lector["IdIncidencia"];
                     aux.LegajoEmpleado = (string)datos.Lector["LegajoEmpleado"];
                     aux.DNI = (string)datos.Lector["DNICliente"];
+                    aux.IdTipo = (int)datos.Lector["IdTipo"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.FechaYHora = (DateTime)datos.Lector["FechaYHora"];
+                    aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
+                    aux.FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue;
+                    aux.Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty;
                     aux.IdPrioridad = (int)datos.Lector["IdPrioridad"];
+                    aux.Estado = (string)datos.Lector["Estado"];
 
                     incidencias.Add(aux);
                 }
@@ -56,9 +60,13 @@ namespace Datos
                     aux.IdIncidencia = (int)datos.Lector["IdIncidencia"];
                     aux.LegajoEmpleado = (string)datos.Lector["LegajoEmpleado"];
                     aux.DNI = (string)datos.Lector["DNICliente"];
+                    aux.IdTipo = (int)datos.Lector["IdTipo"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.FechaYHora = (DateTime)datos.Lector["FechaYHora"];
+                    aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
+                    aux.FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue;
+                    aux.Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty;
                     aux.IdPrioridad = (int)datos.Lector["IdPrioridad"];
+                    aux.Estado = (string)datos.Lector["Estado"];
                 }
             }
             catch (Exception er)
