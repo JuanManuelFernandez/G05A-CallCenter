@@ -1,6 +1,0 @@
-C:\Users\Facundo\Documents\GitHub\G05A-CallCenter\Dominio\bin\Debug\Dominio.dll
-C:\Users\Facundo\Documents\GitHub\G05A-CallCenter\Dominio\bin\Debug\Dominio.pdb
-C:\Users\Facundo\Documents\GitHub\G05A-CallCenter\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
-C:\Users\Facundo\Documents\GitHub\G05A-CallCenter\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
-C:\Users\Facundo\Documents\GitHub\G05A-CallCenter\Dominio\obj\Debug\Dominio.dll
-C:\Users\Facundo\Documents\GitHub\G05A-CallCenter\Dominio\obj\Debug\Dominio.pdb
