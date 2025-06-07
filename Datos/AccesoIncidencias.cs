@@ -18,22 +18,22 @@ namespace Datos
             datos.Conectar();
             datos.Consultar("SELECT * FROM Incidencias"); //cambiar...
             datos.Leer();
-            datos.Leer();
             try
             {
                 while (datos.Lector.Read())
                 {
                     Incidencias aux = new Incidencias();
-                    aux.IdIncidencia = (int)datos.Lector["IdIncidencia"];
-                    aux.LegajoEmpleado = (string)datos.Lector["LegajoEmpleado"];
-                    aux.DNI = (string)datos.Lector["DNICliente"];
-                    aux.IdTipo = (int)datos.Lector["IdTipo"];
+                    //IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion, FechaYHoraResolucion, Resolucion
+                    aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
+                    aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
+                    aux.IdCliente = (int)datos.Lector["IDCliente"];
+                    aux.IdTipo = (int)datos.Lector["IDTipo"];
+                    aux.IdPrioridad = (int)datos.Lector["IDPrioridad"];
+                    aux.EstadoActual = (string)datos.Lector["EstadoActual"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
                     aux.FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue;
                     aux.Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty;
-                    aux.IdPrioridad = (int)datos.Lector["IdPrioridad"];
-                    aux.Estado = (string)datos.Lector["Estado"];
 
                     incidencias.Add(aux);
 
@@ -59,16 +59,17 @@ namespace Datos
             try
             {
                 while (datos.Lector.Read()) {
-                    aux.IdIncidencia = (int)datos.Lector["IdIncidencia"];
-                    aux.LegajoEmpleado = (string)datos.Lector["LegajoEmpleado"];
-                    aux.DNI = (string)datos.Lector["DNICliente"];
+                    //IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion, FechaYHoraResolucion, Resolucion
+                    aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
+                    aux.IdCliente = (int)datos.Lector["IDCliente"];
+                    aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
                     aux.IdTipo = (int)datos.Lector["IdTipo"];
+                    aux.IdPrioridad = (int)datos.Lector["IdPrioridad"];
+                    aux.EstadoActual = (string)datos.Lector["EstadoActual"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
                     aux.FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue;
                     aux.Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty;
-                    aux.IdPrioridad = (int)datos.Lector["IdPrioridad"];
-                    aux.Estado = (string)datos.Lector["Estado"];
                 }
             }
             catch (Exception er)

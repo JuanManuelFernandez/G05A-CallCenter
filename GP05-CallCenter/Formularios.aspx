@@ -5,8 +5,9 @@
         <h1>Lista de Incidencias Actuales:</h1>
         <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="dgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencia" runat="server" class="table table-bordered" AutoGenerateColumns="false">
             <Columns>
-                <asp:BoundField HeaderText="Fecha y Hora" DataField="FechaYHoraCreacion" />
                 <asp:BoundField HeaderText="Prioridad" DataField="IdPrioridad" />
+                <asp:BoundField HeaderText="Estado Actual" DataField="EstadoActual" />
+                <asp:BoundField HeaderText="Fecha/Hora Creacion" DataField="FechaYHoraCreacion" />
                 <asp:CommandField ShowSelectButton="true" SelectText="Abrir" />
             </Columns>
         </asp:GridView>

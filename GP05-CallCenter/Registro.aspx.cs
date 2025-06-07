@@ -18,24 +18,24 @@ namespace GP05_CallCenter
             AccesoClientes accesoClientes = new AccesoClientes();
             Clientes nuevoCliente = new Clientes
             {
-                dni = TextBox1.Text,
-                nombre = TextBox2.Text,
-                apellido = TextBox3.Text,
-                email = TextBox4.Text,
-                telefono = TextBox5.Text,
-                contraseña = TextBox6.Text,
+                Dni = dni.Text,
+                Nombre = nombre.Text,
+                Apellido = apellido.Text,
+                Email = mail.Text,
+                Telefono = telefono.Text,
+                Contraseña = contraseña.Text,
             };
 
-            LblRegistro.Visible = true;
+            lblRegistro.Visible = true;
 
             try
             {
-                TextBox1.Text = "";
-                TextBox2.Text = "";
-                TextBox3.Text = "";
-                TextBox4.Text = "";
-                TextBox5.Text = "";
-                TextBox6.Text = "";
+                dni.Text = "";
+                nombre.Text = "";
+                apellido.Text = "";
+                mail.Text = "";
+                telefono.Text = "";
+                contraseña.Text = "";
                 accesoClientes.AgregarCliente(nuevoCliente);
             }
             catch (Exception ex)

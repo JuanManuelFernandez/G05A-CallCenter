@@ -10,8 +10,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="col-md-1">
-                    <asp:Label ID="lblDNI" runat="server" Text="DNI"></asp:Label>
-                    <asp:TextBox ID="txtDNI" runat="server"></asp:TextBox>
+                    <asp:Label ID="lblIdCliente" runat="server" Text="DNI"></asp:Label>
+                    <asp:TextBox ID="txtIdCliente" runat="server"></asp:TextBox>
                 </div>
                 <div class="col-md-1">
                     <asp:Label ID="lblMail" runat="server" Text="Email"></asp:Label>
@@ -38,8 +38,8 @@
             </div>
             <div class="col-md-6 text-end">
                 <div class="col-md-1">
-                    <asp:Label ID="lblEstado" runat="server" Text="Estado"></asp:Label>
-                    <asp:TextBox ID="txtEstado" runat="server"></asp:TextBox>
+                    <asp:Label ID="lblEstadoActual" runat="server" Text="Estado Actual"></asp:Label>
+                    <asp:TextBox ID="txtEstadoActual" runat="server"></asp:TextBox>
                 </div>
                 <div class="col-md-1">
                     <asp:Label ID="lblPrioridad" runat="server" Text="Prioridad"></asp:Label>

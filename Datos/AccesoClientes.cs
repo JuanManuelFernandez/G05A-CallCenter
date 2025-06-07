@@ -26,13 +26,14 @@ namespace Datos
                 while (datos.Lector.Read())
                 {
                     Clientes aux = new Clientes();
-                    aux.id = (int)datos.Lector["IDPersona"];
-                    aux.dni = (string)datos.Lector["DNI"];
-                    aux.nombre = (string)datos.Lector["Nombre"];
-                    aux.apellido = (string)datos.Lector["Apellido"];
-                    aux.email = (string)datos.Lector["Mail"];
-                    aux.telefono = (string)datos.Lector["Telefono"];
-                    aux.contraseña = (string)datos.Lector["Contraseña"];
+                    aux.IdCliente = (int)datos.Lector["IDCliente"]; // IDPersona cambiado por IDCliente
+                    aux.Dni = (string)datos.Lector["DNI"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Apellido = (string)datos.Lector["Apellido"];
+                    aux.Email = (string)datos.Lector["Mail"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Contraseña = (string)datos.Lector["Contraseña"];
+                    aux.IdCategoria = (int)datos.Lector["IDCategoria"]; // Deberia leer de la tabla Categorias
 
                     clientes.Add(aux);
                 }
@@ -56,12 +57,12 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("INSERT INTO Cliente (DNI, Nombre, Apellido, Mail, Telefono, Contraseña) VALUES (@DNI, @Nombre, @Apellido, @Mail, @Telefono, @Contraseña)");
-                datos.setearParametro("@DNI", nuevo.dni);
-                datos.setearParametro("@Nombre", nuevo.nombre);
-                datos.setearParametro("@Apellido", nuevo.apellido);
-                datos.setearParametro("@Mail", nuevo.email);
-                datos.setearParametro("@Telefono", nuevo.telefono);
-                datos.setearParametro("@Contraseña", nuevo.contraseña);
+                datos.setearParametro("@DNI", nuevo.Dni);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Apellido", nuevo.Apellido);
+                datos.setearParametro("@Mail", nuevo.Email);
+                datos.setearParametro("@Telefono", nuevo.Telefono);
+                datos.setearParametro("@Contraseña", nuevo.Contraseña);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
