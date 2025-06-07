@@ -42,7 +42,7 @@ CREATE TABLE Clientes (
 	Mail NVARCHAR(100) NOT NULL,
 	Telefono NVARCHAR(50) NOT NULL,
 	Contraseña NVARCHAR(50) NOT NULL,
-	IDCategoria INT NOT NULL -- CAMBIO
+	IDCategoria INT NULL -- CAMBIO
 )
 
 INSERT INTO Clientes (DNI, Nombre, Apellido, Mail, Telefono, Contraseña, IDCategoria)

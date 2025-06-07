@@ -56,7 +56,7 @@ namespace Datos
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Cliente (DNI, Nombre, Apellido, Mail, Telefono, Contraseña) VALUES (@DNI, @Nombre, @Apellido, @Mail, @Telefono, @Contraseña)");
+                datos.Consultar("INSERT INTO Clientes (DNI, Nombre, Apellido, Mail, Telefono, Contraseña) VALUES (@DNI, @Nombre, @Apellido, @Mail, @Telefono, @Contraseña)");
                 datos.setearParametro("@DNI", nuevo.Dni);
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Apellido", nuevo.Apellido);
