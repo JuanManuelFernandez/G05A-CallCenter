@@ -15,7 +15,7 @@
             <div class="mt-3">
                 <asp:TextBox ID="txtContraseña" runat="server" Placeholder="Contraseña"></asp:TextBox>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mt-3">
                 <section class="col-md-3" aria-labelledby="hostingTitle">
                     <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnIngresar_Click" />
                 </section>

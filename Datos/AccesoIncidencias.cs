@@ -18,6 +18,7 @@ namespace Datos
             datos.Conectar();
             datos.Consultar("SELECT * FROM Incidencias"); //cambiar...
             datos.Leer();
+            datos.Leer();
             try
             {
                 while (datos.Lector.Read())
@@ -35,6 +36,7 @@ namespace Datos
                     aux.Estado = (string)datos.Lector["Estado"];
 
                     incidencias.Add(aux);
+
                 }
             }
             catch (Exception er)

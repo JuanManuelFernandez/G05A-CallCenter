@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoIncidencias.cs" />
+    <Compile Include="AccesoClientes.cs" />
+    <Compile Include="Clientes.cs" />
     <Compile Include="Incidencias.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

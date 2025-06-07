@@ -19,10 +19,16 @@
             <div class="mb-3">
                 <asp:TextBox ID="TextBox4" runat="server" Placeholder="Mail"></asp:TextBox>
             </div>
-            <div class="mt-3">
+            <div class="mb-3">
                 <asp:TextBox ID="TextBox5" runat="server" Placeholder="Telefono"></asp:TextBox>
             </div>
-            <div class="row justify-content-center">
+            <div class="mt-3">
+                 <asp:TextBox ID="TextBox6" runat="server" Placeholder="Contraseña"></asp:TextBox>
+            </div>
+            <div class="row justify-content-center mt-1">
+                <asp:Label ID="LblRegistro" runat="server" Text="Registro realizado con exito" Visible="false" ForeColor="Green"></asp:Label>
+            </div>
+            <div class="row justify-content-center mt-2">
                 <section class="col-md-3" aria-labelledby="hostingTitle">
                     <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnRegistrar_Click" />
                 </section>
