@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Routing;
 using Microsoft.AspNet.FriendlyUrls;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public static class RouteConfig
     {

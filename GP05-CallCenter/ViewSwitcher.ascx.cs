@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.FriendlyUrls.Resolvers;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public partial class ViewSwitcher : System.Web.UI.UserControl
     {

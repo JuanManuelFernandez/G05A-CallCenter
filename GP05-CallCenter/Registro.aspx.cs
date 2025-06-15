@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Datos;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public partial class Registro : System.Web.UI.Page
     {
@@ -16,14 +17,17 @@ namespace GP05_CallCenter
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             AccesoClientes accesoClientes = new AccesoClientes();
-            Clientes nuevoCliente = new Clientes
+            Cliente nuevoCliente = new Cliente();
             {
-                Dni = dni.Text,
-                Nombre = nombre.Text,
-                Apellido = apellido.Text,
-                Email = mail.Text,
-                Telefono = telefono.Text,
-                Contraseña = contraseña.Text,
+                nuevoCliente.DNI = dni.Text;
+                nuevoCliente.Nombre = nombre.Text;
+                nuevoCliente.Apellido = apellido.Text;
+                nuevoCliente.Telefono = telefono.Text;
+            }
+            nuevoCliente.Usuario = new Usuario();
+            {
+                nuevoCliente.Email = email.Text;
+                nuevoCliente.Usuario.Clave = clave.Text;
             };
 
             lblRegistro.Visible = true;
@@ -33,9 +37,9 @@ namespace GP05_CallCenter
                 dni.Text = "";
                 nombre.Text = "";
                 apellido.Text = "";
-                mail.Text = "";
+                email.Text = "";
                 telefono.Text = "";
-                contraseña.Text = "";
+                clave.Text = "";
                 accesoClientes.AgregarCliente(nuevoCliente);
             }
             catch (Exception ex)

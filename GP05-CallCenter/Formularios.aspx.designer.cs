@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
 
 

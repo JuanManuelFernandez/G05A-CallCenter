@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
 
 
@@ -42,15 +42,6 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.TextBox apellido;
 
         /// <summary>
-        /// mail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox mail;
-
-        /// <summary>
         /// telefono control.
         /// </summary>
         /// <remarks>
@@ -60,13 +51,22 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.TextBox telefono;
 
         /// <summary>
-        /// contraseña control.
+        /// email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox contraseña;
+        protected global::System.Web.UI.WebControls.TextBox email;
+
+        /// <summary>
+        /// clave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox clave;
 
         /// <summary>
         /// lblRegistro control.

@@ -9,11 +9,11 @@ namespace Datos
 {
     public class AccesoIncidencias
     {
-        private List<Incidencias> incidencias = null;
+        private List<Incidencia> incidencias = null;
         private AccesoDatos datos = null;
 
-        public List<Incidencias> listar() { 
-            incidencias = new List<Incidencias>();
+        public List<Incidencia> listar() { 
+            incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
             datos.Consultar("SELECT * FROM Incidencias"); //cambiar...
@@ -22,18 +22,20 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Incidencias aux = new Incidencias();
-                    //IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion, FechaYHoraResolucion, Resolucion
-                    aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
-                    aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
-                    aux.IdCliente = (int)datos.Lector["IDCliente"];
-                    aux.IdTipo = (int)datos.Lector["IDTipo"];
-                    aux.IdPrioridad = (int)datos.Lector["IDPrioridad"];
-                    aux.EstadoActual = (string)datos.Lector["EstadoActual"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
-                    aux.FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue;
-                    aux.Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty;
+                    Incidencia aux = new Incidencia
+                    {
+                        //IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion, FechaYHoraResolucion, Resolucion
+                        IdIncidencia = (int)datos.Lector["IDIncidencia"],
+                        IdEmpleado = (int)datos.Lector["IDEmpleado"],
+                        IdCliente = (int)datos.Lector["IDCliente"],
+                        IdTipo = (int)datos.Lector["IDTipo"],
+                        IdPrioridad = (int)datos.Lector["IDPrioridad"],
+                        EstadoActual = (string)datos.Lector["EstadoActual"],
+                        Descripcion = (string)datos.Lector["Descripcion"],
+                        FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue,
+                        FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue,
+                        Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty
+                    };
 
                     incidencias.Add(aux);
 
@@ -50,9 +52,9 @@ namespace Datos
             }
             return incidencias;
         }
-        public Incidencias Buscar(string id) {
+        public Incidencia Buscar(string id) {
             datos = new AccesoDatos();
-            Incidencias aux = new Incidencias();
+            Incidencia aux = new Incidencia();
             datos.Conectar();
             datos.Consultar("SELECT * FROM Incidencias WHERE IDIncidencia = " + id);
             datos.Leer();

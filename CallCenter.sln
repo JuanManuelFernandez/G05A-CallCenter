@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GP05-CallCenter", "GP05-CallCenter\GP05-CallCenter.csproj", "{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCenter", "GP05-CallCenter\CallCenter.csproj", "{F2DFDA15-63B2-4F4F-AAFC-C476BB0994F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{DDE82B76-8FBD-4AB2-8D52-4D094C4DC8DE}"
 EndProject

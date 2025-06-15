@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="GP05_CallCenter.Registro" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="CallCenter.Registro" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main>
@@ -17,13 +17,13 @@
                 <asp:TextBox ID="apellido" runat="server" Placeholder="Apellido"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <asp:TextBox ID="mail" runat="server" Placeholder="Mail"></asp:TextBox>
-            </div>
-            <div class="mb-3">
                 <asp:TextBox ID="telefono" runat="server" Placeholder="Telefono"></asp:TextBox>
             </div>
+            <div class="mb-3">
+                <asp:TextBox ID="email" runat="server" Placeholder="Email"></asp:TextBox>
+            </div>
             <div class="mt-3">
-                 <asp:TextBox ID="contraseña" runat="server" Placeholder="Contraseña"></asp:TextBox>
+                 <asp:TextBox ID="clave" runat="server" Placeholder="Contraseña"></asp:TextBox>
             </div>
             <div class="row justify-content-center mt-1">
                 <asp:Label ID="lblRegistro" runat="server" Text="Registro realizado con exito" Visible="false" ForeColor="Green"></asp:Label>

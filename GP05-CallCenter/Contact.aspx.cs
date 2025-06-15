@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public partial class Contact : Page
     {

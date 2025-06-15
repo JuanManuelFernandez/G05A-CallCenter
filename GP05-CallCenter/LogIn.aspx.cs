@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Datos;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public partial class LogIn : System.Web.UI.Page
     {

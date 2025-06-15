@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="GP05_CallCenter.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="CallCenter.Global" Language="C#" %>
