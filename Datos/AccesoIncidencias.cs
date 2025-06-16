@@ -65,8 +65,8 @@ namespace Datos
                     aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
                     aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
-                    aux.IdTipo = (int)datos.Lector["IdTipo"];
-                    aux.IdPrioridad = (int)datos.Lector["IdPrioridad"];
+                    aux.IdTipo = (int)datos.Lector["IDTipo"];
+                    aux.IdPrioridad = (int)datos.Lector["IDPrioridad"];
                     aux.EstadoActual = (string)datos.Lector["EstadoActual"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;

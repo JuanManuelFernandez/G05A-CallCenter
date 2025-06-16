@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Datos;
+using Dominio;
 
 namespace CallCenter
 {
@@ -20,18 +21,18 @@ namespace CallCenter
                 txtDireccion.Enabled = false;
                 txtTipo.Enabled = false;
 
-                btnCargar.Text = "Aceptar";
-                string id = Request.QueryString["id"].ToString();
-                AccesoIncidencias datos = new AccesoIncidencias();
-                Incidencia actual = datos.Buscar(id);
+                //btnCargar.Text = "Aceptar";
+                //string id = Request.QueryString["id"].ToString();
+                //AccesoIncidencias datos = new AccesoIncidencias();
+                //Incidencia actual = datos.Buscar(id);
 
-                lblFechaYHora.Text = actual.FechaYHoraCreacion.ToString();
-                txtIdCliente.Text = actual.IdCliente.ToString();
-                txtDescripcion.Text = actual.Descripcion.ToString();
-                txtTipo.Text = actual.IdTipo.ToString();
-                txtEstadoActual.Text = actual.EstadoActual.ToString();
-                txtPrioridad.Text = actual.IdPrioridad.ToString();
-                txtResolucion.Text= actual.Resolucion.ToString();
+                //txtIdCliente.Text = actual.IdCliente.ToString();
+                //txtTipo.Text = actual.IdTipo.ToString();
+                //txtPrioridad.Text = actual.IdPrioridad.ToString();
+                //lblFechaYHora.Text = actual.FechaYHoraCreacion.ToString();
+                //txtEstadoActual.Text = actual.EstadoActual.ToString();
+                //txtDescripcion.Text = actual.Descripcion.ToString();
+                //txtResolucion.Text= actual.Resolucion.ToString();
             }
         }
     }
