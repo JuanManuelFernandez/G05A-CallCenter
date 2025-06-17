@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AccesoIncidencias.cs" />
     <Compile Include="AccesoClientes.cs" />
+    <Compile Include="AccesoUsuario.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Incidencia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

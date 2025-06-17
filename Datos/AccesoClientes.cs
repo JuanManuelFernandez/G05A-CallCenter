@@ -17,8 +17,8 @@ namespace Datos
             clientes = new List<Cliente>();
             datos = new AccesoDatos();
 
-            datos.Conectar();
             // Unimos Clientes y Usuarios mediante IDUsuario
+            datos.Conectar();
             datos.Consultar("SELECT C.IDCliente,C.IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
             datos.Leer();
 
@@ -61,18 +61,22 @@ namespace Datos
         public void AgregarCliente(Cliente nuevo)
         {
             datos = new AccesoDatos();
+            AccesoUsuario auxiliar = new AccesoUsuario();
 
             try
             {
                 // Insertar en Usuarios
+                datos.Conectar();
                 datos.Consultar("INSERT INTO Usuarios (Email, Clave) VALUES (@Email, @Clave)");
                 datos.setearParametro("@Email", nuevo.Usuario.Email);
                 datos.setearParametro("@Clave", nuevo.Usuario.Clave);
+                datos.EjecutarNonQuery();
+                datos.Cerrar();
 
                 // Insertar en Clientes usando el IDUsuario recién generado
-                datos.Consultar("INSERT INTO Clientes (IDCategoria, IDUsuario, DNI, Nombre, Apellido, Telefono) VALUES (@IDCateg, @IDUsuario, @DNI, @Nombre, @Apellido, @Telefono)");
-                datos.setearParametro("@IDCateg", nuevo.IdCategoria);
-                datos.setearParametro("@IDUsuario", nuevo.Usuario.IdUsuario);
+                datos.Conectar();
+                datos.Consultar("INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono) VALUES (@IDUsuario, @DNI, @Nombre, @Apellido, @Telefono)");
+                datos.setearParametro("@IDUsuario", auxiliar.Listar()[(auxiliar.Listar().Count)-1].IdUsuario);
                 datos.setearParametro("@DNI", nuevo.DNI);
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Apellido", nuevo.Apellido);

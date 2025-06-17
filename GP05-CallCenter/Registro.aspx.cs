@@ -26,7 +26,7 @@ namespace CallCenter
             }
             nuevoCliente.Usuario = new Usuario();
             {
-                nuevoCliente.Email = email.Text;
+                nuevoCliente.Usuario.Email = email.Text;
                 nuevoCliente.Usuario.Clave = clave.Text;
             };
 
