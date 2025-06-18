@@ -12,6 +12,8 @@ CREATE TABLE Usuarios (
 	Clave VARCHAR(100) NOT NULL 
 )
 
+SELECT * FROM Usuarios
+
 CREATE TABLE CategoriasCliente (
   IDCategoria INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
   Nombre NVARCHAR(50) NOT NULL, -- Regular, Plus, Premium, etc. Determina el tiempo de respuesta minimo por incidencia
@@ -20,13 +22,15 @@ CREATE TABLE CategoriasCliente (
 
 CREATE TABLE Clientes (
 	IDCliente INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	IDCategoria INT NOT NULL FOREIGN KEY REFERENCES CategoriasCliente(IDCategoria),
+	IDCategoria INT NULL FOREIGN KEY REFERENCES CategoriasCliente(IDCategoria),
 	IDUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuarios(IDUsuario),
 	DNI INT NOT NULL,
 	Nombre NVARCHAR(50) NOT NULL,
 	Apellido NVARCHAR(50) NOT NULL,
 	Telefono NVARCHAR(50) NOT NULL,
 )
+
+SELECT * FROM Clientes
 
 SELECT IDCliente,C.IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario
 
