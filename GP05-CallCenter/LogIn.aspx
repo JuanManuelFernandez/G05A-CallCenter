@@ -10,15 +10,18 @@
 
         <div class="text-center">
             <div class="mb-3">
-                <asp:TextBox ID="txtMail" runat="server" Placeholder="Mail"></asp:TextBox>
+                <asp:TextBox ID="txtMail" runat="server" Placeholder="Mail" TextMode="Email"></asp:TextBox>
             </div>
             <div class="mt-3">
-                <asp:TextBox ID="txtContraseña" runat="server" Placeholder="Contraseña"></asp:TextBox>
+                <asp:TextBox ID="txtContraseña" runat="server" Placeholder="Contraseña" TextMode="Password"></asp:TextBox>
             </div>
             <div class="row justify-content-center mt-3">
                 <section class="col-md-3" aria-labelledby="hostingTitle">
                     <asp:Button ID="btnIngresar" runat="server" Text="Ingresar" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnIngresar_Click" />
                 </section>
+            </div>
+            <div class="row justify-content-center mt-1">
+                <asp:Label ID="lblError" runat="server" Text="Contraseña o Email incorrecto..." Visible="false" ForeColor="Red"></asp:Label>
             </div>
         </div>
     </main>

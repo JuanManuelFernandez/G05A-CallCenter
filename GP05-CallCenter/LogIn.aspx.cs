@@ -16,7 +16,14 @@ namespace CallCenter
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Formularios.aspx");
+            AccesoUsuario datos = new AccesoUsuario();
+            List<Usuario> lista = datos.Listar();
+            foreach (Usuario aux in lista) {
+                if (aux.Email == txtMail.Text && aux.Clave == txtContraseña.Text) {
+                    Response.Redirect("Formularios.aspx");
+                }
+            }
+            lblError.Visible = true;
         }
     }
 }
