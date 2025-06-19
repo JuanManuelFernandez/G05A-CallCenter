@@ -17,7 +17,7 @@ namespace Dominio
             get { return lector; }
         }
         public void Conectar() {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=TPI_CallCenter; integrated security=true"); //\\SQLEXPRESS
+            conexion = new SqlConnection("server=.; database=CallCenter; integrated security=true"); //\\SQLEXPRESS
             comando = new SqlCommand();
         }
         public void Consultar(string consulta) {
@@ -33,7 +33,6 @@ namespace Dominio
             }
             catch (Exception er)
             {
-
                 throw er;
             }
         }

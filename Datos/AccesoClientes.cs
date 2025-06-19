@@ -19,7 +19,7 @@ namespace Datos
 
             // Unimos Clientes y Usuarios mediante IDUsuario
             datos.Conectar();
-            datos.Consultar("SELECT C.IDCliente,C.IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
+            datos.Consultar("SELECT C.IDCliente,C.IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
             datos.Leer();
 
             try
@@ -32,6 +32,7 @@ namespace Datos
                         IdCategoria = (int)datos.Lector["IDCategoria"],// Deberia leer de la tabla Categorias
                         Usuario = new Usuario
                         {
+                            TipoUsuario = (TipoUsuario)datos.Lector["TipoUsuario"],
                             Email = (string)datos.Lector["U.Email"],
                             Clave = (string)datos.Lector["U.Clave"]
                         },
@@ -49,7 +50,6 @@ namespace Datos
             }
             catch (Exception er)
             {
-
                 throw er;
             }
             finally
