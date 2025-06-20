@@ -19,7 +19,7 @@ namespace CallCenter
             AccesoClientes accesoClientes = new AccesoClientes();
             Cliente nuevoCliente = new Cliente();
             {
-                nuevoCliente.DNI = dni.Text;
+                nuevoCliente.DNI = int.Parse(dni.Text);
                 nuevoCliente.Nombre = nombre.Text;
                 nuevoCliente.Apellido = apellido.Text;
                 nuevoCliente.Telefono = telefono.Text;

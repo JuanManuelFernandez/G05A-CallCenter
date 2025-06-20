@@ -23,7 +23,7 @@ CREATE TABLE CategoriasCliente (
 
 CREATE TABLE Clientes (
 	IDCliente INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	IDCategoria INT NOT NULL FOREIGN KEY REFERENCES CategoriasCliente(IDCategoria),
+	IDCategoria INT NULL FOREIGN KEY REFERENCES CategoriasCliente(IDCategoria),
 	IDUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuarios(IDUsuario),
 	DNI INT NOT NULL,
 	Nombre NVARCHAR(50) NOT NULL,

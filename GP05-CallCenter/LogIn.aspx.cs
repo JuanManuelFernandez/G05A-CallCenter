@@ -26,15 +26,15 @@ namespace CallCenter
                 if (accesoUsuario.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);
-                    if (usuario.TipoUsuario == TipoUsuario.ADMIN)
+                    if (usuario.TipoUsuario == TipoUsuario.Admin)
                     {
                         //Response.Redirect("Dashboard.aspx"); Panel de Administrador (To-Do)
                     }
-                    else if (usuario.TipoUsuario == TipoUsuario.EMPLEADO)
+                    else if (usuario.TipoUsuario == TipoUsuario.Empleado)
                     {
                         Response.Redirect("Incidencias.aspx");
                     }
-                    else if (usuario.TipoUsuario == TipoUsuario.CLIENTE)
+                    else if (usuario.TipoUsuario == TipoUsuario.Cliente)
                     {
                         Response.Redirect("Formularios.aspx");
                     }

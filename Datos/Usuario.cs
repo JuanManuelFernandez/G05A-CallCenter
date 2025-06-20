@@ -8,9 +8,9 @@ namespace Datos
 {
     public enum TipoUsuario
     {
-        ADMIN = 1,
-        EMPLEADO = 2,
-        CLIENTE = 3,
+        Admin = 1,
+        Empleado = 2,
+        Cliente = 3,
     }
     public class Usuario
     {
@@ -18,16 +18,17 @@ namespace Datos
         public TipoUsuario TipoUsuario { get; set; }
         public string Email { get; set; }
         public string Clave { get; set; }
+        public bool Eliminado {  get; set; }
 
         public Usuario(int tipo, string email, string clave)
         {
-            TipoUsuario = tipo == 1 ? TipoUsuario.ADMIN : tipo == 2 ? TipoUsuario.EMPLEADO : TipoUsuario.CLIENTE;
+            TipoUsuario = tipo == 1 ? TipoUsuario.Admin : tipo == 2 ? TipoUsuario.Empleado : TipoUsuario.Cliente;
             Email = email;
             Clave = clave;
         }
         public Usuario()
         {
-            TipoUsuario = TipoUsuario.CLIENTE;
+            TipoUsuario = TipoUsuario.Cliente;
             Email = "user@mail.com";
             Clave = "password";
         }
