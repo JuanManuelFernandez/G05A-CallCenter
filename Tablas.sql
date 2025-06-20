@@ -5,6 +5,9 @@ GO
 
 --DROP TABLE X
 SELECT * FROM Usuarios
+SELECT * FROM Clientes
+
+
 
 CREATE TABLE Usuarios (
 	IDUsuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -18,7 +21,6 @@ CREATE TABLE CategoriasCliente (
   IDCategoria INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
   Nombre NVARCHAR(50) NOT NULL, -- Regular, Plus, Premium, etc. Determina el tiempo de respuesta minimo por incidencia
   Descripcion NVARCHAR(250) NULL,
-  Eliminado BIT NOT NULL DEFAULT 0
 )
 
 CREATE TABLE Clientes (
@@ -29,7 +31,6 @@ CREATE TABLE Clientes (
 	Nombre NVARCHAR(50) NOT NULL,
 	Apellido NVARCHAR(50) NOT NULL,
 	Telefono NVARCHAR(50) NOT NULL,
-	Eliminado BIT NOT NULL DEFAULT 0
 )
 
 CREATE TABLE Empleados (
@@ -39,21 +40,18 @@ CREATE TABLE Empleados (
 	DNI INT NOT NULL,
 	Nombre NVARCHAR(50) NOT NULL,
 	Apellido NVARCHAR(50) NOT NULL,
-	Eliminado BIT NOT NULL DEFAULT 0
 )
 
 CREATE TABLE TiposIncidente (
   IDTipo INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   Nombre NVARCHAR(50) NOT NULL,
   Descripcion NVARCHAR(250) NOT NULL,
-  Eliminado BIT NOT NULL DEFAULT 0
 )
 
 CREATE TABLE PrioridadesIncidente (
   IDPrioridad INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   Nombre NVARCHAR(50) NOT NULL, -- Uno, Dos o Tres
   Descripcion NVARCHAR(250) NOT NULL,
-  Eliminado BIT NOT NULL DEFAULT 0
 )
 
 CREATE TABLE Incidencias (
@@ -74,5 +72,4 @@ CREATE TABLE Historiales (
   IDHistorial INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   IDIncidencias INT NOT NULL FOREIGN KEY REFERENCES Incidencias(IDIncidencia),
   FechaCambio datetime,
-  Eliminado BIT NOT NULL DEFAULT 0
 )
