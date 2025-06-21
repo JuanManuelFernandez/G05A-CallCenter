@@ -15,10 +15,12 @@ CREATE TABLE Usuarios (
 	Eliminado BIT NOT NULL DEFAULT 0
 )
 
+
+
 CREATE TABLE CategoriasCliente (
   IDCategoria INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
   Nombre NVARCHAR(50) NOT NULL, -- Regular, Plus, Premium, etc. Determina el tiempo de respuesta minimo por incidencia
-  Descripcion NVARCHAR(250) NULL,
+  Descripcion NVARCHAR(250) NULL
 )
 
 CREATE TABLE Clientes (
@@ -30,27 +32,25 @@ CREATE TABLE Clientes (
 	Apellido NVARCHAR(50) NOT NULL,
 	Telefono NVARCHAR(50) NOT NULL
 )
-
 CREATE TABLE Empleados (
 	IDEmpleado INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	IDUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuarios(IDUsuario),
 	Legajo VARCHAR(10) NOT NULL,
 	DNI INT NOT NULL,
 	Nombre NVARCHAR(50) NOT NULL,
-	Apellido NVARCHAR(50) NOT NULL,
-	Eliminado BIT NOT NULL DEFAULT 0
+	Apellido NVARCHAR(50) NOT NULL
 )
 
 CREATE TABLE TiposIncidente (
   IDTipo INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   Nombre NVARCHAR(50) NOT NULL,
-  Descripcion NVARCHAR(250) NOT NULL,
+  Descripcion NVARCHAR(250) NOT NULL
 )
 
 CREATE TABLE PrioridadesIncidente (
   IDPrioridad INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   Nombre NVARCHAR(50) NOT NULL, -- Uno, Dos o Tres
-  Descripcion NVARCHAR(250) NOT NULL,
+  Descripcion NVARCHAR(250) NOT NULL
 )
 
 CREATE TABLE Incidencias (
@@ -63,12 +63,12 @@ CREATE TABLE Incidencias (
 	Descripcion NVARCHAR(500) NOT NULL,
 	FechaYHoraCreacion datetime NOT NULL,
 	FechaYHoraResolucion datetime NULL,
-	Resolucion NVARCHAR(500) NULL,
-	Eliminado BIT NOT NULL DEFAULT 0
+	Resolucion NVARCHAR(500) NULL
 )
 
 CREATE TABLE Historiales (
   IDHistorial INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   IDIncidencias INT NOT NULL FOREIGN KEY REFERENCES Incidencias(IDIncidencia),
-  FechaCambio datetime,
+  FechaCambio datetime
 )
+

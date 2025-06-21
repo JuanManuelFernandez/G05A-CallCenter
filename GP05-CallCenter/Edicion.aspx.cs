@@ -83,7 +83,7 @@ namespace GP05_CallCenter
             }
             else
             {
-                data.EliminarUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+                data.EliminarUsuarioID(int.Parse(Request.QueryString["IdUsuario"]));
                 Response.Redirect("Admin.aspx");
             }
         }

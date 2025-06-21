@@ -127,7 +127,7 @@ namespace Datos
             }
             return aux;
         }
-        public void EliminarUsuario(int id)
+        public void EliminarUsuarioID(int id)
         {
             datos = new AccesoDatos();
             try

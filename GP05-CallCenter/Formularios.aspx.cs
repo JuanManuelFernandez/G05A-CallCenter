@@ -15,6 +15,7 @@ namespace CallCenter
             if (Session["usuario"] == null)
             {
                 Session.Add("error", "Debes loguearte para acceder a esta pagina");
+                Response.Redirect("Error.aspx");
             }
 
             AccesoIncidencias datos = new AccesoIncidencias();
@@ -25,7 +26,7 @@ namespace CallCenter
         protected void dgvIncidencias_SelectedIndexChanged(object sender, EventArgs e)
         {
             var id = dgvIncidencias.SelectedDataKey.Value.ToString();
-            Response.Redirect("Incidencia.aspx?id=" + id);
+            Response.Redirect("Incidencias.aspx?id=" + id);
         }
     }
 }

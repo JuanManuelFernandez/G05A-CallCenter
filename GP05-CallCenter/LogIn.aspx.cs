@@ -19,20 +19,19 @@ namespace CallCenter
         {
             Usuario usuario;
             AccesoUsuario accesoUsuario = new AccesoUsuario();
-            //usuario = new Usuario(3, txtEmail.Text, txtClave.Text);
             try
             {
-                usuario = new Usuario(3, txtEmail.Text, txtClave.Text); // Hardcodeado como Cliente (menos privilegios), aunque se pisa en Loguear
+                usuario = accesoUsuario.Listar().Find(x => x.Email == txtEmail.Text && x.Clave == txtClave.Text) != null ? accesoUsuario.Listar().Find(x => x.Email == txtEmail.Text && x.Clave == txtClave.Text) : new Usuario();
                 if (accesoUsuario.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);
                     if (usuario.TipoUsuario == TipoUsuario.Admin)
                     {
-                        //Response.Redirect("Dashboard.aspx"); Panel de Administrador (To-Do)
+                        Response.Redirect("Admin.aspx"); 
                     }
                     else if (usuario.TipoUsuario == TipoUsuario.Empleado)
                     {
-                        Response.Redirect("Incidencias.aspx");
+                        Response.Redirect("Inicio.aspx");
                     }
                     else if (usuario.TipoUsuario == TipoUsuario.Cliente)
                     {

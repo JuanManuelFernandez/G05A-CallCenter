@@ -20,8 +20,7 @@ SELECT * FROM Usuarios
 --(2, 2, 30999888, 'Ana', 'Garcia', '1144556677');
 
 --INSERT INTO Empleados (IDUsuario, Legajo, DNI, Nombre, Apellido) VALUES
---(1, 'L0001', 28123456, 'Carlos', 'Lopez'),
---(2, 'L0002', 29123456, 'Lucia', 'Martinez');
+--(3, 'L0001', 28123456, 'Carlos', 'Lopez')
 
 --INSERT INTO TiposIncidente (Nombre, Descripcion) VALUES
 --('Problema técnico', 'Falla en el servicio o software'),

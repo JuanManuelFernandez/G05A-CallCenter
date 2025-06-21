@@ -141,8 +141,7 @@ namespace Datos
                 datos.Cerrar();
 
                 datos.Conectar();
-                datos.Consultar("UPDATE Clientes SET IDCategoria = @IDCategoria, DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Telefono = @Telefono WHERE IDUsuario = @IDUsuario");
-                datos.setearParametro("@IDCategoria", mod.IdCategoria);
+                datos.Consultar("UPDATE Clientes SET DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Telefono = @Telefono WHERE IDUsuario = @IDUsuario");
                 datos.setearParametro("@DNI", mod.DNI);
                 datos.setearParametro("@Nombre", mod.Nombre);
                 datos.setearParametro("@Apellido", mod.Apellido);
