@@ -1,6 +1,6 @@
-GO
-USE CallCenter
-GO
+--GO
+--USE CallCenter
+--GO
 
 SELECT * FROM Usuarios
 

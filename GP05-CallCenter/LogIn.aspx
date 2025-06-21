@@ -5,8 +5,7 @@
     <main>
         <h1 class="text-center">¡Bienvenido de vuelta!</h1>
 
-        <p class="text-center mb-0">¡Que bueno volver a verte!</p>
-        <p class="text-center">Tomaremos tu reclamo lo más pronto posible. Ya sabes que hacer en los campos de abajo.</p>
+        <p class="text-center">Tomaremos tu reclamo lo más pronto posible. <br> Por favor, completa con tus datos debajo.</p>
 
         <div class="text-center">
             <div class="mb-3">

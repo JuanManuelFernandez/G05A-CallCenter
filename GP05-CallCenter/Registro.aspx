@@ -14,7 +14,7 @@
                 <asp:TextBox ID="nombre" runat="server" Placeholder="Nombre" required="required" ></asp:TextBox>
             </div>
             <div class="mb-3">
-                <asp:TextBox ID="apellido" runat="server" Placeholder="Apellido" required="required" ></asp:TextBox>
+                 <asp:TextBox ID="apellido" runat="server" Placeholder="Apellido" required="required" ></asp:TextBox>
             </div>
             <div class="mb-3">
                 <asp:TextBox ID="telefono" runat="server" Placeholder="Telefono" TextMode="Number" required="required" ></asp:TextBox>

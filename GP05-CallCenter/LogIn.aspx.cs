@@ -36,7 +36,7 @@ namespace CallCenter
                     }
                     else if (usuario.TipoUsuario == TipoUsuario.Cliente)
                     {
-                        Response.Redirect("Formularios.aspx");
+                        Response.Redirect("Inicio.aspx");
                     }
                 } 
                 else
