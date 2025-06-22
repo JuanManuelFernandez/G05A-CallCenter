@@ -12,14 +12,26 @@ namespace GP05_CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] != null)
+            {
+                Usuario user = (Usuario)Session["usuario"];
+                if (user.TipoUsuario != TipoUsuario.Admin) {
+                    Response.Redirect("Inicio.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("Inicio.aspx");
+            }
             if (!IsPostBack)
             {
                 if ((Request.QueryString["IdUsuario"]) != null)
                 {
                     AccesoUsuario dataUser = new AccesoUsuario();
+                    AccesoEmpleados dataEmp = new AccesoEmpleados();
                     AccesoClientes dataClientes = new AccesoClientes();
                     Usuario user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
-                    Cliente cliente = new Cliente();
+
 
                     if (user.Eliminado)
                     {
@@ -28,16 +40,27 @@ namespace GP05_CallCenter
                     }
                     if (user.TipoUsuario.ToString() == "Cliente")
                     {
-                        cliente = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+                        cargarCategoria();
+                        Cliente cliente = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
                         txtDNI.Text = cliente.DNI.ToString();
                         txtNombre.Text = cliente.Nombre.ToString();
                         txtApellido.Text = cliente.Apellido.ToString();
                         txtEmail.Text = cliente.Usuario.Email.ToString();
                         txtTelefono.Text = cliente.Telefono.ToString();
-                        txtCategoria.Text = cliente.IdCategoria.ToString();
+                        ddlCategoria.SelectedValue = cliente.Categoria.IDCategoria.ToString();
                     }
                     else if (user.TipoUsuario.ToString() == "Empleado")
                     {
+                        Empleado emp = dataEmp.BuscarPorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+                        lblCategoria.Visible = false;
+                        ddlCategoria.Visible = false;
+                        lblTelefono.Text = "Legajo";
+                        txtTelefono.TextMode = TextBoxMode.SingleLine;
+                        txtDNI.Text = emp.DNI.ToString();
+                        txtNombre.Text = emp.Nombre;
+                        txtApellido.Text = emp.Apellido;
+                        txtEmail.Text = user.Email;
+                        txtTelefono.Text = emp.Legajo.ToString();
 
                     }
                     return;
@@ -58,7 +81,8 @@ namespace GP05_CallCenter
                 Cliente cliente = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
                 Cliente nuevo = new Cliente();
                 nuevo.Usuario = new Usuario();
-                nuevo.IdCategoria = int.Parse(txtCategoria.Text);
+                nuevo.Categoria = new CategoriasCliente();
+                nuevo.Categoria.IDCategoria = int.Parse(ddlCategoria.SelectedValue);
                 nuevo.DNI = int.Parse(txtDNI.Text);
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.Apellido = txtApellido.Text;
@@ -85,6 +109,22 @@ namespace GP05_CallCenter
             {
                 data.EliminarUsuarioID(int.Parse(Request.QueryString["IdUsuario"]));
                 Response.Redirect("Admin.aspx");
+            }
+        }
+        public void cargarCategoria()
+        {
+            AccesoCategorias datos = new AccesoCategorias();
+            try
+            {
+                ddlCategoria.DataSource = datos.Listar();
+                ddlCategoria.DataValueField = "IDCategoria";
+                ddlCategoria.DataTextField = "Nombre";
+                ddlCategoria.DataBind();
+            }
+            catch (Exception er)
+            {
+
+                throw er;
             }
         }
     }

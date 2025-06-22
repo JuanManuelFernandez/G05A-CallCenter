@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-3">
                 <asp:Label ID="lblCategoria" runat="server" Text="Categoría" CssClass="form-label" />
-                <asp:TextBox ID="txtCategoria" runat="server" CssClass="form-control form-control-rounded"/>
+                <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control form-control-rounded" AutoPostBack="false"></asp:DropDownList>
             </div>
             <div class="col-md-6 d-flex justify-content-start mt-4">
                 <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-primary btn-lg me-3" OnClick="btnModificar_Click" />

@@ -20,7 +20,7 @@ namespace Datos
 
             // Unimos Clientes y Usuarios mediante IDUsuario
             datos.Conectar();
-            datos.Consultar("SELECT C.IDCliente,C.IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
+            datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
             datos.Leer();
 
             try
@@ -30,7 +30,10 @@ namespace Datos
                     Cliente aux = new Cliente
                     {
                         IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
-                        IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,// Deberia leer de la tabla Categorias
+                        Categoria = new CategoriasCliente
+                        {
+                            IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
+                        },
                         Usuario = new Usuario
                         {
                             IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
@@ -101,13 +104,16 @@ namespace Datos
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT C.IDCliente,C.IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.IDUsuario = " + id);
+                datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.IDUsuario = " + id);
                 datos.Leer();
                 datos.Lector.Read();
                 aux = new Cliente
                 {
                     IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
-                    IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,// Deberia leer de la tabla Categorias
+                    Categoria = new CategoriasCliente
+                    {
+                        IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
+                    },
                     Usuario = new Usuario
                     {
                         IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
@@ -148,11 +154,13 @@ namespace Datos
                 }
                 return false;
             }
-            finally { 
-                datos.Cerrar(); 
+            finally
+            {
+                datos.Cerrar();
             }
         }
-        public void ModificarCliente(Cliente mod) {
+        public void ModificarCliente(Cliente mod)
+        {
             datos = new AccesoDatos();
             AccesoUsuario dataUsuarios = new AccesoUsuario();
             try
@@ -162,7 +170,15 @@ namespace Datos
                 datos.Cerrar();
 
                 datos.Conectar();
-                datos.Consultar("UPDATE Clientes SET DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Telefono = @Telefono WHERE IDUsuario = @IDUsuario");
+                datos.Consultar("UPDATE Clientes SET IDCategoria = @IDCategoria, DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Telefono = @Telefono WHERE IDUsuario = @IDUsuario");
+                if (mod.Categoria == null || mod.Categoria.IDCategoria == 0)
+                {
+                    datos.setearParametro("@IDCategoria", DBNull.Value);
+                }
+                else
+                {
+                    datos.setearParametro("@IDCategoria", mod.Categoria.IDCategoria);
+                }
                 datos.setearParametro("@DNI", mod.DNI);
                 datos.setearParametro("@Nombre", mod.Nombre);
                 datos.setearParametro("@Apellido", mod.Apellido);
@@ -174,7 +190,7 @@ namespace Datos
             {
                 throw er;
             }
-            finally 
+            finally
             {
                 datos.Cerrar();
             }

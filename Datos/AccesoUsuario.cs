@@ -53,6 +53,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES (@TipoUsuario, @Email, @Clave)");
+                datos.setearParametro("@TipoUsuario", nuevo.TipoUsuario);
                 datos.setearParametro("@Email", nuevo.Email);
                 datos.setearParametro("@Clave", nuevo.Clave);
                 datos.EjecutarNonQuery();

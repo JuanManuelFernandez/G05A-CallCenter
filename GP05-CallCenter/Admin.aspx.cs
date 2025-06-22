@@ -12,9 +12,18 @@ namespace GP05_CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AccesoUsuario datos = new AccesoUsuario();
-            dgvUsuarios.DataSource = datos.Listar();
-            dgvUsuarios.DataBind();
+            if (Session["usuario"] != null)
+            {
+                Usuario user = (Usuario)Session["usuario"];
+                if (user.TipoUsuario == TipoUsuario.Admin)
+                {
+                    AccesoUsuario datos = new AccesoUsuario();
+                    dgvUsuarios.DataSource = datos.Listar();
+                    dgvUsuarios.DataBind();
+                    return;
+                }
+            }
+            Response.Redirect("Inicio.aspx");
         }
 
         protected void dgvUsuarios_SelectedIndexChanged(object sender, EventArgs e)

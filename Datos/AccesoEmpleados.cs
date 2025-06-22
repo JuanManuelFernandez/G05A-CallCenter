@@ -62,5 +62,27 @@ namespace Datos
 
             return aux;
         }
+        public void AgregarEmpleado(Empleado nuevo) {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("INSERT INTO Empleados (IDUsuario, Legajo, DNI, Nombre, Apellido) VALUES (@IDUsuario, @Legajo, @DNI, @Nombre, @Apellido)");
+                datos.setearParametro("@IDUsuario",nuevo.IDUsuario);
+                datos.setearParametro("@Legajo", nuevo.Legajo);
+                datos.setearParametro("@DNI",nuevo.DNI);
+                datos.setearParametro("@Nombre",nuevo.Nombre);
+                datos.setearParametro("@Apellido", nuevo.Apellido);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace GP05_CallCenter
 {
     public partial class Inicio : System.Web.UI.Page
     {
-        public string NombreDeUsuario{ get; set; }
+        public string NombreDeUsuario { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"] == null)
@@ -25,14 +25,30 @@ namespace GP05_CallCenter
                 NombreDeUsuario = dataEmp.BuscarPorIdUsuario(user.IdUsuario).Nombre;
                 btnMisReclamos.Text = "Reclamos";
             }
-            else {
+            else if (user.TipoUsuario == TipoUsuario.Cliente)
+            {
                 NombreDeUsuario = (data.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).Nombre;
+            }
+            else
+            {
+                NombreDeUsuario = "Administrador/a";
+                btnMisDatos.Text = "Cargar Empleado";
+                btnMisReclamos.Text = "Administrar Usuarios";
+                btnCargar.Visible = false;
             }
         }
 
         protected void btnDatos_Click(object sender, EventArgs e)
         {
-            Response.Redirect("MisDatos.aspx");
+            Usuario user = (Usuario)Session["usuario"];
+            if (user.TipoUsuario == TipoUsuario.Admin)
+            {
+                Response.Redirect("Registro.aspx");
+            }
+            else
+            {
+                Response.Redirect("MisDatos.aspx");
+            }
         }
 
         protected void btnReclamos_Click(object sender, EventArgs e)
@@ -42,9 +58,13 @@ namespace GP05_CallCenter
             {
                 Response.Redirect("MisReclamos.aspx");
             }
-            else 
+            else if (user.TipoUsuario == TipoUsuario.Empleado)
             {
                 Response.Redirect("Formularios.aspx");
+            }
+            else
+            {
+                Response.Redirect("Admin.aspx");
             }
         }
 
