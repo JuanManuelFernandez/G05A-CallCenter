@@ -14,9 +14,11 @@ namespace CallCenter
         {
             lblConfirmar.Visible = false;
             lblReconfirmar.Visible = false;
+            lblError.Visible = false;
             txtPass.Visible = false;
             txtRePass.Visible = false;
             btnConfirmar.Visible = false;
+            btnConfirmarCambio.Visible = false;
             if (Session["usuario"] == null)
             {
                 Response.Redirect("LogIn.aspx");
@@ -61,6 +63,8 @@ namespace CallCenter
                 {
                     user.Clave = txtPass.Text;
                     data.ModificarUsuario(user);
+                    Session.Clear();
+                    Response.Redirect("Default.aspx");
                 }
                 else
                 {
@@ -69,10 +73,6 @@ namespace CallCenter
                     lblError.Visible = true;
                     lblError.Text = "Contraseñas no coinciden.";
                 }
-            }
-            else
-            {
-                data.EliminarUsuarioID(user.IdUsuario);
             }
         }
     }
