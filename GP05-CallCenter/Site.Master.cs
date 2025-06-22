@@ -13,5 +13,12 @@ namespace CallCenter
         {
 
         }
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            // Cerrar sesión
+            Session.Clear(); // Elimina todos los valores de sesión
+            Session.Abandon(); // Termina la sesión actual
+            Response.Redirect("~/Inicio.aspx");
+        }
     }
 }
