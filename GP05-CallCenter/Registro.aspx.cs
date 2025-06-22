@@ -18,6 +18,8 @@ namespace CallCenter
         {
             AccesoClientes accesoClientes = new AccesoClientes();
             Cliente nuevoCliente = new Cliente();
+
+            AccesoUsuario accesoUsuario = new AccesoUsuario();
             {
                 nuevoCliente.DNI = int.Parse(dni.Text);
                 nuevoCliente.Nombre = nombre.Text;
@@ -34,13 +36,29 @@ namespace CallCenter
 
             try
             {
+                Usuario user = accesoUsuario.Listar().Find(x => x.Email == email.Text) != null ? accesoUsuario.Listar().Find(x => x.Email == email.Text) : null;
+                if(user == null)
+                {
+                    accesoClientes.AgregarCliente(nuevoCliente);
+                }
+                else if(user.Eliminado == true)
+                {
+                    nuevoCliente.Usuario.IdUsuario = user.IdUsuario;
+                    accesoUsuario.ActivarUsuarioConEmail(email.Text);
+                    accesoClientes.ModificarCliente(nuevoCliente);
+                }
+                else if(user.Eliminado == false)
+                {
+                    lblRegistro.Text = "Ya existe un usuario activo en el sistema con ese email.";
+                    return;
+                }
                 dni.Text = "";
                 nombre.Text = "";
                 apellido.Text = "";
                 email.Text = "";
                 telefono.Text = "";
                 clave.Text = "";
-                accesoClientes.AgregarCliente(nuevoCliente);
+                Response.Redirect("Inicio.aspx");
             }
             catch (Exception ex)
             {

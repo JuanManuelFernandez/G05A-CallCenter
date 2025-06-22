@@ -163,6 +163,25 @@ namespace Datos
                 datos.Cerrar();
             }
         }
+        public void ActivarUsuarioConEmail(string email)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE Usuarios SET Eliminado = 0 WHERE Email = @email");
+                datos.setearParametro("@email", email);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
         public void ModificarUsuario(Usuario mod) {
             datos = new AccesoDatos();
             try

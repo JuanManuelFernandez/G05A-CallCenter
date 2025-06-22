@@ -31,7 +31,7 @@ namespace CallCenter
             lblReconfirmar.Visible = true;
             lblReconfirmar.Text = "Ingrese su nueva contraseña otra vez:";
             txtRePass.Visible = true;
-            btnConfirmar.Visible = true;
+            btnConfirmarCambio.Visible = true;
         }
 
         protected void BntDel_Click(object sender, EventArgs e)
@@ -46,6 +46,15 @@ namespace CallCenter
         {
             AccesoUsuario data = new AccesoUsuario();
             Usuario user = (Usuario)Session["usuario"];
+            data.EliminarUsuarioID(user.IdUsuario);
+            Session.Clear();
+            Response.Redirect("Default.aspx");
+        }
+        protected void btnConfirmarCambio_Click(object sender, EventArgs e)
+        {
+            AccesoUsuario data = new AccesoUsuario();
+            Usuario user = (Usuario)Session["usuario"];
+
             if (txtPass.Text != null)
             {
                 if (txtPass.Text == txtRePass.Text)
@@ -65,8 +74,6 @@ namespace CallCenter
             {
                 data.EliminarUsuarioID(user.IdUsuario);
             }
-            Session.Clear();
-            Response.Redirect("Default.aspx");
         }
     }
 }

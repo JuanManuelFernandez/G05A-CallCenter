@@ -21,7 +21,7 @@ namespace CallCenter
             AccesoUsuario accesoUsuario = new AccesoUsuario();
             try
             {
-                usuario = accesoUsuario.Listar().Find(x => x.Email == txtEmail.Text && x.Clave == txtClave.Text) != null ? accesoUsuario.Listar().Find(x => x.Email == txtEmail.Text && x.Clave == txtClave.Text) : new Usuario();
+                usuario = accesoUsuario.Listar().Find(x => x.Email == txtEmail.Text && x.Clave == txtClave.Text && x.Eliminado == false) != null ? accesoUsuario.Listar().Find(x => x.Email == txtEmail.Text && x.Clave == txtClave.Text) : new Usuario();
                 if (accesoUsuario.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);

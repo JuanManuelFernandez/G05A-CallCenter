@@ -131,6 +131,27 @@ namespace Datos
             }
             return aux;
         }
+        public bool BuscarClientePorEmail(string email)
+        {
+            datos = new AccesoDatos();
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT Email, Eliminado FROM Usuarios WHERE Email =" + email);
+                datos.Leer();
+                datos.Lector.Read();
+
+                if (datos.Lector["Email"] != DBNull.Value)
+                {
+                    return true;
+                }
+                return false;
+            }
+            finally { 
+                datos.Cerrar(); 
+            }
+        }
         public void ModificarCliente(Cliente mod) {
             datos = new AccesoDatos();
             AccesoUsuario dataUsuarios = new AccesoUsuario();

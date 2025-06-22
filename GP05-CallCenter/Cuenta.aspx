@@ -21,6 +21,7 @@
         </div>
         <div class="text-center mt-3">
             <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar" Visible="false" CssClass="btn-danger" OnClick="btnConfirmar_Click" />
+            <asp:Button ID="btnConfirmarCambio" runat="server" Text="Confirmar" Visible="false" CssClass="btn-danger" OnClick="btnConfirmarCambio_Click" />
             <asp:Label ID="lblError" runat="server" Text="" Visible="false"></asp:Label>
         </div>
     </main>

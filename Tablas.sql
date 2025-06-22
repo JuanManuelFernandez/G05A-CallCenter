@@ -72,3 +72,15 @@ CREATE TABLE Historiales (
   FechaCambio datetime
 )
 
+SELECT * FROM Usuarios;
+
+SELECT * FROM Clientes;
+
+
+UPDATE Usuarios SET Eliminado = 1 WHERE IDUsuario = 10;
+
+DELETE FROM Clientes WHERE IDCliente = 8;
+
+DELETE FROM Usuarios WHERE IDUsuario = 8;
+
+
