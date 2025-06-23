@@ -44,7 +44,8 @@ namespace Datos
             }
             return empleados;
         }
-        public Empleado BuscarPorIdUsuario(int id) {
+        public Empleado BuscarPorIdUsuario(int id)
+        {
             datos = new AccesoDatos();
             empleados = new List<Empleado>();
             Empleado aux = new Empleado();
@@ -62,21 +63,46 @@ namespace Datos
 
             return aux;
         }
-        public void AgregarEmpleado(Empleado nuevo) {
+        public void AgregarEmpleado(Empleado nuevo)
+        {
             datos = new AccesoDatos();
             try
             {
                 datos.Conectar();
                 datos.Consultar("INSERT INTO Empleados (IDUsuario, Legajo, DNI, Nombre, Apellido) VALUES (@IDUsuario, @Legajo, @DNI, @Nombre, @Apellido)");
-                datos.setearParametro("@IDUsuario",nuevo.IDUsuario);
+                datos.setearParametro("@IDUsuario", nuevo.IDUsuario);
                 datos.setearParametro("@Legajo", nuevo.Legajo);
-                datos.setearParametro("@DNI",nuevo.DNI);
-                datos.setearParametro("@Nombre",nuevo.Nombre);
+                datos.setearParametro("@DNI", nuevo.DNI);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Apellido", nuevo.Apellido);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
             {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public void ModificarEmpleado(Empleado nuevo)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE Empleados SET Legajo = @Legajo, DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido WHERE IDUsuario = @IDUsuario");
+                datos.setearParametro("@Legajo",nuevo.Legajo);
+                datos.setearParametro("@DNI",nuevo.DNI);
+                datos.setearParametro("@Nombre",nuevo.Nombre);
+                datos.setearParametro("@Apellido",nuevo.Apellido);
+                datos.setearParametro("@IDUsuario",nuevo.IDUsuario);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+
                 throw er;
             }
             finally

@@ -15,8 +15,6 @@ CREATE TABLE Usuarios (
 	Eliminado BIT NOT NULL DEFAULT 0
 )
 
-
-
 CREATE TABLE CategoriasCliente (
   IDCategoria INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
   Nombre NVARCHAR(50) NOT NULL, -- Regular, Plus, Premium, etc. Determina el tiempo de respuesta minimo por incidencia
@@ -71,16 +69,3 @@ CREATE TABLE Historiales (
   IDIncidencias INT NOT NULL FOREIGN KEY REFERENCES Incidencias(IDIncidencia),
   FechaCambio datetime
 )
-
-SELECT * FROM Usuarios;
-
-SELECT * FROM Clientes;
-
-
-UPDATE Usuarios SET Eliminado = 1 WHERE IDUsuario = 10;
-
-DELETE FROM Clientes WHERE IDCliente = 8;
-
-DELETE FROM Usuarios WHERE IDUsuario = 8;
-
-

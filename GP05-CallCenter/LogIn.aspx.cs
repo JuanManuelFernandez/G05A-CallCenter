@@ -12,7 +12,9 @@ namespace CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (Session["usuario"]!=null) {
+                Response.Redirect("Inicio.aspx");
+            }
         }
 
         protected void btnIngresar_Click(object sender, EventArgs e)

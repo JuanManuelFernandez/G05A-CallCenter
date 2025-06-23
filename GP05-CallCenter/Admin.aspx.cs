@@ -18,7 +18,7 @@ namespace GP05_CallCenter
                 if (user.TipoUsuario == TipoUsuario.Admin)
                 {
                     AccesoUsuario datos = new AccesoUsuario();
-                    dgvUsuarios.DataSource = datos.Listar();
+                    dgvUsuarios.DataSource = datos.ListarAdmin();
                     dgvUsuarios.DataBind();
                     return;
                 }

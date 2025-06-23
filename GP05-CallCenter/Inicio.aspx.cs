@@ -33,8 +33,8 @@ namespace GP05_CallCenter
             {
                 NombreDeUsuario = "Administrador/a";
                 btnMisDatos.Text = "Cargar Empleado";
-                btnMisReclamos.Text = "Administrar Usuarios";
-                btnCargar.Visible = false;
+                btnMisReclamos.Text = "Administrar Incidencias";
+                btnCargar.Text = "Administrar Usuarios";
             }
         }
 
@@ -53,24 +53,20 @@ namespace GP05_CallCenter
 
         protected void btnReclamos_Click(object sender, EventArgs e)
         {
+            Response.Redirect("Formularios.aspx");
+        }
+
+        protected void btnCargar_Click(object sender, EventArgs e)
+        {
             Usuario user = (Usuario)Session["usuario"];
-            if (user.TipoUsuario == TipoUsuario.Cliente)
+            if (user.TipoUsuario != TipoUsuario.Admin)
             {
-                Response.Redirect("MisReclamos.aspx");
-            }
-            else if (user.TipoUsuario == TipoUsuario.Empleado)
-            {
-                Response.Redirect("Formularios.aspx");
+                Response.Redirect("Incidencias.aspx");
             }
             else
             {
                 Response.Redirect("Admin.aspx");
             }
-        }
-
-        protected void btnCargar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Incidencias.aspx");
         }
     }
 }

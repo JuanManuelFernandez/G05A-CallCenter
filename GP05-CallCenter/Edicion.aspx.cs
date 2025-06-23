@@ -15,7 +15,8 @@ namespace GP05_CallCenter
             if (Session["usuario"] != null)
             {
                 Usuario user = (Usuario)Session["usuario"];
-                if (user.TipoUsuario != TipoUsuario.Admin) {
+                if (user.TipoUsuario != TipoUsuario.Admin)
+                {
                     Response.Redirect("Inicio.aspx");
                 }
             }
@@ -78,23 +79,29 @@ namespace GP05_CallCenter
             if (user.TipoUsuario.ToString() == "Cliente")
             {
                 AccesoClientes dataClientes = new AccesoClientes();
-                Cliente cliente = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
-                Cliente nuevo = new Cliente();
-                nuevo.Usuario = new Usuario();
-                nuevo.Categoria = new CategoriasCliente();
+                Cliente nuevo = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
                 nuevo.Categoria.IDCategoria = int.Parse(ddlCategoria.SelectedValue);
                 nuevo.DNI = int.Parse(txtDNI.Text);
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.Apellido = txtApellido.Text;
                 nuevo.Telefono = txtTelefono.Text;
-                nuevo.Usuario.IdUsuario = cliente.Usuario.IdUsuario;
-                nuevo.Usuario.TipoUsuario = cliente.Usuario.TipoUsuario;
                 nuevo.Usuario.Email = txtEmail.Text;
-                nuevo.Usuario.Clave = cliente.Usuario.Clave;
-                nuevo.Usuario.Eliminado = cliente.Usuario.Eliminado;
                 dataClientes.ModificarCliente(nuevo);
-                Response.Redirect("Admin.aspx");
             }
+            else if (user.TipoUsuario == TipoUsuario.Empleado)
+            {
+                AccesoEmpleados dataEmpleados = new AccesoEmpleados();
+                Empleado nuevo = dataEmpleados.BuscarPorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+                user.Email = txtEmail.Text;
+                nuevo.Legajo = txtTelefono.Text;
+                nuevo.Nombre = txtNombre.Text;
+                nuevo.Apellido = txtApellido.Text;
+                nuevo.DNI = int.Parse(txtDNI.Text);
+
+                dataUser.ModificarUsuario(user);
+                dataEmpleados.ModificarEmpleado(nuevo);
+            }
+            Response.Redirect("Admin.aspx");
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)

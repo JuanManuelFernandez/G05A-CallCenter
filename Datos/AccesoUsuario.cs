@@ -46,6 +46,39 @@ namespace Datos
             }
             return usuarios;
         }
+        public List<Usuario> ListarAdmin()
+        {
+            usuarios = new List<Usuario>();
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT IDUsuario, TipoUsuario, Email, Clave, Eliminado FROM Usuarios WHERE TipoUsuario !=" + (int)TipoUsuario.Admin);
+                datos.Leer();
+                while (datos.Lector.Read())
+                {
+                    Usuario aux = new Usuario
+                    {
+                        IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
+                        TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
+                        Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                        Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
+                        Eliminado = datos.Lector["Eliminado"] != DBNull.Value ? (bool)datos.Lector["Eliminado"] : false,
+                    };
+
+                    usuarios.Add(aux);
+                }
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+            return usuarios;
+        }
 
         public void AgregarUsuario(Usuario nuevo)
         {
@@ -184,7 +217,8 @@ namespace Datos
                 datos.Cerrar();
             }
         }
-        public void ModificarUsuario(Usuario mod) {
+        public void ModificarUsuario(Usuario mod)
+        {
             datos = new AccesoDatos();
             try
             {

@@ -12,7 +12,7 @@ namespace Datos
         public int IdCliente { get; set; }
         public int IdEmpleado { get; set; }
         public int IdTipo { get; set; }
-        public int IdPrioridad { get; set; }
+        public PrioridadesIncidente prioridad { get; set; }
         public string EstadoActual { get; set; }
         public string Descripcion { get; set; }
         public DateTime FechaYHoraCreacion { get; set; }
