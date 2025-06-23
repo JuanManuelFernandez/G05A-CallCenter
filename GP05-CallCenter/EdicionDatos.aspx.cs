@@ -12,6 +12,7 @@ namespace GP05_CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblRegistro.Visible = false;
             if (Session["usuario"] == null)
             {
                 Response.Redirect("Inicio.aspx");
@@ -40,8 +41,8 @@ namespace GP05_CallCenter
                 else
                 {
                     datos.AgregarCategoria(nuevo);
+                    Response.Redirect("Inicio.aspx");
                 }
-                Response.Redirect("Inicio.aspx");
             }
             else if (ddlTipo.SelectedItem.Text == "Tipos Incidente")
             {
@@ -56,8 +57,8 @@ namespace GP05_CallCenter
                 else
                 {
                     datos.AgregarTipos(nuevo);
+                    Response.Redirect("Inicio.aspx");
                 }
-                Response.Redirect("Inicio.aspx");
             }
             else if (ddlTipo.SelectedItem.Text == "Proridades Incidente")
             {
@@ -72,8 +73,8 @@ namespace GP05_CallCenter
                 else
                 {
                     datos.AgregarPrioridades(nuevo);
+                    Response.Redirect("Inicio.aspx");
                 }
-                Response.Redirect("Inicio.aspx");
             }
         }
     }

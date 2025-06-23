@@ -20,7 +20,7 @@
             <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-primary btn-lg" OnClick="btnAgregar_Click" />
         </div>
     </div>
-    <div class="row justify-content-center mt-1">
+    <div class="row text-center mt-1">
         <asp:Label ID="lblRegistro" runat="server" Text="Ya existe el dato ingresado..." Visible="false" ForeColor="Red" />
     </div>
 </asp:Content>
