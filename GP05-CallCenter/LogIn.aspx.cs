@@ -27,18 +27,7 @@ namespace CallCenter
                 if (accesoUsuario.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);
-                    if (usuario.TipoUsuario == TipoUsuario.Admin)
-                    {
-                        Response.Redirect("Inicio.aspx"); 
-                    }
-                    else if (usuario.TipoUsuario == TipoUsuario.Empleado)
-                    {
-                        Response.Redirect("Inicio.aspx");
-                    }
-                    else if (usuario.TipoUsuario == TipoUsuario.Cliente)
-                    {
-                        Response.Redirect("Inicio.aspx");
-                    }
+                    Response.Redirect("Inicio.aspx");
                 } 
                 else
                 {

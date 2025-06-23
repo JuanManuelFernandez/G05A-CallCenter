@@ -34,7 +34,10 @@
     </div>
     <div class="row justify-content-center mt-3">
         <section class="col-md-3 text-center" aria-labelledby="hostingTitle">
-            <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnModificar_Click"/>
+            <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnModificar_Click" />
+        </section>
+        <section class="col-md-3 text-center" aria-labelledby="hostingTitle">
+            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-danger btn-lg mx-3" OnClick="btnCancelar_Click" />
         </section>
     </div>
 

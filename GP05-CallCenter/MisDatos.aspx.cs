@@ -59,9 +59,14 @@ namespace GP05_CallCenter
                 cliente.Usuario.Email = txtEmail.Text;
                 cliente.Telefono = txtTelefono.Text;
                 data.ModificarCliente(cliente);
-                dataUser.ModificarUsuario(cliente.Usuario);
+                Session.Clear();
                 Response.Redirect("Inicio.aspx");
             } //demas roles...
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Inicio.aspx");
         }
     }
 }
