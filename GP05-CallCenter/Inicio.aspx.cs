@@ -35,6 +35,7 @@ namespace GP05_CallCenter
                 btnMisDatos.Text = "Cargar Empleado";
                 btnMisReclamos.Text = "Administrar Incidencias";
                 btnCargar.Text = "Administrar Usuarios";
+                btnModificarTipos.Visible = true;
             }
         }
 
@@ -67,6 +68,11 @@ namespace GP05_CallCenter
             {
                 Response.Redirect("Admin.aspx");
             }
+        }
+
+        protected void btnModificarTipos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("EdicionDatos.aspx");
         }
     }
 }

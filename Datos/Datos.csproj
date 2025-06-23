@@ -46,6 +46,7 @@
     <Compile Include="AccesoIncidencias.cs" />
     <Compile Include="AccesoClientes.cs" />
     <Compile Include="AccesoPrioridades.cs" />
+    <Compile Include="AccesoTipos.cs" />
     <Compile Include="AccesoUsuario.cs" />
     <Compile Include="CategoriasCliente.cs" />
     <Compile Include="Cliente.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Incidencia.cs" />
     <Compile Include="PrioridadesIncidente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TiposIncidente.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -56,6 +56,25 @@ namespace Datos
             }
             return valor;
         }
-
+        public void AgregarPrioridades(PrioridadesIncidente nuevo)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("INSERT INTO PrioridadesIncidente(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)");
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
     }
 }

@@ -7,46 +7,41 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    public class AccesoCategorias
+    public class AccesoTipos
     {
         private AccesoDatos datos = null;
-        private List<CategoriasCliente> categorias = null;
-        public List<CategoriasCliente> Listar()
+        private List<TiposIncidente> tipos = null;
+        public List<TiposIncidente> Listar()
         {
             datos = new AccesoDatos();
-            categorias = new List<CategoriasCliente>();
+            tipos = new List<TiposIncidente>();
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDCategoria, Nombre, Descripcion FROM CategoriasCliente");
+                datos.Consultar("SELECT IDTipo, Nombre, Descripcion FROM TiposIncidente");
                 datos.Leer();
-
                 while (datos.Lector.Read())
                 {
-                    CategoriasCliente aux = new CategoriasCliente();
-                    aux.IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0;
+                    TiposIncidente aux = new TiposIncidente();
+                    aux.IDTipo = datos.Lector["IDTipo"] != DBNull.Value ? (int)datos.Lector["IDTipo"] : 0;
                     aux.Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty;
                     aux.Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty;
-                    categorias.Add(aux);
+                    tipos.Add(aux);
                 }
             }
             catch (Exception er)
             {
                 throw er;
             }
-            finally
-            {
-                datos.Cerrar();
-            }
-            return categorias;
+            return tipos;
         }
-        public void AgregarCategoria(CategoriasCliente nuevo)
+        public void AgregarTipos(TiposIncidente nuevo)
         {
             datos = new AccesoDatos();
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO CategoriasCliente(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)");
+                datos.Consultar("INSERT INTO TiposIncidente(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)");
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Descripcion", nuevo.Descripcion);
                 datos.EjecutarNonQuery();
