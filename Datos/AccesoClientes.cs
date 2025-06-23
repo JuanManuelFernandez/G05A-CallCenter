@@ -159,6 +159,52 @@ namespace Datos
                 datos.Cerrar();
             }
         }
+        //REVISAR ESTA FUNCION
+        public Cliente BuscarClientePorDNI(int dni)
+        {
+            datos = new AccesoDatos();
+            Cliente aux = null;
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT C.IDCliente, IDCategoria, C.IDUsuario, C.DNI, C.Nombre, C.Apellido, C.Telefono, U.TipoUsuario, U.Email, U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE C.DNI = @Dni");
+                datos.setearParametro("@Dni", dni);
+                datos.Leer();
+
+                if (datos.Lector.Read())
+                {
+                    aux = new Cliente
+                    {
+                        IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
+                        Categoria = new CategoriasCliente
+                        {
+                            IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
+                        },
+                        Usuario = new Usuario
+                        {
+                            IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
+                            TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente,
+                            Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                            Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
+                        },
+                        DNI = datos.Lector["DNI"] != DBNull.Value ? (int)datos.Lector["DNI"] : 0,
+                        Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
+                        Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty,
+                        Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty
+                    };
+                }
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+            return aux;
+        }
+
         public void ModificarCliente(Cliente mod)
         {
             datos = new AccesoDatos();

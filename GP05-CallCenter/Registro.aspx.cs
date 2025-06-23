@@ -44,6 +44,7 @@ namespace CallCenter
             AccesoClientes accesoClientes = new AccesoClientes();
             Cliente nuevoCliente = new Cliente();
             AccesoUsuario accesoUsuario = new AccesoUsuario();
+            AccesoClientes accesoCliente = new AccesoClientes();
             {
                 nuevoCliente.DNI = int.Parse(dni.Text);
                 nuevoCliente.Nombre = nombre.Text;
@@ -61,6 +62,14 @@ namespace CallCenter
 
             try
             {
+                //REVISAR
+                Cliente clienteExistente = accesoClientes.BuscarClientePorDNI(nuevoCliente.DNI);
+                if (clienteExistente != null)
+                {
+                    lblRegistro.Text = "Ya existe un cliente con ese DNI.";
+                    lblRegistro.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
                 Usuario user = accesoUsuario.Listar().Find(x => x.Email == email.Text) != null ? accesoUsuario.Listar().Find(x => x.Email == email.Text) : null;
                 if (user == null)
                 {
@@ -75,6 +84,7 @@ namespace CallCenter
                 else if (user.Eliminado == false)
                 {
                     lblRegistro.Text = "Ya existe un usuario activo en el sistema con ese email.";
+                    lblRegistro.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
                 dni.Text = "";
