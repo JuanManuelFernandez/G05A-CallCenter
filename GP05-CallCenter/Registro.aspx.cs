@@ -58,50 +58,42 @@ namespace CallCenter
             }
             ;
 
-            lblRegistro.Visible = true;
-
             try
             {
-                //REVISAR
-                Cliente clienteExistente = accesoClientes.BuscarClientePorDNI(nuevoCliente.DNI);
-                if (clienteExistente != null)
+                if (accesoCliente.Listar().Find(x => x.Usuario.Email == nuevoCliente.Usuario.Email && x.DNI == nuevoCliente.DNI && x.Usuario.Clave == nuevoCliente.Usuario.Clave && x.Usuario.Eliminado == true) != null)
                 {
+                    nuevoCliente.Usuario.IdUsuario = accesoCliente.BuscarClientePorDNI(nuevoCliente.DNI).Usuario.IdUsuario;
+                    accesoUsuario.ActivarUsuarioConEmail(email.Text);
+                    accesoClientes.ModificarCliente(nuevoCliente);
+                }
+                else if (accesoCliente.Listar().Find(x => x.DNI == nuevoCliente.DNI && x.Usuario.Eliminado == false) != null)
+                {
+                    lblRegistro.Visible = true;
                     lblRegistro.Text = "Ya existe un cliente con ese DNI.";
                     lblRegistro.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
-                Usuario user = accesoUsuario.Listar().Find(x => x.Email == email.Text) != null ? accesoUsuario.Listar().Find(x => x.Email == email.Text) : null;
-                if (user == null)
+                else if (accesoCliente.Listar().Find(x => x.Usuario.Email == nuevoCliente.Usuario.Email) != null)
                 {
-                    accesoClientes.AgregarCliente(nuevoCliente);
-                }
-                else if (user.Eliminado == true)
-                {
-                    nuevoCliente.Usuario.IdUsuario = user.IdUsuario;
-                    accesoUsuario.ActivarUsuarioConEmail(email.Text);
-                    accesoClientes.ModificarCliente(nuevoCliente);
-                }
-                else if (user.Eliminado == false)
-                {
-                    lblRegistro.Text = "Ya existe un usuario activo en el sistema con ese email.";
+                    lblRegistro.Visible = true;
+                    lblRegistro.Text = "Ya existe un cliente con ese Email.";
                     lblRegistro.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
-                dni.Text = "";
-                nombre.Text = "";
-                apellido.Text = "";
-                email.Text = "";
-                telefono.Text = "";
-                clave.Text = "";
+                else
+                {
+                    accesoClientes.AgregarCliente(nuevoCliente);
+                }
                 Session.Add("usuario", (Usuario)accesoUsuario.Listar().Find(x => x.Email == nuevoCliente.Usuario.Email));
-                Response.Redirect("Inicio.aspx");
+                Response.Redirect("Inicio.aspx", false);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public void CargarEmpleado() { 
+        public void CargarEmpleado()
+        {
             AccesoEmpleados dataEmp = new AccesoEmpleados();
             AccesoUsuario dataUser = new AccesoUsuario();
             Empleado nuevo = new Empleado();
@@ -112,7 +104,7 @@ namespace CallCenter
                 nuevo.Nombre = nombre.Text;
                 nuevo.Apellido = apellido.Text;
             }
-            { 
+            {
                 user.Email = email.Text;
                 user.Clave = clave.Text;
                 user.TipoUsuario = TipoUsuario.Empleado;
@@ -120,7 +112,7 @@ namespace CallCenter
             try
             {
                 dataUser.AgregarUsuario(user);
-                nuevo.IDUsuario = (dataUser.Listar()[(dataUser.Listar().Count)-1]).IdUsuario;
+                nuevo.IDUsuario = (dataUser.Listar()[(dataUser.Listar().Count) - 1]).IdUsuario;
                 dataEmp.AgregarEmpleado(nuevo);
             }
             catch (Exception er)

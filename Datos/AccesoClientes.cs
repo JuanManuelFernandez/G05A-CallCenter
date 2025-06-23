@@ -20,7 +20,7 @@ namespace Datos
 
             // Unimos Clientes y Usuarios mediante IDUsuario
             datos.Conectar();
-            datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Email,U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
+            datos.Consultar("SELECT C.IDCliente,IDCategoria,C.IDUsuario,C.DNI,C.Nombre,C.Apellido,C.Telefono,U.TipoUsuario,U.Email,U.Clave,U.Eliminado FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario");
             datos.Leer();
 
             try
@@ -39,7 +39,8 @@ namespace Datos
                             IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                             TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente,
                             Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
-                            Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
+                            Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
+                            Eliminado = datos.Lector["Eliminado"] != DBNull.Value ? (bool)datos.Lector["Eliminado"] : true
                         },
                         DNI = datos.Lector["DNI"] != DBNull.Value ? (int)datos.Lector["DNI"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
