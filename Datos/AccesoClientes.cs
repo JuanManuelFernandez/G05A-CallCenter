@@ -238,5 +238,62 @@ namespace Datos
                 datos.Cerrar();
             }
         }
+        public bool VerificarDNI(int DNI)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE Eliminado = 0 AND DNI = '" + DNI + "'");
+                datos.Leer();
+                return datos.Lector.Read();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public bool VerificaReactivar(Cliente aux)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.DNI + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Email + "'");
+                datos.Leer();
+                return datos.Lector.Read();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public bool VerificarTelefono(int Telefono)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT 1 FROM Clientes WHERE Telefono = '" + Telefono + "'");
+                datos.Leer();
+                return datos.Lector.Read();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
     }
 }

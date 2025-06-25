@@ -240,5 +240,24 @@ namespace Datos
                 datos.Cerrar();
             }
         }
+        public bool VerificarEmail(string Email)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT 1 FROM USUARIOS WHERE Email = '" + Email + "'");
+                datos.Leer();
+                return datos.Lector.Read();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
     }
 }

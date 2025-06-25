@@ -1,6 +1,7 @@
 ﻿using Datos;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,6 +13,7 @@ namespace GP05_CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblRegistro.Visible = false;
             if (Session["usuario"] != null)
             {
                 Usuario user = (Usuario)Session["usuario"];
@@ -32,7 +34,6 @@ namespace GP05_CallCenter
                     AccesoEmpleados dataEmp = new AccesoEmpleados();
                     AccesoClientes dataClientes = new AccesoClientes();
                     Usuario user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
-
 
                     if (user.Eliminado)
                     {
@@ -78,30 +79,18 @@ namespace GP05_CallCenter
             Usuario user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
             if (user.TipoUsuario.ToString() == "Cliente")
             {
-                AccesoClientes dataClientes = new AccesoClientes();
-                Cliente nuevo = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
-                nuevo.Categoria.IDCategoria = int.Parse(ddlCategoria.SelectedValue);
-                nuevo.DNI = int.Parse(txtDNI.Text);
-                nuevo.Nombre = txtNombre.Text;
-                nuevo.Apellido = txtApellido.Text;
-                nuevo.Telefono = txtTelefono.Text;
-                nuevo.Usuario.Email = txtEmail.Text;
-                dataClientes.ModificarCliente(nuevo);
+                if (ModificarCliente()) {
+                    Response.Redirect("Admin.aspx");
+                } 
             }
             else if (user.TipoUsuario == TipoUsuario.Empleado)
             {
-                AccesoEmpleados dataEmpleados = new AccesoEmpleados();
-                Empleado nuevo = dataEmpleados.BuscarPorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
-                user.Email = txtEmail.Text;
-                nuevo.Legajo = txtTelefono.Text;
-                nuevo.Nombre = txtNombre.Text;
-                nuevo.Apellido = txtApellido.Text;
-                nuevo.DNI = int.Parse(txtDNI.Text);
-
-                dataUser.ModificarUsuario(user);
-                dataEmpleados.ModificarEmpleado(nuevo);
+                if (ModificarEmpleado())
+                {
+                    Response.Redirect("Admin.aspx");
+                }
             }
-            Response.Redirect("Admin.aspx");
+            
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -117,6 +106,87 @@ namespace GP05_CallCenter
                 data.EliminarUsuarioID(int.Parse(Request.QueryString["IdUsuario"]));
                 Response.Redirect("Admin.aspx");
             }
+        }
+        public bool ModificarEmpleado()
+        {
+            AccesoClientes dataClientes = new AccesoClientes();
+            AccesoUsuario dataUser = new AccesoUsuario();
+            Usuario user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
+            AccesoEmpleados dataEmpleados = new AccesoEmpleados();
+            Empleado nuevo = dataEmpleados.BuscarPorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+
+
+
+            if (dataEmpleados.listar().Find(x => x.DNI == int.Parse(txtDNI.Text) && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.DNI == int.Parse(txtDNI.Text) && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            {
+                lblRegistro.Visible = true;
+                lblRegistro.Text = "Ya existe un usuario con ese DNI...";
+                return false;
+            }
+            else if (dataUser.Listar().Find(x => x.Email == txtEmail.Text && x.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            {
+                lblRegistro.Visible = true;
+                lblRegistro.Text = "Ya existe un usuario con ese Email...";
+                return false;
+            }
+            else if (dataEmpleados.listar().Find(x => x.Legajo == txtTelefono.Text && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            {
+                lblRegistro.Visible = true;
+                lblRegistro.Text = "Ya existe un empleado con ese Legajo...";
+                return false;
+            }
+
+            user.Email = txtEmail.Text;
+            nuevo.Legajo = txtTelefono.Text;
+            nuevo.Nombre = txtNombre.Text;
+            nuevo.Apellido = txtApellido.Text;
+            nuevo.DNI = int.Parse(txtDNI.Text);
+
+            dataUser.ModificarUsuario(user);
+            dataEmpleados.ModificarEmpleado(nuevo);
+            return true;
+        }
+        public bool ModificarCliente()
+        {
+            AccesoEmpleados dataEmpleados = new AccesoEmpleados();
+            AccesoUsuario dataUser = new AccesoUsuario();
+            AccesoClientes dataClientes = new AccesoClientes();
+            Cliente nuevo = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+
+            if (dataEmpleados.listar().Find(x => x.DNI == int.Parse(txtDNI.Text) && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.DNI == int.Parse(txtDNI.Text) && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            {
+                lblRegistro.Visible = true;
+                lblRegistro.Text = "Ya existe un usuario con ese DNI...";
+                return false;
+            }
+            else if (dataUser.Listar().Find(x => x.Email == txtEmail.Text && x.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            {
+                lblRegistro.Visible = true;
+                lblRegistro.Text = "Ya existe un usuario con ese Email...";
+                return false;
+            }
+            else if (dataClientes.Listar().Find(x => x.Telefono == txtTelefono.Text && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            {
+                lblRegistro.Visible = true;
+                lblRegistro.Text = "Ya existe un cliente con ese Telefono...";
+                return false;
+            }
+
+            nuevo.Categoria.IDCategoria = int.Parse(ddlCategoria.SelectedValue);
+            nuevo.DNI = int.Parse(txtDNI.Text);
+            nuevo.Nombre = txtNombre.Text;
+            nuevo.Apellido = txtApellido.Text;
+            nuevo.Telefono = txtTelefono.Text;
+            nuevo.Usuario.Email = txtEmail.Text;
+
+            if (nuevo.Telefono.Length < 8 || nuevo.Telefono.Length > 15)
+            {
+                lblRegistro.Visible = true;
+                lblRegistro.Text = "El numero de telefono se debe tener entre 8 y 15 digitos...";
+                return false;
+            }
+            dataClientes.ModificarCliente(nuevo);
+            return true;
         }
         public void cargarCategoria()
         {

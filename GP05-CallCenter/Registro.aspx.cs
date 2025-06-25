@@ -42,6 +42,7 @@ namespace CallCenter
         public void CargarCliente()
         {
             AccesoClientes accesoClientes = new AccesoClientes();
+            AccesoEmpleados accesoEmpleados = new AccesoEmpleados();
             Cliente nuevoCliente = new Cliente();
             AccesoUsuario accesoUsuario = new AccesoUsuario();
             AccesoClientes accesoCliente = new AccesoClientes();
@@ -56,27 +57,41 @@ namespace CallCenter
                 nuevoCliente.Usuario.Email = email.Text;
                 nuevoCliente.Usuario.Clave = clave.Text;
             }
-            ;
+
+            if (nuevoCliente.Telefono.Length < 8 || nuevoCliente.Telefono.Length > 15)
+            {
+                lblRegistro.Visible = true;
+                lblRegistro.Text = "El numero de telefono se debe tener entre 8 y 15 digitos...";
+                lblRegistro.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
 
             try
             {
-                if (accesoCliente.Listar().Find(x => x.Usuario.Email == nuevoCliente.Usuario.Email && x.DNI == nuevoCliente.DNI && x.Usuario.Clave == nuevoCliente.Usuario.Clave && x.Usuario.Eliminado == true) != null)
+                if (accesoCliente.VerificaReactivar(nuevoCliente))
                 {
                     nuevoCliente.Usuario.IdUsuario = accesoCliente.BuscarClientePorDNI(nuevoCliente.DNI).Usuario.IdUsuario;
                     accesoUsuario.ActivarUsuarioConEmail(email.Text);
                     accesoClientes.ModificarCliente(nuevoCliente);
                 }
-                else if (accesoCliente.Listar().Find(x => x.DNI == nuevoCliente.DNI && x.Usuario.Eliminado == false) != null)
+                else if (accesoCliente.VerificarDNI(nuevoCliente.DNI) || accesoEmpleados.VerificarDNI(nuevoCliente.DNI))
                 {
                     lblRegistro.Visible = true;
-                    lblRegistro.Text = "Ya existe un cliente con ese DNI.";
+                    lblRegistro.Text = "Ya existe un usuario con ese DNI.";
                     lblRegistro.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
-                else if (accesoCliente.Listar().Find(x => x.Usuario.Email == nuevoCliente.Usuario.Email) != null)
+                else if (accesoCliente.VerificarTelefono(int.Parse(nuevoCliente.Telefono)))
                 {
                     lblRegistro.Visible = true;
-                    lblRegistro.Text = "Ya existe un cliente con ese Email.";
+                    lblRegistro.Text = "Ya existe un cliente con ese Telefono.";
+                    lblRegistro.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+                else if (accesoUsuario.VerificarEmail(nuevoCliente.Usuario.Email))
+                {
+                    lblRegistro.Visible = true;
+                    lblRegistro.Text = "Ya existe un usuario con ese Email.";
                     lblRegistro.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
@@ -95,6 +110,7 @@ namespace CallCenter
         public void CargarEmpleado()
         {
             AccesoEmpleados dataEmp = new AccesoEmpleados();
+            AccesoClientes dataCli = new AccesoClientes();
             AccesoUsuario dataUser = new AccesoUsuario();
             Empleado nuevo = new Empleado();
             Usuario user = new Usuario();
@@ -111,6 +127,28 @@ namespace CallCenter
             }
             try
             {
+                if (dataEmp.VerificarDNI(nuevo.DNI) || dataCli.VerificarDNI(nuevo.DNI))
+                {
+                    lblRegistro.Visible = true;
+                    lblRegistro.Text = "Ya existe un usuario con ese DNI.";
+                    lblRegistro.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+                else if (dataUser.VerificarEmail(user.Email))
+                {
+                    lblRegistro.Visible = true;
+                    lblRegistro.Text = "Ya existe un usuario con ese Email.";
+                    lblRegistro.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+                else if (dataEmp.VerificarLegajo(nuevo.Legajo))
+                {
+                    lblRegistro.Visible = true;
+                    lblRegistro.Text = "Ya existe un empleado con ese Legajo.";
+                    lblRegistro.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
                 dataUser.AgregarUsuario(user);
                 nuevo.IDUsuario = (dataUser.Listar()[(dataUser.Listar().Count) - 1]).IdUsuario;
                 dataEmp.AgregarEmpleado(nuevo);

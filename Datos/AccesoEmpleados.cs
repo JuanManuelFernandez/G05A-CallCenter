@@ -93,16 +93,62 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE Empleados SET Legajo = @Legajo, DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido WHERE IDUsuario = @IDUsuario");
-                datos.setearParametro("@Legajo",nuevo.Legajo);
-                datos.setearParametro("@DNI",nuevo.DNI);
-                datos.setearParametro("@Nombre",nuevo.Nombre);
-                datos.setearParametro("@Apellido",nuevo.Apellido);
-                datos.setearParametro("@IDUsuario",nuevo.IDUsuario);
+                datos.setearParametro("@Legajo", nuevo.Legajo);
+                datos.setearParametro("@DNI", nuevo.DNI);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Apellido", nuevo.Apellido);
+                datos.setearParametro("@IDUsuario", nuevo.IDUsuario);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
             {
 
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public bool VerificarDNI(int DNI)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT 1 FROM Empleados E INNER JOIN Usuarios U ON E.IDUsuario = U.IDUsuario WHERE Eliminado = 0 AND DNI = '" + DNI + "'");
+                datos.Leer();
+                if (datos.Lector.Read())
+                {
+                    return true;
+                }
+                else
+                {
+
+                    return false;
+                }
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public bool VerificarLegajo(string Legajo)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT 1 FROM Empleados WHERE Legajo = '" + Legajo + "'");
+                datos.Leer();
+                return datos.Lector.Read();
+            }
+            catch (Exception er)
+            {
                 throw er;
             }
             finally

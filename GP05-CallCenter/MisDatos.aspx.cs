@@ -15,6 +15,7 @@ namespace GP05_CallCenter
         private Empleado empleado;
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblRegistro.Visible = false;
             if (Session["usuario"] == null)
             {
                 Session.Add("error", "Debes loguearte para ver esta pagina");
@@ -32,17 +33,25 @@ namespace GP05_CallCenter
                     txtNombre.Text = cliente.Nombre;
                     txtApellido.Text = cliente.Apellido;
                     txtTelefono.Text = cliente.Telefono;
-                } else if (user.TipoUsuario == TipoUsuario.Empleado)
+
+                    if (cliente.Telefono.Length < 8 || cliente.Telefono.Length > 15)
+                    {
+                        lblRegistro.Visible = true;
+                        lblRegistro.Text = "El numero de telefono se debe tener entre 8 y 15 digitos...";
+                        return;
+                    }
+                }
+                else if (user.TipoUsuario == TipoUsuario.Empleado)
                 {
                     lblTelefono.Text = "Legajo";
-                    txtTelefono.Enabled= false;
-                    txtEmail.Enabled= false;
-                    btnModificar.Visible= false;
+                    txtTelefono.Enabled = false;
+                    txtEmail.Enabled = false;
+                    btnModificar.Visible = false;
                     AccesoEmpleados data = new AccesoEmpleados();
                     empleado = data.BuscarPorIdUsuario(user.IdUsuario);
                     txtEmail.Text = user.Email;
                     txtDNI.Text = empleado.DNI.ToString();
-                    txtNombre.Text= empleado.Nombre;
+                    txtNombre.Text = empleado.Nombre;
                     txtApellido.Text = empleado.Apellido;
                     txtTelefono.Text = empleado.Legajo;
                 }
@@ -55,13 +64,26 @@ namespace GP05_CallCenter
             {
                 AccesoClientes data = new AccesoClientes();
                 AccesoUsuario dataUser = new AccesoUsuario();
+                AccesoEmpleados dataEmp = new AccesoEmpleados();
+                if (dataUser.Listar().Find(x => x.Email == txtEmail.Text && x.IdUsuario != ((Usuario)Session["usuario"]).IdUsuario) != null)
+                {
+                    lblRegistro.Visible = true;
+                    lblRegistro.Text = "Ya existe un usuario con ese Email...";
+                    return;
+                }
+                else if (data.Listar().Find(x => x.Telefono == txtTelefono.Text && x.Usuario.IdUsuario != ((Usuario)Session["usuario"]).IdUsuario) != null)
+                {
+                    lblRegistro.Visible = true;
+                    lblRegistro.Text = "Ya existe un usuario con ese Telefono...";
+                    return;
+                }
                 cliente = data.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
                 cliente.Usuario.Email = txtEmail.Text;
                 cliente.Telefono = txtTelefono.Text;
                 data.ModificarCliente(cliente);
                 Session.Clear();
                 Response.Redirect("Inicio.aspx");
-            } //demas roles...
+            }
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)

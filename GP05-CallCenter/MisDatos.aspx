@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <asp:Label ID="lblTelefono" runat="server" Text="Telefono" CssClass="form-label"></asp:Label>
-                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" min=1></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -40,5 +40,7 @@
             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-danger btn-lg mx-3" OnClick="btnCancelar_Click" />
         </section>
     </div>
-
+    <div class="row text-center mt-1">
+        <asp:Label ID="lblRegistro" runat="server" Text="Ya existe el dato ingresado..." Visible="false" ForeColor="Red" />
+    </div>
 </asp:Content>

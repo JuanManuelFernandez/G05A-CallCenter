@@ -10,7 +10,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
                     <div class="mb-3">
-                        <asp:TextBox ID="dni" runat="server" Placeholder="DNI" TextMode="Number" required="required" CssClass="form-control" />
+                        <asp:TextBox ID="dni" runat="server" Placeholder="DNI" TextMode="Number" required="required" CssClass="form-control" min=1/>
                     </div>
                     <div class="mb-3">
                         <asp:TextBox ID="nombre" runat="server" Placeholder="Nombre" required="required" CssClass="form-control" />
@@ -19,7 +19,7 @@
                         <asp:TextBox ID="apellido" runat="server" Placeholder="Apellido" required="required" CssClass="form-control" />
                     </div>
                     <div class="mb-3">
-                        <asp:TextBox ID="telefono" runat="server" Placeholder="Teléfono" TextMode="Number" required="required" CssClass="form-control" />
+                        <asp:TextBox ID="telefono" runat="server" Placeholder="Teléfono" TextMode="Phone" required="required" CssClass="form-control" min=1/>
                     </div>
                     <div class="mb-3">
                         <asp:TextBox ID="email" runat="server" Placeholder="Email" TextMode="Email" required="required" CssClass="form-control" />
