@@ -11,7 +11,7 @@ namespace Datos
         public int IdIncidencia { get; set; }
         public int IdCliente { get; set; }
         public int IdEmpleado { get; set; }
-        public int IdTipo { get; set; }
+        public TiposIncidente tipo { get; set; }
         public PrioridadesIncidente prioridad { get; set; }
         public string EstadoActual { get; set; }
         public string Descripcion { get; set; }

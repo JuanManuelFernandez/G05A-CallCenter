@@ -53,7 +53,7 @@ CREATE TABLE PrioridadesIncidente (
 
 CREATE TABLE Incidencias (
 	IDIncidencia INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	IDEmpleado INT NOT NULL FOREIGN KEY REFERENCES Empleados(IDEmpleado),
+	IDEmpleado INT NULL FOREIGN KEY REFERENCES Empleados(IDEmpleado),
 	IDCliente INT NOT NULL FOREIGN KEY REFERENCES Clientes(IDCliente),
 	IDTipo INT NOT NULL FOREIGN KEY REFERENCES TiposIncidente(IDTipo),
 	IDPrioridad INT NOT NULL FOREIGN KEY REFERENCES PrioridadesIncidente(IDPrioridad),

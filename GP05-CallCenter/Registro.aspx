@@ -2,9 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main>
-        <h1 class="text-center">¡Bienvenido!</h1>
+        <h1 class="text-center"><%= TituloH1 %></h1>
 
-        <p class="text-center">¿Tu primera vez acá? Registrate y tomaremos tu pedido lo más pronto posible</p>
+        <p class="text-center"><%= ParrafoP %></p>
 
         <div class="container">
             <div class="row justify-content-center">
@@ -19,7 +19,7 @@
                         <asp:TextBox ID="apellido" runat="server" Placeholder="Apellido" required="required" CssClass="form-control" />
                     </div>
                     <div class="mb-3">
-                        <asp:TextBox ID="telefono" runat="server" Placeholder="Teléfono" TextMode="Phone" required="required" CssClass="form-control" min=1/>
+                        <asp:TextBox ID="telefono" runat="server" Placeholder="Teléfono" TextMode="Number" required="required" CssClass="form-control" min=1/>
                     </div>
                     <div class="mb-3">
                         <asp:TextBox ID="email" runat="server" Placeholder="Email" TextMode="Email" required="required" CssClass="form-control" />

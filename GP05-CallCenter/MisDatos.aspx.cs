@@ -33,13 +33,6 @@ namespace GP05_CallCenter
                     txtNombre.Text = cliente.Nombre;
                     txtApellido.Text = cliente.Apellido;
                     txtTelefono.Text = cliente.Telefono;
-
-                    if (cliente.Telefono.Length < 8 || cliente.Telefono.Length > 15)
-                    {
-                        lblRegistro.Visible = true;
-                        lblRegistro.Text = "El numero de telefono se debe tener entre 8 y 15 digitos...";
-                        return;
-                    }
                 }
                 else if (user.TipoUsuario == TipoUsuario.Empleado)
                 {
@@ -65,7 +58,15 @@ namespace GP05_CallCenter
                 AccesoClientes data = new AccesoClientes();
                 AccesoUsuario dataUser = new AccesoUsuario();
                 AccesoEmpleados dataEmp = new AccesoEmpleados();
-                if (dataUser.Listar().Find(x => x.Email == txtEmail.Text && x.IdUsuario != ((Usuario)Session["usuario"]).IdUsuario) != null)
+
+                string aux = txtTelefono.Text;
+
+                if (aux.Length < 8 || aux.Length > 15)
+                {
+                    lblRegistro.Visible = true;
+                    lblRegistro.Text = "El numero de telefono se debe tener entre 8 y 15 digitos...";
+                    return;
+                } else if (dataUser.Listar().Find(x => x.Email == txtEmail.Text && x.IdUsuario != ((Usuario)Session["usuario"]).IdUsuario) != null)
                 {
                     lblRegistro.Visible = true;
                     lblRegistro.Text = "Ya existe un usuario con ese Email...";

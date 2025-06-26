@@ -41,13 +41,22 @@ namespace CallCenter
             }
             else
             {
+
                 AccesoClientes dataCli = new AccesoClientes();
                 Cliente cli = dataCli.BuscarClientePorIdUsuario(user.IdUsuario);
                 dgvIncidencias.DataSource = datos.listarIncidenciasCliente(cli.IdCliente);
+                AgregarDGVCliente();
                 dgvIncidencias.DataBind();
             }
 
 
+        }
+        public void AgregarDGVCliente()
+        {
+            BoundField aux = new BoundField();
+            aux.HeaderText = "Descripcion";
+            aux.DataField = "Descripcion";
+            dgvIncidencias.Columns.Add(aux);
         }
 
         protected void dgvIncidencias_SelectedIndexChanged(object sender, EventArgs e)

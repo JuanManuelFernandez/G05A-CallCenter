@@ -18,7 +18,7 @@ namespace Datos
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
-            datos.Consultar("SELECT IDIncidencia, IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion, FechaYHoraResolucion, Resolucion FROM Incidencias");
+            datos.Consultar("SELECT I.IDIncidencia, I.IDEmpleado, I.IDCliente, I.IDTipo, T.Nombre AS NombreTipo, T.Descripcion AS DescripcionTipo, I.IDPrioridad, P.Nombre AS NombrePriori, P.Descripcion AS DescripcionPriori, I.EstadoActual, I.Descripcion, I.FechaYHoraCreacion, I.FechaYHoraResolucion, I.Resolucion FROM Incidencias I INNER JOIN TiposIncidente T ON I.IDTipo = T.IDTipo INNER JOIN PrioridadesIncidente P ON I.IDPrioridad = P.IDPrioridad");
             datos.Leer();
             try
             {
@@ -28,11 +28,21 @@ namespace Datos
                     aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
                     aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
-                    aux.IdTipo = (int)datos.Lector["IDTipo"];
-                    aux.prioridad = new PrioridadesIncidente();
-                    aux.prioridad.IDPrioridad = (int)datos.Lector["IDPrioridad"];
-                    aux.prioridad.Nombre = (priori.BuscarPorId(aux.prioridad.IDPrioridad)).Nombre;
-                    aux.prioridad.Descripcion = (priori.BuscarPorId(aux.prioridad.IDPrioridad)).Descripcion;
+
+                    aux.tipo = new TiposIncidente
+                    {
+                        IDTipo = (int)datos.Lector["IDTipo"],
+                        Nombre = (string)datos.Lector["NombreTipo"],
+                        Descripcion = (string)datos.Lector["DescripcionTipo"]
+                    };
+
+                    aux.prioridad = new PrioridadesIncidente
+                    {
+                        IDPrioridad = (int)datos.Lector["IDPrioridad"],
+                        Nombre = (string)datos.Lector["NombrePriori"],
+                        Descripcion = (string)datos.Lector["DescripcionPriori"]
+                    };
+
                     aux.EstadoActual = (string)datos.Lector["EstadoActual"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
@@ -60,7 +70,7 @@ namespace Datos
             datos = new AccesoDatos();
             Incidencia aux = new Incidencia();
             datos.Conectar();
-            datos.Consultar("SELECT IDIncidencia, IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion, FechaYHoraResolucion, Resolucion FROM Incidencias WHERE IDIncidencia = " + id);
+            datos.Consultar("SELECT I.IDIncidencia, I.IDEmpleado, I.IDCliente, I.IDTipo, T.Nombre AS NombreTipo, T.Descripcion AS DescripcionTipo, I.IDPrioridad, P.Nombre AS NombrePriori, P.Descripcion AS DescripcionPriori, I.EstadoActual, I.Descripcion, I.FechaYHoraCreacion, I.FechaYHoraResolucion, I.Resolucion FROM Incidencias I INNER JOIN TiposIncidente T ON I.IDTipo = T.IDTipo INNER JOIN PrioridadesIncidente P ON I.IDPrioridad = P.IDPrioridad WHERE IDIncidencia = " + id);
             datos.Leer();
             try
             {
@@ -69,11 +79,21 @@ namespace Datos
                     aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
                     aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
-                    aux.IdTipo = (int)datos.Lector["IDTipo"];
-                    aux.prioridad = new PrioridadesIncidente();
-                    aux.prioridad.IDPrioridad = (int)datos.Lector["IDPrioridad"];
-                    aux.prioridad.Nombre = (priori.BuscarPorId(aux.prioridad.IDPrioridad)).Nombre;
-                    aux.prioridad.Descripcion = (priori.BuscarPorId(aux.prioridad.IDPrioridad)).Descripcion;
+
+                    aux.tipo = new TiposIncidente
+                    {
+                        IDTipo = (int)datos.Lector["IDTipo"],
+                        Nombre = (string)datos.Lector["NombreTipo"],
+                        Descripcion = (string)datos.Lector["DescripcionTipo"]
+                    };
+
+                    aux.prioridad = new PrioridadesIncidente
+                    {
+                        IDPrioridad = (int)datos.Lector["IDPrioridad"],
+                        Nombre = (string)datos.Lector["NombrePriori"],
+                        Descripcion = (string)datos.Lector["DescripcionPriori"]
+                    };
+
                     aux.EstadoActual = (string)datos.Lector["EstadoActual"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
@@ -97,7 +117,7 @@ namespace Datos
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
-            datos.Consultar("SELECT IDIncidencia, IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion, FechaYHoraResolucion, Resolucion FROM Incidencias WHERE IDCliente =" + id);
+            datos.Consultar("SELECT I.IDIncidencia, I.IDEmpleado, I.IDCliente, I.IDTipo, T.Nombre AS NombreTipo, T.Descripcion AS DescripcionTipo, I.IDPrioridad, P.Nombre AS NombrePriori, P.Descripcion AS DescripcionPriori, I.EstadoActual, I.Descripcion, I.FechaYHoraCreacion, I.FechaYHoraResolucion, I.Resolucion FROM Incidencias I INNER JOIN TiposIncidente T ON I.IDTipo = T.IDTipo INNER JOIN PrioridadesIncidente P ON I.IDPrioridad = P.IDPrioridad WHERE IDCliente =" + id);
             datos.Leer();
             try
             {
@@ -107,11 +127,21 @@ namespace Datos
                     aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
                     aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
-                    aux.IdTipo = (int)datos.Lector["IDTipo"];
-                    aux.prioridad = new PrioridadesIncidente();
-                    aux.prioridad.IDPrioridad = (int)datos.Lector["IDPrioridad"];
-                    aux.prioridad.Nombre = (priori.BuscarPorId(aux.prioridad.IDPrioridad)).Nombre;
-                    aux.prioridad.Descripcion = (priori.BuscarPorId(aux.prioridad.IDPrioridad)).Descripcion;
+
+                    aux.tipo = new TiposIncidente
+                    {
+                        IDTipo = (int)datos.Lector["IDTipo"],
+                        Nombre = (string)datos.Lector["NombreTipo"],
+                        Descripcion = (string)datos.Lector["DescripcionTipo"]
+                    };
+
+                    aux.prioridad = new PrioridadesIncidente
+                    {
+                        IDPrioridad = (int)datos.Lector["IDPrioridad"],
+                        Nombre = (string)datos.Lector["NombrePriori"],
+                        Descripcion = (string)datos.Lector["DescripcionPriori"]
+                    };
+
                     aux.EstadoActual = (string)datos.Lector["EstadoActual"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
@@ -139,7 +169,7 @@ namespace Datos
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
-            datos.Consultar("SELECT IDIncidencia, IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion, FechaYHoraResolucion, Resolucion FROM Incidencias WHERE IDEmpleado =" + id);
+            datos.Consultar("SELECT I.IDIncidencia, I.IDEmpleado, I.IDCliente, I.IDTipo, T.Nombre AS NombreTipo, T.Descripcion AS DescripcionTipo, I.IDPrioridad, P.Nombre AS NombrePriori, P.Descripcion AS DescripcionPriori, I.EstadoActual, I.Descripcion, I.FechaYHoraCreacion, I.FechaYHoraResolucion, I.Resolucion FROM Incidencias I INNER JOIN TiposIncidente T ON I.IDTipo = T.IDTipo INNER JOIN PrioridadesIncidente P ON I.IDPrioridad = P.IDPrioridad WHERE IDEmpleado =" + id);
             datos.Leer();
             try
             {
@@ -149,11 +179,21 @@ namespace Datos
                     aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
                     aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
-                    aux.IdTipo = (int)datos.Lector["IDTipo"];
-                    aux.prioridad = new PrioridadesIncidente();
-                    aux.prioridad.IDPrioridad = (int)datos.Lector["IDPrioridad"];
-                    aux.prioridad.Nombre = (priori.BuscarPorId(aux.prioridad.IDPrioridad)).Nombre;
-                    aux.prioridad.Descripcion = (priori.BuscarPorId(aux.prioridad.IDPrioridad)).Descripcion;
+
+                    aux.tipo = new TiposIncidente
+                    {
+                        IDTipo = (int)datos.Lector["IDTipo"],
+                        Nombre = (string)datos.Lector["NombreTipo"],
+                        Descripcion = (string)datos.Lector["DescripcionTipo"]
+                    };
+
+                    aux.prioridad = new PrioridadesIncidente
+                    {
+                        IDPrioridad = (int)datos.Lector["IDPrioridad"],
+                        Nombre = (string)datos.Lector["NombrePriori"],
+                        Descripcion = (string)datos.Lector["DescripcionPriori"]
+                    };
+
                     aux.EstadoActual = (string)datos.Lector["EstadoActual"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
@@ -174,6 +214,28 @@ namespace Datos
                 datos.Cerrar();
             }
             return incidencias;
+        }
+        public void AgregarIncidencia(Incidencia nueva)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("INSERT INTO INCIDENCIAS (IDEMPLEADO, IDCLIENTE, IDTIPO, IDPRIORIDAD, ESTADOACTUAL, DESCRIPCION, FECHAYHORACREACION) VALUES (@IDEMPLEADO, @IDCLIENTE, @IDTIPO, @IDPRIORIDAD, @ESTADOACTUAL, @DESCRIPCION, @FECHAYHORACREACION)");
+                datos.setearParametro("@IDEMPLEADO",DBNull.Value);
+                datos.setearParametro("@IDCLIENTE",nueva.IdCliente);
+                datos.setearParametro("@IDTIPO",nueva.tipo.IDTipo);
+                datos.setearParametro("@IDPRIORIDAD",nueva.prioridad.IDPrioridad);
+                datos.setearParametro("@ESTADOACTUAL","Pendiente");
+                datos.setearParametro("@DESCRIPCION",nueva.Descripcion);
+                datos.setearParametro("@FECHAYHORACREACION",DateTime.Now);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+
+                throw er;
+            }
         }
     }
 }

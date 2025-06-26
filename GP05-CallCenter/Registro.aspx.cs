@@ -11,13 +11,19 @@ namespace CallCenter
 {
     public partial class Registro : System.Web.UI.Page
     {
+        public string TituloH1 { get; set; }
+        public string ParrafoP { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            TituloH1 = "¡Bienvenido/a!";
+            ParrafoP = "¿Tu primera vez acá? Registrate y tomaremos tu pedido lo más pronto posible";
             if (Session["usuario"] != null)
             {
                 Usuario user = (Usuario)Session["usuario"];
                 if (user.TipoUsuario == TipoUsuario.Admin)
                 {
+                    TituloH1 = "¡Bienvenido Administrador/a!";
+                    ParrafoP = "Aqui podra agregar Empleados.";
                     telefono.Attributes["Placeholder"] = "Legajo";
                     telefono.Attributes["Textmode"] = "";
                 }

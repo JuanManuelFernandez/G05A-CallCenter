@@ -9,30 +9,98 @@ using Dominio;
 
 namespace CallCenter
 {
-    public partial class Incidencia : System.Web.UI.Page
+    public partial class Incidencias : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["id"] != null) {
-                txtIdCliente.Enabled = false;
-                txtDescripcion.Enabled = false;
-                txtTelefono.Enabled = false;
-                txtMail.Enabled = false;
-                txtDireccion.Enabled = false;
-                txtTipo.Enabled = false;
+            CargarTipo();
+            CargarPrioridad();
 
-                //btnCargar.Text = "Aceptar";
-                //string id = Request.QueryString["id"].ToString();
-                //AccesoIncidencias datos = new AccesoIncidencias();
-                //Incidencia actual = datos.Buscar(id);
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("Inicio.aspx");
+            }
+            else if (Request.QueryString["id"] != null)
+            {
+                CargarIncidencia();
+                return;
+            }
+        }
+        public void CargarIncidencia()
+        {
+            btnCargar.Text = "Aceptar";
+            string id = Request.QueryString["id"].ToString();
+            AccesoIncidencias datos = new AccesoIncidencias();
+            AccesoClientes datosClientes = new AccesoClientes();
+            AccesoEmpleados datosEmpleados = new AccesoEmpleados();
+            Incidencia actual = datos.listar().Find(x => x.IdIncidencia == int.Parse(id));
+            Cliente cliente = datosClientes.Listar().Find(x => x.IdCliente == actual.IdCliente);
+            Empleado empleado = datosEmpleados.listar().Find(x => x.IDEmpleado == actual.IdEmpleado);
 
-                //txtIdCliente.Text = actual.IdCliente.ToString();
-                //txtTipo.Text = actual.IdTipo.ToString();
-                //txtPrioridad.Text = actual.IdPrioridad.ToString();
-                //lblFechaYHora.Text = actual.FechaYHoraCreacion.ToString();
-                //txtEstadoActual.Text = actual.EstadoActual.ToString();
-                //txtDescripcion.Text = actual.Descripcion.ToString();
-                //txtResolucion.Text= actual.Resolucion.ToString();
+            txtIdCliente.Text = cliente.DNI.ToString();
+            txtMail.Text = cliente.Usuario.Email;
+            txtTelefono.Text = cliente.Telefono.ToString();
+            ddlTipo.SelectedValue = actual.tipo.IDTipo.ToString();
+            ddlPrioridad.SelectedValue = actual.prioridad.IDPrioridad.ToString();
+            lblFechaYHora.Text = actual.FechaYHoraCreacion.ToString();
+            txtEstadoActual.Text = actual.EstadoActual.ToString();
+            txtDescripcion.Text = actual.Descripcion;
+            txtResolucion.Text = actual.Resolucion;
+        }
+
+        protected void btnCargar_Click(object sender, EventArgs e)
+        {
+            AccesoIncidencias entry = new AccesoIncidencias();
+            Usuario user = (Usuario)Session["usuario"];
+            if (user.TipoUsuario == TipoUsuario.Cliente)
+            {
+                AccesoClientes datos = new AccesoClientes();
+                Incidencia nueva = new Incidencia();
+                nueva.IdCliente = (datos.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente;
+
+                nueva.tipo = new TiposIncidente
+                {
+                    IDTipo = int.Parse(ddlTipo.SelectedValue)
+                };
+
+                nueva.prioridad = new PrioridadesIncidente
+                {
+                    IDPrioridad = int.Parse(ddlPrioridad.SelectedValue)
+                };
+                nueva.Descripcion = txtDescripcion.Text;
+                entry.AgregarIncidencia(nueva); 
+            }
+        }
+        public void CargarTipo()
+        {
+            AccesoTipos datos = new AccesoTipos();
+            try
+            {
+                ddlTipo.DataSource = datos.Listar();
+                ddlTipo.DataValueField = "IDTipo";
+                ddlTipo.DataTextField = "Nombre";
+                ddlTipo.DataBind();
+            }
+            catch (Exception er)
+            {
+
+                throw er;
+            }
+        }
+        public void CargarPrioridad()
+        {
+            AccesoPrioridades datos = new AccesoPrioridades();
+            try
+            {
+                ddlPrioridad.DataSource = datos.Listar();
+                ddlPrioridad.DataValueField = "IDPrioridad";
+                ddlPrioridad.DataTextField = "Nombre";
+                ddlPrioridad.DataBind();
+            }
+            catch (Exception er)
+            {
+
+                throw er;
             }
         }
     }
