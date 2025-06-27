@@ -26,7 +26,7 @@ namespace Datos
                 {
                     Incidencia aux = new Incidencia();
                     aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
-                    aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
+                    aux.IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
 
                     aux.tipo = new TiposIncidente
@@ -77,7 +77,7 @@ namespace Datos
                 while (datos.Lector.Read())
                 {
                     aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
-                    aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
+                    aux.IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
 
                     aux.tipo = new TiposIncidente
@@ -125,7 +125,7 @@ namespace Datos
                 {
                     Incidencia aux = new Incidencia();
                     aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
-                    aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
+                    aux.IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
 
                     aux.tipo = new TiposIncidente
@@ -177,7 +177,7 @@ namespace Datos
                 {
                     Incidencia aux = new Incidencia();
                     aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
-                    aux.IdEmpleado = (int)datos.Lector["IDEmpleado"];
+                    aux.IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
 
                     aux.tipo = new TiposIncidente
@@ -222,19 +222,56 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("INSERT INTO INCIDENCIAS (IDEMPLEADO, IDCLIENTE, IDTIPO, IDPRIORIDAD, ESTADOACTUAL, DESCRIPCION, FECHAYHORACREACION) VALUES (@IDEMPLEADO, @IDCLIENTE, @IDTIPO, @IDPRIORIDAD, @ESTADOACTUAL, @DESCRIPCION, @FECHAYHORACREACION)");
-                datos.setearParametro("@IDEMPLEADO",DBNull.Value);
-                datos.setearParametro("@IDCLIENTE",nueva.IdCliente);
-                datos.setearParametro("@IDTIPO",nueva.tipo.IDTipo);
-                datos.setearParametro("@IDPRIORIDAD",nueva.prioridad.IDPrioridad);
-                datos.setearParametro("@ESTADOACTUAL","Pendiente");
-                datos.setearParametro("@DESCRIPCION",nueva.Descripcion);
-                datos.setearParametro("@FECHAYHORACREACION",DateTime.Now);
+                datos.setearParametro("@IDEMPLEADO", DBNull.Value);
+                datos.setearParametro("@IDCLIENTE", nueva.IdCliente);
+                datos.setearParametro("@IDTIPO", nueva.tipo.IDTipo);
+                datos.setearParametro("@IDPRIORIDAD", nueva.prioridad.IDPrioridad);
+                datos.setearParametro("@ESTADOACTUAL", "Pendiente");
+                datos.setearParametro("@DESCRIPCION", nueva.Descripcion);
+                datos.setearParametro("@FECHAYHORACREACION", DateTime.Now);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
             {
 
                 throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public void ModificarIncidencia(Incidencia nueva)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE Incidencias SET IDEmpleado = @IDEmpleado, IDTipo = @IDTipo, IDPrioridad = @IDPrioridad, EstadoActual = @EstadoActual, FechaYHoraResolucion = @FechaYHoraResolucion, Resolucion = @Resolucion WHERE IDIncidencia = @IDIncidencia");
+                datos.setearParametro("@IDEmpleado", nueva.IdEmpleado);
+                datos.setearParametro("@IDTipo", nueva.tipo.IDTipo);
+                datos.setearParametro("@IDPrioridad", nueva.prioridad.IDPrioridad);
+                datos.setearParametro("@EstadoActual", nueva.EstadoActual);
+                if (nueva.Resolucion != null)
+                {
+                    datos.setearParametro("@FechaYHoraResolucion", nueva.FechaYHoraResolucion);
+                    datos.setearParametro("@Resolucion", nueva.Resolucion);
+                } else
+                {
+                    datos.setearParametro("@FechaYHoraResolucion", DBNull.Value);
+                    datos.setearParametro("@Resolucion", DBNull.Value);
+                }
+                datos.setearParametro("@IDIncidencia", nueva.IdIncidencia);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
             }
         }
     }
