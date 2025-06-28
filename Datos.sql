@@ -14,6 +14,9 @@ DELETE FROM Usuarios
 --SELECT * FROM CategoriasCliente
 --DELETE Usuarios
 
+SELECT * FROM Usuarios
+
+
 INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES
 (3, 'usuario1@mail.com', 'clave1'),
 (3, 'usuario2@mail.com', 'clave2'),

@@ -4,7 +4,7 @@
 
     <div class="row justify-content-center mt-3">
         <div class="col-md-6 text-center">
-            <h1>Bienvenido/a <%= NombreDeUsuario %></h1>
+            <h1 class="py-3 mb-4 bg-primary text-white display-4" style="display: inline-block;">Bienvenido/a <%= NombreDeUsuario %></h1>
             <p>Elige una opcion:</p>
         </div>
     </div>

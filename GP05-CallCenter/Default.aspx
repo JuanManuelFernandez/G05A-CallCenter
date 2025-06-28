@@ -4,9 +4,12 @@
 
     <main>
         <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle" class="text-center mb-4">Call Center UTN</h1>
+            <h1 id="aspnetTitle" class="text-center py-3 px-4 mb-4 bg-primary text-white display-1">Call Center UTN</h1>
+            <div class="text-center">
+                <img src="Imagenes/LogoUTN.png" alt="Alternate Text" class="img-fluid mt-2 w-25 h-100"/>
+            </div>
             <%--aclaracion: mb = margin bot (margin de abajo) mt = margin top (margin de arriba)--%>
-            <p class="text-center mb-4">Bienvenido a nuestro centro de soporte. Tomaremos tu reclamo con mucho gusto, te esperamos.</p>
+            <p class="text-center mt-2 mb-4">Bienvenido a nuestro centro de soporte. Tomaremos tu reclamo con mucho gusto, te esperamos.</p>
         </section>
 
         <div>

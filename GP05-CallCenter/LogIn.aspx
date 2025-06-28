@@ -3,7 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <main>
-        <h1 class="text-center">¡Bienvenido de vuelta!</h1>
+        <div class="text-center">
+            <h1 class="py-3 mb-4 bg-primary text-white display-4" style="display: inline-block;">¡Bienvenido de vuelta!</h1>
+        </div>
 
         <p class="text-center">Tomaremos tu reclamo lo más pronto posible. <br> Por favor, completa con tus datos debajo.</p>
 

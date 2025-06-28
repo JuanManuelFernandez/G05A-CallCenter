@@ -8,7 +8,7 @@
         </div>
 
         <div class="d-flex align-items-center justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <div class="form-group mb-3">
                     <asp:Label ID="lblEmail" runat="server" Text="Email" CssClass="form-label"></asp:Label>
                     <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
