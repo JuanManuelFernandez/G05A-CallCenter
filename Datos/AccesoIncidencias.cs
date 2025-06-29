@@ -252,7 +252,7 @@ namespace Datos
                 datos.setearParametro("@IDTipo", nueva.tipo.IDTipo);
                 datos.setearParametro("@IDPrioridad", nueva.prioridad.IDPrioridad);
                 datos.setearParametro("@EstadoActual", nueva.EstadoActual);
-                if (nueva.Resolucion != null)
+                if (!(string.IsNullOrEmpty(nueva.Resolucion)))
                 {
                     datos.setearParametro("@FechaYHoraResolucion", nueva.FechaYHoraResolucion);
                     datos.setearParametro("@Resolucion", nueva.Resolucion);

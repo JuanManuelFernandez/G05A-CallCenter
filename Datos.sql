@@ -39,8 +39,7 @@ INSERT INTO Clientes (IDUsuario, IDCategoria, DNI, Nombre, Apellido, Telefono) V
 INSERT INTO Empleados (IDUsuario, Legajo, DNI, Nombre, Apellido) VALUES
 (4, 'L0001', 70800900, 'Empleado1', 'Uno'),
 (5, 'L0002', 10500900, 'Empleado2', 'Dos'),
-(6, 'L0003', 10500900, 'Empleado3', 'Tres'),
-(7, 'L0003', 10500900, 'Empleado3', 'Tres')
+(6, 'L0003', 10500900, 'Empleado3', 'Tres');
 
 INSERT INTO TiposIncidente (Nombre, Descripcion) VALUES
 ('Problema técnico', 'Falla en el servicio o software'),
