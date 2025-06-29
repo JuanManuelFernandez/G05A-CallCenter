@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <asp:Label ID="lblTelefono" runat="server" Text="Telefono" CssClass="form-label"></asp:Label>
-                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" min=1></asp:TextBox>
+                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" min="1"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -35,8 +35,6 @@
     <div class="row justify-content-center mt-3">
         <section class="col-md-3 text-center" aria-labelledby="hostingTitle">
             <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnModificar_Click" />
-        </section>
-        <section class="col-md-3 text-center" aria-labelledby="hostingTitle">
             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-danger btn-lg mx-3" OnClick="btnCancelar_Click" />
         </section>
     </div>

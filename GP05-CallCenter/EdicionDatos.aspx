@@ -14,7 +14,7 @@
             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control form-control-lg" placeholder="Escriba el nombre..."></asp:TextBox>
         </div>
         <div class="col-auto">
-            <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control form-control-lg" placeholder="Escriba la descripcion..." TextMode="MultiLine"></asp:TextBox>
+            <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control form-control-lg" placeholder="Escriba la descripcion..." TextMode="MultiLine" style="resize:none"></asp:TextBox>
         </div>
         <div class="col-auto">
             <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-primary btn-lg" OnClick="btnAgregar_Click" />

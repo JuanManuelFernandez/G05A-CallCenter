@@ -22,9 +22,23 @@ namespace CallCenter
             }
             else if (Request.QueryString["id"] != null)
             {
+                btnCargar.Text = "Modificar";
+                btnCargar.CssClass = "btn btn-success btn-lg mx-3";
                 CargarIncidencia();
                 return;
             }
+            else if (((Usuario)Session["usuario"]).TipoUsuario == TipoUsuario.Empleado)
+            {
+                lblFechaYHora.Text = DateTime.Now.ToString();
+                btnCargar.Text = "Cargar";
+                btnCargar.CssClass = "btn btn-success btn-lg mx-3";
+                txtNombre.Enabled = true;
+                txtDNI.Enabled = true;
+                txtMail.Enabled = true;
+                txtTelefono.Enabled = true;
+                return;
+            }
+            CargarDatosCliente();
         }
         public void CargarIncidencia()
         {
@@ -39,7 +53,7 @@ namespace CallCenter
                 Cliente cliente = datosClientes.Listar().Find(x => x.IdCliente == actual.IdCliente);
                 Empleado empleado = datosEmpleados.listar().Find(x => x.IDEmpleado == actual.IdEmpleado);
 
-                txtIdCliente.Text = cliente.DNI.ToString();
+                txtDNI.Text = cliente.DNI.ToString();
                 txtMail.Text = cliente.Usuario.Email;
                 txtTelefono.Text = cliente.Telefono.ToString();
                 ddlTipo.SelectedValue = actual.tipo.IDTipo.ToString();
@@ -93,6 +107,7 @@ namespace CallCenter
                     entry.ModificarIncidencia(nueva);
                 }
             }
+            Response.Redirect("Inicio.aspx");
         }
         public void CargarTipo()
         {
@@ -131,6 +146,37 @@ namespace CallCenter
                     throw er;
                 }
             }
+        }
+        protected void txtResolucion_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtResolucion.Text))
+            {
+                btnCargar.Text = "Cerrar";
+                btnCargar.CssClass = "btn btn-danger btn-lg mx-3";
+            }
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Inicio.aspx");
+        }
+        public void CargarDatosCliente()
+        {
+            AccesoClientes datos = new AccesoClientes();
+            Usuario user = ((Usuario)Session["usuario"]);
+            Cliente cli = datos.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
+            txtResolucion.Visible = false;
+            lblResolucion.Visible = false;
+            lblEstadoActual.Visible = false;
+            lblPrioridad.Visible = false;
+            txtEstadoActual.Visible = false;
+            ddlPrioridad.Visible = false;
+
+            lblFechaYHora.Text = DateTime.Now.ToString();
+            txtNombre.Text = string.Concat(cli.Apellido, ", ", cli.Nombre);
+            txtMail.Text = cli.Usuario.Email;
+            txtDNI.Text = cli.DNI.ToString();
+            txtTelefono.Text = cli.Telefono.ToString();
         }
     }
 }

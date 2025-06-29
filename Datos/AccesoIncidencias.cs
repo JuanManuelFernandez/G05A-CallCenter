@@ -228,7 +228,7 @@ namespace Datos
                 datos.setearParametro("@IDPRIORIDAD", nueva.prioridad.IDPrioridad);
                 datos.setearParametro("@ESTADOACTUAL", "Pendiente");
                 datos.setearParametro("@DESCRIPCION", nueva.Descripcion);
-                datos.setearParametro("@FECHAYHORACREACION", DateTime.Now);
+                datos.setearParametro("@FECHAYHORACREACION", nueva.FechaYHoraCreacion);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
