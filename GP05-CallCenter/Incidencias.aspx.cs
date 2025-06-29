@@ -59,9 +59,11 @@ namespace CallCenter
                 ddlTipo.SelectedValue = actual.tipo.IDTipo.ToString();
                 ddlPrioridad.SelectedValue = actual.prioridad.IDPrioridad.ToString();
                 lblFechaYHora.Text = actual.FechaYHoraCreacion.ToString();
+                txtNombre.Text = string.Concat(cliente.Apellido, ", ", cliente.Nombre);
                 txtEstadoActual.Text = actual.EstadoActual.ToString();
                 txtDescripcion.Text = actual.Descripcion;
                 txtResolucion.Text = actual.Resolucion;
+                txtDescripcion.Enabled = false;
             }
         }
 
@@ -85,6 +87,7 @@ namespace CallCenter
                     IDPrioridad = int.Parse(ddlPrioridad.SelectedValue)
                 };
                 nueva.Descripcion = txtDescripcion.Text;
+                nueva.FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text);
                 entry.AgregarIncidencia(nueva);
             }
             else

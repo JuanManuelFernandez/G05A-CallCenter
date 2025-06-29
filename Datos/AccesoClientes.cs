@@ -42,7 +42,7 @@ namespace Datos
                             Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
                             Eliminado = datos.Lector["Eliminado"] != DBNull.Value ? (bool)datos.Lector["Eliminado"] : true
                         },
-                        DNI = datos.Lector["DNI"] != DBNull.Value ? (int)datos.Lector["DNI"] : 0,
+                        DNI = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty,
                         Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty
@@ -118,7 +118,7 @@ namespace Datos
                 aux.Usuario.TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente;
                 aux.Usuario.Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty;
                 aux.Usuario.Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty;
-                aux.DNI = datos.Lector["DNI"] != DBNull.Value ? (int)datos.Lector["DNI"] : 0;
+                aux.DNI = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty;
                 aux.Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty;
                 aux.Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty;
                 aux.Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty;
@@ -157,7 +157,7 @@ namespace Datos
             }
         }
         //REVISAR ESTA FUNCION
-        public Cliente BuscarClientePorDNI(int dni)
+        public Cliente BuscarClientePorDNI(string dni)
         {
             datos = new AccesoDatos();
             Cliente aux = null;
@@ -184,7 +184,7 @@ namespace Datos
                             Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
                             Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
                         },
-                        DNI = datos.Lector["DNI"] != DBNull.Value ? (int)datos.Lector["DNI"] : 0,
+                        DNI = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty,
                         Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty
@@ -238,7 +238,7 @@ namespace Datos
                 datos.Cerrar();
             }
         }
-        public bool VerificarDNI(int DNI)
+        public bool VerificarDNI(string DNI)
         {
             datos = new AccesoDatos();
             try
@@ -276,7 +276,7 @@ namespace Datos
                 datos.Cerrar();
             }
         }
-        public bool VerificarTelefono(int Telefono)
+        public bool VerificarTelefono(string Telefono)
         {
             datos = new AccesoDatos();
             try

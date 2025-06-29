@@ -117,7 +117,7 @@ namespace GP05_CallCenter
 
 
 
-            if (dataEmpleados.listar().Find(x => x.DNI == int.Parse(txtDNI.Text) && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.DNI == int.Parse(txtDNI.Text) && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            if (dataEmpleados.listar().Find(x => x.DNI == txtDNI.Text && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.DNI == txtDNI.Text && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
             {
                 lblRegistro.Visible = true;
                 lblRegistro.Text = "Ya existe un usuario con ese DNI...";
@@ -140,7 +140,7 @@ namespace GP05_CallCenter
             nuevo.Legajo = txtTelefono.Text;
             nuevo.Nombre = txtNombre.Text;
             nuevo.Apellido = txtApellido.Text;
-            nuevo.DNI = int.Parse(txtDNI.Text);
+            nuevo.DNI = txtDNI.Text;
 
             dataUser.ModificarUsuario(user);
             dataEmpleados.ModificarEmpleado(nuevo);
@@ -153,7 +153,7 @@ namespace GP05_CallCenter
             AccesoClientes dataClientes = new AccesoClientes();
             Cliente nuevo = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
 
-            if (dataEmpleados.listar().Find(x => x.DNI == int.Parse(txtDNI.Text) && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.DNI == int.Parse(txtDNI.Text) && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            if (dataEmpleados.listar().Find(x => x.DNI == txtDNI.Text && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.DNI == txtDNI.Text && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
             {
                 lblRegistro.Visible = true;
                 lblRegistro.Text = "Ya existe un usuario con ese DNI...";
@@ -173,7 +173,7 @@ namespace GP05_CallCenter
             }
 
             nuevo.Categoria.IDCategoria = int.Parse(ddlCategoria.SelectedValue);
-            nuevo.DNI = int.Parse(txtDNI.Text);
+            nuevo.DNI = txtDNI.Text;
             nuevo.Nombre = txtNombre.Text;
             nuevo.Apellido = txtApellido.Text;
             nuevo.Telefono = txtTelefono.Text;

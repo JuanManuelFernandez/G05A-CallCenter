@@ -53,7 +53,7 @@ namespace CallCenter
             AccesoUsuario accesoUsuario = new AccesoUsuario();
             AccesoClientes accesoCliente = new AccesoClientes();
             {
-                nuevoCliente.DNI = int.Parse(dni.Text);
+                nuevoCliente.DNI = dni.Text;
                 nuevoCliente.Nombre = nombre.Text;
                 nuevoCliente.Apellido = apellido.Text;
                 nuevoCliente.Telefono = telefono.Text;
@@ -87,7 +87,7 @@ namespace CallCenter
                     lblRegistro.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
-                else if (accesoCliente.VerificarTelefono(int.Parse(nuevoCliente.Telefono)))
+                else if (accesoCliente.VerificarTelefono(nuevoCliente.Telefono))
                 {
                     lblRegistro.Visible = true;
                     lblRegistro.Text = "Ya existe un cliente con ese Telefono.";
@@ -121,7 +121,7 @@ namespace CallCenter
             Empleado nuevo = new Empleado();
             Usuario user = new Usuario();
             {
-                nuevo.DNI = int.Parse(dni.Text);
+                nuevo.DNI = dni.Text;
                 nuevo.Legajo = telefono.Text;
                 nuevo.Nombre = nombre.Text;
                 nuevo.Apellido = apellido.Text;
