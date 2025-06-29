@@ -13,17 +13,13 @@ namespace GP05_CallCenter
         protected void Page_Load(object sender, EventArgs e)
         {
             lblRegistro.Visible = false;
-            if (Session["usuario"] == null)
-            {
-                Response.Redirect("Inicio.aspx");
-            }
-            else if (((Usuario)Session["usuario"]).TipoUsuario != TipoUsuario.Admin)
+            if (Session["usuario"] == null || ((Usuario)Session["usuario"]).TipoUsuario != TipoUsuario.Admin) // Si no hay sesion de usuario o TipoUsuario != Admin
             {
                 Response.Redirect("Inicio.aspx");
             }
             ddlTipo.Items.Add("Categorias Cliente");
             ddlTipo.Items.Add("Tipos Incidente");
-            ddlTipo.Items.Add("Proridades Incidente");
+            ddlTipo.Items.Add("Prioridades Incidente");
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -60,7 +56,7 @@ namespace GP05_CallCenter
                     Response.Redirect("Inicio.aspx");
                 }
             }
-            else if (ddlTipo.SelectedItem.Text == "Proridades Incidente")
+            else if (ddlTipo.SelectedItem.Text == "Prioridades Incidente")
             {
                 AccesoPrioridades datos = new AccesoPrioridades();
                 PrioridadesIncidente nuevo = new PrioridadesIncidente();

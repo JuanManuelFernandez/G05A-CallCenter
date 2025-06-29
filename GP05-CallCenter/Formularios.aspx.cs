@@ -62,9 +62,11 @@ namespace CallCenter
         }
         public void AgregarDGVCliente()
         {
-            BoundField aux = new BoundField();
-            aux.HeaderText = "Descripcion";
-            aux.DataField = "Descripcion";
+            BoundField aux = new BoundField
+            {
+                HeaderText = "Descripcion",
+                DataField = "Descripcion"
+            };
             dgvIncidencias.Columns.Add(aux);
         }
         protected void dgvIncidencias_SelectedIndexChanged(object sender, EventArgs e)

@@ -2,20 +2,16 @@ GO
 USE CallCenter
 GO
 
-DELETE FROM Historiales
-DELETE FROM Incidencias
-DELETE FROM PrioridadesIncidente
-DELETE FROM TiposIncidente
-DELETE FROM Empleados
-DELETE FROM Clientes
-DELETE FROM CategoriasCliente
-DELETE FROM Usuarios
+--DELETE FROM Historiales
+--DELETE FROM Incidencias
+--DELETE FROM PrioridadesIncidente
+--DELETE FROM TiposIncidente
+--DELETE FROM Empleados
+--DELETE FROM Clientes
+--DELETE FROM CategoriasCliente
+--DELETE FROM Usuarios
 
 --SELECT * FROM CategoriasCliente
---DELETE Usuarios
-
-SELECT * FROM Usuarios
-
 
 INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES
 (3, 'usuario1@mail.com', 'clave1'),
