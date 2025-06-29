@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LogIn.aspx.cs" Inherits="CallCenter.LogIn" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
     <main>
         <div class="text-center">
             <h1 class="py-3 mb-4 bg-primary text-white display-4" style="display: inline-block;">¡Bienvenido de vuelta!</h1>

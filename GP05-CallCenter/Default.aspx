@@ -6,14 +6,14 @@
         <section class="row" aria-labelledby="aspnetTitle">
             <h1 id="aspnetTitle" class="text-center py-3 px-4 mb-4 bg-primary text-white display-1">Call Center UTN</h1>
             <div class="text-center">
-                <img src="Imagenes/LogoUTN.png" alt="Alternate Text" class="img-fluid mt-2 w-25 h-100"/>
+                <img src="assets/LogoUTN.png" alt="Alternate Text" class="img-fluid mt-2 w-25 h-100"/>
             </div>
             <%--aclaracion: mb = margin bot (margin de abajo) mt = margin top (margin de arriba)--%>
-            <p class="text-center mt-2 mb-4">Bienvenido a nuestro centro de soporte. Tomaremos tu reclamo con mucho gusto, te esperamos.</p>
+            <p class="text-center mt-2 mb-4"> <br> Bienvenido a nuestro centro de soporte. <br> Tomaremos tu reclamo con mucho gusto, te esperamos.</p>
         </section>
 
         <div>
-            <h2 class="text-center mb-4">Primero lo primero</h2>
+            <h2 class="text-center mb-4">Elige una opcion</h2>
         </div>
         <div class="row justify-content-center">
             <section class="col-md-2" aria-labelledby="gettingStartedTitle">
