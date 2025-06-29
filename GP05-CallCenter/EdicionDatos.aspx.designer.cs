@@ -15,6 +15,15 @@ namespace GP05_CallCenter
     {
 
         /// <summary>
+        /// Control ddlElegir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlElegir;
+
+        /// <summary>
         /// Control ddlTipo.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace GP05_CallCenter
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
+
+        /// <summary>
+        /// Control ddlDato.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDato;
 
         /// <summary>
         /// Control txtDescripcion.

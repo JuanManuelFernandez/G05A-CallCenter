@@ -18,7 +18,36 @@ namespace Datos
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDCategoria, Nombre, Descripcion FROM CategoriasCliente");
+                datos.Consultar("SELECT IDCategoria, Nombre, Descripcion FROM CategoriasCliente WHERE Eliminado = 0");
+                datos.Leer();
+
+                while (datos.Lector.Read())
+                {
+                    CategoriasCliente aux = new CategoriasCliente();
+                    aux.IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0;
+                    aux.Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty;
+                    aux.Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty;
+                    categorias.Add(aux);
+                }
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+            return categorias;
+        }
+        public List<CategoriasCliente> ListarCategoriasEliminadas()
+        {
+            datos = new AccesoDatos();
+            categorias = new List<CategoriasCliente>();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT IDCategoria, Nombre, Descripcion FROM CategoriasCliente WHERE Eliminado = 1");
                 datos.Leer();
 
                 while (datos.Lector.Read())
@@ -49,6 +78,65 @@ namespace Datos
                 datos.Consultar("INSERT INTO CategoriasCliente(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)");
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public void EliminarCategoria(CategoriasCliente nuevo)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE CategoriasCliente SET Eliminado = 1 WHERE IDCategoria = @IDCategoria");
+                datos.setearParametro("@IDCategoria", nuevo.IDCategoria);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public void ReactivarCategoria(CategoriasCliente nuevo)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE CategoriasCliente SET Eliminado = 0 WHERE IDCategoria = @IDCategoria");
+                datos.setearParametro("@IDCategoria", nuevo.IDCategoria);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public void ModificarCategoria(CategoriasCliente nuevo)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE CategoriasCliente SET Nombre = @Nombre, Descripcion = @Descripcion WHERE IDCategoria = @IDCategoria");
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.setearParametro("@IDCategoria", nuevo.IDCategoria);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
