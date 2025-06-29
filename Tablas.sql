@@ -18,7 +18,8 @@ CREATE TABLE Usuarios (
 CREATE TABLE CategoriasCliente (
   IDCategoria INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
   Nombre NVARCHAR(50) NOT NULL, -- Regular, Plus, Premium, etc. Determina el tiempo de respuesta minimo por incidencia
-  Descripcion NVARCHAR(250) NULL
+  Descripcion NVARCHAR(250) NULL,
+  Eliminado BIT NOT NULL DEFAULT 0
 )
 
 CREATE TABLE Clientes (
@@ -42,13 +43,15 @@ CREATE TABLE Empleados (
 CREATE TABLE TiposIncidente (
   IDTipo INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   Nombre NVARCHAR(50) NOT NULL,
-  Descripcion NVARCHAR(250) NOT NULL
+  Descripcion NVARCHAR(250) NOT NULL,
+  Eliminado BIT NOT NULL DEFAULT 0
 )
 
 CREATE TABLE PrioridadesIncidente (
   IDPrioridad INT NOT NULL PRIMARY KEY IDENTITY(1,1),
   Nombre NVARCHAR(50) NOT NULL, -- Uno, Dos o Tres
-  Descripcion NVARCHAR(250) NOT NULL
+  Descripcion NVARCHAR(250) NOT NULL,
+  Eliminado BIT NOT NULL DEFAULT 0
 )
 
 CREATE TABLE Incidencias (

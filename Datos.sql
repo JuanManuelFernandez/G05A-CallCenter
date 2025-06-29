@@ -14,9 +14,9 @@ GO
 --SELECT * FROM CategoriasCliente
 
 INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES
-(3, 'usuario1@mail.com', 'clave1'),
-(3, 'usuario2@mail.com', 'clave2'),
-(3, 'usuario3@mail.com', 'clave3'),
+(3, 'cliente1.52dfq@silomails.com', 'clave1'),
+(3, 'cliente2@mail.com', 'clave2'),
+(3, 'cliente3@mail.com', 'clave3'),
 (2, 'empleado1@mail.com', 'clave1'),
 (2, 'empleado2@mail.com', 'clave2'),
 (2, 'empleado3@mail.com', 'clave3'),

@@ -69,13 +69,33 @@ namespace CallCenter
 
         protected void btnCargar_Click(object sender, EventArgs e)
         {
+            string id = Request.QueryString["id"].ToString();
+            AccesoIncidencias datos = new AccesoIncidencias();
+            AccesoClientes datosClientes = new AccesoClientes();
+            AccesoEmpleados datosEmpleados = new AccesoEmpleados();
+            Incidencia actual = datos.listar().Find(x => x.IdIncidencia == int.Parse(id));
+            Cliente cliente = datosClientes.Listar().Find(x => x.IdCliente == actual.IdCliente);
+            Empleado empleado = datosEmpleados.listar().Find(x => x.IDEmpleado == actual.IdEmpleado);
+
+            EmailService emailService = new EmailService();
+            emailService.armarCorreo(cliente.Usuario.Email, actual.EstadoActual, txtDescripcion.Text);
+
+            try
+            {
+                emailService.enviarEmail();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+            }
+
             AccesoIncidencias entry = new AccesoIncidencias();
             Usuario user = (Usuario)Session["usuario"];
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
-                AccesoClientes datos = new AccesoClientes();
+                //AccesoClientes datos = new AccesoClientes();
                 Incidencia nueva = new Incidencia();
-                nueva.IdCliente = (datos.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente;
+                nueva.IdCliente = (datosClientes.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente;
 
                 nueva.tipo = new TiposIncidente
                 {
