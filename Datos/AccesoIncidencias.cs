@@ -12,9 +12,9 @@ namespace Datos
         private List<Incidencia> incidencias = null;
         private AccesoDatos datos = null;
 
-        public List<Incidencia> listar()
+        public List<Incidencia> Listar()
         {
-            AccesoPrioridades priori = new AccesoPrioridades();
+            //AccesoPrioridades priori = new AccesoPrioridades();
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
@@ -24,38 +24,38 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Incidencia aux = new Incidencia();
-                    aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
-                    aux.IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
-                    aux.IdCliente = (int)datos.Lector["IDCliente"];
-
-                    aux.tipo = new TiposIncidente
+                    Incidencia aux = new Incidencia
                     {
-                        IDTipo = (int)datos.Lector["IDTipo"],
-                        Nombre = (string)datos.Lector["NombreTipo"],
-                        Descripcion = (string)datos.Lector["DescripcionTipo"]
-                    };
+                        IdIncidencia = (int)datos.Lector["IDIncidencia"],
+                        IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
+                        IdCliente = (int)datos.Lector["IDCliente"],
 
-                    aux.prioridad = new PrioridadesIncidente
-                    {
-                        IDPrioridad = (int)datos.Lector["IDPrioridad"],
-                        Nombre = (string)datos.Lector["NombrePriori"],
-                        Descripcion = (string)datos.Lector["DescripcionPriori"]
-                    };
+                        tipo = new TiposIncidente
+                        {
+                            IDTipo = (int)datos.Lector["IDTipo"],
+                            Nombre = (string)datos.Lector["NombreTipo"],
+                            Descripcion = (string)datos.Lector["DescripcionTipo"]
+                        },
 
-                    aux.EstadoActual = (string)datos.Lector["EstadoActual"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
-                    aux.FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue;
-                    aux.Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty;
+                        prioridad = new PrioridadesIncidente
+                        {
+                            IDPrioridad = (int)datos.Lector["IDPrioridad"],
+                            Nombre = (string)datos.Lector["NombrePriori"],
+                            Descripcion = (string)datos.Lector["DescripcionPriori"]
+                        },
+
+                        EstadoActual = (string)datos.Lector["EstadoActual"],
+                        Descripcion = (string)datos.Lector["Descripcion"],
+                        FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue,
+                        FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue,
+                        Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty
+                    };
 
                     incidencias.Add(aux);
-
                 }
             }
             catch (Exception er)
             {
-
                 throw er;
             }
             finally
@@ -66,7 +66,7 @@ namespace Datos
         }
         public Incidencia Buscar(string id)
         {
-            AccesoPrioridades priori = new AccesoPrioridades();
+            //AccesoPrioridades priori = new AccesoPrioridades();
             datos = new AccesoDatos();
             Incidencia aux = new Incidencia();
             datos.Conectar();
@@ -111,9 +111,9 @@ namespace Datos
             }
             return aux;
         }
-        public List<Incidencia> listarIncidenciasCliente(int id)
+        public List<Incidencia> ListarIncidenciasCliente(int id)
         {
-            AccesoPrioridades priori = new AccesoPrioridades();
+            //AccesoPrioridades priori = new AccesoPrioridades();
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
@@ -123,30 +123,32 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Incidencia aux = new Incidencia();
-                    aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
-                    aux.IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
-                    aux.IdCliente = (int)datos.Lector["IDCliente"];
-
-                    aux.tipo = new TiposIncidente
+                    Incidencia aux = new Incidencia
                     {
-                        IDTipo = (int)datos.Lector["IDTipo"],
-                        Nombre = (string)datos.Lector["NombreTipo"],
-                        Descripcion = (string)datos.Lector["DescripcionTipo"]
-                    };
+                        IdIncidencia = (int)datos.Lector["IDIncidencia"],
+                        IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
+                        IdCliente = (int)datos.Lector["IDCliente"],
 
-                    aux.prioridad = new PrioridadesIncidente
-                    {
-                        IDPrioridad = (int)datos.Lector["IDPrioridad"],
-                        Nombre = (string)datos.Lector["NombrePriori"],
-                        Descripcion = (string)datos.Lector["DescripcionPriori"]
-                    };
+                        tipo = new TiposIncidente
+                        {
+                            IDTipo = (int)datos.Lector["IDTipo"],
+                            Nombre = (string)datos.Lector["NombreTipo"],
+                            Descripcion = (string)datos.Lector["DescripcionTipo"]
+                        },
 
-                    aux.EstadoActual = (string)datos.Lector["EstadoActual"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
-                    aux.FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue;
-                    aux.Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty;
+                        prioridad = new PrioridadesIncidente
+                        {
+                            IDPrioridad = (int)datos.Lector["IDPrioridad"],
+                            Nombre = (string)datos.Lector["NombrePriori"],
+                            Descripcion = (string)datos.Lector["DescripcionPriori"]
+                        },
+
+                        EstadoActual = (string)datos.Lector["EstadoActual"],
+                        Descripcion = (string)datos.Lector["Descripcion"],
+                        FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue,
+                        FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue,
+                        Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty
+                    };
 
                     incidencias.Add(aux);
 
@@ -154,7 +156,6 @@ namespace Datos
             }
             catch (Exception er)
             {
-
                 throw er;
             }
             finally
@@ -163,9 +164,9 @@ namespace Datos
             }
             return incidencias;
         }
-        public List<Incidencia> listarIncidenciasEmpleado(int id)
+        public List<Incidencia> ListarIncidenciasEmpleado(int id)
         {
-            AccesoPrioridades priori = new AccesoPrioridades();
+            //AccesoPrioridades priori = new AccesoPrioridades();
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
@@ -175,30 +176,32 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Incidencia aux = new Incidencia();
-                    aux.IdIncidencia = (int)datos.Lector["IDIncidencia"];
-                    aux.IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
-                    aux.IdCliente = (int)datos.Lector["IDCliente"];
-
-                    aux.tipo = new TiposIncidente
+                    Incidencia aux = new Incidencia
                     {
-                        IDTipo = (int)datos.Lector["IDTipo"],
-                        Nombre = (string)datos.Lector["NombreTipo"],
-                        Descripcion = (string)datos.Lector["DescripcionTipo"]
-                    };
+                        IdIncidencia = (int)datos.Lector["IDIncidencia"],
+                        IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
+                        IdCliente = (int)datos.Lector["IDCliente"],
 
-                    aux.prioridad = new PrioridadesIncidente
-                    {
-                        IDPrioridad = (int)datos.Lector["IDPrioridad"],
-                        Nombre = (string)datos.Lector["NombrePriori"],
-                        Descripcion = (string)datos.Lector["DescripcionPriori"]
-                    };
+                        tipo = new TiposIncidente
+                        {
+                            IDTipo = (int)datos.Lector["IDTipo"],
+                            Nombre = (string)datos.Lector["NombreTipo"],
+                            Descripcion = (string)datos.Lector["DescripcionTipo"]
+                        },
 
-                    aux.EstadoActual = (string)datos.Lector["EstadoActual"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue;
-                    aux.FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue;
-                    aux.Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty;
+                        prioridad = new PrioridadesIncidente
+                        {
+                            IDPrioridad = (int)datos.Lector["IDPrioridad"],
+                            Nombre = (string)datos.Lector["NombrePriori"],
+                            Descripcion = (string)datos.Lector["DescripcionPriori"]
+                        },
+
+                        EstadoActual = (string)datos.Lector["EstadoActual"],
+                        Descripcion = (string)datos.Lector["Descripcion"],
+                        FechaYHoraCreacion = datos.Lector["FechaYHoraCreacion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraCreacion"] : DateTime.MaxValue,
+                        FechaYHoraResolucion = datos.Lector["FechaYHoraResolucion"] != DBNull.Value ? (DateTime)datos.Lector["FechaYHoraResolucion"] : DateTime.MaxValue,
+                        Resolucion = datos.Lector["Resolucion"] != DBNull.Value ? (string)datos.Lector["Resolucion"] : string.Empty
+                    };
 
                     incidencias.Add(aux);
 
@@ -206,7 +209,6 @@ namespace Datos
             }
             catch (Exception er)
             {
-
                 throw er;
             }
             finally
@@ -222,18 +224,17 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("INSERT INTO INCIDENCIAS (IDEMPLEADO, IDCLIENTE, IDTIPO, IDPRIORIDAD, ESTADOACTUAL, DESCRIPCION, FECHAYHORACREACION) VALUES (@IDEMPLEADO, @IDCLIENTE, @IDTIPO, @IDPRIORIDAD, @ESTADOACTUAL, @DESCRIPCION, @FECHAYHORACREACION)");
-                datos.setearParametro("@IDEMPLEADO", DBNull.Value);
-                datos.setearParametro("@IDCLIENTE", nueva.IdCliente);
-                datos.setearParametro("@IDTIPO", nueva.tipo.IDTipo);
-                datos.setearParametro("@IDPRIORIDAD", nueva.prioridad.IDPrioridad);
-                datos.setearParametro("@ESTADOACTUAL", "Pendiente");
-                datos.setearParametro("@DESCRIPCION", nueva.Descripcion);
-                datos.setearParametro("@FECHAYHORACREACION", nueva.FechaYHoraCreacion);
+                datos.SetearParametro("@IDEMPLEADO", DBNull.Value);
+                datos.SetearParametro("@IDCLIENTE", nueva.IdCliente);
+                datos.SetearParametro("@IDTIPO", nueva.tipo.IDTipo);
+                datos.SetearParametro("@IDPRIORIDAD", nueva.prioridad.IDPrioridad);
+                datos.SetearParametro("@ESTADOACTUAL", "Pendiente");
+                datos.SetearParametro("@DESCRIPCION", nueva.Descripcion);
+                datos.SetearParametro("@FECHAYHORACREACION", nueva.FechaYHoraCreacion);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
             {
-
                 throw er;
             }
             finally
@@ -248,25 +249,24 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE Incidencias SET IDEmpleado = @IDEmpleado, IDTipo = @IDTipo, IDPrioridad = @IDPrioridad, EstadoActual = @EstadoActual, FechaYHoraResolucion = @FechaYHoraResolucion, Resolucion = @Resolucion WHERE IDIncidencia = @IDIncidencia");
-                datos.setearParametro("@IDEmpleado", nueva.IdEmpleado);
-                datos.setearParametro("@IDTipo", nueva.tipo.IDTipo);
-                datos.setearParametro("@IDPrioridad", nueva.prioridad.IDPrioridad);
-                datos.setearParametro("@EstadoActual", nueva.EstadoActual);
+                datos.SetearParametro("@IDEmpleado", nueva.IdEmpleado);
+                datos.SetearParametro("@IDTipo", nueva.tipo.IDTipo);
+                datos.SetearParametro("@IDPrioridad", nueva.prioridad.IDPrioridad);
+                datos.SetearParametro("@EstadoActual", nueva.EstadoActual);
                 if (!(string.IsNullOrEmpty(nueva.Resolucion)))
                 {
-                    datos.setearParametro("@FechaYHoraResolucion", nueva.FechaYHoraResolucion);
-                    datos.setearParametro("@Resolucion", nueva.Resolucion);
+                    datos.SetearParametro("@FechaYHoraResolucion", nueva.FechaYHoraResolucion);
+                    datos.SetearParametro("@Resolucion", nueva.Resolucion);
                 } else
                 {
-                    datos.setearParametro("@FechaYHoraResolucion", DBNull.Value);
-                    datos.setearParametro("@Resolucion", DBNull.Value);
+                    datos.SetearParametro("@FechaYHoraResolucion", DBNull.Value);
+                    datos.SetearParametro("@Resolucion", DBNull.Value);
                 }
-                datos.setearParametro("@IDIncidencia", nueva.IdIncidencia);
+                datos.SetearParametro("@IDIncidencia", nueva.IdIncidencia);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
             {
-
                 throw er;
             }
             finally

@@ -38,10 +38,15 @@
                 <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-select w-50 mx-auto"></asp:DropDownList>
             </div>
 
+            <asp:Label ID="lblResumenProblema" runat="server" Text="Resumen del problema" CssClass="form-label fw-bold text-center"> </asp:Label>
+            <asp:TextBox ID="txtResumenProblema" runat="server" Placeholder="No anda internet, el router no enciende..." CssClass="form-control w-50 mx-auto mb-2"></asp:TextBox>
+
+
             <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion" CssClass="form-label fw-bold text-center"> </asp:Label>
             <br />
-            <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 175px"></asp:TextBox>
+            <asp:TextBox ID="txtDescripcion" runat="server" Placeholder="Descripcion detallada del inconveniente o la consulta a realizar..." TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 175px"></asp:TextBox>
         </div>
+
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <asp:Label ID="lblEstadoActual" runat="server" Text="Estado Actual" CssClass="form-label fw-bold"></asp:Label>
@@ -54,13 +59,13 @@
                 <asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="form-select"></asp:DropDownList>
             </div>
             <asp:Label ID="lblResolucion" runat="server" Text="Resolucion" CssClass="form-label fw-bold text-center mt-2"></asp:Label>
-            <asp:TextBox ID="txtResolucion" runat="server" TextMode="MultiLine" Style="width: 500px; height: 175px; resize: none;" CssClass="form-control w-50 mx-auto" OnTextChanged="txtResolucion_TextChanged" AutoPostBack="true"></asp:TextBox>
+            <asp:TextBox ID="txtResolucion" runat="server" TextMode="MultiLine" Style="width: 500px; height: 175px; resize: none;" CssClass="form-control w-50 mx-auto" OnTextChanged="TxtResolucion_TextChanged" AutoPostBack="true"></asp:TextBox>
         </div>
     </div>
     <div class="row justify-content-center mt-3">
         <section class="col-md-3 text-center" aria-labelledby="hostingTitle">
-            <asp:Button ID="btnCargar" runat="server" Text="Cargar" CssClass="btn btn-success btn-lg mx-3" OnClick="btnCargar_Click" />
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary btn-lg mx-3" OnClick="btnCancelar_Click" />
+            <asp:Button ID="btnCargar" runat="server" Text="Cargar" CssClass="btn btn-success btn-lg mx-3" OnClick="BtnCargar_Click" />
+            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnCancelar_Click" />
         </section>
     </div>
 </asp:Content>

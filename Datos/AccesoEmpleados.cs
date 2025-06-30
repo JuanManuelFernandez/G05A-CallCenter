@@ -23,13 +23,15 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Empleado aux = new Empleado();
-                    aux.IDEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
-                    aux.IDUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0;
-                    aux.Legajo = datos.Lector["Legajo"] != DBNull.Value ? (string)datos.Lector["Legajo"] : string.Empty;
-                    aux.DNI = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty;
-                    aux.Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty;
-                    aux.Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty;
+                    Empleado aux = new Empleado
+                    {
+                        IDEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
+                        IDUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
+                        Legajo = datos.Lector["Legajo"] != DBNull.Value ? (string)datos.Lector["Legajo"] : string.Empty,
+                        DNI = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
+                        Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
+                        Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty
+                    };
                     empleados.Add(aux);
                 }
             }
@@ -70,11 +72,11 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("INSERT INTO Empleados (IDUsuario, Legajo, DNI, Nombre, Apellido) VALUES (@IDUsuario, @Legajo, @DNI, @Nombre, @Apellido)");
-                datos.setearParametro("@IDUsuario", nuevo.IDUsuario);
-                datos.setearParametro("@Legajo", nuevo.Legajo);
-                datos.setearParametro("@DNI", nuevo.DNI);
-                datos.setearParametro("@Nombre", nuevo.Nombre);
-                datos.setearParametro("@Apellido", nuevo.Apellido);
+                datos.SetearParametro("@IDUsuario", nuevo.IDUsuario);
+                datos.SetearParametro("@Legajo", nuevo.Legajo);
+                datos.SetearParametro("@DNI", nuevo.DNI);
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Apellido", nuevo.Apellido);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -93,11 +95,11 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE Empleados SET Legajo = @Legajo, DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido WHERE IDUsuario = @IDUsuario");
-                datos.setearParametro("@Legajo", nuevo.Legajo);
-                datos.setearParametro("@DNI", nuevo.DNI);
-                datos.setearParametro("@Nombre", nuevo.Nombre);
-                datos.setearParametro("@Apellido", nuevo.Apellido);
-                datos.setearParametro("@IDUsuario", nuevo.IDUsuario);
+                datos.SetearParametro("@Legajo", nuevo.Legajo);
+                datos.SetearParametro("@DNI", nuevo.DNI);
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Apellido", nuevo.Apellido);
+                datos.SetearParametro("@IDUsuario", nuevo.IDUsuario);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)

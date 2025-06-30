@@ -30,7 +30,7 @@ namespace Datos
                         TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
                         Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
                         Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
-                        Eliminado = datos.Lector["Eliminado"] != DBNull.Value ? (bool)datos.Lector["Eliminado"] : false,
+                        Eliminado = datos.Lector["Eliminado"] != DBNull.Value && (bool)datos.Lector["Eliminado"],
                     };
 
                     usuarios.Add(aux);
@@ -63,7 +63,7 @@ namespace Datos
                         TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
                         Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
                         Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
-                        Eliminado = datos.Lector["Eliminado"] != DBNull.Value ? (bool)datos.Lector["Eliminado"] : false,
+                        Eliminado = datos.Lector["Eliminado"] != DBNull.Value && (bool)datos.Lector["Eliminado"],
                     };
 
                     usuarios.Add(aux);
@@ -87,9 +87,9 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES (@TipoUsuario, @Email, @Clave)");
-                datos.setearParametro("@TipoUsuario", nuevo.TipoUsuario);
-                datos.setearParametro("@Email", nuevo.Email);
-                datos.setearParametro("@Clave", nuevo.Clave);
+                datos.SetearParametro("@TipoUsuario", nuevo.TipoUsuario);
+                datos.SetearParametro("@Email", nuevo.Email);
+                datos.SetearParametro("@Clave", nuevo.Clave);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -108,17 +108,14 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("SELECT IdUsuario, TipoUsuario, Email, Clave FROM Usuarios WHERE Email = @Email AND Clave = @Clave");
-                datos.setearParametro("@Email", usuario.Email);
-                datos.setearParametro("@Clave", usuario.Clave);
+                datos.SetearParametro("@Email", usuario.Email);
+                datos.SetearParametro("@Clave", usuario.Clave);
 
-                //datos.EjecutarNonQuery();
-                //datos.Cerrar();
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
                     usuario.IdUsuario = (int)datos.Lector["IdUsuario"];
                     usuario.TipoUsuario = (int)datos.Lector["TipoUsuario"] == 1 ? TipoUsuario.Admin : (int)datos.Lector["TipoUsuario"] == 2 ? TipoUsuario.Empleado : TipoUsuario.Cliente;
-                    //datos.Cerrar();
                     return true;
                 }
             }
@@ -148,7 +145,7 @@ namespace Datos
                     TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
                     Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
                     Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
-                    Eliminado = datos.Lector["Eliminado"] != DBNull.Value ? (bool)datos.Lector["Eliminado"] : false,
+                    Eliminado = datos.Lector["Eliminado"] != DBNull.Value && (bool)datos.Lector["Eliminado"],
                 };
 
             }
@@ -205,7 +202,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE Usuarios SET Eliminado = 0 WHERE Email = @email");
-                datos.setearParametro("@email", email);
+                datos.SetearParametro("@email", email);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -224,11 +221,11 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE Usuarios SET TipoUsuario = @TipoUsuario, Email = @Email, Clave = @Clave, Eliminado = @Eliminado WHERE IDUsuario = @IDUsuario");
-                datos.setearParametro("@TipoUsuario", mod.TipoUsuario);
-                datos.setearParametro("@Email", mod.Email);
-                datos.setearParametro("@Clave", mod.Clave);
-                datos.setearParametro("@Eliminado", mod.Eliminado);
-                datos.setearParametro("@IDUsuario", mod.IdUsuario);
+                datos.SetearParametro("@TipoUsuario", mod.TipoUsuario);
+                datos.SetearParametro("@Email", mod.Email);
+                datos.SetearParametro("@Clave", mod.Clave);
+                datos.SetearParametro("@Eliminado", mod.Eliminado);
+                datos.SetearParametro("@IDUsuario", mod.IdUsuario);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)

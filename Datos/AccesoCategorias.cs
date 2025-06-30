@@ -76,8 +76,8 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("INSERT INTO CategoriasCliente(Nombre, Descripcion) VALUES (@Nombre, @Descripcion)");
-                datos.setearParametro("@Nombre", nuevo.Nombre);
-                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Descripcion", nuevo.Descripcion);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -96,7 +96,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE CategoriasCliente SET Eliminado = 1 WHERE IDCategoria = @IDCategoria");
-                datos.setearParametro("@IDCategoria", nuevo.IDCategoria);
+                datos.SetearParametro("@IDCategoria", nuevo.IDCategoria);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -115,7 +115,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE CategoriasCliente SET Eliminado = 0 WHERE IDCategoria = @IDCategoria");
-                datos.setearParametro("@IDCategoria", nuevo.IDCategoria);
+                datos.SetearParametro("@IDCategoria", nuevo.IDCategoria);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -134,9 +134,9 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE CategoriasCliente SET Nombre = @Nombre, Descripcion = @Descripcion WHERE IDCategoria = @IDCategoria");
-                datos.setearParametro("@Nombre", nuevo.Nombre);
-                datos.setearParametro("@Descripcion", nuevo.Descripcion);
-                datos.setearParametro("@IDCategoria", nuevo.IDCategoria);
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Descripcion", nuevo.Descripcion);
+                datos.SetearParametro("@IDCategoria", nuevo.IDCategoria);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)

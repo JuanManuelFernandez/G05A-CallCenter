@@ -49,7 +49,7 @@ namespace CallCenter
                 AccesoIncidencias datos = new AccesoIncidencias();
                 AccesoClientes datosClientes = new AccesoClientes();
                 AccesoEmpleados datosEmpleados = new AccesoEmpleados();
-                Incidencia actual = datos.listar().Find(x => x.IdIncidencia == int.Parse(id));
+                Incidencia actual = datos.Listar().Find(x => x.IdIncidencia == int.Parse(id));
                 Cliente cliente = datosClientes.Listar().Find(x => x.IdCliente == actual.IdCliente);
                 Empleado empleado = datosEmpleados.listar().Find(x => x.IDEmpleado == actual.IdEmpleado);
 
@@ -67,54 +67,36 @@ namespace CallCenter
             }
         }
 
-        protected void btnCargar_Click(object sender, EventArgs e)
+        protected void BtnCargar_Click(object sender, EventArgs e)
         {
-            string id = Request.QueryString["id"].ToString();
-            AccesoIncidencias datos = new AccesoIncidencias();
-            AccesoClientes datosClientes = new AccesoClientes();
-            AccesoEmpleados datosEmpleados = new AccesoEmpleados();
-            Incidencia actual = datos.listar().Find(x => x.IdIncidencia == int.Parse(id));
-            Cliente cliente = datosClientes.Listar().Find(x => x.IdCliente == actual.IdCliente);
-            Empleado empleado = datosEmpleados.listar().Find(x => x.IDEmpleado == actual.IdEmpleado);
-
-            EmailService emailService = new EmailService();
-            emailService.armarCorreo(cliente.Usuario.Email, actual.EstadoActual, txtDescripcion.Text);
-
-            try
-            {
-                emailService.enviarEmail();
-            }
-            catch (Exception ex)
-            {
-                Session.Add("error", ex);
-            }
-
             AccesoIncidencias entry = new AccesoIncidencias();
             Usuario user = (Usuario)Session["usuario"];
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
-                //AccesoClientes datos = new AccesoClientes();
-                Incidencia nueva = new Incidencia();
-                nueva.IdCliente = (datosClientes.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente;
-
-                nueva.tipo = new TiposIncidente
+                AccesoClientes datos = new AccesoClientes();
+                Incidencia nueva = new Incidencia
                 {
-                    IDTipo = int.Parse(ddlTipo.SelectedValue)
-                };
+                    IdCliente = (datos.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
 
-                nueva.prioridad = new PrioridadesIncidente
-                {
-                    IDPrioridad = int.Parse(ddlPrioridad.SelectedValue)
+                    tipo = new TiposIncidente
+                    {
+                        IDTipo = int.Parse(ddlTipo.SelectedValue)
+                    },
+
+                    prioridad = new PrioridadesIncidente
+                    {
+                        IDPrioridad = int.Parse(ddlPrioridad.SelectedValue)
+                    },
+                    Descripcion = txtDescripcion.Text,
+                    FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                 };
-                nueva.Descripcion = txtDescripcion.Text;
-                nueva.FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text);
                 entry.AgregarIncidencia(nueva);
             }
             else
             {
                 if (Request.QueryString["id"] != null)
                 {
-                    Incidencia nueva = entry.listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
+                    Incidencia nueva = entry.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
                     nueva.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
                     nueva.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
                     nueva.EstadoActual = txtEstadoActual.Text;
@@ -130,6 +112,20 @@ namespace CallCenter
                     entry.ModificarIncidencia(nueva);
                 }
             }
+
+            EmailService emailService = new EmailService();
+            emailService.ArmarCorreo(txtMail.Text, txtResumenProblema.Text, txtDescripcion.Text);
+
+            try
+            {
+                emailService.EnviarEmail();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx");
+            }
+
             Response.Redirect("Inicio.aspx");
         }
         public void CargarTipo()
@@ -170,7 +166,7 @@ namespace CallCenter
                 }
             }
         }
-        protected void txtResolucion_TextChanged(object sender, EventArgs e)
+        protected void TxtResolucion_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtResolucion.Text))
             {
@@ -179,7 +175,7 @@ namespace CallCenter
             }
         }
 
-        protected void btnCancelar_Click(object sender, EventArgs e)
+        protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Inicio.aspx");
         }

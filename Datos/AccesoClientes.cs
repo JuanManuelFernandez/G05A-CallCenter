@@ -40,7 +40,7 @@ namespace Datos
                             TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente,
                             Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
                             Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
-                            Eliminado = datos.Lector["Eliminado"] != DBNull.Value ? (bool)datos.Lector["Eliminado"] : true
+                            Eliminado = datos.Lector["Eliminado"] == DBNull.Value || (bool)datos.Lector["Eliminado"]
                         },
                         DNI = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
@@ -71,21 +71,21 @@ namespace Datos
                 // Insertar en Usuarios
                 datos.Conectar();
                 datos.Consultar("INSERT INTO Usuarios (TipoUsuario, Email, Clave, Eliminado) VALUES (@TipoUsuario, @Email, @Clave, @Eliminado)");
-                datos.setearParametro("@TipoUsuario", nuevo.Usuario.TipoUsuario);
-                datos.setearParametro("@Clave", nuevo.Usuario.Clave);
-                datos.setearParametro("@Email", nuevo.Usuario.Email);
-                datos.setearParametro("@Eliminado", 0);
+                datos.SetearParametro("@TipoUsuario", nuevo.Usuario.TipoUsuario);
+                datos.SetearParametro("@Clave", nuevo.Usuario.Clave);
+                datos.SetearParametro("@Email", nuevo.Usuario.Email);
+                datos.SetearParametro("@Eliminado", 0);
                 datos.EjecutarNonQuery();
                 datos.Cerrar();
 
                 // Insertar en Clientes usando el IDUsuario recién generado
                 datos.Conectar();
                 datos.Consultar("INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono) VALUES (@IDUsuario, @DNI, @Nombre, @Apellido, @Telefono)");
-                datos.setearParametro("@IDUsuario", auxiliar.Listar()[(auxiliar.Listar().Count) - 1].IdUsuario);
-                datos.setearParametro("@DNI", nuevo.DNI);
-                datos.setearParametro("@Nombre", nuevo.Nombre);
-                datos.setearParametro("@Apellido", nuevo.Apellido);
-                datos.setearParametro("@Telefono", nuevo.Telefono);
+                datos.SetearParametro("@IDUsuario", auxiliar.Listar()[(auxiliar.Listar().Count) - 1].IdUsuario);
+                datos.SetearParametro("@DNI", nuevo.DNI);
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Apellido", nuevo.Apellido);
+                datos.SetearParametro("@Telefono", nuevo.Telefono);
 
                 datos.EjecutarNonQuery();
             }
@@ -165,7 +165,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("SELECT C.IDCliente, IDCategoria, C.IDUsuario, C.DNI, C.Nombre, C.Apellido, C.Telefono, U.TipoUsuario, U.Email, U.Clave FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE C.DNI = @Dni");
-                datos.setearParametro("@Dni", dni);
+                datos.SetearParametro("@Dni", dni);
                 datos.Leer();
 
                 if (datos.Lector.Read())
@@ -216,17 +216,17 @@ namespace Datos
                 datos.Consultar("UPDATE Clientes SET IDCategoria = @IDCategoria, DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Telefono = @Telefono WHERE IDUsuario = @IDUsuario");
                 if (mod.Categoria == null || mod.Categoria.IDCategoria == 0)
                 {
-                    datos.setearParametro("@IDCategoria", DBNull.Value);
+                    datos.SetearParametro("@IDCategoria", DBNull.Value);
                 }
                 else
                 {
-                    datos.setearParametro("@IDCategoria", mod.Categoria.IDCategoria);
+                    datos.SetearParametro("@IDCategoria", mod.Categoria.IDCategoria);
                 }
-                datos.setearParametro("@DNI", mod.DNI);
-                datos.setearParametro("@Nombre", mod.Nombre);
-                datos.setearParametro("@Apellido", mod.Apellido);
-                datos.setearParametro("@Telefono", mod.Telefono);
-                datos.setearParametro("@IDUsuario", mod.Usuario.IdUsuario);
+                datos.SetearParametro("@DNI", mod.DNI);
+                datos.SetearParametro("@Nombre", mod.Nombre);
+                datos.SetearParametro("@Apellido", mod.Apellido);
+                datos.SetearParametro("@Telefono", mod.Telefono);
+                datos.SetearParametro("@IDUsuario", mod.Usuario.IdUsuario);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)

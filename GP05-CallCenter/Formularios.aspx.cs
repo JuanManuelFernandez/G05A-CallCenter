@@ -30,7 +30,7 @@ namespace CallCenter
                     aux.ShowSelectButton = true;
                     aux.SelectText = "Abrir";
                     dgvIncidencias.Columns.Add(aux);
-                    dgvIncidencias.DataSource = datos.listarIncidenciasEmpleado(emp.IDEmpleado);
+                    dgvIncidencias.DataSource = datos.ListarIncidenciasEmpleado(emp.IDEmpleado);
                     dgvIncidencias.DataBind();
                 }
                 else if (user.TipoUsuario == TipoUsuario.Admin)
@@ -47,14 +47,14 @@ namespace CallCenter
                     aux.ShowSelectButton = true;
                     aux.SelectText = "Abrir";
                     dgvIncidencias.Columns.Add(aux);
-                    dgvIncidencias.DataSource = datos.listar();
+                    dgvIncidencias.DataSource = datos.Listar();
                     dgvIncidencias.DataBind();
                 }
                 else
                 {
                     AccesoClientes dataCli = new AccesoClientes();
                     Cliente cli = dataCli.BuscarClientePorIdUsuario(user.IdUsuario);
-                    dgvIncidencias.DataSource = datos.listarIncidenciasCliente(cli.IdCliente);
+                    dgvIncidencias.DataSource = datos.ListarIncidenciasCliente(cli.IdCliente);
                     AgregarDGVCliente();
                     dgvIncidencias.DataBind();
                 }
@@ -97,7 +97,7 @@ namespace CallCenter
             DropDownList lista = (DropDownList)sender;
             GridViewRow fila = (GridViewRow)lista.NamingContainer;
             AccesoIncidencias data = new AccesoIncidencias();
-            Incidencia inc = data.listar().Find(x => x.IdIncidencia == int.Parse(dgvIncidencias.DataKeys[fila.RowIndex].Value.ToString()));
+            Incidencia inc = data.Listar().Find(x => x.IdIncidencia == int.Parse(dgvIncidencias.DataKeys[fila.RowIndex].Value.ToString()));
             inc.IdEmpleado = int.Parse(lista.SelectedValue);
             inc.Resolucion = string.Empty;
             data.ModificarIncidencia(inc);

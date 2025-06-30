@@ -17,17 +17,21 @@ namespace Dominio
 
         public EmailService()
         {
-            server = new SmtpClient();
-            server.Credentials = new NetworkCredential("utncallcenter@gmail.com", "C3^U$54T@#E72*cY");
-            server.EnableSsl = true;
-            server.Port = 587;
-            server.Host = "smtp.gmail.com";
+            server = new SmtpClient
+            {
+                Credentials = new NetworkCredential("utncallcenter@gmail.com", "zhuz xchi xylo xhvr"), // Clave de AppCallCenter
+                EnableSsl = true,
+                Port = 587,
+                Host = "smtp.gmail.com"
+            };
         }
 
-        public void armarCorreo(string emailDestino, string asunto, string cuerpo)
+        public void ArmarCorreo(string emailDestino, string asunto, string cuerpo)
         {
-            email = new MailMessage();
-            email.From = new MailAddress("noresponder@callcenter.utn.com"); // Cambiar
+            email = new MailMessage
+            {
+                From = new MailAddress("utncallcenter@gmail.com", "CallCenter UTN") // Cambiar
+            };
             email.To.Add(emailDestino);
             email.Subject = asunto;
             email.IsBodyHtml = true;
@@ -36,7 +40,7 @@ namespace Dominio
 
         }
 
-        public void enviarEmail()
+        public void EnviarEmail()
         {
             try
             {
