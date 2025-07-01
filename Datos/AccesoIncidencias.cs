@@ -224,7 +224,8 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("INSERT INTO INCIDENCIAS (IDEMPLEADO, IDCLIENTE, IDTIPO, IDPRIORIDAD, ESTADOACTUAL, DESCRIPCION, FECHAYHORACREACION) VALUES (@IDEMPLEADO, @IDCLIENTE, @IDTIPO, @IDPRIORIDAD, @ESTADOACTUAL, @DESCRIPCION, @FECHAYHORACREACION)");
-                datos.SetearParametro("@IDEMPLEADO", DBNull.Value);
+                if (nueva.IdEmpleado == 0) datos.SetearParametro("@IDEMPLEADO", DBNull.Value);
+                else datos.SetearParametro("@IDEMPLEADO", nueva.IdEmpleado);
                 datos.SetearParametro("@IDCLIENTE", nueva.IdCliente);
                 datos.SetearParametro("@IDTIPO", nueva.tipo.IDTipo);
                 datos.SetearParametro("@IDPRIORIDAD", nueva.prioridad.IDPrioridad);

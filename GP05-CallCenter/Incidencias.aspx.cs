@@ -81,12 +81,13 @@ namespace CallCenter
             AccesoIncidencias entry = new AccesoIncidencias();
             Usuario user = (Usuario)Session["usuario"];
             EmailService emailService = new EmailService();
+            AccesoClientes dataCli = new AccesoClientes();
+            AccesoEmpleados dataEmp = new AccesoEmpleados();
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
-                AccesoClientes datos = new AccesoClientes();
                 Incidencia nueva = new Incidencia
                 {
-                    IdCliente = (datos.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
+                    IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
 
                     tipo = new TiposIncidente
                     {
@@ -135,7 +136,42 @@ namespace CallCenter
                 }
                 else
                 {
-                    //Carga Una Incidencia El Empleado...
+                    string[] aux = txtNombre.Text.Split(',');
+                    Cliente nuevo = new Cliente
+                    {
+                        Usuario = new Usuario
+                        {
+                            TipoUsuario = TipoUsuario.Cliente,
+                            Email = txtMail.Text,
+                            Clave = "password"
+                        },
+                        DNI = txtDNI.Text,
+                        Nombre = aux[1],
+                        Apellido = aux[0],
+                        Telefono = txtTelefono.Text
+                    };
+
+                    dataCli.AgregarCliente(nuevo);
+
+                    Incidencia inc = new Incidencia
+                    {
+                        IdCliente = (dataCli.Listar().Find(x => x.DNI == txtDNI.Text)).IdCliente,
+                        IdEmpleado = (dataEmp.listar().Find(x => x.IDUsuario == user.IdUsuario)).IDEmpleado,
+
+                        tipo = new TiposIncidente
+                        {
+                            IDTipo = int.Parse(ddlTipo.SelectedValue)
+                        },
+
+                        prioridad = new PrioridadesIncidente
+                        {
+                            IDPrioridad = int.Parse(ddlPrioridad.SelectedValue)
+                        },
+                        Descripcion = txtDescripcion.Text,
+                        FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
+                    };
+                    entry.AgregarIncidencia(inc);
+                    emailService.ArmarCorreo(txtMail.Text, txtResumenProblema.Text, txtDescripcion.Text);
                 }
             }
 

@@ -13,23 +13,23 @@
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <asp:Label ID="lblNombre" runat="server" Text="Nombre Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control w-100" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control w-100" Enabled="false" required="required"></asp:TextBox>
 
             </div>
             <div class="col-md-3">
                 <asp:Label ID="lblMail" runat="server" Text="Email Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtMail" runat="server" CssClass="form-control w-100" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtMail" runat="server" CssClass="form-control w-100" Enabled="false" required="required"></asp:TextBox>
             </div>
         </div>
 
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <asp:Label ID="lblDni" runat="server" Text="DNI Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control w-100" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control w-100" Enabled="false" required="required"></asp:TextBox>
             </div>
             <div class="col-md-3">
                 <asp:Label ID="lblTelefono" runat="server" Text="Telefono Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control w-100" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control w-100" Enabled="false" required="required"></asp:TextBox>
             </div>
 
             <div class="text-center m-2">
@@ -39,12 +39,12 @@
             </div>
 
             <asp:Label ID="lblResumenProblema" runat="server" Text="Resumen del problema" CssClass="form-label fw-bold text-center"> </asp:Label>
-            <asp:TextBox ID="txtResumenProblema" runat="server" Placeholder="No anda internet, el router no enciende..." CssClass="form-control w-50 mx-auto mb-2"></asp:TextBox>
+            <asp:TextBox ID="txtResumenProblema" runat="server" Placeholder="No anda internet, el router no enciende..." CssClass="form-control w-50 mx-auto mb-2" required="required"></asp:TextBox>
 
 
             <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion" CssClass="form-label fw-bold text-center"> </asp:Label>
             <br />
-            <asp:TextBox ID="txtDescripcion" runat="server" Placeholder="Descripcion detallada del inconveniente o la consulta a realizar..." TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 135px"></asp:TextBox>
+            <asp:TextBox ID="txtDescripcion" runat="server" Placeholder="Descripcion detallada del inconveniente o la consulta a realizar..." TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 135px" required="required"></asp:TextBox>
         </div>
 
         <div class="row justify-content-center">
