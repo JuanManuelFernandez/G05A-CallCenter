@@ -60,11 +60,10 @@ CREATE TABLE Incidencias (
 	IDCliente INT NOT NULL FOREIGN KEY REFERENCES Clientes(IDCliente),
 	IDTipo INT NOT NULL FOREIGN KEY REFERENCES TiposIncidente(IDTipo),
 	IDPrioridad INT NOT NULL FOREIGN KEY REFERENCES PrioridadesIncidente(IDPrioridad),
-	Resumen VARCHAR(250) NOT NULL,
-	EstadoActual VARCHAR(250) NOT NULL,
-	Descripcion NVARCHAR(500) NOT NULL,
+	Resumen VARCHAR(100) NOT NULL, -- Subject de Email
+	EstadoActual VARCHAR(250) NOT NULL, -- Manejado por Soporte
+	Descripcion NVARCHAR(500) NOT NULL, -- Body de Email
 	FechaYHoraCreacion datetime NOT NULL,
 	FechaYHoraResolucion datetime NULL,
 	Resolucion NVARCHAR(500) NULL
 )
-

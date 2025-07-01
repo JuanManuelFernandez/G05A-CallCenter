@@ -11,7 +11,7 @@ GO
 --DELETE FROM CategoriasCliente
 --DELETE FROM Usuarios
 
---SELECT * FROM CategoriasCliente
+--SELECT * FROM Incidencias
 
 INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES
 (3, 'cliente1.52dfq@silomails.com', 'clave1'),
@@ -46,12 +46,7 @@ INSERT INTO PrioridadesIncidente (Nombre, Descripcion) VALUES
 ('Media', 'Puede esperar hasta 24h'),
 ('Baja', 'Puede esperar hasta 72h')
 
-INSERT INTO Incidencias (IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion) VALUES
-(1, 1, 1, 1, 'Reiniciando router...', 'No puedo acceder a internet.', GETDATE()),
-(2, 2, 1, 2, 'Instalando actualizacion...', 'La conexion es muy lenta.', GETDATE()),
-(3, 3, 2, 3, 'Consulta sobre facturacion', 'Esperando respuesta de gente de finanzas.', GETDATE())
-
-INSERT INTO Historiales (IDIncidencias, FechaCambio) VALUES
-(1, GETDATE()),
-(2, GETDATE()),
-(3, GETDATE())
+INSERT INTO Incidencias (IDEmpleado, IDCliente, IDTipo, IDPrioridad, Resumen, EstadoActual, Descripcion, FechaYHoraCreacion) VALUES
+(1, 1, 1, 1, 'No anda internet!', 'Reiniciando router...', 'No puedo acceder a internet hace 4 horas.', GETDATE()),
+(2, 2, 1, 2, 'Anda muy lento el Wi-Fi', 'Instalando actualizacion...', 'La conexion es muy lenta. Solo hay 2 dispositivos conectados y ninguno usa Netflix.', GETDATE()),
+(3, 3, 2, 3, 'Consulta medios de pago', 'Consulta por mail a finanzas...', 'Me gustaria saber si puedo pagar por Mercadopago en vez de transferencia bancaria.', GETDATE())
