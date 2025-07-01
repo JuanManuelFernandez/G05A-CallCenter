@@ -58,7 +58,7 @@ namespace Dominio
             }
             conexion.Close();
         }
-        public void setearParametro(string columna, object dato)
+        public void SetearParametro(string columna, object dato)
         {
             comando.Parameters.AddWithValue(columna, dato);
         }

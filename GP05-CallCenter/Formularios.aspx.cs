@@ -90,6 +90,14 @@ namespace CallCenter
                 aux.Items.Insert(0, new ListItem("Asignar"));
                 aux.SelectedIndex = 0;
             }
+            if (!(string.IsNullOrEmpty(inc.Resolucion)))
+            {
+                aux.Enabled = false;
+            }
+            else
+            {
+                aux.Enabled = true;
+            }
         }
 
         protected void ddlEmpleados_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,8 +106,10 @@ namespace CallCenter
             GridViewRow fila = (GridViewRow)lista.NamingContainer;
             AccesoIncidencias data = new AccesoIncidencias();
             Incidencia inc = data.Listar().Find(x => x.IdIncidencia == int.Parse(dgvIncidencias.DataKeys[fila.RowIndex].Value.ToString()));
+            if (lista.SelectedItem.Text == "Asignar") return;
             inc.IdEmpleado = int.Parse(lista.SelectedValue);
             inc.Resolucion = string.Empty;
+            inc.EstadoActual = "Asignado";
             data.ModificarIncidencia(inc);
         }
     }

@@ -60,6 +60,7 @@ CREATE TABLE Incidencias (
 	IDCliente INT NOT NULL FOREIGN KEY REFERENCES Clientes(IDCliente),
 	IDTipo INT NOT NULL FOREIGN KEY REFERENCES TiposIncidente(IDTipo),
 	IDPrioridad INT NOT NULL FOREIGN KEY REFERENCES PrioridadesIncidente(IDPrioridad),
+	Resumen VARCHAR(250) NOT NULL,
 	EstadoActual VARCHAR(250) NOT NULL,
 	Descripcion NVARCHAR(500) NOT NULL,
 	FechaYHoraCreacion datetime NOT NULL,
@@ -67,8 +68,3 @@ CREATE TABLE Incidencias (
 	Resolucion NVARCHAR(500) NULL
 )
 
-CREATE TABLE Historiales (
-  IDHistorial INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-  IDIncidencias INT NOT NULL FOREIGN KEY REFERENCES Incidencias(IDIncidencia),
-  FechaCambio datetime
-)

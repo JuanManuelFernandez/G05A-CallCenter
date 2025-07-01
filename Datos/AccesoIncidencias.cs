@@ -117,7 +117,7 @@ namespace Datos
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
-            datos.Consultar("SELECT I.IDIncidencia, I.IDEmpleado, I.IDCliente, I.IDTipo, T.Nombre AS NombreTipo, T.Descripcion AS DescripcionTipo, I.IDPrioridad, P.Nombre AS NombrePriori, P.Descripcion AS DescripcionPriori, I.EstadoActual, I.Descripcion, I.FechaYHoraCreacion, I.FechaYHoraResolucion, I.Resolucion FROM Incidencias I INNER JOIN TiposIncidente T ON I.IDTipo = T.IDTipo INNER JOIN PrioridadesIncidente P ON I.IDPrioridad = P.IDPrioridad WHERE IDCliente =" + id);
+            datos.Consultar("SELECT I.IDIncidencia, I.IDEmpleado, I.IDCliente, I.IDTipo, T.Nombre AS NombreTipo, T.Descripcion AS DescripcionTipo, I.IDPrioridad, P.Nombre AS NombrePriori, P.Descripcion AS DescripcionPriori, I.EstadoActual, I.Descripcion, I.FechaYHoraCreacion, I.FechaYHoraResolucion, I.Resolucion FROM Incidencias I INNER JOIN TiposIncidente T ON I.IDTipo = T.IDTipo INNER JOIN PrioridadesIncidente P ON I.IDPrioridad = P.IDPrioridad WHERE I.Resolucion IS NULL AND IDCliente =" + id);
             datos.Leer();
             try
             {
@@ -170,7 +170,7 @@ namespace Datos
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
-            datos.Consultar("SELECT I.IDIncidencia, I.IDEmpleado, I.IDCliente, I.IDTipo, T.Nombre AS NombreTipo, T.Descripcion AS DescripcionTipo, I.IDPrioridad, P.Nombre AS NombrePriori, P.Descripcion AS DescripcionPriori, I.EstadoActual, I.Descripcion, I.FechaYHoraCreacion, I.FechaYHoraResolucion, I.Resolucion FROM Incidencias I INNER JOIN TiposIncidente T ON I.IDTipo = T.IDTipo INNER JOIN PrioridadesIncidente P ON I.IDPrioridad = P.IDPrioridad WHERE IDEmpleado =" + id);
+            datos.Consultar("SELECT I.IDIncidencia, I.IDEmpleado, I.IDCliente, I.IDTipo, T.Nombre AS NombreTipo, T.Descripcion AS DescripcionTipo, I.IDPrioridad, P.Nombre AS NombrePriori, P.Descripcion AS DescripcionPriori, I.EstadoActual, I.Descripcion, I.FechaYHoraCreacion, I.FechaYHoraResolucion, I.Resolucion FROM Incidencias I INNER JOIN TiposIncidente T ON I.IDTipo = T.IDTipo INNER JOIN PrioridadesIncidente P ON I.IDPrioridad = P.IDPrioridad WHERE I.Resolucion IS NULL AND IDEmpleado =" + id);
             datos.Leer();
             try
             {
@@ -249,20 +249,45 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE Incidencias SET IDEmpleado = @IDEmpleado, IDTipo = @IDTipo, IDPrioridad = @IDPrioridad, EstadoActual = @EstadoActual, FechaYHoraResolucion = @FechaYHoraResolucion, Resolucion = @Resolucion WHERE IDIncidencia = @IDIncidencia");
-                datos.SetearParametro("@IDEmpleado", nueva.IdEmpleado);
-                datos.SetearParametro("@IDTipo", nueva.tipo.IDTipo);
+                if (nueva.IdEmpleado != 0) datos.SetearParametro("@IDEmpleado", nueva.IdEmpleado);
+                else datos.SetearParametro("@IDEmpleado", DBNull.Value);
+                    datos.SetearParametro("@IDTipo", nueva.tipo.IDTipo);
                 datos.SetearParametro("@IDPrioridad", nueva.prioridad.IDPrioridad);
                 datos.SetearParametro("@EstadoActual", nueva.EstadoActual);
                 if (!(string.IsNullOrEmpty(nueva.Resolucion)))
                 {
                     datos.SetearParametro("@FechaYHoraResolucion", nueva.FechaYHoraResolucion);
                     datos.SetearParametro("@Resolucion", nueva.Resolucion);
-                } else
+                }
+                else
                 {
                     datos.SetearParametro("@FechaYHoraResolucion", DBNull.Value);
                     datos.SetearParametro("@Resolucion", DBNull.Value);
                 }
                 datos.SetearParametro("@IDIncidencia", nueva.IdIncidencia);
+                datos.EjecutarNonQuery();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+        public void ReactivarIncidencia(Incidencia react)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE Incidencias SET EstadoActual = @EstadoActual, Resolucion = @Resolucion, FechaYHoraResolucion = @FechaYHoraResolucion, IDEmpleado = @IDEmpleado WHERE IDIncidencia = @IDIncidencia");
+                datos.SetearParametro("@EstadoActual", "Reactivado");
+                datos.SetearParametro("@Resolucion",DBNull.Value);
+                datos.SetearParametro("@FechaYHoraResolucion", DBNull.Value);
+                datos.SetearParametro("@IDEmpleado", DBNull.Value);
+                datos.SetearParametro("@IDIncidencia",react.IdIncidencia);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)

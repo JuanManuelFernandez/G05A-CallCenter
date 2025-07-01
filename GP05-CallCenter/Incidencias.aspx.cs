@@ -64,6 +64,15 @@ namespace CallCenter
                 txtDescripcion.Text = actual.Descripcion;
                 txtResolucion.Text = actual.Resolucion;
                 txtDescripcion.Enabled = false;
+                if (actual.FechaYHoraResolucion != DateTime.MaxValue)
+                {
+                    txtResolucion.Enabled = false;
+                    ddlTipo.Enabled = false;
+                    txtResumenProblema.Enabled = false;
+                    txtEstadoActual.Enabled = false;
+                    ddlPrioridad.Enabled = false;
+                    btnCargar.Text = "Reabrir";
+                }
             }
         }
 
@@ -71,6 +80,7 @@ namespace CallCenter
         {
             AccesoIncidencias entry = new AccesoIncidencias();
             Usuario user = (Usuario)Session["usuario"];
+            EmailService emailService = new EmailService();
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
                 AccesoClientes datos = new AccesoClientes();
@@ -90,6 +100,7 @@ namespace CallCenter
                     Descripcion = txtDescripcion.Text,
                     FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                 };
+                emailService.ArmarCorreo(txtMail.Text, txtResumenProblema.Text, txtDescripcion.Text);
                 entry.AgregarIncidencia(nueva);
             }
             else
@@ -97,24 +108,36 @@ namespace CallCenter
                 if (Request.QueryString["id"] != null)
                 {
                     Incidencia nueva = entry.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
-                    nueva.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
-                    nueva.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
-                    nueva.EstadoActual = txtEstadoActual.Text;
-                    if (!(string.IsNullOrEmpty(txtResolucion.Text)))
+                    if (nueva.FechaYHoraResolucion != DateTime.MaxValue)
                     {
-                        nueva.FechaYHoraResolucion = DateTime.Now;
-                        nueva.Resolucion = txtResolucion.Text;
+                        entry.ReactivarIncidencia(nueva);
+                        emailService.ArmarCorreo(txtMail.Text, "Se realizo la reactivacion de la Incidencia" + nueva.IdIncidencia + ".", txtDescripcion.Text);
                     }
                     else
                     {
-                        nueva.Resolucion = null;
+                        nueva.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
+                        nueva.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
+                        nueva.EstadoActual = txtEstadoActual.Text;
+                        if (!(string.IsNullOrEmpty(txtResolucion.Text)))
+                        {
+                            nueva.EstadoActual = "Cerrado";
+                            nueva.FechaYHoraResolucion = DateTime.Now;
+                            nueva.Resolucion = txtResolucion.Text;
+                            emailService.ArmarCorreo(txtMail.Text, "Se realiza el cierre de la Incidencia " + nueva.IdIncidencia + ". Se detallan los motivos", txtResolucion.Text);
+                        }
+                        else
+                        {
+                            nueva.Resolucion = null;
+                        }
+                        entry.ModificarIncidencia(nueva);
+
                     }
-                    entry.ModificarIncidencia(nueva);
+                }
+                else
+                {
+                    //Carga Una Incidencia El Empleado...
                 }
             }
-
-            EmailService emailService = new EmailService();
-            emailService.ArmarCorreo(txtMail.Text, txtResumenProblema.Text, txtDescripcion.Text);
 
             try
             {
@@ -125,8 +148,7 @@ namespace CallCenter
                 Session.Add("error", ex);
                 Response.Redirect("Error.aspx");
             }
-
-            Response.Redirect("Inicio.aspx");
+            Response.Redirect("Formularios.aspx");
         }
         public void CargarTipo()
         {
@@ -177,7 +199,7 @@ namespace CallCenter
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Inicio.aspx");
+            Response.Redirect("Formularios.aspx"); //revisar de la parte del cliente.
         }
         public void CargarDatosCliente()
         {

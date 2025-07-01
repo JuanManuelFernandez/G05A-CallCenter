@@ -44,7 +44,7 @@
 
             <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion" CssClass="form-label fw-bold text-center"> </asp:Label>
             <br />
-            <asp:TextBox ID="txtDescripcion" runat="server" Placeholder="Descripcion detallada del inconveniente o la consulta a realizar..." TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 175px"></asp:TextBox>
+            <asp:TextBox ID="txtDescripcion" runat="server" Placeholder="Descripcion detallada del inconveniente o la consulta a realizar..." TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 135px"></asp:TextBox>
         </div>
 
         <div class="row justify-content-center">
@@ -59,7 +59,7 @@
                 <asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="form-select"></asp:DropDownList>
             </div>
             <asp:Label ID="lblResolucion" runat="server" Text="Resolucion" CssClass="form-label fw-bold text-center mt-2"></asp:Label>
-            <asp:TextBox ID="txtResolucion" runat="server" TextMode="MultiLine" Style="width: 500px; height: 175px; resize: none;" CssClass="form-control w-50 mx-auto" OnTextChanged="TxtResolucion_TextChanged" AutoPostBack="true"></asp:TextBox>
+            <asp:TextBox ID="txtResolucion" runat="server" TextMode="MultiLine" Style="width: 500px; height: 135px; resize: none;" CssClass="form-control w-50 mx-auto" OnTextChanged="TxtResolucion_TextChanged" AutoPostBack="true"></asp:TextBox>
         </div>
     </div>
     <div class="row justify-content-center mt-3">
