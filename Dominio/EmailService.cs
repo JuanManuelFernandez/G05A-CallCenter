@@ -35,9 +35,7 @@ namespace Dominio
             email.To.Add(emailDestino);
             email.Subject = asunto;
             email.IsBodyHtml = true;
-            email.Body = "<h1>Resumen de Incidencia</h1> <br> "; // Cambiar: Elaborar HTML donde se provea el resumen de la incidencia.
-            //email.Body = cuerpo;
-
+            email.Body = cuerpo; 
         }
 
         public void EnviarEmail()

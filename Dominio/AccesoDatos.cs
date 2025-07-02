@@ -13,18 +13,22 @@ namespace Dominio
         private SqlCommand comando;
         private SqlDataReader lector = null;
 
-        public SqlDataReader Lector {
+        public SqlDataReader Lector
+        {
             get { return lector; }
         }
-        public void Conectar() {
+        public void Conectar()
+        {
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CallCenter; integrated security=true"); //\\SQLEXPRESS
             comando = new SqlCommand();
         }
-        public void Consultar(string consulta) {
+        public void Consultar(string consulta)
+        {
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
-        public void Leer() { 
+        public void Leer()
+        {
             comando.Connection = conexion;
             try
             {
@@ -36,7 +40,8 @@ namespace Dominio
                 throw er;
             }
         }
-        public void EjecutarNonQuery() {
+        public void EjecutarNonQuery()
+        {
             comando.Connection = conexion;
 
             try
@@ -48,6 +53,23 @@ namespace Dominio
             {
 
                 throw er;
+            }
+        }
+        public object EjectuarScalar()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return comando.ExecuteScalar();
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                conexion.Close();
             }
         }
         public void Cerrar()

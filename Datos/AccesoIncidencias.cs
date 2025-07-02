@@ -217,13 +217,13 @@ namespace Datos
             }
             return incidencias;
         }
-        public void AgregarIncidencia(Incidencia nueva)
+        public int AgregarIncidencia(Incidencia nueva)
         {
             datos = new AccesoDatos();
             try
             {
                 datos.Conectar();
-                datos.Consultar("INSERT INTO INCIDENCIAS (IDEMPLEADO, IDCLIENTE, IDTIPO, IDPRIORIDAD, ESTADOACTUAL, DESCRIPCION, FECHAYHORACREACION) VALUES (@IDEMPLEADO, @IDCLIENTE, @IDTIPO, @IDPRIORIDAD, @ESTADOACTUAL, @DESCRIPCION, @FECHAYHORACREACION)");
+                datos.Consultar("INSERT INTO INCIDENCIAS (IDEMPLEADO, IDCLIENTE, IDTIPO, IDPRIORIDAD, ESTADOACTUAL, DESCRIPCION, FECHAYHORACREACION) OUTPUT INSERTED.IDINCIDENCIA VALUES (@IDEMPLEADO, @IDCLIENTE, @IDTIPO, @IDPRIORIDAD, @ESTADOACTUAL, @DESCRIPCION, @FECHAYHORACREACION)");
                 if (nueva.IdEmpleado == 0) datos.SetearParametro("@IDEMPLEADO", DBNull.Value);
                 else datos.SetearParametro("@IDEMPLEADO", nueva.IdEmpleado);
                 datos.SetearParametro("@IDCLIENTE", nueva.IdCliente);
@@ -232,7 +232,7 @@ namespace Datos
                 datos.SetearParametro("@ESTADOACTUAL", "Pendiente");
                 datos.SetearParametro("@DESCRIPCION", nueva.Descripcion);
                 datos.SetearParametro("@FECHAYHORACREACION", nueva.FechaYHoraCreacion);
-                datos.EjecutarNonQuery();
+                return (int)datos.EjectuarScalar();
             }
             catch (Exception er)
             {

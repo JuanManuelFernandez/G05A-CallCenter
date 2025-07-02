@@ -42,10 +42,11 @@ namespace CallCenter
         }
         public void CargarIncidencia()
         {
+            btnCargar.Text = "Aceptar";
             if (!IsPostBack)
             {
-                btnCargar.Text = "Aceptar";
                 string id = Request.QueryString["id"].ToString();
+
                 AccesoIncidencias datos = new AccesoIncidencias();
                 AccesoClientes datosClientes = new AccesoClientes();
                 AccesoEmpleados datosEmpleados = new AccesoEmpleados();
@@ -64,14 +65,16 @@ namespace CallCenter
                 txtDescripcion.Text = actual.Descripcion;
                 txtResolucion.Text = actual.Resolucion;
                 txtDescripcion.Enabled = false;
+
                 if (actual.FechaYHoraResolucion != DateTime.MaxValue)
                 {
+                    btnCargar.Text = "Reabrir";
+
                     txtResolucion.Enabled = false;
                     ddlTipo.Enabled = false;
                     txtResumenProblema.Enabled = false;
                     txtEstadoActual.Enabled = false;
                     ddlPrioridad.Enabled = false;
-                    btnCargar.Text = "Reabrir";
                 }
             }
         }
@@ -101,8 +104,8 @@ namespace CallCenter
                     Descripcion = txtDescripcion.Text,
                     FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                 };
-                emailService.ArmarCorreo(txtMail.Text, txtResumenProblema.Text, txtDescripcion.Text);
-                entry.AgregarIncidencia(nueva);
+                int IDIncidencia = entry.AgregarIncidencia(nueva);
+                emailService.ArmarCorreo(txtMail.Text, txtResumenProblema.Text, "Se genero la Incidencia Numero " + IDIncidencia + "<br>Estos son los datos: "+ txtDescripcion.Text);
             }
             else
             {
@@ -170,7 +173,7 @@ namespace CallCenter
                         Descripcion = txtDescripcion.Text,
                         FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                     };
-                    entry.AgregarIncidencia(inc);
+                    int IDIncidencia = entry.AgregarIncidencia(inc);
                     emailService.ArmarCorreo(txtMail.Text, txtResumenProblema.Text, txtDescripcion.Text);
                 }
             }
