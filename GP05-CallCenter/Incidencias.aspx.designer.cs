@@ -219,7 +219,7 @@ namespace CallCenter
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCargar;
+        protected global::System.Web.UI.WebControls.LinkButton btnCargar;
 
         /// <summary>
         /// Control btnCancelar.
@@ -228,6 +228,6 @@ namespace CallCenter
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelar;
     }
 }

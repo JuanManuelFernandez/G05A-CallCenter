@@ -64,8 +64,15 @@
     </div>
     <div class="row justify-content-center mt-3">
         <section class="col-md-3 text-center" aria-labelledby="hostingTitle">
-            <asp:Button ID="btnCargar" runat="server" Text="Cargar" CssClass="btn btn-success btn-lg mx-3" OnClick="BtnCargar_Click" />
-            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnCancelar_Click" />
+            <div class="d-flex justify-content-center">
+            <%--<asp:Button ID="btnCargar" runat="server" Text="Cargar" CssClass="btn btn-success btn-lg mx-3" OnClick="BtnCargar_Click" />--%>
+                <asp:LinkButton ID="btnCargar" runat="server" CssClass="btn btn-success btn-lg mx-3" OnClick="BtnCargar_Click" style="display: inline-flex; align-items: center;">
+                    <img src="Assets/check.png" style="width: 30px; height: 30px; margin-right: 5px;" />Cargar </asp:LinkButton>
+
+                <asp:LinkButton ID="btnCancelar" runat="server" CssClass="btn btn-danger btn-lg mx-3" OnClick="BtnCancelar_Click" style="display: inline-flex; align-items: center;">
+                    <img src="Assets/cancel.png" style="width: 30px; height: 30px; margin-right: 5px;" />Cancelar </asp:LinkButton>
+                <%--<asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnCancelar_Click" />--%>
+            </div>
         </section>
     </div>
 </asp:Content>

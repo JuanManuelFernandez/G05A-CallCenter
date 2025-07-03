@@ -55,13 +55,19 @@
 <%--                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>--%>
                         <%-- <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Acerca de</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contacto</a></li> --%>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Cuenta">Cuenta</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Cuenta">
+                                <img src="Assets/cuenta.png" style="width: 30px; height: 30px;" />
+                            </a>
+                        </li>
                         <% var usuario = Session["usuario"] as Datos.Usuario;
                             if (usuario != null)
                             {
                         %>
                         <li class="nav-item">
-                            <asp:LinkButton ID="btnLogout" runat="server" CssClass="nav-link" OnClick="btnLogout_Click">Salir</asp:LinkButton>
+                            <asp:LinkButton runat="server" CssClass="nav-link logout-btn" OnClick="btnLogout_Click">
+                                <img src="Assets/logout.png" style="width: 30px; height: 30px;"/>
+                            </asp:LinkButton>
                         </li>
                         <% } %>
                     </ul>
