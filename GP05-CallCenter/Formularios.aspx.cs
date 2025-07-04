@@ -112,5 +112,10 @@ namespace CallCenter
             inc.EstadoActual = "Asignado";
             data.ModificarIncidencia(inc);
         }
+
+        public void BtnBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
