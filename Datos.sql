@@ -47,6 +47,6 @@ INSERT INTO PrioridadesIncidente (Nombre, Descripcion) VALUES
 ('Baja', 'Puede esperar hasta 72h')
 
 INSERT INTO Incidencias (IDEmpleado, IDCliente, IDTipo, IDPrioridad, Resumen, EstadoActual, Descripcion, FechaYHoraCreacion) VALUES
-(1, 1, 1, 1, 'No anda internet!', 'Reiniciando router...', 'No puedo acceder a internet hace 4 horas.', GETDATE()),
-(2, 2, 1, 2, 'Anda muy lento el Wi-Fi', 'Instalando actualizacion...', 'La conexion es muy lenta. Solo hay 2 dispositivos conectados y ninguno usa Netflix.', GETDATE()),
-(3, 3, 2, 3, 'Consulta medios de pago', 'Consulta por mail a finanzas...', 'Me gustaria saber si puedo pagar por Mercadopago en vez de transferencia bancaria.', GETDATE())
+(1, 1, 1, 1,  'Reiniciando router...', 'No puedo acceder a internet hace 4 horas.', GETDATE()),
+(2, 2, 1, 2, 'Instalando actualizacion...', 'La conexion es muy lenta. Solo hay 2 dispositivos conectados y ninguno usa Netflix.', GETDATE()),
+(3, 3, 2, 3,  'Consulta por mail a finanzas...', 'Me gustaria saber si puedo pagar por Mercadopago en vez de transferencia bancaria.', GETDATE())

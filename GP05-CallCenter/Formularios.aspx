@@ -4,7 +4,7 @@
     <main>
         <h1>Lista de Incidencias Actuales:</h1>
 
-        <div class="row justify-content-center mb-4">
+<%--        <div class="row justify-content-center mb-4">
             <div class="col-auto">
                 <asp:Label runat="server">Filtrar por: </asp:Label>
             </div>
@@ -14,7 +14,7 @@
             <div class="col-auto">
                 <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnBuscar_Click" />
             </div>
-        </div>
+        </div>--%>
 
         <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="dgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencia" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnRowDataBound="dgvIncidencias_RowDataBound">
             <Columns>

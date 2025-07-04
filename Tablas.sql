@@ -4,8 +4,8 @@ USE CallCenter
 GO
 
 --DROP TABLE X
-SELECT * FROM Usuarios
-SELECT * FROM Clientes
+--SELECT * FROM Usuarios
+--SELECT * FROM Clientes
 
 CREATE TABLE Usuarios (
 	IDUsuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -60,7 +60,6 @@ CREATE TABLE Incidencias (
 	IDCliente INT NOT NULL FOREIGN KEY REFERENCES Clientes(IDCliente),
 	IDTipo INT NOT NULL FOREIGN KEY REFERENCES TiposIncidente(IDTipo),
 	IDPrioridad INT NOT NULL FOREIGN KEY REFERENCES PrioridadesIncidente(IDPrioridad),
-	Resumen VARCHAR(100) NOT NULL, -- Subject de Email
 	EstadoActual VARCHAR(250) NOT NULL, -- Manejado por Soporte
 	Descripcion NVARCHAR(500) NOT NULL, -- Body de Email
 	FechaYHoraCreacion datetime NOT NULL,
