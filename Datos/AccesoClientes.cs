@@ -86,9 +86,10 @@ namespace Datos
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Apellido", nuevo.Apellido);
                 datos.SetearParametro("@Telefono", nuevo.Telefono);
-                if(nuevo.Categoria.IDCategoria != 0) datos.SetearParametro("@IDCategoria", nuevo.Categoria.IDCategoria);
+                if (nuevo.Categoria != null) datos.SetearParametro("@IDCategoria", nuevo.Categoria.IDCategoria);
+                else datos.SetearParametro("@IDCategoria", DBNull.Value);
 
-                datos.EjecutarNonQuery();
+                    datos.EjecutarNonQuery();
             }
             catch (Exception er)
             {

@@ -2,7 +2,6 @@ GO
 USE CallCenter
 GO
 
---DELETE FROM Historiales
 --DELETE FROM Incidencias
 --DELETE FROM PrioridadesIncidente
 --DELETE FROM TiposIncidente

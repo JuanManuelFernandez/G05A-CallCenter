@@ -38,6 +38,7 @@ namespace CallCenter
                 txtDNI.Enabled = true;
                 txtMail.Enabled = true;
                 txtTelefono.Enabled = true;
+                ddlCategoria.Enabled = true;
                 txtResolucion.Visible = false;
                 lblResolucion.Visible = false;
                 return;
@@ -297,7 +298,12 @@ namespace CallCenter
             txtMail.Text = cli.Usuario.Email;
             txtDNI.Text = cli.DNI.ToString();
             txtTelefono.Text = cli.Telefono.ToString();
-            ddlCategoria.SelectedValue = cli.Categoria.IDCategoria.ToString();
+            if (cli.Categoria.IDCategoria != 0) ddlCategoria.SelectedValue = cli.Categoria.IDCategoria.ToString();
+            else
+            {
+                ddlCategoria.Items.Insert(0, new ListItem("Sin Asignacion"));
+                ddlCategoria.SelectedIndex = 0;
+            }
         }
         public void CargarCategoria()
         {
@@ -334,6 +340,7 @@ namespace CallCenter
                     txtDNI.Enabled = false;
                     txtNombre.Enabled = false;
                     txtTelefono.Enabled = false;
+                    ddlCategoria.Enabled = false;
                     return false;
                 }
                 else if (txtTelefono.Text == aux.Telefono)
@@ -346,6 +353,7 @@ namespace CallCenter
                     txtDNI.Enabled = false;
                     txtNombre.Enabled = false;
                     txtTelefono.Enabled = false;
+                    ddlCategoria.Enabled = false;
                     return false;
                 }
             }
@@ -368,6 +376,7 @@ namespace CallCenter
                     txtDNI.Enabled = false;
                     txtNombre.Enabled = false;
                     txtTelefono.Enabled = false;
+                    ddlCategoria.Enabled = false;
                     return;
                 }
             }
@@ -389,6 +398,7 @@ namespace CallCenter
                     txtMail.Enabled = false;
                     txtNombre.Enabled = false;
                     txtTelefono.Enabled = false;
+                    ddlCategoria.Enabled = false;
                     return;
                 }
             }
@@ -410,6 +420,7 @@ namespace CallCenter
                     txtMail.Enabled = false;
                     txtNombre.Enabled = false;
                     txtDNI.Enabled = false;
+                    ddlCategoria.Enabled = false;
                     return;
                 }
             }
