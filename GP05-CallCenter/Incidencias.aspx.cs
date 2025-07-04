@@ -38,6 +38,8 @@ namespace CallCenter
                 txtDNI.Enabled = true;
                 txtMail.Enabled = true;
                 txtTelefono.Enabled = true;
+                txtResolucion.Visible = false;
+                lblResolucion.Visible = false;
                 return;
             }
             CargarDatosCliente();
