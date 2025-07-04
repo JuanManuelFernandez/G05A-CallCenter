@@ -123,22 +123,22 @@ namespace CallCenter
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
 
         /// <summary>
-        /// Control lblResumenProblema.
+        /// Control lblCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResumenProblema;
+        protected global::System.Web.UI.WebControls.Label lblCategoria;
 
         /// <summary>
-        /// Control txtResumenProblema.
+        /// Control ddlCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResumenProblema;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
 
         /// <summary>
         /// Control lblDescripcion.
@@ -229,5 +229,14 @@ namespace CallCenter
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnCancelar;
+
+        /// <summary>
+        /// Control lblRegistro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRegistro;
     }
 }

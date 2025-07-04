@@ -13,8 +13,10 @@ namespace CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblRegistro.Visible = false;
             CargarTipo();
             CargarPrioridad();
+            CargarCategoria();
 
             if (Session["usuario"] == null)
             {
@@ -59,12 +61,19 @@ namespace CallCenter
                 txtTelefono.Text = cliente.Telefono.ToString();
                 ddlTipo.SelectedValue = actual.tipo.IDTipo.ToString();
                 ddlPrioridad.SelectedValue = actual.prioridad.IDPrioridad.ToString();
+                if (cliente.Categoria.IDCategoria != 0) ddlCategoria.SelectedValue = cliente.Categoria.IDCategoria.ToString();
+                else
+                {
+                    ddlCategoria.Items.Insert(0, new ListItem("Sin Asignacion"));
+                    ddlCategoria.SelectedIndex = 0;
+                }
                 lblFechaYHora.Text = actual.FechaYHoraCreacion.ToString();
                 txtNombre.Text = string.Concat(cliente.Apellido, ", ", cliente.Nombre);
                 txtEstadoActual.Text = actual.EstadoActual.ToString();
                 txtDescripcion.Text = actual.Descripcion;
                 txtResolucion.Text = actual.Resolucion;
                 txtDescripcion.Enabled = false;
+                ddlCategoria.Enabled = false;
 
                 if (actual.FechaYHoraResolucion != DateTime.MaxValue)
                 {
@@ -72,7 +81,6 @@ namespace CallCenter
 
                     txtResolucion.Enabled = false;
                     ddlTipo.Enabled = false;
-                    txtResumenProblema.Enabled = false;
                     txtEstadoActual.Enabled = false;
                     ddlPrioridad.Enabled = false;
                 }
@@ -105,7 +113,7 @@ namespace CallCenter
                     FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                 };
                 int IDIncidencia = entry.AgregarIncidencia(nueva);
-                emailService.ArmarCorreo(txtMail.Text, txtResumenProblema.Text, "Se genero la Incidencia Numero " + IDIncidencia + "<br>Estos son los datos: "+ txtDescripcion.Text);
+                emailService.ArmarCorreo(txtMail.Text, "Se genero la Incidencia Numero " + IDIncidencia, "Estos son los datos: <br>" + txtDescripcion.Text);
             }
             else
             {
@@ -115,7 +123,7 @@ namespace CallCenter
                     if (nueva.FechaYHoraResolucion != DateTime.MaxValue)
                     {
                         entry.ReactivarIncidencia(nueva);
-                        emailService.ArmarCorreo(txtMail.Text, "Se realizo la reactivacion de la Incidencia" + nueva.IdIncidencia + ".", txtDescripcion.Text);
+                        emailService.ArmarCorreo(txtMail.Text, "Se realizo la reactivacion de la Incidencia " + nueva.IdIncidencia + ".", "Estos son los datos: <br>" + txtDescripcion.Text);
                     }
                     else
                     {
@@ -127,7 +135,7 @@ namespace CallCenter
                             nueva.EstadoActual = "Cerrado";
                             nueva.FechaYHoraResolucion = DateTime.Now;
                             nueva.Resolucion = txtResolucion.Text;
-                            emailService.ArmarCorreo(txtMail.Text, "Se realiza el cierre de la Incidencia " + nueva.IdIncidencia + ". Se detallan los motivos", txtResolucion.Text);
+                            emailService.ArmarCorreo(txtMail.Text, "Se realiza el cierre de la Incidencia " + nueva.IdIncidencia, "Se detallan los motivos: <br>" + txtResolucion.Text);
                         }
                         else
                         {
@@ -139,22 +147,28 @@ namespace CallCenter
                 }
                 else
                 {
-                    string[] aux = txtNombre.Text.Split(',');
-                    Cliente nuevo = new Cliente
+                    if (ValidacionesCliente())
                     {
-                        Usuario = new Usuario
+                        string[] aux = txtNombre.Text.Split(',');
+                        Cliente nuevo = new Cliente
                         {
-                            TipoUsuario = TipoUsuario.Cliente,
-                            Email = txtMail.Text,
-                            Clave = "password"
-                        },
-                        DNI = txtDNI.Text,
-                        Nombre = aux[1],
-                        Apellido = aux[0],
-                        Telefono = txtTelefono.Text
-                    };
-
-                    dataCli.AgregarCliente(nuevo);
+                            Usuario = new Usuario
+                            {
+                                TipoUsuario = TipoUsuario.Cliente,
+                                Email = txtMail.Text,
+                                Clave = "password"
+                            },
+                            DNI = txtDNI.Text,
+                            Nombre = aux[1],
+                            Apellido = aux[0],
+                            Telefono = txtTelefono.Text,
+                            Categoria = new CategoriasCliente
+                            {
+                                IDCategoria = int.Parse(ddlCategoria.SelectedValue),
+                            }
+                        };
+                        dataCli.AgregarCliente(nuevo);
+                    }
 
                     Incidencia inc = new Incidencia
                     {
@@ -174,7 +188,7 @@ namespace CallCenter
                         FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                     };
                     int IDIncidencia = entry.AgregarIncidencia(inc);
-                    emailService.ArmarCorreo(txtMail.Text, txtResumenProblema.Text, txtDescripcion.Text);
+                    emailService.ArmarCorreo(txtMail.Text, "Se genero la Incidencia Numero " + IDIncidencia, "Estos son los datos: <br>" + txtDescripcion.Text);
                 }
             }
 
@@ -238,7 +252,7 @@ namespace CallCenter
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Formularios.aspx"); //revisar de la parte del cliente.
+            Response.Redirect("Formularios.aspx");
         }
         public void CargarDatosCliente()
         {
@@ -257,6 +271,113 @@ namespace CallCenter
             txtMail.Text = cli.Usuario.Email;
             txtDNI.Text = cli.DNI.ToString();
             txtTelefono.Text = cli.Telefono.ToString();
+        }
+        public void CargarCategoria()
+        {
+            if (!IsPostBack)
+            {
+                AccesoCategorias datos = new AccesoCategorias();
+                try
+                {
+                    ddlCategoria.DataSource = datos.Listar();
+                    ddlCategoria.DataValueField = "IDCategoria";
+                    ddlCategoria.DataTextField = "Nombre";
+                    ddlCategoria.DataBind();
+                }
+                catch (Exception er)
+                {
+
+                    throw er;
+                }
+            }
+        }
+        public bool ValidacionesCliente()
+        {
+            AccesoClientes dataCli = new AccesoClientes();
+            AccesoEmpleados dataEmp = new AccesoEmpleados();
+            foreach (Cliente aux in dataCli.Listar())
+            {
+                if (txtDNI.Text == aux.DNI)
+                {
+                    txtDNI.Text = aux.DNI;
+                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtMail.Text = aux.Usuario.Email;
+                    txtTelefono.Text = aux.Telefono;
+                    txtDNI.Enabled = false;
+                    txtNombre.Enabled = false;
+                    txtTelefono.Enabled = false;
+                    return false;
+                }
+                else if (txtTelefono.Text == aux.Telefono)
+                {
+                    txtDNI.Text = aux.DNI;
+                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtMail.Text = aux.Usuario.Email;
+                    txtTelefono.Text = aux.Telefono;
+                    txtDNI.Enabled = false;
+                    txtNombre.Enabled = false;
+                    txtTelefono.Enabled = false;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        protected void txtMail_TextChanged(object sender, EventArgs e)
+        {
+            AccesoClientes dataCli = new AccesoClientes();
+            foreach (Cliente aux in dataCli.Listar())
+            {
+                if (txtMail.Text == aux.Usuario.Email)
+                {
+                    txtDNI.Text = aux.DNI;
+                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtMail.Text = aux.Usuario.Email;
+                    txtTelefono.Text = aux.Telefono;
+                    txtDNI.Enabled = false;
+                    txtNombre.Enabled = false;
+                    txtTelefono.Enabled = false;
+                    return;
+                }
+            }
+        }
+
+        protected void txtDNI_TextChanged(object sender, EventArgs e)
+        {
+            AccesoClientes dataCli = new AccesoClientes();
+            foreach (Cliente aux in dataCli.Listar())
+            {
+                if (txtDNI.Text == aux.DNI)
+                {
+                    txtDNI.Text = aux.DNI;
+                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtMail.Text = aux.Usuario.Email;
+                    txtTelefono.Text = aux.Telefono;
+                    txtMail.Enabled = false;
+                    txtNombre.Enabled = false;
+                    txtTelefono.Enabled = false;
+                    return;
+                }
+            }
+        }
+
+        protected void txtTelefono_TextChanged(object sender, EventArgs e)
+        {
+            AccesoClientes dataCli = new AccesoClientes();
+            foreach (Cliente aux in dataCli.Listar())
+            {
+                if (txtTelefono.Text == aux.Telefono)
+                {
+                    txtDNI.Text = aux.DNI;
+                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtMail.Text = aux.Usuario.Email;
+                    txtTelefono.Text = aux.Telefono;
+                    txtMail.Enabled = false;
+                    txtNombre.Enabled = false;
+                    txtDNI.Enabled = false;
+                    return;
+                }
+            }
         }
     }
 }

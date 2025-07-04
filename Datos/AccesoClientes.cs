@@ -80,12 +80,13 @@ namespace Datos
 
                 // Insertar en Clientes usando el IDUsuario recién generado
                 datos.Conectar();
-                datos.Consultar("INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono) VALUES (@IDUsuario, @DNI, @Nombre, @Apellido, @Telefono)");
+                datos.Consultar("INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono, IDCategoria) VALUES (@IDUsuario, @DNI, @Nombre, @Apellido, @Telefono, @IDCategoria)");
                 datos.SetearParametro("@IDUsuario", auxiliar.Listar()[(auxiliar.Listar().Count) - 1].IdUsuario);
                 datos.SetearParametro("@DNI", nuevo.DNI);
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Apellido", nuevo.Apellido);
                 datos.SetearParametro("@Telefono", nuevo.Telefono);
+                if(nuevo.Categoria.IDCategoria != 0) datos.SetearParametro("@IDCategoria", nuevo.Categoria.IDCategoria);
 
                 datos.EjecutarNonQuery();
             }

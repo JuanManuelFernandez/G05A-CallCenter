@@ -6,10 +6,12 @@
         <h1 class="text-center">Mi cuenta</h1>
 
         <div class="text-center mt-3">
-            <asp:Button ID="BtnMod" runat="server" Text="Cambiar contraseña" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnMod_Click" />
+            <asp:LinkButton ID="BtnMod" runat="server" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnMod_Click" Style="display: inline-flex; align-items: center;">
+                <img src="Assets/edit.png" style="width: 30px; height: 30px; margin-right: 5px;" />Cambiar contraseña </asp:LinkButton>
         </div>
         <div class="text-center mt-3">
-            <asp:Button ID="BntDel" runat="server" Text="Eliminar cuenta" CssClass="btn btn-danger btn-lg mx-3" OnClick="BntDel_Click" />
+            <asp:LinkButton ID="BntDel" runat="server" CssClass="btn btn-danger btn-lg mx-3" OnClick="BntDel_Click" Style="display: inline-flex; align-items: center;">
+                <img src="Assets/cancel.png" style="width: 30px; height: 30px; margin-right: 5px;" />Eliminar cuenta </asp:LinkButton>
         </div>
         <div class="text-center mt-3">
             <asp:Label ID="lblConfirmar" runat="server" Text="" Visible="false"></asp:Label>
