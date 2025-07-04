@@ -35,7 +35,7 @@
 
         <div class="row justify-content-center mt-2">
             <section class="text-center col-md-6" aria-labelledby="hostingTitle">
-                <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" CssClass="btn btn-primary btn-lg w-100" OnClick="btnRegistrar_Click" />
+                <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" CssClass="btn btn-success btn-lg w-100" OnClick="btnRegistrar_Click" />
             </section>
         </div>
         <div class="text-center mt-1">

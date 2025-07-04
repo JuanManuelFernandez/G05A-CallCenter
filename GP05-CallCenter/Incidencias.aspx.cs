@@ -13,7 +13,6 @@ namespace CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblRegistro.Visible = false;
             CargarTipo();
             CargarPrioridad();
             CargarCategoria();
@@ -34,6 +33,7 @@ namespace CallCenter
                 lblFechaYHora.Text = DateTime.Now.ToString();
                 btnCargar.Text = "Cargar";
                 btnCargar.CssClass = "btn btn-success btn-lg mx-3";
+                txtApellido.Enabled = true;
                 txtNombre.Enabled = true;
                 txtDNI.Enabled = true;
                 txtMail.Enabled = true;
@@ -70,10 +70,12 @@ namespace CallCenter
                     ddlCategoria.SelectedIndex = 0;
                 }
                 lblFechaYHora.Text = actual.FechaYHoraCreacion.ToString();
-                txtNombre.Text = string.Concat(cliente.Apellido, ", ", cliente.Nombre);
+                txtNombre.Text = cliente.Nombre;
+                txtApellido.Text = cliente.Apellido;
                 txtEstadoActual.Text = actual.EstadoActual.ToString();
                 txtDescripcion.Text = actual.Descripcion;
                 txtResolucion.Text = actual.Resolucion;
+                txtApellido.Enabled = false;
                 txtDescripcion.Enabled = false;
                 ddlCategoria.Enabled = false;
 
@@ -151,7 +153,7 @@ namespace CallCenter
                 {
                     if (ValidacionesCliente())
                     {
-                        string[] aux = txtNombre.Text.Split(',');
+                        AccesoUsuario dataUser = new AccesoUsuario();
                         Cliente nuevo = new Cliente
                         {
                             Usuario = new Usuario
@@ -161,14 +163,33 @@ namespace CallCenter
                                 Clave = "password"
                             },
                             DNI = txtDNI.Text,
-                            Nombre = aux[1],
-                            Apellido = aux[0],
+                            Nombre = txtNombre.Text,
+                            Apellido = txtApellido.Text,
                             Telefono = txtTelefono.Text,
                             Categoria = new CategoriasCliente
                             {
                                 IDCategoria = int.Parse(ddlCategoria.SelectedValue),
                             }
                         };
+                        foreach (Usuario usuario in dataUser.Listar())
+                        {
+                            if (usuario.Email == txtMail.Text && usuario.TipoUsuario != TipoUsuario.Cliente)
+                            {
+                                lblRegistro.Text = "El mail ya se encuentra registrado...";
+                                lblRegistro.Visible = true;
+                                return;
+                            }
+                        }
+                        foreach (Empleado emp in dataEmp.listar())
+                        {
+                            if (emp.DNI == txtDNI.Text)
+                            {
+                                lblRegistro.Text = "El DNI ya se encuentra registrado...";
+                                lblRegistro.Visible = true;
+                                return;
+                            }
+                        }
+
                         dataCli.AgregarCliente(nuevo);
                     }
 
@@ -261,18 +282,22 @@ namespace CallCenter
             AccesoClientes datos = new AccesoClientes();
             Usuario user = ((Usuario)Session["usuario"]);
             Cliente cli = datos.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
+            txtApellido.Enabled = false;
             txtResolucion.Visible = false;
             lblResolucion.Visible = false;
             lblEstadoActual.Visible = false;
             lblPrioridad.Visible = false;
             txtEstadoActual.Visible = false;
             ddlPrioridad.Visible = false;
+            ddlCategoria.Enabled = false;
 
             lblFechaYHora.Text = DateTime.Now.ToString();
-            txtNombre.Text = string.Concat(cli.Apellido, ", ", cli.Nombre);
+            txtNombre.Text = cli.Nombre;
+            txtApellido.Text = cli.Apellido;
             txtMail.Text = cli.Usuario.Email;
             txtDNI.Text = cli.DNI.ToString();
             txtTelefono.Text = cli.Telefono.ToString();
+            ddlCategoria.SelectedValue = cli.Categoria.IDCategoria.ToString();
         }
         public void CargarCategoria()
         {
@@ -302,7 +327,8 @@ namespace CallCenter
                 if (txtDNI.Text == aux.DNI)
                 {
                     txtDNI.Text = aux.DNI;
-                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtNombre.Text = aux.Nombre;
+                    txtApellido.Text = aux.Apellido;
                     txtMail.Text = aux.Usuario.Email;
                     txtTelefono.Text = aux.Telefono;
                     txtDNI.Enabled = false;
@@ -313,7 +339,8 @@ namespace CallCenter
                 else if (txtTelefono.Text == aux.Telefono)
                 {
                     txtDNI.Text = aux.DNI;
-                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtNombre.Text = aux.Nombre;
+                    txtApellido.Text = aux.Apellido;
                     txtMail.Text = aux.Usuario.Email;
                     txtTelefono.Text = aux.Telefono;
                     txtDNI.Enabled = false;
@@ -333,9 +360,11 @@ namespace CallCenter
                 if (txtMail.Text == aux.Usuario.Email)
                 {
                     txtDNI.Text = aux.DNI;
-                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtNombre.Text = aux.Nombre;
+                    txtApellido.Text = aux.Apellido;
                     txtMail.Text = aux.Usuario.Email;
                     txtTelefono.Text = aux.Telefono;
+                    txtApellido.Enabled = false;
                     txtDNI.Enabled = false;
                     txtNombre.Enabled = false;
                     txtTelefono.Enabled = false;
@@ -352,9 +381,11 @@ namespace CallCenter
                 if (txtDNI.Text == aux.DNI)
                 {
                     txtDNI.Text = aux.DNI;
-                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtNombre.Text = aux.Nombre;
+                    txtApellido.Text = aux.Apellido;
                     txtMail.Text = aux.Usuario.Email;
                     txtTelefono.Text = aux.Telefono;
+                    txtApellido.Enabled = false;
                     txtMail.Enabled = false;
                     txtNombre.Enabled = false;
                     txtTelefono.Enabled = false;
@@ -371,9 +402,11 @@ namespace CallCenter
                 if (txtTelefono.Text == aux.Telefono)
                 {
                     txtDNI.Text = aux.DNI;
-                    txtNombre.Text = aux.Apellido + ", " + aux.Nombre;
+                    txtNombre.Text = aux.Nombre;
+                    txtApellido.Text = aux.Apellido;
                     txtMail.Text = aux.Usuario.Email;
                     txtTelefono.Text = aux.Telefono;
+                    txtApellido.Enabled = false;
                     txtMail.Enabled = false;
                     txtNombre.Enabled = false;
                     txtDNI.Enabled = false;

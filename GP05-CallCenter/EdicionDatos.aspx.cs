@@ -228,7 +228,7 @@ namespace GP05_CallCenter
                 ddlDato.Visible = false;
                 txtDescripcion.Enabled = true;
                 btnAgregar.Text = "Agregar";
-                btnAgregar.CssClass = "btn btn-primary btn-lg";
+                btnAgregar.CssClass = "btn btn-success btn-lg";
                 Validar();
                 txtDescripcion.Text = string.Empty;
             }
