@@ -22,6 +22,7 @@ namespace CallCenter
                 Usuario user = (Usuario)Session["usuario"];
                 if (user.TipoUsuario == TipoUsuario.Admin)
                 {
+                    telefono.TextMode = TextBoxMode.SingleLine;
                     TituloH1 = "¡Bienvenido Administrador/a!";
                     ParrafoP = "Aqui podra agregar Empleados.";
                     telefono.Attributes["Placeholder"] = "Legajo";
