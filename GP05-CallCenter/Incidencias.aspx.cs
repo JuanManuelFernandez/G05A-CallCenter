@@ -61,7 +61,12 @@ namespace CallCenter
                 txtTelefono.Text = cliente.Telefono.ToString();
                 ddlTipo.SelectedValue = actual.tipo.IDTipo.ToString();
                 ddlPrioridad.SelectedValue = actual.prioridad.IDPrioridad.ToString();
-                ddlCategoria.SelectedValue = cliente.Categoria.IDCategoria.ToString();
+                if (cliente.Categoria.IDCategoria != 0) ddlCategoria.SelectedValue = cliente.Categoria.IDCategoria.ToString();
+                else
+                {
+                    ddlCategoria.Items.Insert(0, new ListItem("Sin Asignacion"));
+                    ddlCategoria.SelectedIndex = 0;
+                }
                 lblFechaYHora.Text = actual.FechaYHoraCreacion.ToString();
                 txtNombre.Text = string.Concat(cliente.Apellido, ", ", cliente.Nombre);
                 txtEstadoActual.Text = actual.EstadoActual.ToString();
