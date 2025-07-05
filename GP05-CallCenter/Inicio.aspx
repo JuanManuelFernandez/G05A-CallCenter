@@ -24,5 +24,11 @@
             <asp:Button ID="btnModificarTipos" runat="server" Text="Modificar Tipos" CssClass="btn btn-primary btn-lg mx-3" Visible ="false" OnClick="btnModificarTipos_Click"/>
         </section>
     </div>
+    <div>
+        <section class="text-center mt-3" aria-labelledby="hostingTitle">
+            <asp:LinkButton ID="btnRegistrarCliente" runat="server" CssClass="btn btn-success btn-lg mx-3" Visible = "false" OnClick="btnDarDeAltaUsuario_Click" Style="display: inline-flex; align-items: center;">
+                <img src="Assets/RegisterU.png" style="width: 30px; height: 30px; margin-right: 5px;" />Agregar usuario </asp:LinkButton>
+        </section>
+    </div>
 
 </asp:Content>
