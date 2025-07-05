@@ -125,6 +125,7 @@
     <Content Include="Formularios.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Incidencias.aspx" />
+    <Content Include="IncidenciasLibres.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="MisDatos.aspx" />
@@ -266,6 +267,13 @@
     </Compile>
     <Compile Include="Incidencias.aspx.designer.cs">
       <DependentUpon>Incidencias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IncidenciasLibres.aspx.cs">
+      <DependentUpon>IncidenciasLibres.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IncidenciasLibres.aspx.designer.cs">
+      <DependentUpon>IncidenciasLibres.aspx</DependentUpon>
     </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
