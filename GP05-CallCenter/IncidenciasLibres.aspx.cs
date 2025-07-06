@@ -40,12 +40,12 @@ namespace GP05_CallCenter
                 int index = Convert.ToInt32(e.CommandArgument);
                 GridViewRow row = dgvIncidenciasLibres.Rows[index];
                 int IDIncidencia = Convert.ToInt32(dgvIncidenciasLibres.DataKeys[index].Value);
+                AccesoEmpleados  emp = new AccesoEmpleados();
                 Usuario user = (Usuario)Session["usuario"];
 
                 if (user.TipoUsuario == TipoUsuario.Empleado)
                 {
-                    //SOLUCIONAR QUE TOME AUTOMATICAMENTE EL IDEmpleado iniciado en el sistema
-                    int IDEmpleado = 1;
+                    int IDEmpleado = emp.ObtenerIDEmpleadoLogueado(user.IdUsuario);
 
                     AccesoIncidencias datos = new AccesoIncidencias();
                     bool success = datos.AsignarIncidencia(IDIncidencia, IDEmpleado);

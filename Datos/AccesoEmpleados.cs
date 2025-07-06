@@ -158,5 +158,34 @@ namespace Datos
                 datos.Cerrar();
             }
         }
+        public int ObtenerIDEmpleadoLogueado(int IDUsuario)
+        {
+            datos = new AccesoDatos();
+            int IDEmpleado = 0;
+
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT IDEmpleado FROM Empleados WHERE IDUsuario = @IDUsuario");
+                datos.SetearParametro("@IDUsuario", IDUsuario);
+                datos.Leer();
+
+                if (datos.Lector.Read())
+                {
+                    IDEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
+                }
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+
+            return IDEmpleado;
+        }
+
     }
 }
