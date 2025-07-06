@@ -68,3 +68,10 @@ CREATE TABLE Incidencias (
 	FechaYHoraResolucion datetime NULL,
 	Resolucion NVARCHAR(500) NULL
 )
+
+CREATE TABLE Historial (
+	IDHistorial INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	IDIncidencia INT NOT NULL FOREIGN KEY REFERENCES Incidencias(IDIncidencia),
+	EstadoActual VARCHAR(250) NOT NULL,
+	Descripcion VARCHAR(500) NOT NULL
+)
