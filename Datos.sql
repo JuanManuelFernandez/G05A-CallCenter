@@ -2,6 +2,7 @@ GO
 USE CallCenter
 GO
 
+--DELETE FROM Plantillas
 --DELETE FROM Incidencias
 --DELETE FROM PrioridadesIncidente
 --DELETE FROM TiposIncidente
@@ -10,13 +11,16 @@ GO
 --DELETE FROM CategoriasCliente
 --DELETE FROM Usuarios
 
---SELECT * FROM Incidencias
+SELECT IDPlantilla, Nombre, Descripcion WHERE Eliminado = 0
+SELECT IDCategoria, Nombre, Descripcion FROM CategoriasCliente WHERE Eliminado = 0
+SELECT * FROM Plantillas
+--WHERE IDPlantilla = 1
 
 INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES
 (3, 'cliente1.52dfq@silomails.com', 'clave1'),
 (3, 'cliente2@mail.com', 'clave2'),
 (3, 'cliente3@mail.com', 'clave3'),
-(2, 'empleado1@mail.com', 'clave1'),
+(2, 'empleado1.nw9m0@silomails.com', 'clave1'),
 (2, 'empleado2@mail.com', 'clave2'),
 (2, 'empleado3@mail.com', 'clave3'),
 (1, 'admin@mail.com', 'clave1')
@@ -52,3 +56,22 @@ INSERT INTO Incidencias (IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActua
 (1, 1, 1, 1, 'Enviando tecnico...', 'No puedo acceder a internet hace 4 dias.', GETDATE()),
 (2, 2, 1, 2, 'Se trabo la actualizacion...', 'Hace ya mas de 3 horas que esta bajando la actualizacion. Esta funcionando?', GETDATE()),
 (3, 3, 2, 3, 'Consulta por mail a cobranzas...', 'Me estan cobrando por servicios que no uso. Quiero pedir la baja ya mismo!', GETDATE())
+
+INSERT INTO Plantillas (Nombre, Descripcion) VALUES
+('Caso inactivo', 'Hola, como estas?' +CHAR(13)+CHAR(13)+
+'Hace un tiempo que no tenemos novedades de vos. Tuviste tiempo para ver nuestros anteriores mensajes sobre este caso?' +CHAR(13)+
+'Recorda que siempre estamos aca para ayudarte.'  +CHAR(13)+CHAR(13)+
+'Muchas gracias,'  +CHAR(13)+
+'Soporte UTN'),
+('Completar datos', 'Hola, como estas?' +CHAR(13)+
+'Para facilitar la gestion de este caso, por favor danos la siguiente informacion:' +CHAR(13)+
+'DNI: ' +CHAR(13)+
+'Nombre y Apellido: ' +CHAR(13)+
+'Telefono: ' + CHAR(13) +
+'Direccion: '  +CHAR(13)+CHAR(13)+
+'Muchas gracias,'  +CHAR(13)+
+'Soporte UTN'),
+('Derivaciones', 'Gracias por contactarte con nosotros.' +CHAR(13)+CHAR(13)+
+'Vamos a enviar tu caso a un Ingeniero de Soporte, quien se pondra pronto en contacto para ayudarte con tus inconvenientes.' +CHAR(13)+CHAR(13)+
+'Muchas gracias,' +CHAR(13)+
+'Soporte UTN')

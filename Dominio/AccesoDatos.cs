@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dominio
 {
@@ -19,7 +15,7 @@ namespace Dominio
         }
         public void Conectar()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CallCenter; integrated security=true"); //\\SQLEXPRESS
+            conexion = new SqlConnection("server=.; database=CallCenter; integrated security=true"); //\\SQLEXPRESS
             comando = new SqlCommand();
         }
         public void Consultar(string consulta)

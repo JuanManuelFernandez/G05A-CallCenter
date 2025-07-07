@@ -16,6 +16,7 @@ namespace CallCenter
             CargarTipo();
             CargarPrioridad();
             CargarCategoria();
+            CargarPlantilla();
 
             if (Session["usuario"] == null)
             {
@@ -327,6 +328,51 @@ namespace CallCenter
 
                     throw er;
                 }
+            }
+        }
+        public void CargarPlantilla()
+        {
+            AccesoPlantillas datos = new AccesoPlantillas();
+            try
+            {
+                ddlPlantillas.DataSource = datos.Listar();
+                ddlPlantillas.DataTextField = "Nombre";
+                ddlPlantillas.DataValueField = "Descripcion";
+                ddlPlantillas.DataBind();
+
+                //ddlPlantillas.Items.Add("Seleccione una plantilla");
+                ddlPlantillas.Items.Insert(0, new ListItem("Seleccione una plantilla", ""));
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+        }
+        protected void BtnAplicarPlantilla_Click(object sender, EventArgs e)
+        {
+            if (ddlPlantillas.SelectedIndex <= 0) return; // Validación básica
+
+            int id = int.Parse(ddlPlantillas.SelectedValue);
+
+            // Obtener la plantilla
+            AccesoPlantillas datos = new AccesoPlantillas();
+            Plantilla plantilla = datos.Buscar(id);
+
+            if (plantilla != null)
+            {
+                txtDescripcion.Text = plantilla.Descripcion;
+            }
+        }
+        protected void DdlPlantillas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var test = ddlPlantillas.SelectedValue;
+            int id = int.Parse(ddlPlantillas.SelectedValue.ToString());
+            AccesoPlantillas datos = new AccesoPlantillas();
+            Plantilla plantilla = datos.Buscar(id);
+
+            if (plantilla != null)
+            {
+                txtDescripcion.Text = plantilla.Descripcion;
             }
         }
         public bool ValidacionesCliente()

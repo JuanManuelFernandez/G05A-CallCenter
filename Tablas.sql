@@ -75,3 +75,10 @@ CREATE TABLE Historial (
 	EstadoActual VARCHAR(250) NOT NULL,
 	Descripcion VARCHAR(500) NOT NULL
 )
+
+CREATE TABLE Plantillas (
+	IDPlantilla INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Nombre VARCHAR(100) NOT NULL, -- Incidencia inactiva, Completar datos, Derivaciones o Escalaciones
+	Descripcion NVARCHAR(500) NOT NULL, -- Body de Email
+    Eliminado BIT NOT NULL DEFAULT 0
+)
