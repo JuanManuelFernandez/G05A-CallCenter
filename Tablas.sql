@@ -4,10 +4,10 @@ USE CallCenter
 GO
 
 --DROP TABLE X
-SELECT * FROM Usuarios
-SELECT * FROM Clientes
-SELECT * FROM Incidencias
-SELECT * FROM Empleados
+--SELECT * FROM Usuarios
+--SELECT * FROM Clientes
+--SELECT * FROM Incidencias
+--SELECT * FROM Empleados
 
 CREATE TABLE Usuarios (
 	IDUsuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),

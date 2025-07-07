@@ -247,7 +247,6 @@ namespace CallCenter
                 }
                 catch (Exception er)
                 {
-
                     throw er;
                 }
             }
@@ -266,7 +265,6 @@ namespace CallCenter
                 }
                 catch (Exception er)
                 {
-
                     throw er;
                 }
             }
@@ -325,60 +323,50 @@ namespace CallCenter
                 }
                 catch (Exception er)
                 {
-
                     throw er;
                 }
             }
         }
         public void CargarPlantilla()
         {
-            AccesoPlantillas datos = new AccesoPlantillas();
-            try
+            if (!IsPostBack)
             {
-                ddlPlantillas.DataSource = datos.Listar();
-                ddlPlantillas.DataTextField = "Nombre";
-                ddlPlantillas.DataValueField = "Descripcion";
-                ddlPlantillas.DataBind();
-
-                //ddlPlantillas.Items.Add("Seleccione una plantilla");
-                ddlPlantillas.Items.Insert(0, new ListItem("Seleccione una plantilla", ""));
-            }
-            catch (Exception er)
-            {
-                throw er;
+                AccesoPlantillas datos = new AccesoPlantillas();
+                try
+                {
+                    ddlPlantillas.DataSource = datos.Listar();
+                    ddlPlantillas.DataValueField = "IDPlantilla";
+                    ddlPlantillas.DataTextField = "Nombre";
+                    ddlPlantillas.DataBind();
+                }
+                catch (Exception er)
+                {
+                    throw er;
+                }
             }
         }
         protected void BtnAplicarPlantilla_Click(object sender, EventArgs e)
         {
-            if (ddlPlantillas.SelectedIndex <= 0) return; // Validación básica
-
-            int id = int.Parse(ddlPlantillas.SelectedValue);
-
-            // Obtener la plantilla
-            AccesoPlantillas datos = new AccesoPlantillas();
-            Plantilla plantilla = datos.Buscar(id);
-
-            if (plantilla != null)
+            if (ddlPlantillas.SelectedItem.Text == "Caso inactivo")
             {
-                txtDescripcion.Text = plantilla.Descripcion;
+                AccesoPlantillas data = new AccesoPlantillas();
+                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
             }
-        }
-        protected void DdlPlantillas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var test = ddlPlantillas.SelectedValue;
-            int id = int.Parse(ddlPlantillas.SelectedValue.ToString());
-            AccesoPlantillas datos = new AccesoPlantillas();
-            Plantilla plantilla = datos.Buscar(id);
-
-            if (plantilla != null)
+            else if (ddlPlantillas.SelectedItem.Text == "Completar datos")
             {
-                txtDescripcion.Text = plantilla.Descripcion;
+                AccesoPlantillas data = new AccesoPlantillas();
+                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
+            }
+            else if (ddlPlantillas.SelectedItem.Text == "Derivaciones")
+            {
+                AccesoPlantillas data = new AccesoPlantillas();
+                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
             }
         }
         public bool ValidacionesCliente()
         {
             AccesoClientes dataCli = new AccesoClientes();
-            AccesoEmpleados dataEmp = new AccesoEmpleados();
+            //AccesoEmpleados dataEmp = new AccesoEmpleados();
             foreach (Cliente aux in dataCli.Listar())
             {
                 if (txtDNI.Text == aux.DNI)
@@ -410,8 +398,7 @@ namespace CallCenter
             }
             return true;
         }
-
-        protected void txtMail_TextChanged(object sender, EventArgs e)
+        protected void TxtMail_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
             foreach (Cliente aux in dataCli.Listar())
@@ -432,8 +419,7 @@ namespace CallCenter
                 }
             }
         }
-
-        protected void txtDNI_TextChanged(object sender, EventArgs e)
+        protected void TxtDNI_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
             foreach (Cliente aux in dataCli.Listar())
@@ -454,8 +440,7 @@ namespace CallCenter
                 }
             }
         }
-
-        protected void txtTelefono_TextChanged(object sender, EventArgs e)
+        protected void TxtTelefono_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
             foreach (Cliente aux in dataCli.Listar())
@@ -475,6 +460,10 @@ namespace CallCenter
                     return;
                 }
             }
+        }
+        public void DeshabilitarEdicion()
+        {
+
         }
     }
 }

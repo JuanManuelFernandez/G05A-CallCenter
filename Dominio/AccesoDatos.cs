@@ -15,7 +15,7 @@ namespace Dominio
         }
         public void Conectar()
         {
-            conexion = new SqlConnection("server=.; database=CallCenter; integrated security=true"); //\\SQLEXPRESS
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CallCenter; integrated security=true"); //\\SQLEXPRESS
             comando = new SqlCommand();
         }
         public void Consultar(string consulta)
@@ -70,10 +70,7 @@ namespace Dominio
         }
         public void Cerrar()
         {
-            if (lector != null)
-            {
-                lector.Close();
-            }
+            lector?.Close();
             conexion.Close();
         }
         public void SetearParametro(string columna, object dato)

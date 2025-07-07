@@ -25,18 +25,18 @@
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <asp:Label ID="lblDni" runat="server" Text="DNI Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="txtDNI_TextChanged" AutoPostBack="true" TextMode="Number" min="1"></asp:TextBox>
+                <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="TxtDNI_TextChanged" AutoPostBack="true" TextMode="Number" min="1"></asp:TextBox>
             </div>
             <div class="col-md-3">
 
                 <asp:Label ID="lblMail" runat="server" Text="Email Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtMail" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="txtMail_TextChanged" AutoPostBack="true" TextMode="Email" MaxLength="100"></asp:TextBox>
+                <asp:TextBox ID="txtMail" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="TxtMail_TextChanged" AutoPostBack="true" TextMode="Email" MaxLength="100"></asp:TextBox>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <asp:Label ID="lblTelefono" runat="server" Text="Telefono Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="txtTelefono_TextChanged" AutoPostBack="true" TextMode="Number" min="1" MaxLength="50"></asp:TextBox>
+                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="TxtTelefono_TextChanged" AutoPostBack="true" TextMode="Number" min="1" MaxLength="50"></asp:TextBox>
             </div>
             <div class="col-md-3">
                 <asp:Label ID="lblCategoria" runat="server" Text="Categoria Cliente" CssClass="form-label fw-bold"></asp:Label>
@@ -53,9 +53,11 @@
             <br />
             <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 135px" required="required" MaxLength="500"></asp:TextBox>
 
-            <asp:Label ID="lblPlantillas" runat="server" Text="Seleccionar plantilla:" CssClass="form-label fw-bold text-center" />
-            <asp:DropDownList ID="ddlPlantillas" runat="server" AutoPostBack="true" CssClass="form-select w-50 mx-auto mb-3" OnSelectedIndexChanged="DdlPlantillas_SelectedIndexChanged"></asp:DropDownList>
-            <asp:Button ID="btnAplicarPlantilla" runat="server" Text="Aplicar Plantilla" CssClass="btn btn-primary mt-2" OnClick="BtnAplicarPlantilla_Click" />
+            <div class="row justify-content-center col-md-3">
+                <asp:Label ID="lblPlantillas" runat="server" Text="Seleccionar plantilla:" CssClass="form-label fw-bold" />
+                <asp:DropDownList ID="ddlPlantillas" runat="server" CssClass="form-select"></asp:DropDownList>
+                <asp:Button ID="btnAplicarPlantilla" runat="server" Text="Aplicar Plantilla" CssClass="btn btn-secondary" OnClick="BtnAplicarPlantilla_Click" />
+            </div>
 
         </div>
 

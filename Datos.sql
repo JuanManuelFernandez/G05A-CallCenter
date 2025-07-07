@@ -11,10 +11,8 @@ GO
 --DELETE FROM CategoriasCliente
 --DELETE FROM Usuarios
 
-SELECT IDPlantilla, Nombre, Descripcion WHERE Eliminado = 0
-SELECT IDCategoria, Nombre, Descripcion FROM CategoriasCliente WHERE Eliminado = 0
-SELECT * FROM Plantillas
---WHERE IDPlantilla = 1
+--SELECT IDPlantilla, Nombre, Descripcion WHERE Eliminado = 0
+--SELECT * FROM Incidencias
 
 INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES
 (3, 'cliente1.52dfq@silomails.com', 'clave1'),
