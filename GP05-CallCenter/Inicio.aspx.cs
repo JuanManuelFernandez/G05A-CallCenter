@@ -24,6 +24,8 @@ namespace GP05_CallCenter
             {
                 NombreDeUsuario = dataEmp.BuscarPorIdUsuario(user.IdUsuario).Nombre;
                 btnMisReclamos.Text = "Reclamos";
+                btnRegistrarCliente.Visible = true;
+                btnIncidenciasLibres.Visible = true;
             }
             else if (user.TipoUsuario == TipoUsuario.Cliente)
             {
@@ -73,6 +75,15 @@ namespace GP05_CallCenter
         protected void btnModificarTipos_Click(object sender, EventArgs e)
         {
             Response.Redirect("EdicionDatos.aspx");
+        }
+        protected void btnDarDeAltaUsuario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Registro.aspx");
+        }
+        protected void btnIncidenciasLibres_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("IncidenciasLibres.aspx");
+
         }
     }
 }

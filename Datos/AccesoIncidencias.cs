@@ -300,5 +300,28 @@ namespace Datos
                 datos.Cerrar();
             }
         }
+        public bool AsignarIncidencia(int IDIncidencia, int IDEmpleado)
+        {
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("UPDATE Incidencias SET IDEmpleado = @IDEmpleado WHERE IDIncidencia = @IDIncidencia");
+                datos.SetearParametro("@IDEmpleado", IDEmpleado);
+                datos.SetearParametro("@IDIncidencia", IDIncidencia);
+                datos.EjecutarNonQuery();
+
+                return true;
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+        }
+
     }
 }

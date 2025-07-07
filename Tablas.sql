@@ -4,8 +4,10 @@ USE CallCenter
 GO
 
 --DROP TABLE X
---SELECT * FROM Usuarios
---SELECT * FROM Clientes
+SELECT * FROM Usuarios
+SELECT * FROM Clientes
+SELECT * FROM Incidencias
+SELECT * FROM Empleados
 
 CREATE TABLE Usuarios (
 	IDUsuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -65,4 +67,11 @@ CREATE TABLE Incidencias (
 	FechaYHoraCreacion datetime NOT NULL,
 	FechaYHoraResolucion datetime NULL,
 	Resolucion NVARCHAR(500) NULL
+)
+
+CREATE TABLE Historial (
+	IDHistorial INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	IDIncidencia INT NOT NULL FOREIGN KEY REFERENCES Incidencias(IDIncidencia),
+	EstadoActual VARCHAR(250) NOT NULL,
+	Descripcion VARCHAR(500) NOT NULL
 )

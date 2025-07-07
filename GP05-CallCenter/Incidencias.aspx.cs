@@ -99,6 +99,8 @@ namespace CallCenter
             EmailService emailService = new EmailService();
             AccesoClientes dataCli = new AccesoClientes();
             AccesoEmpleados dataEmp = new AccesoEmpleados();
+            AccesoHistorial datahist = new AccesoHistorial();
+
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
                 Incidencia nueva = new Incidencia
@@ -118,6 +120,9 @@ namespace CallCenter
                     FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                 };
                 int IDIncidencia = entry.AgregarIncidencia(nueva);
+                nueva.IdIncidencia = IDIncidencia;
+                nueva.EstadoActual = "Pendiente";
+                datahist.Agregar(nueva);
                 emailService.ArmarCorreo(txtMail.Text, "Se genero la Incidencia Numero " + IDIncidencia, "Estos son los datos: <br>" + txtDescripcion.Text);
             }
             else

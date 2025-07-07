@@ -124,7 +124,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Formularios.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Historial.aspx" />
     <Content Include="Incidencias.aspx" />
+    <Content Include="IncidenciasLibres.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="MisDatos.aspx" />
@@ -260,12 +262,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Historial.aspx.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Historial.aspx.designer.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Incidencias.aspx.cs">
       <DependentUpon>Incidencias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Incidencias.aspx.designer.cs">
       <DependentUpon>Incidencias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IncidenciasLibres.aspx.cs">
+      <DependentUpon>IncidenciasLibres.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IncidenciasLibres.aspx.designer.cs">
+      <DependentUpon>IncidenciasLibres.aspx</DependentUpon>
     </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>

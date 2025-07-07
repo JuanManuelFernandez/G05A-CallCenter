@@ -117,5 +117,14 @@ namespace CallCenter
         {
 
         }
+        protected void dgvIncidencias_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if(e.CommandName == "Abrir")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                var id = dgvIncidencias.DataKeys[index].Value.ToString();
+                Response.Redirect("Historial.aspx?id=" + id);
+            }
+        }
     }
 }

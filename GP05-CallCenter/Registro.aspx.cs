@@ -28,6 +28,11 @@ namespace CallCenter
                     telefono.Attributes["Placeholder"] = "Legajo";
                     telefono.Attributes["Textmode"] = "";
                 }
+                else if(user.TipoUsuario == TipoUsuario.Empleado)
+                {
+                    TituloH1 = "¡Bienbenido Empleado/a!";
+                    ParrafoP = "Aqui puedes registrar a un cliente como usuario en el caso de que no lo este";
+                }
                 else
                 {
                     Response.Redirect("Inicio.aspx");
@@ -36,8 +41,13 @@ namespace CallCenter
         }
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
-
-            if (Session["usuario"] != null)
+            Usuario user = (Usuario)Session["usuario"];
+            if(user.TipoUsuario == TipoUsuario.Empleado)
+            {
+                CargarCliente();
+                Response.Redirect("inicio.aspx");
+            }
+            else if (Session["usuario"] != null)
             {
                 CargarEmpleado();
             }
@@ -53,6 +63,7 @@ namespace CallCenter
             Cliente nuevoCliente = new Cliente();
             AccesoUsuario accesoUsuario = new AccesoUsuario();
             AccesoClientes accesoCliente = new AccesoClientes();
+            Usuario user = (Usuario)Session["usuario"];
             {
                 nuevoCliente.DNI = dni.Text;
                 nuevoCliente.Nombre = nombre.Text;
@@ -106,8 +117,11 @@ namespace CallCenter
                 {
                     accesoClientes.AgregarCliente(nuevoCliente);
                 }
-                Session.Add("usuario", (Usuario)accesoUsuario.Listar().Find(x => x.Email == nuevoCliente.Usuario.Email));
-                Response.Redirect("Inicio.aspx", false);
+                if(user.TipoUsuario != TipoUsuario.Empleado)
+                {
+                    Session.Add("usuario", (Usuario)accesoUsuario.Listar().Find(x => x.Email == nuevoCliente.Usuario.Email));
+                    Response.Redirect("Inicio.aspx", false);
+                }
             }
             catch (Exception ex)
             {
