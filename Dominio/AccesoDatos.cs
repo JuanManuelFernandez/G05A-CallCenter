@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Dominio
 {
@@ -70,7 +74,10 @@ namespace Dominio
         }
         public void Cerrar()
         {
-            lector?.Close();
+            if (lector != null)
+            {
+                lector.Close();
+            }
             conexion.Close();
         }
         public void SetearParametro(string columna, object dato)

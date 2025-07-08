@@ -1,5 +1,10 @@
 ﻿using Datos;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace GP05_CallCenter
 {
@@ -23,7 +28,7 @@ namespace GP05_CallCenter
             }
         }
 
-        protected void BtnAgregar_Click(object sender, EventArgs e)
+        protected void btnAgregar_Click(object sender, EventArgs e)
         {
             if (ddlElegir.SelectedItem.Text == "Alta")
             {
@@ -215,7 +220,7 @@ namespace GP05_CallCenter
                 txtDescripcion.Text = (data.Listar().Find(x => x.IDPrioridad == int.Parse(ddlDato.SelectedValue))).Descripcion;
             }
         }
-        protected void DdlElegir_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlElegir_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlElegir.SelectedItem.Text == "Alta")
             {
@@ -248,7 +253,7 @@ namespace GP05_CallCenter
 
         }
 
-        protected void DdlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlElegir.SelectedItem.Text != "Alta")
             {
@@ -256,7 +261,7 @@ namespace GP05_CallCenter
             }
         }
 
-        protected void DdlDato_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlDato_SelectedIndexChanged(object sender, EventArgs e)
         {
             AutoCompletar();
         }

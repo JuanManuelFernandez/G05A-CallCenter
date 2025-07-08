@@ -4,10 +4,10 @@ USE CallCenter
 GO
 
 --DROP TABLE X
---SELECT * FROM Usuarios
---SELECT * FROM Clientes
---SELECT * FROM Incidencias
---SELECT * FROM Empleados
+SELECT * FROM Usuarios
+SELECT * FROM Clientes
+SELECT * FROM Incidencias
+SELECT * FROM Empleados
 
 CREATE TABLE Usuarios (
 	IDUsuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -75,10 +75,6 @@ CREATE TABLE Historial (
 	EstadoActual VARCHAR(250) NOT NULL,
 	Descripcion VARCHAR(500) NOT NULL
 )
+SELECT * FROM Historial
 
-CREATE TABLE Plantillas (
-	IDPlantilla INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	Nombre VARCHAR(100) NOT NULL, -- Incidencia inactiva, Completar datos, Derivaciones o Escalaciones
-	Descripcion NVARCHAR(500) NOT NULL, -- Body de Email
-    Eliminado BIT NOT NULL DEFAULT 0
-)
+UPDATE Historial SET EstadoActual = 'En curso' WHERE IDHistorial = 2;

@@ -219,6 +219,7 @@ namespace Datos
         }
         public int AgregarIncidencia(Incidencia nueva)
         {
+            AccesoHistorial hist = new AccesoHistorial();
             datos = new AccesoDatos();
             try
             {
@@ -229,10 +230,13 @@ namespace Datos
                 datos.SetearParametro("@IDCLIENTE", nueva.IdCliente);
                 datos.SetearParametro("@IDTIPO", nueva.tipo.IDTipo);
                 datos.SetearParametro("@IDPRIORIDAD", nueva.prioridad.IDPrioridad);
-                datos.SetearParametro("@ESTADOACTUAL", "Pendiente");
+                datos.SetearParametro("@ESTADOACTUAL", nueva.EstadoActual);
                 datos.SetearParametro("@DESCRIPCION", nueva.Descripcion);
                 datos.SetearParametro("@FECHAYHORACREACION", nueva.FechaYHoraCreacion);
-                return (int)datos.EjectuarScalar();
+                int id = (int)datos.EjectuarScalar();
+                nueva.IdIncidencia = id;
+                hist.Agregar(nueva);
+                return id;
             }
             catch (Exception er)
             {
@@ -245,6 +249,7 @@ namespace Datos
         }
         public void ModificarIncidencia(Incidencia nueva)
         {
+            AccesoHistorial hist = new AccesoHistorial();
             datos = new AccesoDatos();
             try
             {
@@ -267,6 +272,7 @@ namespace Datos
                 }
                 datos.SetearParametro("@IDIncidencia", nueva.IdIncidencia);
                 datos.EjecutarNonQuery();
+                hist.Agregar(nueva);
             }
             catch (Exception er)
             {
@@ -279,6 +285,7 @@ namespace Datos
         }
         public void ReactivarIncidencia(Incidencia react)
         {
+            AccesoHistorial hist = new AccesoHistorial();
             datos = new AccesoDatos();
             try
             {
@@ -290,6 +297,7 @@ namespace Datos
                 datos.SetearParametro("@IDEmpleado", DBNull.Value);
                 datos.SetearParametro("@IDIncidencia",react.IdIncidencia);
                 datos.EjecutarNonQuery();
+                hist.Agregar(react);
             }
             catch (Exception er)
             {
@@ -302,6 +310,7 @@ namespace Datos
         }
         public bool AsignarIncidencia(int IDIncidencia, int IDEmpleado)
         {
+            AccesoHistorial hist = new AccesoHistorial();
             datos = new AccesoDatos();
             try
             {
@@ -310,6 +319,8 @@ namespace Datos
                 datos.SetearParametro("@IDEmpleado", IDEmpleado);
                 datos.SetearParametro("@IDIncidencia", IDIncidencia);
                 datos.EjecutarNonQuery();
+                Incidencia inc = Listar().Find(x => x.IdIncidencia == IDIncidencia);
+                hist.Agregar(inc);
 
                 return true;
             }

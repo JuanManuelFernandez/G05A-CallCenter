@@ -8,22 +8,22 @@
 
     <div class="row justify-content-center mb-4">
         <div class="col-auto">
-            <asp:DropDownList ID="ddlElegir" runat="server" CssClass="form-select form-select-lg" AutoPostBack="true" OnSelectedIndexChanged="DdlElegir_SelectedIndexChanged"></asp:DropDownList>
+            <asp:DropDownList ID="ddlElegir" runat="server" CssClass="form-select form-select-lg" AutoPostBack="true" OnSelectedIndexChanged="ddlElegir_SelectedIndexChanged"></asp:DropDownList>
         </div>
         <div class="col-auto">
-            <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-select form-select-lg" OnSelectedIndexChanged="DdlTipo_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+            <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-select form-select-lg" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
         </div>
         <div class="col-auto">
             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control form-control-lg" placeholder="Escriba el nombre..."></asp:TextBox>
         </div>
         <div class="col-auto">
-            <asp:DropDownList ID="ddlDato" runat="server" CssClass="form-select form-select-lg" Visible ="false" AutoPostBack="true" OnSelectedIndexChanged="DdlDato_SelectedIndexChanged"></asp:DropDownList>
+            <asp:DropDownList ID="ddlDato" runat="server" CssClass="form-select form-select-lg" Visible ="false" AutoPostBack="true" OnSelectedIndexChanged="ddlDato_SelectedIndexChanged"></asp:DropDownList>
         </div>
         <div class="col-auto">
             <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control form-control-lg" placeholder="Escriba la descripcion..." TextMode="MultiLine" Style="resize: none"></asp:TextBox>
         </div>
         <div class="col-auto">
-            <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-primary btn-lg" OnClick="BtnAgregar_Click" />
+            <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-primary btn-lg" OnClick="btnAgregar_Click" />
         </div>
     </div>
     <div class="row text-center mt-1">

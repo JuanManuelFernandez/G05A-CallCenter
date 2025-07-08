@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,7 +17,12 @@ namespace CallCenter
             CargarTipo();
             CargarPrioridad();
             CargarCategoria();
-            CargarPlantilla();
+            Usuario user = (Usuario)Session["usuario"];
+
+            if (user.TipoUsuario == TipoUsuario.Cliente)
+            {
+                btnActualizar.Visible = false;
+            }
 
             if (Session["usuario"] == null)
             {
@@ -29,7 +35,7 @@ namespace CallCenter
                 CargarIncidencia();
                 return;
             }
-            else if (((Usuario)Session["usuario"]).TipoUsuario == TipoUsuario.Empleado)
+            else if (user.TipoUsuario == TipoUsuario.Empleado)
             {
                 lblFechaYHora.Text = DateTime.Now.ToString();
                 btnCargar.Text = "Cargar";
@@ -100,12 +106,12 @@ namespace CallCenter
             EmailService emailService = new EmailService();
             AccesoClientes dataCli = new AccesoClientes();
             AccesoEmpleados dataEmp = new AccesoEmpleados();
-            AccesoHistorial datahist = new AccesoHistorial();
 
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
                 Incidencia nueva = new Incidencia
                 {
+                    EstadoActual = "Pendiente",
                     IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
 
                     tipo = new TiposIncidente
@@ -123,7 +129,6 @@ namespace CallCenter
                 int IDIncidencia = entry.AgregarIncidencia(nueva);
                 nueva.IdIncidencia = IDIncidencia;
                 nueva.EstadoActual = "Pendiente";
-                datahist.Agregar(nueva);
                 emailService.ArmarCorreo(txtMail.Text, "Se genero la Incidencia Numero " + IDIncidencia, "Estos son los datos: <br>" + txtDescripcion.Text);
             }
             else
@@ -141,6 +146,7 @@ namespace CallCenter
                         nueva.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
                         nueva.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
                         nueva.EstadoActual = txtEstadoActual.Text;
+                        nueva.Descripcion = txtDescripcion.Text;
                         if (!(string.IsNullOrEmpty(txtResolucion.Text)))
                         {
                             nueva.EstadoActual = "Cerrado";
@@ -233,6 +239,40 @@ namespace CallCenter
             }
             Response.Redirect("Formularios.aspx");
         }
+        protected void BtnActualizar_Click(object sender, EventArgs e)
+        {
+            AccesoIncidencias entry = new AccesoIncidencias();
+            Usuario user = (Usuario)Session["usuario"];
+            AccesoClientes dataCli = new AccesoClientes();;
+
+            if (user.TipoUsuario == TipoUsuario.Cliente)
+            {
+                Incidencia nueva = new Incidencia
+                {
+                    EstadoActual = "Pendiente",
+                    IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
+                };
+                int IDIncidencia = entry.AgregarIncidencia(nueva);
+                nueva.IdIncidencia = IDIncidencia;
+                nueva.EstadoActual = "Pendiente";
+            }
+            else
+            {
+                if (Request.QueryString["id"] != null)
+                {
+                    Incidencia nueva = entry.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
+                    if (nueva != null)
+                    {
+                        nueva.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
+                        nueva.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
+                        nueva.EstadoActual = txtEstadoActual.Text;
+                        nueva.Descripcion = txtDescripcion.Text;
+                    }
+                    entry.ModificarIncidencia(nueva);
+                    Response.Redirect("Formularios.aspx");
+                }
+            }
+        }
         public void CargarTipo()
         {
             if (!IsPostBack)
@@ -247,6 +287,7 @@ namespace CallCenter
                 }
                 catch (Exception er)
                 {
+
                     throw er;
                 }
             }
@@ -265,19 +306,11 @@ namespace CallCenter
                 }
                 catch (Exception er)
                 {
+
                     throw er;
                 }
             }
         }
-        protected void TxtResolucion_TextChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtResolucion.Text))
-            {
-                btnCargar.Text = "Cerrar";
-                btnCargar.CssClass = "btn btn-danger btn-lg mx-3";
-            }
-        }
-
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Formularios.aspx");
@@ -323,50 +356,15 @@ namespace CallCenter
                 }
                 catch (Exception er)
                 {
+
                     throw er;
                 }
-            }
-        }
-        public void CargarPlantilla()
-        {
-            if (!IsPostBack)
-            {
-                AccesoPlantillas datos = new AccesoPlantillas();
-                try
-                {
-                    ddlPlantillas.DataSource = datos.Listar();
-                    ddlPlantillas.DataValueField = "IDPlantilla";
-                    ddlPlantillas.DataTextField = "Nombre";
-                    ddlPlantillas.DataBind();
-                }
-                catch (Exception er)
-                {
-                    throw er;
-                }
-            }
-        }
-        protected void BtnAplicarPlantilla_Click(object sender, EventArgs e)
-        {
-            if (ddlPlantillas.SelectedItem.Text == "Caso inactivo")
-            {
-                AccesoPlantillas data = new AccesoPlantillas();
-                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
-            }
-            else if (ddlPlantillas.SelectedItem.Text == "Completar datos")
-            {
-                AccesoPlantillas data = new AccesoPlantillas();
-                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
-            }
-            else if (ddlPlantillas.SelectedItem.Text == "Derivaciones")
-            {
-                AccesoPlantillas data = new AccesoPlantillas();
-                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
             }
         }
         public bool ValidacionesCliente()
         {
             AccesoClientes dataCli = new AccesoClientes();
-            //AccesoEmpleados dataEmp = new AccesoEmpleados();
+            AccesoEmpleados dataEmp = new AccesoEmpleados();
             foreach (Cliente aux in dataCli.Listar())
             {
                 if (txtDNI.Text == aux.DNI)
@@ -398,7 +396,8 @@ namespace CallCenter
             }
             return true;
         }
-        protected void TxtMail_TextChanged(object sender, EventArgs e)
+
+        protected void txtMail_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
             foreach (Cliente aux in dataCli.Listar())
@@ -419,7 +418,8 @@ namespace CallCenter
                 }
             }
         }
-        protected void TxtDNI_TextChanged(object sender, EventArgs e)
+
+        protected void txtDNI_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
             foreach (Cliente aux in dataCli.Listar())
@@ -440,7 +440,8 @@ namespace CallCenter
                 }
             }
         }
-        protected void TxtTelefono_TextChanged(object sender, EventArgs e)
+
+        protected void txtTelefono_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
             foreach (Cliente aux in dataCli.Listar())
@@ -460,10 +461,6 @@ namespace CallCenter
                     return;
                 }
             }
-        }
-        public void DeshabilitarEdicion()
-        {
-
         }
     }
 }
