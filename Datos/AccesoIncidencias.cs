@@ -14,7 +14,6 @@ namespace Datos
 
         public List<Incidencia> Listar()
         {
-            //AccesoPrioridades priori = new AccesoPrioridades();
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
@@ -66,7 +65,6 @@ namespace Datos
         }
         public Incidencia Buscar(string id)
         {
-            //AccesoPrioridades priori = new AccesoPrioridades();
             datos = new AccesoDatos();
             Incidencia aux = new Incidencia();
             datos.Conectar();
@@ -113,7 +111,6 @@ namespace Datos
         }
         public List<Incidencia> ListarIncidenciasCliente(int id)
         {
-            //AccesoPrioridades priori = new AccesoPrioridades();
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();
@@ -166,7 +163,6 @@ namespace Datos
         }
         public List<Incidencia> ListarIncidenciasEmpleado(int id)
         {
-            //AccesoPrioridades priori = new AccesoPrioridades();
             incidencias = new List<Incidencia>();
             datos = new AccesoDatos();
             datos.Conectar();

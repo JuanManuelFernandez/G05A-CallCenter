@@ -3,6 +3,25 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main>
         <h1>Lista de Incidencias Actuales:</h1>
+
+        <div class="row justify-content-center mb-4">
+            <div class="col-auto">
+                <asp:Label runat="server">Buscar por: </asp:Label>
+            </div>
+            <div class="col-auto">
+                <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-select form-select-lg"  OnSelectedIndexChanged="DdlTipo_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+            </div>
+            <div class="col-auto">
+                <asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="form-select form-select-lg" Visible ="false" OnSelectedIndexChanged="DdlPrioridad_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+            </div>
+            <div class="col-auto">
+                <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control form-control-lg" placeholder="Escriba aqui..."></asp:TextBox>
+            </div>
+            <div class="col-auto">
+                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnBuscar_Click" />
+            </div>
+        </div>
+
         <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="dgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencia" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnRowCommand="dgvIncidencias_RowCommand" OnRowDataBound="dgvIncidencias_RowDataBound">
             <Columns>
                 <%--<asp:BoundField HeaderText="ID Cliente" DataField="IdCliente" />--%>
@@ -12,7 +31,7 @@
                 <asp:TemplateField HeaderText="Historial">
                     <ItemTemplate>
                         <div style="text-align: center;">
-                            <asp:Button ID="btnHistorial" runat="server" CommandName="Abrir" CommandArgument='<%# Container.DataItemIndex %>' Text="Abrir" CssClass="btn btn-primary btn-lg"/>
+                            <asp:Button ID="btnHistorial" runat="server" CommandName="Abrir" CommandArgument='<%# Container.DataItemIndex %>' Text="Abrir" CssClass="btn btn-primary btn-lg" />
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
