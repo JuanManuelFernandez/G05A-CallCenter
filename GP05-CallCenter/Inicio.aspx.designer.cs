@@ -15,13 +15,13 @@ namespace GP05_CallCenter
     {
 
         /// <summary>
-        /// btnMisDatos control.
+        /// btnMisReclamos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnMisDatos;
+        protected global::System.Web.UI.WebControls.LinkButton btnMisReclamos;
 
         /// <summary>
         /// btnCargar control.
@@ -33,13 +33,13 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.LinkButton btnCargar;
 
         /// <summary>
-        /// btnMisReclamos control.
+        /// btnMisDatos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnMisReclamos;
+        protected global::System.Web.UI.WebControls.LinkButton btnMisDatos;
 
         /// <summary>
         /// btnModificarTipos control.

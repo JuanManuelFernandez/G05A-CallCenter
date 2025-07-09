@@ -1,10 +1,5 @@
 ﻿using Datos;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace GP05_CallCenter
@@ -17,7 +12,8 @@ namespace GP05_CallCenter
             if (Session["usuario"] != null)
             {
                 Usuario user = (Usuario)Session["usuario"];
-                if (user.TipoUsuario != TipoUsuario.Admin)
+                // Cliente no puede editar sus datos
+                if (user.TipoUsuario == TipoUsuario.Cliente)
                 {
                     Response.Redirect("Inicio.aspx");
                 }

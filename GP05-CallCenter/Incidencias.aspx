@@ -85,6 +85,12 @@
                     <img src="Assets/edit.png" style="width: 30px; height: 30px; margin-right: 5px;" />Actualizar caso </asp:LinkButton>
             </div>
         </section>
+        <section>
+            <div class="text-center mt-3">
+                <asp:LinkButton ID="btnActualizarCliente" runat="server" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnActualizarCliente_Click" Visible="true" Style="display: inline-flex; align-items: center;">
+                    <img src="Assets/editUser.png" style="width: 30px; height: 30px; margin-right: 5px;" />Actualizar Cliente </asp:LinkButton>
+            </div>
+        </section>
     </div>
     <div class="text-center mt-1">
         <asp:Label ID="lblRegistro" runat="server" Text="" Visible="false" ForeColor="Red" />

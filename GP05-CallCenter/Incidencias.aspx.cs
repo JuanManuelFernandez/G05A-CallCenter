@@ -17,17 +17,23 @@ namespace CallCenter
             {
                 Response.Redirect("Inicio.aspx");
             }
+            // Pagina para...
+            // Cliente
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
                 btnActualizar.Visible = false;
+                btnActualizarCliente.Visible = false;
+
             }
-            if (Request.QueryString["id"] != null)
+            // Cuando recibo URL de caso ya existente
+            if (Request.QueryString["id"] != null) 
             {
                 btnCargar.Text = "Modificar";
                 btnCargar.CssClass = "btn btn-success btn-lg mx-3";
                 CargarIncidencia();
                 return;
             }
+            // Empleado
             else if (user.TipoUsuario == TipoUsuario.Empleado)
             {
                 lblFechaYHora.Text = DateTime.Now.ToString();
@@ -52,35 +58,35 @@ namespace CallCenter
             {
                 string id = Request.QueryString["id"].ToString();
 
-                AccesoIncidencias datos = new AccesoIncidencias();
-                AccesoClientes datosClientes = new AccesoClientes();
-                AccesoEmpleados datosEmpleados = new AccesoEmpleados();
-                Incidencia actual = datos.Listar().Find(x => x.IdIncidencia == int.Parse(id));
-                Cliente cliente = datosClientes.Listar().Find(x => x.IdCliente == actual.IdCliente);
-                Empleado empleado = datosEmpleados.listar().Find(x => x.IDEmpleado == actual.IdEmpleado);
+                AccesoIncidencias datosInc = new AccesoIncidencias();
+                AccesoClientes datosCli = new AccesoClientes();
+                AccesoEmpleados datosEmp = new AccesoEmpleados();
+                Incidencia incActual = datosInc.Listar().Find(x => x.IdIncidencia == int.Parse(id));
+                Cliente cliente = datosCli.Listar().Find(x => x.IdCliente == incActual.IdCliente);
+                Empleado empleado = datosEmp.listar().Find(x => x.IDEmpleado == incActual.IdEmpleado);
 
                 txtDNI.Text = cliente.DNI.ToString();
                 txtMail.Text = cliente.Usuario.Email;
                 txtTelefono.Text = cliente.Telefono.ToString();
-                ddlTipo.SelectedValue = actual.tipo.IDTipo.ToString();
-                ddlPrioridad.SelectedValue = actual.prioridad.IDPrioridad.ToString();
+                ddlTipo.SelectedValue = incActual.tipo.IDTipo.ToString();
+                ddlPrioridad.SelectedValue = incActual.prioridad.IDPrioridad.ToString();
                 if (cliente.Categoria.IDCategoria != 0) ddlCategoria.SelectedValue = cliente.Categoria.IDCategoria.ToString();
                 else
                 {
                     ddlCategoria.Items.Insert(0, new ListItem("Sin Asignacion"));
                     ddlCategoria.SelectedIndex = 0;
                 }
-                lblFechaYHora.Text = actual.FechaYHoraCreacion.ToString();
+                lblFechaYHora.Text = incActual.FechaYHoraCreacion.ToString();
                 txtNombre.Text = cliente.Nombre;
                 txtApellido.Text = cliente.Apellido;
-                txtEstadoActual.Text = actual.EstadoActual.ToString();
-                txtDescripcion.Text = actual.Descripcion;
-                txtResolucion.Text = actual.Resolucion;
+                txtEstadoActual.Text = incActual.EstadoActual.ToString();
+                txtDescripcion.Text = incActual.Descripcion;
+                txtResolucion.Text = incActual.Resolucion;
                 txtApellido.Enabled = false;
                 txtDescripcion.Enabled = false;
                 ddlCategoria.Enabled = false;
 
-                if (actual.FechaYHoraResolucion != DateTime.MaxValue)
+                if (incActual.FechaYHoraResolucion != DateTime.MaxValue)
                 {
                     btnCargar.Text = "Reabrir";
 
@@ -91,10 +97,9 @@ namespace CallCenter
                 }
             }
         }
-
         protected void BtnCargar_Click(object sender, EventArgs e)
         {
-            AccesoIncidencias entry = new AccesoIncidencias();
+            AccesoIncidencias dataInc = new AccesoIncidencias();
             Usuario user = (Usuario)Session["usuario"];
             EmailService emailService = new EmailService();
             AccesoClientes dataCli = new AccesoClientes();
@@ -102,7 +107,7 @@ namespace CallCenter
 
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
-                Incidencia nueva = new Incidencia
+                Incidencia nuevaInc = new Incidencia
                 {
                     EstadoActual = "Pendiente",
                     IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
@@ -119,39 +124,41 @@ namespace CallCenter
                     Descripcion = txtDescripcion.Text,
                     FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                 };
-                int IDIncidencia = entry.AgregarIncidencia(nueva);
-                nueva.IdIncidencia = IDIncidencia;
-                nueva.EstadoActual = "Pendiente";
-                emailService.ArmarCorreo(txtMail.Text, "Se genero la Incidencia Numero " + IDIncidencia, "Estos son los datos: <br>" + txtDescripcion.Text);
+                int IDIncidencia = dataInc.AgregarIncidencia(nuevaInc);
+                nuevaInc.IdIncidencia = IDIncidencia;
+                nuevaInc.EstadoActual = "Pendiente";
+                emailService.ArmarCorreo(txtMail.Text, "Se genero la Incidencia Numero " + IDIncidencia, "Descripcion: <br>" + txtDescripcion.Text);
             }
             else
             {
                 if (Request.QueryString["id"] != null)
                 {
-                    Incidencia nueva = entry.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
-                    if (nueva.FechaYHoraResolucion != DateTime.MaxValue)
+                    Incidencia nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
+                    if (nuevaInc.FechaYHoraResolucion != DateTime.MaxValue)
                     {
-                        entry.ReactivarIncidencia(nueva);
-                        emailService.ArmarCorreo(txtMail.Text, "Se realizo la reactivacion de la Incidencia " + nueva.IdIncidencia + ".", "Estos son los datos: <br>" + txtDescripcion.Text);
+                        dataInc.ReactivarIncidencia(nuevaInc);
+                        emailService.ArmarCorreo(txtMail.Text, "Se realizo la reactivacion de la Incidencia " + nuevaInc.IdIncidencia + ".", "Descripcion: <br>" + txtDescripcion.Text);
                     }
                     else
                     {
-                        nueva.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
-                        nueva.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
-                        nueva.EstadoActual = txtEstadoActual.Text;
-                        nueva.Descripcion = txtDescripcion.Text;
+                        nuevaInc.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
+                        nuevaInc.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
+                        nuevaInc.EstadoActual = txtEstadoActual.Text;
+                        nuevaInc.Descripcion = txtDescripcion.Text;
+
+                        // Si Resolucion esta vacio, cierra la Incidencia
                         if (!(string.IsNullOrEmpty(txtResolucion.Text)))
                         {
-                            nueva.EstadoActual = "Cerrado";
-                            nueva.FechaYHoraResolucion = DateTime.Now;
-                            nueva.Resolucion = txtResolucion.Text;
-                            emailService.ArmarCorreo(txtMail.Text, "Se realiza el cierre de la Incidencia " + nueva.IdIncidencia, "Se detallan los motivos: <br>" + txtResolucion.Text);
+                            nuevaInc.EstadoActual = "Cerrado";
+                            nuevaInc.FechaYHoraResolucion = DateTime.Now;
+                            nuevaInc.Resolucion = txtResolucion.Text;
+                            emailService.ArmarCorreo(txtMail.Text, "Se realiza el cierre de la Incidencia " + nuevaInc.IdIncidencia, "Se detallan los motivos: <br>" + txtResolucion.Text);
                         }
                         else
                         {
-                            nueva.Resolucion = null;
+                            nuevaInc.Resolucion = null;
                         }
-                        entry.ModificarIncidencia(nueva);
+                        dataInc.ModificarIncidencia(nuevaInc);
                     }
                 }
                 else
@@ -159,7 +166,7 @@ namespace CallCenter
                     if (ValidacionesCliente())
                     {
                         AccesoUsuario dataUser = new AccesoUsuario();
-                        Cliente nuevo = new Cliente
+                        Cliente nuevoCli = new Cliente
                         {
                             Usuario = new Usuario
                             {
@@ -195,7 +202,7 @@ namespace CallCenter
                             }
                         }
 
-                        dataCli.AgregarCliente(nuevo);
+                        dataCli.AgregarCliente(nuevoCli);
                     }
 
                     Incidencia inc = new Incidencia
@@ -215,7 +222,7 @@ namespace CallCenter
                         Descripcion = txtDescripcion.Text,
                         FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                     };
-                    int IDIncidencia = entry.AgregarIncidencia(inc);
+                    int IDIncidencia = dataInc.AgregarIncidencia(inc);
                     emailService.ArmarCorreo(txtMail.Text, "Se genero la Incidencia Numero " + IDIncidencia, "Estos son los datos: <br>" + txtDescripcion.Text);
                 }
             }
@@ -233,38 +240,46 @@ namespace CallCenter
         }
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
-            AccesoIncidencias entry = new AccesoIncidencias();
+            AccesoIncidencias dataInc = new AccesoIncidencias();
             Usuario user = (Usuario)Session["usuario"];
             AccesoClientes dataCli = new AccesoClientes();;
 
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
-                Incidencia nueva = new Incidencia
+                Incidencia nuevaInc = new Incidencia
                 {
                     EstadoActual = "Pendiente",
                     IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
                 };
-                int IDIncidencia = entry.AgregarIncidencia(nueva);
-                nueva.IdIncidencia = IDIncidencia;
-                nueva.EstadoActual = "Pendiente";
+                int IDIncidencia = dataInc.AgregarIncidencia(nuevaInc);
+                nuevaInc.IdIncidencia = IDIncidencia;
+                nuevaInc.EstadoActual = "Pendiente";
             }
             else
             {
                 if (Request.QueryString["id"] != null)
                 {
-                    Incidencia nueva = entry.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
-                    if (nueva != null)
+                    Incidencia nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
+                    if (nuevaInc != null)
                     {
-                        nueva.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
-                        nueva.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
-                        nueva.EstadoActual = txtEstadoActual.Text;
-                        nueva.Descripcion = txtDescripcion.Text;
+                        nuevaInc.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
+                        nuevaInc.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
+                        nuevaInc.EstadoActual = txtEstadoActual.Text;
+                        nuevaInc.Descripcion = txtDescripcion.Text;
                     }
-                    entry.ModificarIncidencia(nueva);
+                    dataInc.ModificarIncidencia(nuevaInc);
                     Response.Redirect("Formularios.aspx");
                 }
             }
         }
+        protected void BtnActualizarCliente_Click(object sender, EventArgs e)
+        {
+            AccesoClientes dataCli = new AccesoClientes();
+            Cliente cli = dataCli.Listar().Find(x => x.DNI == txtDNI.Text);
+            var id = cli.Usuario.IdUsuario;
+            Response.Redirect("Edicion.aspx?IdUsuario=" + id);
+        }
+
         public void CargarTipo()
         {
             if (!IsPostBack)
@@ -307,9 +322,9 @@ namespace CallCenter
         }
         public void CargarDatosCliente()
         {
-            AccesoClientes datos = new AccesoClientes();
             Usuario user = ((Usuario)Session["usuario"]);
-            Cliente cli = datos.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
+            AccesoClientes dataCli = new AccesoClientes();
+            Cliente cli = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
             txtApellido.Enabled = false;
             txtResolucion.Visible = false;
             lblResolucion.Visible = false;
@@ -384,7 +399,6 @@ namespace CallCenter
             }
             return true;
         }
-
         protected void TxtMail_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
@@ -406,7 +420,6 @@ namespace CallCenter
                 }
             }
         }
-
         protected void TxtDNI_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
@@ -428,7 +441,6 @@ namespace CallCenter
                 }
             }
         }
-
         protected void TxtTelefono_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();

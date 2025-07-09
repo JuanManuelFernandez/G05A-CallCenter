@@ -8,22 +8,21 @@
             <h2>Elige una opción:</h2>
             <br />
 
-            <!-- Botones verticales -->
             <div class="d-grid gap-3">
-
-                <asp:LinkButton ID="btnMisDatos" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnDatos_Click">
-                <img src="Assets/Datos.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                Mis datos
-                </asp:LinkButton>
-
-                <asp:LinkButton ID="btnCargar" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnCargar_Click">
-                <img src="Assets/Cargar.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                Cargar Reclamo
-                </asp:LinkButton>
 
                 <asp:LinkButton ID="btnMisReclamos" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnReclamos_Click">
                 <img src="Assets/Lista.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                 Mis reclamos
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnCargar" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnCargar_Click">
+                <img src="Assets/Cargar.png" style="width: 30px; height: 30px; margin-right: 20px;" />
+                Cargar Reclamo
+                </asp:LinkButton>
+
+                <asp:LinkButton ID="btnMisDatos" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnDatos_Click">
+                <img src="Assets/Datos.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                Mis datos
                 </asp:LinkButton>
 
                 <asp:LinkButton ID="btnModificarTipos" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="BtnModificarTipos_Click">
