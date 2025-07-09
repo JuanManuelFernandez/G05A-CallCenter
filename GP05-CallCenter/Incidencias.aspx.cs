@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using Datos;
 using Dominio;
@@ -18,17 +13,15 @@ namespace CallCenter
             CargarPrioridad();
             CargarCategoria();
             Usuario user = (Usuario)Session["usuario"];
-
-            if (user.TipoUsuario == TipoUsuario.Cliente)
-            {
-                btnActualizar.Visible = false;
-            }
-
             if (Session["usuario"] == null)
             {
                 Response.Redirect("Inicio.aspx");
             }
-            else if (Request.QueryString["id"] != null)
+            if (user.TipoUsuario == TipoUsuario.Cliente)
+            {
+                btnActualizar.Visible = false;
+            }
+            if (Request.QueryString["id"] != null)
             {
                 btnCargar.Text = "Modificar";
                 btnCargar.CssClass = "btn btn-success btn-lg mx-3";
@@ -159,7 +152,6 @@ namespace CallCenter
                             nueva.Resolucion = null;
                         }
                         entry.ModificarIncidencia(nueva);
-
                     }
                 }
                 else
@@ -287,7 +279,6 @@ namespace CallCenter
                 }
                 catch (Exception er)
                 {
-
                     throw er;
                 }
             }
@@ -306,7 +297,6 @@ namespace CallCenter
                 }
                 catch (Exception er)
                 {
-
                     throw er;
                 }
             }
@@ -356,7 +346,6 @@ namespace CallCenter
                 }
                 catch (Exception er)
                 {
-
                     throw er;
                 }
             }
@@ -364,7 +353,6 @@ namespace CallCenter
         public bool ValidacionesCliente()
         {
             AccesoClientes dataCli = new AccesoClientes();
-            AccesoEmpleados dataEmp = new AccesoEmpleados();
             foreach (Cliente aux in dataCli.Listar())
             {
                 if (txtDNI.Text == aux.DNI)
@@ -397,7 +385,7 @@ namespace CallCenter
             return true;
         }
 
-        protected void txtMail_TextChanged(object sender, EventArgs e)
+        protected void TxtMail_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
             foreach (Cliente aux in dataCli.Listar())
@@ -419,7 +407,7 @@ namespace CallCenter
             }
         }
 
-        protected void txtDNI_TextChanged(object sender, EventArgs e)
+        protected void TxtDNI_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
             foreach (Cliente aux in dataCli.Listar())
@@ -441,7 +429,7 @@ namespace CallCenter
             }
         }
 
-        protected void txtTelefono_TextChanged(object sender, EventArgs e)
+        protected void TxtTelefono_TextChanged(object sender, EventArgs e)
         {
             AccesoClientes dataCli = new AccesoClientes();
             foreach (Cliente aux in dataCli.Listar())

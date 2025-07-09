@@ -1,10 +1,5 @@
 ﻿using Datos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace GP05_CallCenter
 {
@@ -35,8 +30,8 @@ namespace GP05_CallCenter
             {
                 NombreDeUsuario = "Administrador/a";
                 btnMisDatos.Text = "Cargar Empleado";
-                btnMisReclamos.Text = "Administrar Incidencias";
-                btnCargar.Text = "Administrar Usuarios";
+                btnMisReclamos.Text = "Incidencias";
+                btnCargar.Text = "Usuarios";
                 btnModificarTipos.Visible = true;
             }
         }

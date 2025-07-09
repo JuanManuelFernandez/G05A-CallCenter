@@ -13,30 +13,30 @@
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <asp:Label ID="lblNombre" runat="server" Text="Nombre Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control w-100" Enabled="false" required="required" MaxLength=50></asp:TextBox>
-
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control w-100" Enabled="false" required="required" MaxLength="50"></asp:TextBox>
             </div>
+
             <div class="col-md-3">
                 <asp:Label ID="lblApellido" runat="server" Text="Apellido Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control w-100" required="required" MaxLength=50></asp:TextBox>
+                <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control w-100" required="required" MaxLength="50"></asp:TextBox>
             </div>
         </div>
 
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <asp:Label ID="lblDni" runat="server" Text="DNI Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="txtDNI_TextChanged" AutoPostBack="true" TextMode="Number" min="1"></asp:TextBox>
+                <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="TxtDNI_TextChanged" AutoPostBack="true" TextMode="Number" min="1"></asp:TextBox>
             </div>
-            <div class="col-md-3">
 
+            <div class="col-md-3">
                 <asp:Label ID="lblMail" runat="server" Text="Email Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtMail" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="txtMail_TextChanged" AutoPostBack="true" TextMode="Email" MaxLength=100></asp:TextBox>
+                <asp:TextBox ID="txtMail" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="TxtMail_TextChanged" AutoPostBack="true" TextMode="Email" MaxLength="100"></asp:TextBox>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <asp:Label ID="lblTelefono" runat="server" Text="Telefono Cliente" CssClass="form-label fw-bold"></asp:Label>
-                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="txtTelefono_TextChanged" AutoPostBack="true" TextMode="Number" min="1" MaxLength=50></asp:TextBox>
+                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control w-100" Enabled="false" required="required" OnTextChanged="TxtTelefono_TextChanged" AutoPostBack="true" TextMode="Number" min="1" MaxLength="50"></asp:TextBox>
             </div>
             <div class="col-md-3">
                 <asp:Label ID="lblCategoria" runat="server" Text="Categoria Cliente" CssClass="form-label fw-bold"></asp:Label>
@@ -51,23 +51,23 @@
             </div>
             <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion" CssClass="form-label fw-bold text-center"> </asp:Label>
             <br />
-            <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 135px" required="required" MaxLength=500></asp:TextBox>
+            <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 135px" required="required" MaxLength="500"></asp:TextBox>
         </div>
 
-    <div class="row justify-content-center">
-        <div class="col-md-3">
-            <asp:Label ID="lblEstadoActual" runat="server" Text="Estado Actual" CssClass="form-label fw-bold"></asp:Label>
-            <br />
-            <asp:TextBox ID="txtEstadoActual" runat="server" CssClass="form-control w-100" MaxLength=250></asp:TextBox>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <asp:Label ID="lblEstadoActual" runat="server" Text="Estado Actual" CssClass="form-label fw-bold"></asp:Label>
+                <br />
+                <asp:TextBox ID="txtEstadoActual" runat="server" CssClass="form-control w-100" MaxLength="250"></asp:TextBox>
+            </div>
+            <div class="col-md-3">
+                <asp:Label ID="lblPrioridad" runat="server" Text="Prioridad" CssClass="form-label fw-bold"></asp:Label>
+                <br />
+                <asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="form-select"></asp:DropDownList>
+            </div>
+            <asp:Label ID="lblResolucion" runat="server" Text="Resolucion" CssClass="form-label fw-bold text-center mt-2"></asp:Label>
+            <asp:TextBox ID="txtResolucion" runat="server" TextMode="MultiLine" Style="width: 500px; height: 135px; resize: none;" CssClass="form-control w-50 mx-auto" MaxLength="500"></asp:TextBox>
         </div>
-        <div class="col-md-3">
-            <asp:Label ID="lblPrioridad" runat="server" Text="Prioridad" CssClass="form-label fw-bold"></asp:Label>
-            <br />
-            <asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="form-select"></asp:DropDownList>
-        </div>
-        <asp:Label ID="lblResolucion" runat="server" Text="Resolucion" CssClass="form-label fw-bold text-center mt-2"></asp:Label>
-        <asp:TextBox ID="txtResolucion" runat="server" TextMode="MultiLine" Style="width: 500px; height: 135px; resize: none;" CssClass="form-control w-50 mx-auto" MaxLength=500></asp:TextBox>
-    </div>
     </div>
     <div class="row justify-content-center mt-3">
         <section class="col-md-3 text-center" aria-labelledby="hostingTitle">
@@ -81,8 +81,8 @@
         </section>
         <section>
             <div class="text-center mt-3">
-                <asp:LinkButton ID="btnActualizar" runat="server" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnActualizar_Click" Visible ="true" Style="display: inline-flex; align-items: center;">
-                    <img src="Assets/edit.png" style="width: 30px; height: 30px; margin-right: 5px;" />Actualizar </asp:LinkButton>
+                <asp:LinkButton ID="btnActualizar" runat="server" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnActualizar_Click" Visible="true" Style="display: inline-flex; align-items: center;">
+                    <img src="Assets/edit.png" style="width: 30px; height: 30px; margin-right: 5px;" />Actualizar caso </asp:LinkButton>
             </div>
         </section>
     </div>

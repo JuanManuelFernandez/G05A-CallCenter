@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="text-center my-4">
-        <h1>Se podrán administrar los diferentes tipos de datos desde aquí:
-        </h1>
+        <h1>Administra los tipos de datos aquí:</h1>
     </div>
 
     <div class="row justify-content-center mb-4">

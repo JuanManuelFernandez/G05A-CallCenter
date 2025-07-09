@@ -2,27 +2,27 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main>
-        <h1>Lista de Incidencias Actuales:</h1>
+        <h1>Incidencias Actuales:</h1>
 
         <div class="row justify-content-center mb-4">
             <div class="col-auto">
-                <asp:Label runat="server">Buscar por: </asp:Label>
+                <asp:Label runat="server" CssClass="form-label fw-bold">Criterio: </asp:Label>
             </div>
             <div class="col-auto">
                 <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-select form-select-lg"  OnSelectedIndexChanged="DdlTipo_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
             </div>
             <div class="col-auto">
-                <asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="form-select form-select-lg" Visible ="false" OnSelectedIndexChanged="DdlPrioridad_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                <asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="form-select form-select-lg" Visible="false" OnSelectedIndexChanged="DdlPrioridad_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
             </div>
             <div class="col-auto">
-                <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control form-control-lg" placeholder="Escriba aqui..."></asp:TextBox>
+                <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control form-control-lg" Visible="false" placeholder="Escriba aqui..."></asp:TextBox>
             </div>
             <div class="col-auto">
-                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary btn-lg mx-3" OnClick="BtnBuscar_Click" />
+                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary btn-lg mx-3" Enabled="false" OnClick="BtnBuscar_Click" />
             </div>
         </div>
 
-        <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="dgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencia" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnRowCommand="DgvIncidencias_RowCommand" OnRowDataBound="DgvIncidencias_RowDataBound">
+        <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="DgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencia" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnRowCommand="DgvIncidencias_RowCommand" OnRowDataBound="DgvIncidencias_RowDataBound">
             <Columns>
                 <%--<asp:BoundField HeaderText="ID Cliente" DataField="IdCliente" />--%>
                 <asp:BoundField HeaderText="Prioridad" DataField="prioridad.Nombre" />
