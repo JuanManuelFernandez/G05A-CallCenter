@@ -70,10 +70,7 @@ namespace Dominio
         }
         public void Cerrar()
         {
-            if (lector != null)
-            {
-                lector.Close();
-            }
+            lector?.Close();
             conexion.Close();
         }
         public void SetearParametro(string columna, object dato)

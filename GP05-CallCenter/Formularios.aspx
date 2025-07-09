@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="dgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencia" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnRowCommand="dgvIncidencias_RowCommand" OnRowDataBound="dgvIncidencias_RowDataBound">
+        <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="dgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencia" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnRowCommand="DgvIncidencias_RowCommand" OnRowDataBound="DgvIncidencias_RowDataBound">
             <Columns>
                 <%--<asp:BoundField HeaderText="ID Cliente" DataField="IdCliente" />--%>
                 <asp:BoundField HeaderText="Prioridad" DataField="prioridad.Nombre" />
@@ -37,7 +37,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Asignar Empleado" Visible="false">
                     <ItemTemplate>
-                        <asp:DropDownList ID="ddlEmpleados" runat="server" CssClass="form-control form-control-rounded" OnSelectedIndexChanged="ddlEmpleados_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlEmpleados" runat="server" CssClass="form-control form-control-rounded" OnSelectedIndexChanged="DdlEmpleados_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

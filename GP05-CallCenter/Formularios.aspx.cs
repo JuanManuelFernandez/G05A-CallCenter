@@ -22,9 +22,11 @@ namespace CallCenter
                 {
                     AccesoEmpleados datosEmp = new AccesoEmpleados();
                     Empleado emp = datosEmp.BuscarPorIdUsuario(user.IdUsuario);
-                    CommandField aux = new CommandField();
-                    aux.ShowSelectButton = true;
-                    aux.SelectText = "Abrir";
+                    CommandField aux = new CommandField
+                    {
+                        ShowSelectButton = true,
+                        SelectText = "Abrir"
+                    };
                     dgvIncidencias.Columns.Add(aux);
                     Session.Add("listaCasos", datos.ListarIncidenciasEmpleado(emp.IDEmpleado));
                     dgvIncidencias.DataSource = Session["listaCasos"]; // Capturo lista en Session
@@ -40,9 +42,11 @@ namespace CallCenter
                             break;
                         }
                     }
-                    CommandField aux = new CommandField();
-                    aux.ShowSelectButton = true;
-                    aux.SelectText = "Abrir";
+                    CommandField aux = new CommandField
+                    {
+                        ShowSelectButton = true,
+                        SelectText = "Abrir"
+                    };
                     dgvIncidencias.Columns.Add(aux);
                     dgvIncidencias.DataSource = datos.Listar();
                     dgvIncidencias.DataBind();
@@ -110,12 +114,12 @@ namespace CallCenter
             };
             dgvIncidencias.Columns.Add(aux);
         }
-        protected void dgvIncidencias_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DgvIncidencias_SelectedIndexChanged(object sender, EventArgs e)
         {
             var id = dgvIncidencias.SelectedDataKey.Value.ToString();
             Response.Redirect("Incidencias.aspx?id=" + id);
         }
-        protected void dgvIncidencias_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void DgvIncidencias_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType != DataControlRowType.DataRow) return;
             AccesoEmpleados data = new AccesoEmpleados();
@@ -140,7 +144,7 @@ namespace CallCenter
                 aux.Enabled = true;
             }
         }
-        protected void ddlEmpleados_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DdlEmpleados_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList lista = (DropDownList)sender;
             GridViewRow fila = (GridViewRow)lista.NamingContainer;
@@ -152,7 +156,7 @@ namespace CallCenter
             inc.EstadoActual = "Asignado";
             data.ModificarIncidencia(inc);
         }
-        protected void dgvIncidencias_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void DgvIncidencias_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Abrir")
             {
