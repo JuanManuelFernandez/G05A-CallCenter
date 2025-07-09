@@ -36,7 +36,7 @@ namespace GP05_CallCenter
             }
         }
 
-        protected void btnDatos_Click(object sender, EventArgs e)
+        protected void BtnDatos_Click(object sender, EventArgs e)
         {
             Usuario user = (Usuario)Session["usuario"];
             if (user.TipoUsuario == TipoUsuario.Admin)
@@ -49,12 +49,12 @@ namespace GP05_CallCenter
             }
         }
 
-        protected void btnReclamos_Click(object sender, EventArgs e)
+        protected void BtnReclamos_Click(object sender, EventArgs e)
         {
             Response.Redirect("Formularios.aspx");
         }
 
-        protected void btnCargar_Click(object sender, EventArgs e)
+        protected void BtnCargar_Click(object sender, EventArgs e)
         {
             Usuario user = (Usuario)Session["usuario"];
             if (user.TipoUsuario != TipoUsuario.Admin)
@@ -67,15 +67,15 @@ namespace GP05_CallCenter
             }
         }
 
-        protected void btnModificarTipos_Click(object sender, EventArgs e)
+        protected void BtnModificarTipos_Click(object sender, EventArgs e)
         {
             Response.Redirect("EdicionDatos.aspx");
         }
-        protected void btnDarDeAltaUsuario_Click(object sender, EventArgs e)
+        protected void BtnDarDeAltaUsuario_Click(object sender, EventArgs e)
         {
             Response.Redirect("Registro.aspx");
         }
-        protected void btnIncidenciasLibres_Click(object sender, EventArgs e)
+        protected void BtnIncidenciasLibres_Click(object sender, EventArgs e)
         {
             Response.Redirect("IncidenciasLibres.aspx");
 

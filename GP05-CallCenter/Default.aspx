@@ -23,9 +23,16 @@
         <div class="row justify-content-center mt-4">
             <div class="col-md-3 text-center">
                 <div class="d-grid gap-3">
-                    <asp:Button ID="btnLogin" runat="server" Text="Inicia sesión" CssClass="btn btn-primary btn-lg" OnClick="btnLogIn_Click" />
+                    <asp:LinkButton ID="btnLogin" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnLogIn_Click">
+                    <img src="Assets/Login.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                    Inicia sesión
+                    </asp:LinkButton>
 
-                    <asp:Button ID="btnRegister" runat="server" Text="Registrate" CssClass="btn btn-primary btn-lg" OnClick="btnRegister_Click" />
+                    <asp:LinkButton ID="btnRegister" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnRegister_Click">
+                    <img src="Assets/Registrar.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                    Registrate
+                    </asp:LinkButton>
+
                 </div>
             </div>
         </div>

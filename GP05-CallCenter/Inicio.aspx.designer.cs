@@ -21,7 +21,7 @@ namespace GP05_CallCenter
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMisDatos;
+        protected global::System.Web.UI.WebControls.LinkButton btnMisDatos;
 
         /// <summary>
         /// btnCargar control.
@@ -30,7 +30,7 @@ namespace GP05_CallCenter
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCargar;
+        protected global::System.Web.UI.WebControls.LinkButton btnCargar;
 
         /// <summary>
         /// btnMisReclamos control.
@@ -39,7 +39,7 @@ namespace GP05_CallCenter
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMisReclamos;
+        protected global::System.Web.UI.WebControls.LinkButton btnMisReclamos;
 
         /// <summary>
         /// btnModificarTipos control.
@@ -48,7 +48,7 @@ namespace GP05_CallCenter
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarTipos;
+        protected global::System.Web.UI.WebControls.LinkButton btnModificarTipos;
 
         /// <summary>
         /// btnIncidenciasLibres control.

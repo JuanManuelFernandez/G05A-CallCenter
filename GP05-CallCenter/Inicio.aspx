@@ -5,25 +5,38 @@
     <div class="row justify-content-center mt-3">
         <div class="col-md-4 text-center">
             <h1 class="py-3 mb-4 bg-primary text-white display-4">Bienvenido/a <%= NombreDeUsuario %></h1>
-            <h2>Elige una opción:</h2> <br/>
+            <h2>Elige una opción:</h2>
+            <br />
 
             <!-- Botones verticales -->
             <div class="d-grid gap-3">
 
-                <asp:Button ID="btnMisDatos" runat="server" Text="Mis datos" CssClass="btn btn-primary btn-lg" OnClick="btnDatos_Click" />
+                <asp:LinkButton ID="btnMisDatos" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnDatos_Click">
+                <img src="Assets/Datos.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                Mis datos
+                </asp:LinkButton>
 
-                <asp:Button ID="btnCargar" runat="server" Text="Cargar Reclamo" CssClass="btn btn-primary btn-lg" OnClick="btnCargar_Click" />
+                <asp:LinkButton ID="btnCargar" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnCargar_Click">
+                <img src="Assets/Cargar.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                Cargar Reclamo
+                </asp:LinkButton>
 
-                <asp:Button ID="btnMisReclamos" runat="server" Text="Mis reclamos" CssClass="btn btn-primary btn-lg" OnClick="btnReclamos_Click" />
+                <asp:LinkButton ID="btnMisReclamos" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" OnClick="BtnReclamos_Click">
+                <img src="Assets/Lista.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                Mis reclamos
+                </asp:LinkButton>
 
-                <asp:Button ID="btnModificarTipos" runat="server" Text="Modificar Tipos" CssClass="btn btn-primary btn-lg" Visible="false" OnClick="btnModificarTipos_Click" />
+                <asp:LinkButton ID="btnModificarTipos" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="BtnModificarTipos_Click">
+                <img src="Assets/Lista.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                Modificar Tipos
+                </asp:LinkButton>
 
-                <asp:LinkButton ID="btnIncidenciasLibres" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="btnIncidenciasLibres_Click">
+                <asp:LinkButton ID="btnIncidenciasLibres" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="BtnIncidenciasLibres_Click">
                 <img src="Assets/InciLibres.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                 Incidencias libres
                 </asp:LinkButton>
 
-                <asp:LinkButton ID="btnRegistrarCliente" runat="server" CssClass="btn btn-success btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="btnDarDeAltaUsuario_Click">
+                <asp:LinkButton ID="btnRegistrarCliente" runat="server" CssClass="btn btn-success btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="BtnDarDeAltaUsuario_Click">
                 <img src="Assets/RegisterU.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                 Agregar usuario
                 </asp:LinkButton>
