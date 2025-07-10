@@ -2,16 +2,6 @@ GO
 USE CallCenter
 GO
 
---DELETE FROM Incidencias
---DELETE FROM PrioridadesIncidente
---DELETE FROM TiposIncidente
---DELETE FROM Empleados
---DELETE FROM Clientes
---DELETE FROM CategoriasCliente
---DELETE FROM Usuarios
-
---SELECT * FROM Incidencias
-
 INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES
 (3, 'cliente1.52dfq@silomails.com', 'clave1'),
 (3, 'cliente2@mail.com', 'clave2'),
@@ -46,9 +36,59 @@ INSERT INTO PrioridadesIncidente (Nombre, Descripcion) VALUES
 ('Baja', 'Puede esperar hasta 72h')
 
 INSERT INTO Incidencias (IDEmpleado, IDCliente, IDTipo, IDPrioridad, EstadoActual, Descripcion, FechaYHoraCreacion) VALUES
-(1, 1, 1, 1, 'Reiniciando router...', 'No puedo acceder a internet hace 4 horas.', GETDATE()),
-(2, 2, 1, 2, 'Instalando actualizacion...', 'La conexion es muy lenta. Solo hay 2 dispositivos conectados y ninguno usa Netflix.', GETDATE()),
-(3, 3, 2, 3, 'Consulta por mail a finanzas...', 'Me gustaria saber si puedo pagar por Mercadopago en vez de transferencia bancaria.', GETDATE()),
-(1, 1, 1, 1, 'Enviando tecnico...', 'No puedo acceder a internet hace 4 dias.', GETDATE()),
-(2, 2, 1, 2, 'Se trabo la actualizacion...', 'Hace ya mas de 3 horas que esta bajando la actualizacion. Esta funcionando?', GETDATE()),
-(3, 3, 2, 3, 'Consulta por mail a cobranzas...', 'Me estan cobrando por servicios que no uso. Quiero pedir la baja ya mismo!', GETDATE())
+-- Empleado 1
+(1, 1, 1, 1, 'Reiniciando router', 'No puedo acceder a internet hace 4 horas.', '2025-07-23 12:30'),
+(1, 1, 1, 1, 'Enviando tecnico', 'No puedo acceder a internet hace 4 dias.', '2025-07-26 8:30'),
+(1, 1, 1, 1, 'Esperando respuesta del cliente', 'La señal del Wi-Fi se corta cada 10 minutos.', '2025-07-25 10:15'),
+(1, 1, 1, 2, 'Configurando nuevo router', 'Se daño el router anterior durante una tormenta.', '2025-07-26 09:00'),
+(1, 1, 2, 1, 'Derivado a soporte técnico', 'No funciona el servicio de TV. Pantalla negra.', '2025-07-27 11:30'),
+(1, 1, 2, 3, 'Consultando condiciones del contrato', 'Quiero saber si puedo cambiar de plan sin penalidad.', '2025-07-28 16:00'),
+-- Empleado 2
+(2, 2, 1, 2, 'Instalando actualizacion', 'La conexion es muy lenta. Solo hay 2 dispositivos conectados y ninguno usa Netflix.', '2025-07-23 14:30'),
+(2, 2, 1, 2, 'Se trabo la actualizacion', 'Hace ya mas de 3 horas que esta bajando la actualizacion. Esta funcionando?', '2025-07-23 12:30'),
+(2, 2, 1, 2, 'Revisando cobertura', 'El internet es intermitente desde anoche.', '2025-07-25 08:45'),
+(2, 2, 1, 1, 'Reseteando conexión', 'No tengo acceso a internet ni por cable ni Wi-Fi.', '2025-07-26 13:10'),
+(2, 2, 2, 3, 'Escalado a segundo nivel', 'No puedo grabar programas en el decodificador.', '2025-07-27 15:20'),
+(2, 2, 2, 2, 'Esperando documentación', 'Estoy intentando dar de baja el servicio pero no recibo respuesta.', '2025-07-28 17:40'),
+-- Empleado 3
+(3, 3, 2, 3, 'Consulta por mail a finanzas', 'Puedo pagar por Mercadopago en vez de transferencia bancaria?', '2025-07-23 18:30'),
+(3, 3, 2, 3, 'Consulta por mail a cobranzas', 'Me estan cobrando por servicios que no uso. Quiero pedir la baja ya mismo!', '2025-07-23 9:30'),
+(3, 3, 2, 2, 'Realizando pruebas remotas', 'No se escucha audio en ciertos canales.', '2025-07-25 11:20'),
+(3, 3, 2, 1, 'En espera de confirmación del cliente', 'Quiero pasar de plan básico a plan plus.', '2025-07-26 14:55'),
+(3, 3, 1, 2, 'Revisión programada', 'Internet se desconecta cada vez que llueve.', '2025-07-27 10:40'),
+(3, 3, 2, 3, 'Contactando al área de facturación', 'Me llegó una factura con doble cargo por el mismo mes.', '2025-07-28 09:15')
+
+INSERT INTO Plantillas (Nombre, Descripcion) VALUES
+('Caso inactivo', 'Hola, como estas?' +CHAR(13)+CHAR(13)+
+'Hace un tiempo que no tenemos novedades de vos. Tuviste tiempo para ver nuestros anteriores mensajes sobre este caso?' +CHAR(13)+
+'Recorda que siempre estamos aca para ayudarte.'  +CHAR(13)+CHAR(13)+
+'Muchas gracias,'  +CHAR(13)+
+'Soporte UTN'),
+('Completar datos', 'Hola, como estas?' +CHAR(13)+
+'Para facilitar la gestion de este caso, por favor danos la siguiente informacion:' +CHAR(13)+
+'DNI: ' +CHAR(13)+
+'Nombre y Apellido: ' +CHAR(13)+
+'Telefono: ' + CHAR(13) +
+'Direccion: '  +CHAR(13)+CHAR(13)+
+'Muchas gracias,'  +CHAR(13)+
+'Soporte UTN'),
+('Derivaciones', 'Gracias por contactarte con nosotros.' +CHAR(13)+CHAR(13)+
+'Vamos a enviar tu caso a un Ingeniero de Soporte, quien se pondra pronto en contacto para ayudarte con tus inconvenientes.' +CHAR(13)+CHAR(13)+
+'Muchas gracias,' +CHAR(13)+
+'Soporte UTN')
+
+--DELETE FROM Incidencias
+--DELETE FROM PrioridadesIncidente
+--DELETE FROM TiposIncidente
+--DELETE FROM Empleados
+--DELETE FROM Clientes
+--DELETE FROM CategoriasCliente
+--DELETE FROM Usuarios
+
+SELECT * FROM Plantillas
+
+SELECT P.IDPlantilla, P.Nombre, P.Descripcion FROM Plantillas P WHERE IDPlantilla = 2
+--SELECT U.IDUsuario, E.Nombre, E.Apellido, U.Email, U.Reporte, U.Eliminado FROM Usuarios U INNER JOIN Empleados E ON E.IDUsuario = U.IDUsuario WHERE TipoUsuario = 2
+
+--SELECT Tabla1.Columna1, Tabla2.Columna2 FROM Tabla1 AS T1
+--INNER JOIN Tabla2 AS T2 ON Tabla1.ID = Tabla2.ID

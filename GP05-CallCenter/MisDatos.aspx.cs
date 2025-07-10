@@ -1,10 +1,5 @@
 ﻿using Datos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace GP05_CallCenter
 {
@@ -55,7 +50,7 @@ namespace GP05_CallCenter
         {
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
-                AccesoClientes data = new AccesoClientes();
+                AccesoClientes dataCli = new AccesoClientes();
                 AccesoUsuario dataUser = new AccesoUsuario();
                 AccesoEmpleados dataEmp = new AccesoEmpleados();
 
@@ -72,21 +67,20 @@ namespace GP05_CallCenter
                     lblRegistro.Text = "Ya existe un usuario con ese Email...";
                     return;
                 }
-                else if (data.Listar().Find(x => x.Telefono == txtTelefono.Text && x.Usuario.IdUsuario != ((Usuario)Session["usuario"]).IdUsuario) != null)
+                else if (dataCli.Listar().Find(x => x.Telefono == txtTelefono.Text && x.Usuario.IdUsuario != ((Usuario)Session["usuario"]).IdUsuario) != null)
                 {
                     lblRegistro.Visible = true;
                     lblRegistro.Text = "Ya existe un usuario con ese Telefono...";
                     return;
                 }
-                cliente = data.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
+                cliente = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
                 cliente.Usuario.Email = txtEmail.Text;
                 cliente.Telefono = txtTelefono.Text;
-                data.ModificarCliente(cliente);
+                dataCli.ModificarCliente(cliente);
                 Session.Clear();
                 Response.Redirect("Inicio.aspx");
             }
         }
-
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Inicio.aspx");

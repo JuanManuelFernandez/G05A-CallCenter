@@ -12,6 +12,7 @@
         public TipoUsuario TipoUsuario { get; set; }
         public string Email { get; set; }
         public string Clave { get; set; }
+        public bool Reporte { get; set; }
         public bool Eliminado {  get; set; }
 
         public Usuario(int tipo, string email, string clave)

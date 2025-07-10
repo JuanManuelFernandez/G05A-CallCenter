@@ -35,6 +35,11 @@
                 Incidencias libres
                 </asp:LinkButton>
 
+                <asp:LinkButton ID="btnDiarios" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="BtnDiarios_Click">
+                <img src="Assets/Diarios.png" style="width: 30px; height: 30px; margin-right: 10px;" />
+                Diarios
+                </asp:LinkButton>
+
                 <asp:LinkButton ID="btnRegistrarCliente" runat="server" CssClass="btn btn-success btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="BtnDarDeAltaUsuario_Click">
                 <img src="Assets/RegisterU.png" style="width: 30px; height: 30px; margin-right: 10px;" />
                 Agregar usuario

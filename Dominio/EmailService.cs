@@ -8,7 +8,6 @@ namespace Dominio
     {
         private MailMessage email;
         private SmtpClient server;
-
         public EmailService()
         {
             server = new SmtpClient
@@ -19,7 +18,6 @@ namespace Dominio
                 Host = "smtp.gmail.com"
             };
         }
-
         public void ArmarCorreo(string emailDestino, string asunto, string cuerpo)
         {
             email = new MailMessage
@@ -31,7 +29,6 @@ namespace Dominio
             email.IsBodyHtml = true;
             email.Body = cuerpo; 
         }
-
         public void EnviarEmail()
         {
             try

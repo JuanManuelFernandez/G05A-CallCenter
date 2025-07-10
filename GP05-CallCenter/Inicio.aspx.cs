@@ -15,6 +15,7 @@ namespace GP05_CallCenter
             AccesoClientes data = new AccesoClientes();
             AccesoEmpleados dataEmp = new AccesoEmpleados();
             Usuario user = (Usuario)Session["usuario"];
+            // Empleado
             if (user.TipoUsuario == TipoUsuario.Empleado)
             {
                 NombreDeUsuario = dataEmp.BuscarPorIdUsuario(user.IdUsuario).Nombre;
@@ -22,10 +23,12 @@ namespace GP05_CallCenter
                 btnRegistrarCliente.Visible = true;
                 btnIncidenciasLibres.Visible = true;
             }
+            // Cliente
             else if (user.TipoUsuario == TipoUsuario.Cliente)
             {
                 NombreDeUsuario = (data.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).Nombre;
             }
+            // Admin
             else
             {
                 NombreDeUsuario = "Administrador/a";
@@ -33,9 +36,9 @@ namespace GP05_CallCenter
                 btnMisReclamos.Text = "Incidencias";
                 btnCargar.Text = "Usuarios";
                 btnModificarTipos.Visible = true;
+                btnDiarios.Visible = true;
             }
         }
-
         protected void BtnDatos_Click(object sender, EventArgs e)
         {
             Usuario user = (Usuario)Session["usuario"];
@@ -48,12 +51,10 @@ namespace GP05_CallCenter
                 Response.Redirect("MisDatos.aspx");
             }
         }
-
         protected void BtnReclamos_Click(object sender, EventArgs e)
         {
             Response.Redirect("Formularios.aspx");
         }
-
         protected void BtnCargar_Click(object sender, EventArgs e)
         {
             Usuario user = (Usuario)Session["usuario"];
@@ -66,7 +67,6 @@ namespace GP05_CallCenter
                 Response.Redirect("Admin.aspx");
             }
         }
-
         protected void BtnModificarTipos_Click(object sender, EventArgs e)
         {
             Response.Redirect("EdicionDatos.aspx");
@@ -75,6 +75,12 @@ namespace GP05_CallCenter
         {
             Response.Redirect("Registro.aspx");
         }
+        
+        protected void BtnDiarios_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Diarios.aspx");
+        }
+
         protected void BtnIncidenciasLibres_Click(object sender, EventArgs e)
         {
             Response.Redirect("IncidenciasLibres.aspx");

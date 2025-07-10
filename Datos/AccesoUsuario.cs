@@ -42,7 +42,7 @@ namespace Datos
             }
             return usuarios;
         }
-        public List<Usuario> ListarAdmin()
+        public List<Usuario> ListarUsuarios()
         {
             usuarios = new List<Usuario>();
             datos = new AccesoDatos();
@@ -50,6 +50,40 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("SELECT IDUsuario, TipoUsuario, Email, Clave, Eliminado FROM Usuarios WHERE TipoUsuario !=" + (int)TipoUsuario.Admin);
+                datos.Leer();
+                while (datos.Lector.Read())
+                {
+                    Usuario aux = new Usuario
+                    {
+                        IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
+                        TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
+                        Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                        Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
+                        Eliminado = datos.Lector["Eliminado"] != DBNull.Value && (bool)datos.Lector["Eliminado"],
+                    };
+
+                    usuarios.Add(aux);
+                }
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+            finally
+            {
+                datos.Cerrar();
+            }
+            return usuarios;
+        }
+
+        public List<Usuario> ListarEmpleados()
+        {
+            usuarios = new List<Usuario>();
+            datos = new AccesoDatos();
+            try
+            {
+                datos.Conectar();
+                datos.Consultar("SELECT IDUsuario, TipoUsuario, Email, Clave, Eliminado FROM Usuarios WHERE TipoUsuario ==" + 3);
                 datos.Leer();
                 while (datos.Lector.Read())
                 {

@@ -118,6 +118,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Cuenta.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Diarios.aspx" />
     <Content Include="Edicion.aspx" />
     <Content Include="EdicionDatos.aspx" />
     <Content Include="Error.aspx" />
@@ -230,6 +231,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Diarios.aspx.cs">
+      <DependentUpon>Diarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Diarios.aspx.designer.cs">
+      <DependentUpon>Diarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Edicion.aspx.cs">
       <DependentUpon>Edicion.aspx</DependentUpon>

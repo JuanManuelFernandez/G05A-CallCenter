@@ -32,7 +32,7 @@
 
                 <div class="mb-4">
                     <asp:Label ID="lblCategoria" runat="server" Text="Categoría" CssClass="form-label" />
-                    <asp:DropDownList ID="ddlCategoria" runat="server" CssC ass="form-control form-control-rounded" AutoPostBack="false"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control form-control-rounded" AutoPostBack="false"></asp:DropDownList>
                 </div>
 
                 <div class="d-grid gap-3 mb-3">

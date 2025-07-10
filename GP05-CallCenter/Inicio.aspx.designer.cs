@@ -60,6 +60,15 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.LinkButton btnIncidenciasLibres;
 
         /// <summary>
+        /// btnDiarios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnDiarios;
+
+        /// <summary>
         /// btnRegistrarCliente control.
         /// </summary>
         /// <remarks>

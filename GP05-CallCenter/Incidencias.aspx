@@ -52,6 +52,13 @@
             <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion" CssClass="form-label fw-bold text-center"> </asp:Label>
             <br />
             <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" CssClass="form-control w-50 mx-auto mb-2" Style="resize: none; height: 135px" required="required" MaxLength="500"></asp:TextBox>
+            <asp:Label ID="lblPlantillas" runat="server" Text="Seleccionar plantilla:" CssClass="form-label fw-bold text-center" />
+
+            <div class="row justify-content-center col-md-3">
+                <asp:Label ID="Label1" runat="server" Text="Seleccionar plantilla:" CssClass="form-label fw-bold" />
+                <asp:DropDownList ID="ddlPlantillas" runat="server" CssClass="form-select"></asp:DropDownList>
+                <asp:Button ID="btnAplicarPlantilla" runat="server" Text="Aplicar Plantilla" CssClass="btn btn-primary" OnClick="BtnAplicarPlantilla_Click" />
+            </div>
         </div>
 
         <div class="row justify-content-center">

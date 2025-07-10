@@ -13,7 +13,7 @@ namespace GP05_CallCenter
                 if (user.TipoUsuario == TipoUsuario.Admin)
                 {
                     AccesoUsuario datos = new AccesoUsuario();
-                    dgvUsuarios.DataSource = datos.ListarAdmin();
+                    dgvUsuarios.DataSource = datos.ListarUsuarios();
                     dgvUsuarios.DataBind();
                     return;
                 }
@@ -21,9 +21,9 @@ namespace GP05_CallCenter
             Response.Redirect("Inicio.aspx");
         }
 
-        protected void dgvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DgvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var id = dgvUsuarios.SelectedDataKey.Value.ToString();
+            string id = dgvUsuarios.SelectedDataKey.Value.ToString();
             Response.Redirect("Edicion.aspx?IdUsuario=" + id);
         }
     }

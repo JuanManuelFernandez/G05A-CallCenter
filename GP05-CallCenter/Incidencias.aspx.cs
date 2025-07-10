@@ -12,6 +12,7 @@ namespace CallCenter
             CargarTipo();
             CargarPrioridad();
             CargarCategoria();
+            CargarPlantilla();
             Usuario user = (Usuario)Session["usuario"];
             if (Session["usuario"] == null)
             {
@@ -26,7 +27,7 @@ namespace CallCenter
 
             }
             // Cuando recibo URL de caso ya existente
-            if (Request.QueryString["id"] != null) 
+            if (Request.QueryString["id"] != null)
             {
                 btnCargar.Text = "Modificar";
                 btnCargar.CssClass = "btn btn-success btn-lg mx-3";
@@ -242,7 +243,7 @@ namespace CallCenter
         {
             AccesoIncidencias dataInc = new AccesoIncidencias();
             Usuario user = (Usuario)Session["usuario"];
-            AccesoClientes dataCli = new AccesoClientes();;
+            AccesoClientes dataCli = new AccesoClientes(); ;
 
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
@@ -365,6 +366,43 @@ namespace CallCenter
                 }
             }
         }
+        public void CargarPlantilla()
+        {
+            if (!IsPostBack)
+            {
+                AccesoPlantillas datos = new AccesoPlantillas();
+                try
+                {
+                    ddlPlantillas.DataSource = datos.Listar();
+                    ddlPlantillas.DataValueField = "IDPlantilla";
+                    ddlPlantillas.DataTextField = "Nombre";
+                    ddlPlantillas.DataBind();
+                }
+                catch (Exception er)
+                {
+                    throw er;
+                }
+            }
+        }
+        protected void BtnAplicarPlantilla_Click(object sender, EventArgs e)
+        {
+            if (ddlPlantillas.SelectedItem.Text == "Caso inactivo")
+            {
+                AccesoPlantillas data = new AccesoPlantillas();
+                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
+            }
+            else if (ddlPlantillas.SelectedItem.Text == "Completar datos")
+            {
+                AccesoPlantillas data = new AccesoPlantillas();
+                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
+            }
+            else if (ddlPlantillas.SelectedItem.Text == "Derivaciones")
+            {
+                AccesoPlantillas data = new AccesoPlantillas();
+                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
+            }
+        }
+
         public bool ValidacionesCliente()
         {
             AccesoClientes dataCli = new AccesoClientes();
