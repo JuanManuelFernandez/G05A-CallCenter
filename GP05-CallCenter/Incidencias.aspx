@@ -105,7 +105,9 @@
             </div>
         </section>
     </div>
+
     <div class="text-center mt-1">
-        <asp:Label ID="lblRegistro" runat="server" Text="" Visible="false" ForeColor="Red" />
+        <asp:Label ID="lblError" runat="server" Text="" Visible="false" ForeColor="Red" />
     </div>
+
 </asp:Content>

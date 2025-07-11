@@ -138,8 +138,8 @@ namespace CallCenter
                 };
                 if (string.IsNullOrEmpty(txtDescripcion.Text))
                 {
-                    lblRegistro.Text = "La descripcion no puede estar vacia.";
-                    lblRegistro.Visible = true;
+                    lblError.Text = "La descripcion no puede estar vacia.";
+                    lblError.Visible = true;
                     return;
                 }
                 int IDIncidencia = dataInc.AgregarIncidencia(nuevaInc);
@@ -179,8 +179,8 @@ namespace CallCenter
                         }
                         if (string.IsNullOrEmpty(txtEstadoActual.Text))
                         {
-                            lblRegistro.Text = "El estado no puede estar vacio.";
-                            lblRegistro.Visible = true;
+                            lblError.Text = "El estado no puede estar vacio.";
+                            lblError.Visible = true;
                             return;
                         }
                         dataInc.ModificarIncidencia(nuevaInc);
@@ -212,8 +212,8 @@ namespace CallCenter
                         {
                             if (usuario.Email == txtMail.Text && usuario.TipoUsuario != TipoUsuario.Cliente)
                             {
-                                lblRegistro.Text = "El mail ya se encuentra registrado...";
-                                lblRegistro.Visible = true;
+                                lblError.Text = "El mail ya se encuentra registrado...";
+                                lblError.Visible = true;
                                 return;
                             }
                         }
@@ -221,8 +221,8 @@ namespace CallCenter
                         {
                             if (emp.DNI == txtDNI.Text)
                             {
-                                lblRegistro.Text = "El DNI ya se encuentra registrado...";
-                                lblRegistro.Visible = true;
+                                lblError.Text = "El DNI ya se encuentra registrado...";
+                                lblError.Visible = true;
                                 return;
                             }
                         }
@@ -249,14 +249,14 @@ namespace CallCenter
                     };
                     if (string.IsNullOrEmpty(txtDescripcion.Text))
                     {
-                        lblRegistro.Text = "La descripcion no puede estar vacia.";
-                        lblRegistro.Visible = true;
+                        lblError.Text = "La descripcion no puede estar vacia.";
+                        lblError.Visible = true;
                         return;
                     }
                     if (string.IsNullOrEmpty(txtEstadoActual.Text))
                     {
-                        lblRegistro.Text = "El estado no puede estar vacio.";
-                        lblRegistro.Visible = true;
+                        lblError.Text = "El estado no puede estar vacio.";
+                        lblError.Visible = true;
                         return;
                     }
                     int IDIncidencia = dataInc.AgregarIncidencia(inc);
@@ -340,8 +340,8 @@ namespace CallCenter
                 }
                 if (string.IsNullOrEmpty(txtEstadoActual.Text))
                 {
-                    lblRegistro.Text = "El estado no puede estar vacio.";
-                    lblRegistro.Visible = true;
+                    lblError.Text = "El estado no puede estar vacio.";
+                    lblError.Visible = true;
                     return;
                 }
                 dataInc.ModificarIncidencia(nuevaInc);

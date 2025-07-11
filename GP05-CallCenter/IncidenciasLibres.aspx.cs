@@ -33,7 +33,7 @@ namespace GP05_CallCenter
             }
         }
 
-        protected void dgvIncidenciasLibres_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void DgvIncidenciasLibres_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Tomar")
             {
@@ -48,9 +48,9 @@ namespace GP05_CallCenter
                     int IDEmpleado = emp.ObtenerIDEmpleadoLogueado(user.IdUsuario);
 
                     AccesoIncidencias datos = new AccesoIncidencias();
-                    bool success = datos.AsignarIncidencia(IDIncidencia, IDEmpleado);
+                    bool pudoAsignarse = datos.AsignarIncidencia(IDIncidencia, IDEmpleado);
 
-                    if (success)
+                    if (pudoAsignarse)
                     {
                         Response.Redirect("incidenciasLibres.aspx");
                     }

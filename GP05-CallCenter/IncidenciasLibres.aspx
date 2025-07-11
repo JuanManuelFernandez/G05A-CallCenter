@@ -6,7 +6,7 @@
             <h1>Incidencias libres</h1>
         </div>
 
-        <asp:GridView ID="dgvIncidenciasLibres" runat="server" class="table table-bordered" AutoGenerateColumns="False" OnRowCommand="dgvIncidenciasLibres_RowCommand" DataKeyNames="IDIncidencia">
+        <asp:GridView ID="dgvIncidenciasLibres" runat="server" class="table table-bordered" AutoGenerateColumns="False" OnRowCommand="DgvIncidenciasLibres_RowCommand" DataKeyNames="IDIncidencia">
             <Columns>
                 <asp:BoundField DataField="IDIncidencia" HeaderText="ID" />
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
