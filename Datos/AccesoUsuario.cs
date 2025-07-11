@@ -83,7 +83,7 @@ namespace Datos
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT IDUsuario, TipoUsuario, Email, Clave, Eliminado FROM Usuarios WHERE TipoUsuario ==" + 3);
+                datos.Consultar("SELECT IDUsuario, TipoUsuario, Email, Clave, Eliminado FROM Usuarios WHERE TipoUsuario = " + 2);
                 datos.Leer();
                 while (datos.Lector.Read())
                 {

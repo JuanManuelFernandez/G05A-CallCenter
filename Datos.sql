@@ -3,10 +3,10 @@ USE CallCenter
 GO
 
 INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES
-(3, 'cliente1.52dfq@silomails.com', 'clave1'),
+(3, 'cliente1.52dfq@silomails.com', 'clave1'), -- Mail de prueba
 (3, 'cliente2@mail.com', 'clave2'),
 (3, 'cliente3@mail.com', 'clave3'),
-(2, 'empleado1@mail.com', 'clave1'),
+(2, 'empleado1.nw9m0@silomails.com', 'clave1'), -- Mail de prueba
 (2, 'empleado2@mail.com', 'clave2'),
 (2, 'empleado3@mail.com', 'clave3'),
 (1, 'admin@mail.com', 'clave1')
@@ -64,13 +64,13 @@ INSERT INTO Plantillas (Nombre, Descripcion) VALUES
 'Recorda que siempre estamos aca para ayudarte.'  +CHAR(13)+CHAR(13)+
 'Muchas gracias,'  +CHAR(13)+
 'Soporte UTN'),
-('Completar datos', 'Hola, como estas?' +CHAR(13)+
-'Para facilitar la gestion de este caso, por favor danos la siguiente informacion:' +CHAR(13)+
-'DNI: ' +CHAR(13)+
-'Nombre y Apellido: ' +CHAR(13)+
-'Telefono: ' + CHAR(13) +
-'Direccion: '  +CHAR(13)+CHAR(13)+
-'Muchas gracias,'  +CHAR(13)+
+('Completar datos', 'Hola, como estas?' +CHAR(10)+CHAR(10)+
+'Para facilitar la gestion de este caso, por favor completa la siguiente informacion:' +CHAR(10)+
+'DNI: ' +CHAR(10)+
+'Nombre y Apellido: ' +CHAR(10)+
+'Telefono: ' +CHAR(10)+
+'Direccion: '  +CHAR(10)+CHAR(10)+
+'Muchas gracias,'  +CHAR(10)+
 'Soporte UTN'),
 ('Derivaciones', 'Gracias por contactarte con nosotros.' +CHAR(13)+CHAR(13)+
 'Vamos a enviar tu caso a un Ingeniero de Soporte, quien se pondra pronto en contacto para ayudarte con tus inconvenientes.' +CHAR(13)+CHAR(13)+
@@ -84,11 +84,6 @@ INSERT INTO Plantillas (Nombre, Descripcion) VALUES
 --DELETE FROM Clientes
 --DELETE FROM CategoriasCliente
 --DELETE FROM Usuarios
+--DELETE FROM Plantillas
 
-SELECT * FROM Plantillas
-
-SELECT P.IDPlantilla, P.Nombre, P.Descripcion FROM Plantillas P WHERE IDPlantilla = 2
---SELECT U.IDUsuario, E.Nombre, E.Apellido, U.Email, U.Reporte, U.Eliminado FROM Usuarios U INNER JOIN Empleados E ON E.IDUsuario = U.IDUsuario WHERE TipoUsuario = 2
-
---SELECT Tabla1.Columna1, Tabla2.Columna2 FROM Tabla1 AS T1
---INNER JOIN Tabla2 AS T2 ON Tabla1.ID = Tabla2.ID
+--SELECT * FROM Plantillas

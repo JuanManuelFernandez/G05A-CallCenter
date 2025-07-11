@@ -4,12 +4,19 @@
 
     <main>
         <h1>Reportes</h1>
-        <h2>Selecciona los empleados que recibiran reportes mensuales sobre sus casos:</h2>
-        <asp:GridView ID="dgvEmpleados" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnSelectedIndexChanged="DgvEmpleados_SelectedIndexChanged" DataKeyNames="IdUsuario">
+        <h2>Selecciona los empleados que recibiran los reportes mensuales:</h2>
+        <asp:GridView ID="dgvEmpleados" runat="server" class="table table-bordered" AutoGenerateColumns="false" DataKeyNames="IdUsuario">
             <Columns>
                 <asp:BoundField HeaderText="Email" DataField="Email" />
                 <asp:BoundField HeaderText="Eliminado" DataField="Eliminado" />
-                <asp:CommandField ShowSelectButton="true" SelectText="Editar" />
+
+                <asp:TemplateField HeaderText="Enviar">
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkEnviar" runat="server"
+                            Checked='<%# Convert.ToBoolean(Eval("Reporte")) %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
             </Columns>
         </asp:GridView>
     </main>
