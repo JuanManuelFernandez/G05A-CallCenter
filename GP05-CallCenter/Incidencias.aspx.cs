@@ -95,7 +95,7 @@ namespace CallCenter
                 txtDescripcion.Text = incActual.Descripcion;
                 txtResolucion.Text = incActual.Resolucion;
                 txtApellido.Enabled = false;
-                txtDescripcion.Enabled = false;
+                txtDescripcion.Enabled = true;
                 ddlCategoria.Enabled = false;
 
                 if (incActual.FechaYHoraResolucion != DateTime.MaxValue)

@@ -247,11 +247,12 @@ namespace Datos
             try
             {
                 datos.Conectar();
-                datos.Consultar("UPDATE Incidencias SET IDEmpleado = @IDEmpleado, IDTipo = @IDTipo, IDPrioridad = @IDPrioridad, EstadoActual = @EstadoActual, FechaYHoraResolucion = @FechaYHoraResolucion, Resolucion = @Resolucion WHERE IDIncidencia = @IDIncidencia");
+                datos.Consultar("UPDATE Incidencias SET IDEmpleado = @IDEmpleado, IDTipo = @IDTipo, IDPrioridad = @IDPrioridad, Descripcion = @Descripcion, EstadoActual = @EstadoActual, FechaYHoraResolucion = @FechaYHoraResolucion, Resolucion = @Resolucion WHERE IDIncidencia = @IDIncidencia");
                 if (nueva.IdEmpleado != 0) datos.SetearParametro("@IDEmpleado", nueva.IdEmpleado);
                 else datos.SetearParametro("@IDEmpleado", DBNull.Value);
                     datos.SetearParametro("@IDTipo", nueva.Tipo.IDTipo);
                 datos.SetearParametro("@IDPrioridad", nueva.Prioridad.IDPrioridad);
+                datos.SetearParametro("@Descripcion", nueva.Descripcion);
                 datos.SetearParametro("@EstadoActual", nueva.EstadoActual);
                 if (!(string.IsNullOrEmpty(nueva.Resolucion)))
                 {
