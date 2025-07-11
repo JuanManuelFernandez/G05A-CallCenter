@@ -125,10 +125,23 @@ namespace CallCenter
                     Descripcion = txtDescripcion.Text,
                     FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                 };
+                if (string.IsNullOrEmpty(txtDescripcion.Text))
+                {
+                    lblRegistro.Text = "La descripcion no puede estar vacia.";
+                    lblRegistro.Visible = true;
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtEstadoActual.Text))
+                {
+                    lblRegistro.Text = "El estado no puede estar vacio.";
+                    lblRegistro.Visible = true;
+                    return;
+                }
                 int IDIncidencia = dataInc.AgregarIncidencia(nuevaInc);
                 nuevaInc.IdIncidencia = IDIncidencia;
                 nuevaInc.EstadoActual = "Pendiente";
-                emailService.ArmarCorreo(txtMail.Text, "Se genero la Incidencia Numero " + IDIncidencia, "Descripcion: <br>" + txtDescripcion.Text);
+                emailService.ArmarCorreo(txtMail.Text, "Creacion de Incidencia #" + IDIncidencia, "Descripcion: <br>" + txtDescripcion.Text);
+
             }
             else
             {
@@ -138,7 +151,7 @@ namespace CallCenter
                     if (nuevaInc.FechaYHoraResolucion != DateTime.MaxValue)
                     {
                         dataInc.ReactivarIncidencia(nuevaInc);
-                        emailService.ArmarCorreo(txtMail.Text, "Se realizo la reactivacion de la Incidencia " + nuevaInc.IdIncidencia + ".", "Descripcion: <br>" + txtDescripcion.Text);
+                        emailService.ArmarCorreo(txtMail.Text, "Reactivacion de Incidencia #" + nuevaInc.IdIncidencia + ".", "Descripcion: <br>" + txtDescripcion.Text);
                     }
                     else
                     {
@@ -153,11 +166,17 @@ namespace CallCenter
                             nuevaInc.EstadoActual = "Cerrado";
                             nuevaInc.FechaYHoraResolucion = DateTime.Now;
                             nuevaInc.Resolucion = txtResolucion.Text;
-                            emailService.ArmarCorreo(txtMail.Text, "Se realiza el cierre de la Incidencia " + nuevaInc.IdIncidencia, "Se detallan los motivos: <br>" + txtResolucion.Text);
+                            emailService.ArmarCorreo(txtMail.Text, "Cierre de Incidencia #" + nuevaInc.IdIncidencia, "Motivos: <br>" + txtResolucion.Text);
                         }
                         else
                         {
                             nuevaInc.Resolucion = null;
+                        }
+                        if (string.IsNullOrEmpty(txtEstadoActual.Text))
+                        {
+                            lblRegistro.Text = "El estado no puede estar vacio.";
+                            lblRegistro.Visible = true;
+                            return;
                         }
                         dataInc.ModificarIncidencia(nuevaInc);
                     }
@@ -210,7 +229,7 @@ namespace CallCenter
                     {
                         IdCliente = (dataCli.Listar().Find(x => x.DNI == txtDNI.Text)).IdCliente,
                         IdEmpleado = (dataEmp.listar().Find(x => x.IDUsuario == user.IdUsuario)).IDEmpleado,
-
+                        EstadoActual = txtEstadoActual.Text,
                         tipo = new TiposIncidente
                         {
                             IDTipo = int.Parse(ddlTipo.SelectedValue)
@@ -223,8 +242,20 @@ namespace CallCenter
                         Descripcion = txtDescripcion.Text,
                         FechaYHoraCreacion = DateTime.Parse(lblFechaYHora.Text)
                     };
+                    if (string.IsNullOrEmpty(txtDescripcion.Text))
+                    {
+                        lblRegistro.Text = "La descripcion no puede estar vacia.";
+                        lblRegistro.Visible = true;
+                        return;
+                    }
+                    if (string.IsNullOrEmpty(txtEstadoActual.Text))
+                    {
+                        lblRegistro.Text = "El estado no puede estar vacio.";
+                        lblRegistro.Visible = true;
+                        return;
+                    }
                     int IDIncidencia = dataInc.AgregarIncidencia(inc);
-                    emailService.ArmarCorreo(txtMail.Text, "Se genero la Incidencia Numero " + IDIncidencia, "Estos son los datos: <br>" + txtDescripcion.Text);
+                    emailService.ArmarCorreo(txtMail.Text, "Creacion de Incidencia #" + IDIncidencia, "Descripcion: <br>" + txtDescripcion.Text);
                 }
             }
 
@@ -252,6 +283,18 @@ namespace CallCenter
                     EstadoActual = "Pendiente",
                     IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
                 };
+                if (string.IsNullOrEmpty(txtDescripcion.Text))
+                {
+                    lblRegistro.Text = "La descripcion no puede estar vacia.";
+                    lblRegistro.Visible = true;
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtEstadoActual.Text))
+                {
+                    lblRegistro.Text = "El estado no puede estar vacio.";
+                    lblRegistro.Visible = true;
+                    return;
+                }
                 int IDIncidencia = dataInc.AgregarIncidencia(nuevaInc);
                 nuevaInc.IdIncidencia = IDIncidencia;
                 nuevaInc.EstadoActual = "Pendiente";
@@ -268,6 +311,12 @@ namespace CallCenter
                         nuevaInc.EstadoActual = txtEstadoActual.Text;
                         nuevaInc.Descripcion = txtDescripcion.Text;
                     }
+                    if (string.IsNullOrEmpty(txtEstadoActual.Text))
+                    {
+                        lblRegistro.Text = "El estado no puede estar vacio.";
+                        lblRegistro.Visible = true;
+                        return;
+                    }
                     dataInc.ModificarIncidencia(nuevaInc);
                     Response.Redirect("Formularios.aspx");
                 }
@@ -280,7 +329,6 @@ namespace CallCenter
             var id = cli.Usuario.IdUsuario;
             Response.Redirect("Edicion.aspx?IdUsuario=" + id);
         }
-
         public void CargarTipo()
         {
             if (!IsPostBack)
