@@ -57,7 +57,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <asp:Label ID="Label1" runat="server" Text="Seleccionar plantilla:" CssClass="form-label fw-bold d-block mb-2" />
+                    <asp:Label ID="lblPlantilla" runat="server" Text="Seleccionar plantilla:" CssClass="form-label fw-bold d-block mb-2" />
                     <div class="d-flex align-items-center gap-2">
                         <asp:DropDownList ID="ddlPlantillas" runat="server" CssClass="form-select w-75"></asp:DropDownList>
                         <asp:Button ID="btnAplicarPlantilla" runat="server" Text="Aplicar" CssClass="btn btn-primary" OnClick="BtnAplicarPlantilla_Click" />

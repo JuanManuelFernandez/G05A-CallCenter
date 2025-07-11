@@ -26,14 +26,14 @@ namespace Datos
                         IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
                         IdCliente = (int)datos.Lector["IDCliente"],
 
-                        tipo = new TiposIncidente
+                        Tipo = new TiposIncidente
                         {
                             IDTipo = (int)datos.Lector["IDTipo"],
                             Nombre = (string)datos.Lector["NombreTipo"],
                             Descripcion = (string)datos.Lector["DescripcionTipo"]
                         },
 
-                        prioridad = new PrioridadesIncidente
+                        Prioridad = new PrioridadesIncidente
                         {
                             IDPrioridad = (int)datos.Lector["IDPrioridad"],
                             Nombre = (string)datos.Lector["NombrePriori"],
@@ -75,14 +75,14 @@ namespace Datos
                     aux.IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0;
                     aux.IdCliente = (int)datos.Lector["IDCliente"];
 
-                    aux.tipo = new TiposIncidente
+                    aux.Tipo = new TiposIncidente
                     {
                         IDTipo = (int)datos.Lector["IDTipo"],
                         Nombre = (string)datos.Lector["NombreTipo"],
                         Descripcion = (string)datos.Lector["DescripcionTipo"]
                     };
 
-                    aux.prioridad = new PrioridadesIncidente
+                    aux.Prioridad = new PrioridadesIncidente
                     {
                         IDPrioridad = (int)datos.Lector["IDPrioridad"],
                         Nombre = (string)datos.Lector["NombrePriori"],
@@ -123,14 +123,14 @@ namespace Datos
                         IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
                         IdCliente = (int)datos.Lector["IDCliente"],
 
-                        tipo = new TiposIncidente
+                        Tipo = new TiposIncidente
                         {
                             IDTipo = (int)datos.Lector["IDTipo"],
                             Nombre = (string)datos.Lector["NombreTipo"],
                             Descripcion = (string)datos.Lector["DescripcionTipo"]
                         },
 
-                        prioridad = new PrioridadesIncidente
+                        Prioridad = new PrioridadesIncidente
                         {
                             IDPrioridad = (int)datos.Lector["IDPrioridad"],
                             Nombre = (string)datos.Lector["NombrePriori"],
@@ -175,14 +175,14 @@ namespace Datos
                         IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
                         IdCliente = (int)datos.Lector["IDCliente"],
 
-                        tipo = new TiposIncidente
+                        Tipo = new TiposIncidente
                         {
                             IDTipo = (int)datos.Lector["IDTipo"],
                             Nombre = (string)datos.Lector["NombreTipo"],
                             Descripcion = (string)datos.Lector["DescripcionTipo"]
                         },
 
-                        prioridad = new PrioridadesIncidente
+                        Prioridad = new PrioridadesIncidente
                         {
                             IDPrioridad = (int)datos.Lector["IDPrioridad"],
                             Nombre = (string)datos.Lector["NombrePriori"],
@@ -221,8 +221,8 @@ namespace Datos
                 if (nueva.IdEmpleado == 0) datos.SetearParametro("@IDEMPLEADO", DBNull.Value);
                 else datos.SetearParametro("@IDEMPLEADO", nueva.IdEmpleado);
                 datos.SetearParametro("@IDCLIENTE", nueva.IdCliente);
-                datos.SetearParametro("@IDTIPO", nueva.tipo.IDTipo);
-                datos.SetearParametro("@IDPRIORIDAD", nueva.prioridad.IDPrioridad);
+                datos.SetearParametro("@IDTIPO", nueva.Tipo.IDTipo);
+                datos.SetearParametro("@IDPRIORIDAD", nueva.Prioridad.IDPrioridad);
                 datos.SetearParametro("@ESTADOACTUAL", nueva.EstadoActual);
                 datos.SetearParametro("@DESCRIPCION", nueva.Descripcion);
                 datos.SetearParametro("@FECHAYHORACREACION", nueva.FechaYHoraCreacion);
@@ -250,8 +250,8 @@ namespace Datos
                 datos.Consultar("UPDATE Incidencias SET IDEmpleado = @IDEmpleado, IDTipo = @IDTipo, IDPrioridad = @IDPrioridad, EstadoActual = @EstadoActual, FechaYHoraResolucion = @FechaYHoraResolucion, Resolucion = @Resolucion WHERE IDIncidencia = @IDIncidencia");
                 if (nueva.IdEmpleado != 0) datos.SetearParametro("@IDEmpleado", nueva.IdEmpleado);
                 else datos.SetearParametro("@IDEmpleado", DBNull.Value);
-                    datos.SetearParametro("@IDTipo", nueva.tipo.IDTipo);
-                datos.SetearParametro("@IDPrioridad", nueva.prioridad.IDPrioridad);
+                    datos.SetearParametro("@IDTipo", nueva.Tipo.IDTipo);
+                datos.SetearParametro("@IDPrioridad", nueva.Prioridad.IDPrioridad);
                 datos.SetearParametro("@EstadoActual", nueva.EstadoActual);
                 if (!(string.IsNullOrEmpty(nueva.Resolucion)))
                 {

@@ -53,7 +53,7 @@ namespace GP05_CallCenter
                         if (inc.IdEmpleado == emp.IDEmpleado)
                         {
                             // Calculo de Estadisticas...
-                            switch (inc.prioridad.IDPrioridad)
+                            switch (inc.Prioridad.IDPrioridad)
                             {
                                 case 1: alta++; break;
                                 case 2: media++; break;

@@ -111,7 +111,7 @@ namespace CallCenter
             }
             else
             {
-                List<Incidencia> listaFiltrada = lista.FindAll(x => x.prioridad.Nombre == ddlPrioridad.SelectedValue);
+                List<Incidencia> listaFiltrada = lista.FindAll(x => x.Prioridad.Nombre == ddlPrioridad.SelectedValue);
                 dgvIncidencias.DataSource = listaFiltrada;
             }
             dgvIncidencias.DataBind();

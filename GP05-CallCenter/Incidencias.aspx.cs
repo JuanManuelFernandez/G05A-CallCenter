@@ -22,6 +22,10 @@ namespace CallCenter
             // Cliente
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
+                lblPlantilla.Visible = false;
+                ddlPlantillas.Visible = false;
+                btnAplicarPlantilla.Visible = false;
+
                 btnActualizar.Visible = false;
                 btnActualizarCliente.Visible = false;
 
@@ -69,8 +73,8 @@ namespace CallCenter
                 txtDNI.Text = cliente.DNI.ToString();
                 txtMail.Text = cliente.Usuario.Email;
                 txtTelefono.Text = cliente.Telefono.ToString();
-                ddlTipo.SelectedValue = incActual.tipo.IDTipo.ToString();
-                ddlPrioridad.SelectedValue = incActual.prioridad.IDPrioridad.ToString();
+                ddlTipo.SelectedValue = incActual.Tipo.IDTipo.ToString();
+                ddlPrioridad.SelectedValue = incActual.Prioridad.IDPrioridad.ToString();
                 if (cliente.Categoria.IDCategoria != 0) ddlCategoria.SelectedValue = cliente.Categoria.IDCategoria.ToString();
                 else
                 {
@@ -113,12 +117,12 @@ namespace CallCenter
                     EstadoActual = "Pendiente",
                     IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
 
-                    tipo = new TiposIncidente
+                    Tipo = new TiposIncidente
                     {
                         IDTipo = int.Parse(ddlTipo.SelectedValue)
                     },
 
-                    prioridad = new PrioridadesIncidente
+                    Prioridad = new PrioridadesIncidente
                     {
                         IDPrioridad = int.Parse(ddlPrioridad.SelectedValue)
                     },
@@ -155,8 +159,8 @@ namespace CallCenter
                     }
                     else
                     {
-                        nuevaInc.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
-                        nuevaInc.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
+                        nuevaInc.Tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
+                        nuevaInc.Prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
                         nuevaInc.EstadoActual = txtEstadoActual.Text;
                         nuevaInc.Descripcion = txtDescripcion.Text;
 
@@ -230,12 +234,12 @@ namespace CallCenter
                         IdCliente = (dataCli.Listar().Find(x => x.DNI == txtDNI.Text)).IdCliente,
                         IdEmpleado = (dataEmp.listar().Find(x => x.IDUsuario == user.IdUsuario)).IDEmpleado,
                         EstadoActual = txtEstadoActual.Text,
-                        tipo = new TiposIncidente
+                        Tipo = new TiposIncidente
                         {
                             IDTipo = int.Parse(ddlTipo.SelectedValue)
                         },
 
-                        prioridad = new PrioridadesIncidente
+                        Prioridad = new PrioridadesIncidente
                         {
                             IDPrioridad = int.Parse(ddlPrioridad.SelectedValue)
                         },
@@ -306,8 +310,8 @@ namespace CallCenter
                     Incidencia nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
                     if (nuevaInc != null)
                     {
-                        nuevaInc.tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
-                        nuevaInc.prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
+                        nuevaInc.Tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
+                        nuevaInc.Prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
                         nuevaInc.EstadoActual = txtEstadoActual.Text;
                         nuevaInc.Descripcion = txtDescripcion.Text;
                     }
