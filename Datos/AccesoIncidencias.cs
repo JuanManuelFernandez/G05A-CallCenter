@@ -308,7 +308,7 @@ namespace Datos
             try
             {
                 datos.Conectar();
-                datos.Consultar("UPDATE Incidencias SET IDEmpleado = @IDEmpleado WHERE IDIncidencia = @IDIncidencia");
+                datos.Consultar("UPDATE Incidencias SET IDEmpleado = @IDEmpleado, EstadoActual = 'Asignada' WHERE IDIncidencia = @IDIncidencia");
                 datos.SetearParametro("@IDEmpleado", IDEmpleado);
                 datos.SetearParametro("@IDIncidencia", IDIncidencia);
                 datos.EjecutarNonQuery();

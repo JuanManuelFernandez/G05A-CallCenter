@@ -54,10 +54,6 @@ namespace GP05_CallCenter
                     {
                         Response.Redirect("incidenciasLibres.aspx");
                     }
-                    else
-                    {
-                        Response.Write("<script>alert('Error al asignar la incidencia.');</script>");
-                    }
                 }
             }
         }
