@@ -36,6 +36,13 @@ namespace CallCenter
                 btnCargar.Text = "Modificar";
                 btnCargar.CssClass = "btn btn-success btn-lg mx-3";
                 CargarIncidencia();
+                // Deshabilito Plantillas
+                if (txtDescripcion.Enabled == false)
+                {
+                    lblPlantilla.Visible = false;
+                    ddlPlantillas.Visible = false;
+                    btnAplicarPlantilla.Visible = false;
+                }
                 return;
             }
             // Empleado

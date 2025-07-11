@@ -24,10 +24,8 @@
             </div>
         </div>
 
-
         <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="DgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencia" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnRowCommand="DgvIncidencias_RowCommand" OnRowDataBound="DgvIncidencias_RowDataBound">
             <Columns>
-                <%--<asp:BoundField HeaderText="ID Cliente" DataField="IdCliente" />--%>
                 <asp:BoundField HeaderText="Prioridad" DataField="prioridad.Nombre" />
                 <asp:BoundField HeaderText="Estado Actual" DataField="EstadoActual" />
                 <asp:BoundField HeaderText="Fecha/Hora Creacion" DataField="FechaYHoraCreacion" />
