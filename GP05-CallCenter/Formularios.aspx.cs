@@ -64,8 +64,6 @@ namespace CallCenter
                     dgvIncidencias.DataSource = Session["listaCasos"]; // Capturo lista en Session
                     AgregarDGVCliente();
                     dgvIncidencias.DataBind();
-
-
                 }
                 ddlTipo.Items.Add("Seleccionar...");
                 ddlTipo.Items.Add("Prioridad");

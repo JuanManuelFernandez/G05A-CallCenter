@@ -30,7 +30,7 @@ namespace CallCenter
                 }
                 else if(user.TipoUsuario == TipoUsuario.Empleado)
                 {
-                    TituloH1 = "¡Bienbenido Empleado/a!";
+                    TituloH1 = "¡Bienvenido Empleado/a!";
                     ParrafoP = "Aqui puedes registrar a un cliente como usuario en el caso de que no lo este";
                 }
                 else
@@ -45,7 +45,6 @@ namespace CallCenter
             if(user.TipoUsuario == TipoUsuario.Empleado)
             {
                 CargarCliente();
-                Response.Redirect("inicio.aspx");
             }
             else if (Session["usuario"] != null)
             {
@@ -75,7 +74,13 @@ namespace CallCenter
                 nuevoCliente.Usuario.Email = email.Text;
                 nuevoCliente.Usuario.Clave = clave.Text;
             }
-
+            if(nuevoCliente.Usuario.Clave.Length < 8)
+            {
+                lblRegistro.Visible = true;
+                lblRegistro.Text = "La clave debe tener mínimo 8 caracteres...";
+                lblRegistro.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
             if (nuevoCliente.Telefono.Length < 8 || nuevoCliente.Telefono.Length > 15)
             {
                 lblRegistro.Visible = true;
@@ -121,6 +126,10 @@ namespace CallCenter
                 {
                     Session.Add("usuario", (Usuario)accesoUsuario.Listar().Find(x => x.Email == nuevoCliente.Usuario.Email));
                     Response.Redirect("Inicio.aspx", false);
+                }
+                if(user.TipoUsuario == TipoUsuario.Empleado)
+                {
+                    Response.Redirect("inicio.aspx");
                 }
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@ INSERT INTO Usuarios (TipoUsuario, Email, Clave) VALUES
 (3, 'cliente3@mail.com', 'clave3'),
 (2, 'empleado1.nw9m0@silomails.com', 'clave1'), -- Mail de prueba
 (2, 'empleado2@mail.com', 'clave2'),
-(2, 'empleado3@mail.com', 'clave3'),
+(2, 'fernandezbogojuanmanuel@gmail.com', 'clave3'),
 (1, 'admin@mail.com', 'clave1')
 
 INSERT INTO CategoriasCliente (Nombre, Descripcion) VALUES
@@ -70,6 +70,7 @@ INSERT INTO Plantillas (Nombre, Descripcion) VALUES
 'Nombre y Apellido: ' +CHAR(10)+
 'Telefono: ' +CHAR(10)+
 'Direccion: '  +CHAR(10)+CHAR(10)+
+'envia la información solicitada a este mail: utncallcenter@gmail.com' + CHAR(10) +
 'Muchas gracias,'  +CHAR(10)+
 'Soporte UTN'),
 ('Derivaciones', 'Gracias por contactarte con nosotros.' +CHAR(13)+CHAR(13)+
