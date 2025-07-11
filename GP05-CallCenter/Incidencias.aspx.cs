@@ -135,12 +135,6 @@ namespace CallCenter
                     lblRegistro.Visible = true;
                     return;
                 }
-                if (string.IsNullOrEmpty(txtEstadoActual.Text))
-                {
-                    lblRegistro.Text = "El estado no puede estar vacio.";
-                    lblRegistro.Visible = true;
-                    return;
-                }
                 int IDIncidencia = dataInc.AgregarIncidencia(nuevaInc);
                 nuevaInc.IdIncidencia = IDIncidencia;
                 nuevaInc.EstadoActual = "Pendiente";
@@ -279,19 +273,63 @@ namespace CallCenter
             AccesoIncidencias dataInc = new AccesoIncidencias();
             Usuario user = (Usuario)Session["usuario"];
             AccesoClientes dataCli = new AccesoClientes(); ;
+            
+            //BORRAR?
 
-            if (user.TipoUsuario == TipoUsuario.Cliente)
+            //if (user.TipoUsuario == TipoUsuario.Cliente)
+            //{
+            //    Incidencia nuevaInc = new Incidencia
+            //    {
+            //        EstadoActual = "Pendiente",
+            //        IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
+            //    };
+            //    if (string.IsNullOrEmpty(txtDescripcion.Text))
+            //    {
+            //        lblRegistro.Text = "La descripcion no puede estar vacia.";
+            //        lblRegistro.Visible = true;
+            //        return;
+            //    }
+            //    if (string.IsNullOrEmpty(txtEstadoActual.Text))
+            //    {
+            //        lblRegistro.Text = "El estado no puede estar vacio.";
+            //        lblRegistro.Visible = true;
+            //        return;
+            //    }
+            //    int IDIncidencia = dataInc.AgregarIncidencia(nuevaInc);
+            //    nuevaInc.IdIncidencia = IDIncidencia;
+            //    nuevaInc.EstadoActual = "Pendiente";
+            //}
+            //else
+            //{
+            //    if (Request.QueryString["id"] != null)
+            //    {
+            //        Incidencia nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
+            //        if (nuevaInc != null)
+            //        {
+            //            nuevaInc.Tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
+            //            nuevaInc.Prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
+            //            nuevaInc.EstadoActual = txtEstadoActual.Text;
+            //            nuevaInc.Descripcion = txtDescripcion.Text;
+            //        }
+            //        if (string.IsNullOrEmpty(txtEstadoActual.Text))
+            //        {
+            //            lblRegistro.Text = "El estado no puede estar vacio.";
+            //            lblRegistro.Visible = true;
+            //            return;
+            //        }
+            //        dataInc.ModificarIncidencia(nuevaInc);
+            //        Response.Redirect("Formularios.aspx");
+            //    }
+            //}
+            if (Request.QueryString["id"] != null)
             {
-                Incidencia nuevaInc = new Incidencia
+                Incidencia nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
+                if (nuevaInc != null)
                 {
-                    EstadoActual = "Pendiente",
-                    IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
-                };
-                if (string.IsNullOrEmpty(txtDescripcion.Text))
-                {
-                    lblRegistro.Text = "La descripcion no puede estar vacia.";
-                    lblRegistro.Visible = true;
-                    return;
+                    nuevaInc.Tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
+                    nuevaInc.Prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
+                    nuevaInc.EstadoActual = txtEstadoActual.Text;
+                    nuevaInc.Descripcion = txtDescripcion.Text;
                 }
                 if (string.IsNullOrEmpty(txtEstadoActual.Text))
                 {
@@ -299,31 +337,8 @@ namespace CallCenter
                     lblRegistro.Visible = true;
                     return;
                 }
-                int IDIncidencia = dataInc.AgregarIncidencia(nuevaInc);
-                nuevaInc.IdIncidencia = IDIncidencia;
-                nuevaInc.EstadoActual = "Pendiente";
-            }
-            else
-            {
-                if (Request.QueryString["id"] != null)
-                {
-                    Incidencia nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
-                    if (nuevaInc != null)
-                    {
-                        nuevaInc.Tipo.IDTipo = int.Parse(ddlTipo.SelectedValue);
-                        nuevaInc.Prioridad.IDPrioridad = int.Parse(ddlPrioridad.SelectedValue);
-                        nuevaInc.EstadoActual = txtEstadoActual.Text;
-                        nuevaInc.Descripcion = txtDescripcion.Text;
-                    }
-                    if (string.IsNullOrEmpty(txtEstadoActual.Text))
-                    {
-                        lblRegistro.Text = "El estado no puede estar vacio.";
-                        lblRegistro.Visible = true;
-                        return;
-                    }
-                    dataInc.ModificarIncidencia(nuevaInc);
-                    Response.Redirect("Formularios.aspx");
-                }
+                dataInc.ModificarIncidencia(nuevaInc);
+                Response.Redirect("Formularios.aspx");
             }
         }
         protected void BtnActualizarCliente_Click(object sender, EventArgs e)

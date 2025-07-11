@@ -79,7 +79,7 @@ CREATE TABLE Plantillas (
 )
 
 --DROP TABLE X
---SELECT * FROM Usuarios
---SELECT * FROM Clientes
---SELECT * FROM Incidencias
---SELECT * FROM Empleados
+SELECT * FROM Usuarios
+SELECT * FROM Clientes
+SELECT * FROM Incidencias
+SELECT * FROM Empleados
