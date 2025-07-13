@@ -96,8 +96,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.aspx" />
-    <Content Include="Admin.aspx" />
+    <Content Include="about.aspx" />
+    <Content Include="admin.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -116,22 +116,22 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Cuenta.aspx" />
-    <Content Include="Default.aspx" />
-    <Content Include="Diarios.aspx" />
-    <Content Include="Edicion.aspx" />
-    <Content Include="EdicionDatos.aspx" />
-    <Content Include="Error.aspx" />
+    <Content Include="cuenta.aspx" />
+    <Content Include="landing.aspx" />
+    <Content Include="diarios.aspx" />
+    <Content Include="editarcuenta.aspx" />
+    <Content Include="editardatos.aspx" />
+    <Content Include="error.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="Formularios.aspx" />
+    <Content Include="reclamos.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Historial.aspx" />
-    <Content Include="Incidencias.aspx" />
-    <Content Include="IncidenciasLibres.aspx" />
-    <Content Include="Inicio.aspx" />
-    <Content Include="LogIn.aspx" />
-    <Content Include="MisDatos.aspx" />
-    <Content Include="Registro.aspx" />
+    <Content Include="historial.aspx" />
+    <Content Include="incidencia.aspx" />
+    <Content Include="incidenciaslibres.aspx" />
+    <Content Include="inicio.aspx" />
+    <Content Include="login.aspx" />
+    <Content Include="misdatos.aspx" />
+    <Content Include="registro.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -195,20 +195,20 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.aspx.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="admin.aspx.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin.aspx.designer.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="admin.aspx.designer.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
+    <Compile Include="about.aspx.cs">
+      <DependentUpon>about.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
+    <Compile Include="about.aspx.designer.cs">
+      <DependentUpon>about.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Contact.aspx.cs">
@@ -218,107 +218,107 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Cuenta.aspx.cs">
-      <DependentUpon>Cuenta.aspx</DependentUpon>
+    <Compile Include="cuenta.aspx.cs">
+      <DependentUpon>cuenta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Cuenta.aspx.designer.cs">
-      <DependentUpon>Cuenta.aspx</DependentUpon>
+    <Compile Include="cuenta.aspx.designer.cs">
+      <DependentUpon>cuenta.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="landing.aspx.cs">
+      <DependentUpon>landing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="landing.aspx.designer.cs">
+      <DependentUpon>landing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Diarios.aspx.cs">
-      <DependentUpon>Diarios.aspx</DependentUpon>
+    <Compile Include="diarios.aspx.cs">
+      <DependentUpon>diarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Diarios.aspx.designer.cs">
-      <DependentUpon>Diarios.aspx</DependentUpon>
+    <Compile Include="diarios.aspx.designer.cs">
+      <DependentUpon>diarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Edicion.aspx.cs">
-      <DependentUpon>Edicion.aspx</DependentUpon>
+    <Compile Include="editarcuenta.aspx.cs">
+      <DependentUpon>editarcuenta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Edicion.aspx.designer.cs">
-      <DependentUpon>Edicion.aspx</DependentUpon>
+    <Compile Include="editarcuenta.aspx.designer.cs">
+      <DependentUpon>editarcuenta.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EdicionDatos.aspx.cs">
-      <DependentUpon>EdicionDatos.aspx</DependentUpon>
+    <Compile Include="editardatos.aspx.cs">
+      <DependentUpon>editardatos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EdicionDatos.aspx.designer.cs">
-      <DependentUpon>EdicionDatos.aspx</DependentUpon>
+    <Compile Include="editardatos.aspx.designer.cs">
+      <DependentUpon>editardatos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Error.aspx.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
+    <Compile Include="error.aspx.cs">
+      <DependentUpon>error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Error.aspx.designer.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
+    <Compile Include="error.aspx.designer.cs">
+      <DependentUpon>error.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Formularios.aspx.cs">
-      <DependentUpon>Formularios.aspx</DependentUpon>
+    <Compile Include="reclamos.aspx.cs">
+      <DependentUpon>reclamos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Formularios.aspx.designer.cs">
-      <DependentUpon>Formularios.aspx</DependentUpon>
+    <Compile Include="reclamos.aspx.designer.cs">
+      <DependentUpon>reclamos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Historial.aspx.cs">
-      <DependentUpon>Historial.aspx</DependentUpon>
+    <Compile Include="historial.aspx.cs">
+      <DependentUpon>historial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Historial.aspx.designer.cs">
-      <DependentUpon>Historial.aspx</DependentUpon>
+    <Compile Include="historial.aspx.designer.cs">
+      <DependentUpon>historial.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Incidencias.aspx.cs">
-      <DependentUpon>Incidencias.aspx</DependentUpon>
+    <Compile Include="incidencia.aspx.cs">
+      <DependentUpon>incidencia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Incidencias.aspx.designer.cs">
-      <DependentUpon>Incidencias.aspx</DependentUpon>
+    <Compile Include="incidencia.aspx.designer.cs">
+      <DependentUpon>incidencia.aspx</DependentUpon>
     </Compile>
-    <Compile Include="IncidenciasLibres.aspx.cs">
-      <DependentUpon>IncidenciasLibres.aspx</DependentUpon>
+    <Compile Include="incidenciaslibres.aspx.cs">
+      <DependentUpon>incidenciaslibres.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="IncidenciasLibres.aspx.designer.cs">
-      <DependentUpon>IncidenciasLibres.aspx</DependentUpon>
+    <Compile Include="incidenciaslibres.aspx.designer.cs">
+      <DependentUpon>incidenciaslibres.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Inicio.aspx.cs">
-      <DependentUpon>Inicio.aspx</DependentUpon>
+    <Compile Include="inicio.aspx.cs">
+      <DependentUpon>inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Inicio.aspx.designer.cs">
-      <DependentUpon>Inicio.aspx</DependentUpon>
+    <Compile Include="inicio.aspx.designer.cs">
+      <DependentUpon>inicio.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LogIn.aspx.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LogIn.aspx.designer.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MisDatos.aspx.cs">
-      <DependentUpon>MisDatos.aspx</DependentUpon>
+    <Compile Include="misdatos.aspx.cs">
+      <DependentUpon>misdatos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MisDatos.aspx.designer.cs">
-      <DependentUpon>MisDatos.aspx</DependentUpon>
+    <Compile Include="misdatos.aspx.designer.cs">
+      <DependentUpon>misdatos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registro.aspx.cs">
-      <DependentUpon>Registro.aspx</DependentUpon>
+    <Compile Include="registro.aspx.cs">
+      <DependentUpon>registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Registro.aspx.designer.cs">
-      <DependentUpon>Registro.aspx</DependentUpon>
+    <Compile Include="registro.aspx.designer.cs">
+      <DependentUpon>registro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

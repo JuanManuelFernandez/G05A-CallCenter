@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Formularios.aspx.cs" Inherits="CallCenter.Formularios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="reclamos.aspx.cs" Inherits="CallCenter.Reclamos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main>
-        <h1>Incidencias Actuales:</h1>
+        <h1>incidencia Actuales:</h1>
 
         <div class="row mb-4">
             <div class="col">
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="DgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencia" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnRowCommand="DgvIncidencias_RowCommand" OnRowDataBound="DgvIncidencias_RowDataBound">
+        <asp:GridView ID="dgvIncidencias" OnSelectedIndexChanged="DgvIncidencias_SelectedIndexChanged" DataKeyNames="IdIncidencias" runat="server" class="table table-bordered" AutoGenerateColumns="false" OnRowCommand="DgvIncidencias_RowCommand" OnRowDataBound="DgvIncidencias_RowDataBound">
             <Columns>
                 <asp:BoundField HeaderText="Prioridad" DataField="prioridad.Nombre" />
                 <asp:BoundField HeaderText="Estado Actual" DataField="EstadoActual" />

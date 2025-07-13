@@ -3,13 +3,12 @@ using System.Web.UI.WebControls;
 using Datos;
 using Dominio;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public partial class Diarios : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (Session["usuario"] != null)
             {
                 Usuario user = (Usuario)Session["usuario"];
@@ -24,9 +23,7 @@ namespace GP05_CallCenter
                     return;
                 }
             }
-            Response.Redirect("Inicio.aspx");
-
-
+            Response.Redirect("inicio.aspx");
         }
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
@@ -48,23 +45,23 @@ namespace GP05_CallCenter
                     int idUsuario = Convert.ToInt32(dgvEmpleados.DataKeys[row.RowIndex].Value);
                     Usuario usr = datosUsr.BuscarUsuarioPorId(idUsuario); // Acceso a Email
                     Empleado emp = datosEmp.BuscarPorIdUsuario(idUsuario);
-                    foreach (Incidencia inc in datosInc.Listar())
+                    foreach (Incidencias inc in datosInc.Listar())
                     {
-                        if (inc.IdEmpleado == emp.IDEmpleado)
+                        if (inc.IdEmpleado == emp.IdEmpleado)
                         {
                             // Calculo de Estadisticas...
-                            switch (inc.Prioridad.IDPrioridad)
+                            switch (inc.Prioridad.IdPrioridad)
                             {
                                 case 1: alta++; break;
                                 case 2: media++; break;
                                 case 3: baja++; break;
                             }
 
-                            // Incidencia 1 - Fecha - Esatdo actual - Descripcion
-                            // Incidencia 2 - Fecha - Esatdo actual - Descripcion
-                            // Incidencia N...
+                            // Incidencias 1 - Fecha - Esatdo actual - Descripcion
+                            // Incidencias 2 - Fecha - Esatdo actual - Descripcion
+                            // Incidencias N...
                             emailBody +=
-                                "<h1>Incidencia #" + inc.IdIncidencia + ":</h1>" +
+                                "<h1>Incidencias #" + inc.IdIncidencia + ":</h1>" +
                                 "<b>Fecha/hora creacion:</b> " + inc.FechaYHoraCreacion + "<br><br>" +
                                 "<b>Estado actual:</b>  <br>" +
                                 inc.EstadoActual + "<br><br>" +
@@ -72,7 +69,6 @@ namespace GP05_CallCenter
                                 inc.Descripcion + "<br><br>";
                         }
                     }
-
                     // Cargo Estadisticas al final del mail
                     emailBody +=
                         "<hr>" +
@@ -81,16 +77,16 @@ namespace GP05_CallCenter
                         $"<strong>Alta:</strong> {alta}<br>" +
                         $"<strong>Media:</strong> {media}<br>" +
                         $"<strong>Baja:</strong> {baja}<br>" +
-                        $"<h3>Total: {alta+media+baja} </h3>";
+                        $"<h3>Total: {alta + media + baja} </h3>";
 
-                    // Armo el email aca...
+                    // Armo el email...
                     emailService.ArmarCorreo
                     (
                         usr.Email,
-                        "Reporte Mensual de Incidencias - Empleado #" + emp.IDEmpleado,
+                        "Reporte Mensual de incidencia - Empleado #" + emp.IdEmpleado,
                         emailBody
                     );
-                    // Y lo mando
+                    // ...y lo envio
                     try
                     {
                         emailService.EnviarEmail();
@@ -98,10 +94,10 @@ namespace GP05_CallCenter
                     catch (Exception ex)
                     {
                         Session.Add("error", ex);
-                        Response.Redirect("Error.aspx");
+                        Response.Redirect("error.aspx");
                     }
 
-                    Response.Redirect("Inicio.aspx");
+                    Response.Redirect("inicio.aspx");
                 }
             }
 

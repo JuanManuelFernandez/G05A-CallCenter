@@ -1,7 +1,7 @@
 ﻿using Datos;
 using System;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public partial class Admin : System.Web.UI.Page
     {
@@ -18,13 +18,13 @@ namespace GP05_CallCenter
                     return;
                 }
             }
-            Response.Redirect("Inicio.aspx");
+            Response.Redirect("inicio.aspx");
         }
 
         protected void DgvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
         {
             string id = dgvUsuarios.SelectedDataKey.Value.ToString();
-            Response.Redirect("Edicion.aspx?IdUsuario=" + id);
+            Response.Redirect("editarcuenta.aspx?IdUsuario=" + id);
         }
     }
 }

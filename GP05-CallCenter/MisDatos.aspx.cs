@@ -1,9 +1,9 @@
 ﻿using Datos;
 using System;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
-    public partial class MisDatos : System.Web.UI.Page
+    public partial class Misdatos : System.Web.UI.Page
     {
         private Usuario user;
         private Cliente cliente;
@@ -14,7 +14,7 @@ namespace GP05_CallCenter
             if (Session["usuario"] == null)
             {
                 Session.Add("error", "Debes loguearte para ver esta pagina");
-                Response.Redirect("Error.aspx");
+                Response.Redirect("error.aspx");
             }
             user = (Usuario)Session["usuario"];
             if (!IsPostBack)
@@ -24,7 +24,7 @@ namespace GP05_CallCenter
                     AccesoClientes data = new AccesoClientes();
                     cliente = data.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
                     txtEmail.Text = cliente.Usuario.Email;
-                    txtDNI.Text = cliente.DNI.ToString();
+                    txtDNI.Text = cliente.Dni.ToString();
                     txtNombre.Text = cliente.Nombre;
                     txtApellido.Text = cliente.Apellido;
                     txtTelefono.Text = cliente.Telefono;
@@ -38,7 +38,7 @@ namespace GP05_CallCenter
                     AccesoEmpleados data = new AccesoEmpleados();
                     empleado = data.BuscarPorIdUsuario(user.IdUsuario);
                     txtEmail.Text = user.Email;
-                    txtDNI.Text = empleado.DNI.ToString();
+                    txtDNI.Text = empleado.Dni.ToString();
                     txtNombre.Text = empleado.Nombre;
                     txtApellido.Text = empleado.Apellido;
                     txtTelefono.Text = empleado.Legajo;
@@ -78,12 +78,12 @@ namespace GP05_CallCenter
                 cliente.Telefono = txtTelefono.Text;
                 dataCli.ModificarCliente(cliente);
                 Session.Clear();
-                Response.Redirect("Inicio.aspx");
+                Response.Redirect("inicio.aspx");
             }
         }
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Inicio.aspx");
+            Response.Redirect("inicio.aspx");
         }
     }
 }

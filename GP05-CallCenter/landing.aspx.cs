@@ -4,7 +4,7 @@ using System.Web.UI;
 
 namespace CallCenter
 {
-    public partial class _Default : Page
+    public partial class Default : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -13,25 +13,25 @@ namespace CallCenter
                 Usuario user = (Usuario)Session["usuario"];
                 if (user.TipoUsuario == TipoUsuario.Admin)
                 {
-                    Response.Redirect("Inicio.aspx");
+                    Response.Redirect("inicio.aspx");
                 }
                 else if (user.TipoUsuario == TipoUsuario.Empleado)
                 {
-                    Response.Redirect("Inicio.aspx");
+                    Response.Redirect("inicio.aspx");
                 }
                 else
                 {
-                    Response.Redirect("Inicio.aspx");
+                    Response.Redirect("inicio.aspx");
                 }
             }
         }
         protected void BtnRegister_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Registro.aspx");
+            Response.Redirect("registro.aspx");
         }
         protected void BtnLogIn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("LogIn.aspx");
+            Response.Redirect("login.aspx");
         }
     }
 }

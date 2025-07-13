@@ -2,7 +2,7 @@
 {
     public class PrioridadesIncidente
     {
-        public int IDPrioridad { get; set; }
+        public int IdPrioridad { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
     }

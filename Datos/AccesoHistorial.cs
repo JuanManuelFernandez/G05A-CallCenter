@@ -40,13 +40,13 @@ namespace Datos
             }
             return historial;
         }
-        public List<Historial> ListarPorIDIncidencia(int IDIncidencia)
+        public List<Historial> ListarPorIdIncidencia(int idIncidencia)
         {
             //AccesoPrioridades priori = new AccesoPrioridades();
             historial = new List<Historial>();
             datos = new AccesoDatos();
             datos.Conectar();
-            datos.Consultar("SELECT IDHistorial, IDIncidencia, EstadoActual, Descripcion FROM Historial WHERE IDIncidencia = " + IDIncidencia);
+            datos.Consultar("SELECT IDHistorial, IDIncidencia, EstadoActual, Descripcion FROM Historial WHERE IDIncidencia = " + idIncidencia);
             datos.Leer();
             try
             {
@@ -72,7 +72,7 @@ namespace Datos
             }
             return historial;
         }
-        public void Agregar(Incidencia nueva)
+        public void Agregar(Incidencias nueva)
         {
             datos = new AccesoDatos();
             datos.Conectar();

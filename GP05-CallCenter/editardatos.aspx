@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EdicionDatos.aspx.cs" Inherits="GP05_CallCenter.EdicionDatos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editardatos.aspx.cs" Inherits="CallCenter.EditarDatos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="text-center my-4">
-        <h1>Administra los tipos de datos aquí:</h1>
+        <h1>administra los tipos de datos aquí:</h1>
     </div>
 
     <div class="row justify-content-center mb-4">

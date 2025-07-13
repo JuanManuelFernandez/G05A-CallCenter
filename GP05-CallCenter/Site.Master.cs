@@ -14,7 +14,7 @@ namespace CallCenter
             // Cerrar sesión
             Session.Clear(); // Elimina todos los valores de sesión
             Session.Abandon(); // Termina la sesión actual
-            Response.Redirect("~/Inicio.aspx");
+            Response.Redirect("~/inicio.aspx");
         }
     }
 }

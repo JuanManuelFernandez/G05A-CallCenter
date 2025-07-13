@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Datos;
 
 namespace CallCenter
 {
-    public partial class LogIn : System.Web.UI.Page
+    public partial class Login : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuario"]!=null) {
-                Response.Redirect("Inicio.aspx");
+                Response.Redirect("inicio.aspx");
             }
         }
 
@@ -27,7 +22,7 @@ namespace CallCenter
                 if (accesoUsuario.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);
-                    Response.Redirect("Inicio.aspx");
+                    Response.Redirect("inicio.aspx");
                 } 
                 else
                 {

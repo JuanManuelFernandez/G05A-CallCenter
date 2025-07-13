@@ -1,12 +1,7 @@
 ﻿using Datos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public partial class Historial : System.Web.UI.Page
     {
@@ -14,8 +9,8 @@ namespace GP05_CallCenter
         {
             AccesoHistorial data = new AccesoHistorial();
 
-            int IDIncidencia = int.Parse(Request.QueryString["id"]);
-            dgvHistorial.DataSource = data.ListarPorIDIncidencia(IDIncidencia);
+            int idIncidencia = int.Parse(Request.QueryString["id"]);
+            dgvHistorial.DataSource = data.ListarPorIdIncidencia(idIncidencia);
 
             dgvHistorial.DataBind();
         }

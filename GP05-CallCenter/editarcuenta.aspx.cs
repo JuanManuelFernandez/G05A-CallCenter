@@ -2,9 +2,9 @@
 using System;
 using System.Web.UI.WebControls;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
-    public partial class Edicion : System.Web.UI.Page
+    public partial class EditarCuenta : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -15,12 +15,12 @@ namespace GP05_CallCenter
                 // Cliente no puede editar sus datos
                 if (user.TipoUsuario == TipoUsuario.Cliente)
                 {
-                    Response.Redirect("Inicio.aspx");
+                    Response.Redirect("inicio.aspx");
                 }
             }
             else
             {
-                Response.Redirect("Inicio.aspx");
+                Response.Redirect("inicio.aspx");
             }
             if (!IsPostBack)
             {
@@ -38,14 +38,14 @@ namespace GP05_CallCenter
                     }
                     if (user.TipoUsuario.ToString() == "Cliente")
                     {
-                        cargarCategoria();
+                        CargarCategoria();
                         Cliente cliente = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
-                        txtDNI.Text = cliente.DNI.ToString();
+                        txtDNI.Text = cliente.Dni.ToString();
                         txtNombre.Text = cliente.Nombre.ToString();
                         txtApellido.Text = cliente.Apellido.ToString();
                         txtEmail.Text = cliente.Usuario.Email.ToString();
                         txtTelefono.Text = cliente.Telefono.ToString();
-                        ddlCategoria.SelectedValue = cliente.Categoria.IDCategoria.ToString();
+                        ddlCategoria.SelectedValue = cliente.Categoria.IdCategoria.ToString();
                     }
                     else if (user.TipoUsuario.ToString() == "Empleado")
                     {
@@ -54,7 +54,7 @@ namespace GP05_CallCenter
                         ddlCategoria.Visible = false;
                         lblTelefono.Text = "Legajo";
                         txtTelefono.TextMode = TextBoxMode.SingleLine;
-                        txtDNI.Text = emp.DNI.ToString();
+                        txtDNI.Text = emp.Dni.ToString();
                         txtNombre.Text = emp.Nombre;
                         txtApellido.Text = emp.Apellido;
                         txtEmail.Text = user.Email;
@@ -76,14 +76,14 @@ namespace GP05_CallCenter
             if (user.TipoUsuario.ToString() == "Cliente")
             {
                 if (ModificarCliente()) {
-                    Response.Redirect("Admin.aspx");
+                    Response.Redirect("admin.aspx");
                 } 
             }
             else if (user.TipoUsuario == TipoUsuario.Empleado)
             {
                 if (ModificarEmpleado())
                 {
-                    Response.Redirect("Admin.aspx");
+                    Response.Redirect("admin.aspx");
                 }
             }
             
@@ -95,12 +95,12 @@ namespace GP05_CallCenter
             if (btnEliminar.Text == "Activar")
             {
                 data.ActivarUsuario(int.Parse(Request.QueryString["IdUsuario"]));
-                Response.Redirect("Admin.aspx");
+                Response.Redirect("admin.aspx");
             }
             else
             {
-                data.EliminarUsuarioID(int.Parse(Request.QueryString["IdUsuario"]));
-                Response.Redirect("Admin.aspx");
+                data.EliminarUsuarioId(int.Parse(Request.QueryString["IdUsuario"]));
+                Response.Redirect("admin.aspx");
             }
         }
         public bool ModificarEmpleado()
@@ -113,7 +113,7 @@ namespace GP05_CallCenter
 
 
 
-            if (dataEmpleados.listar().Find(x => x.DNI == txtDNI.Text && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.DNI == txtDNI.Text && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            if (dataEmpleados.Listar().Find(x => x.Dni == txtDNI.Text && x.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.Dni == txtDNI.Text && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
             {
                 lblRegistro.Visible = true;
                 lblRegistro.Text = "Ya existe un usuario con ese DNI...";
@@ -125,7 +125,7 @@ namespace GP05_CallCenter
                 lblRegistro.Text = "Ya existe un usuario con ese Email...";
                 return false;
             }
-            else if (dataEmpleados.listar().Find(x => x.Legajo == txtTelefono.Text && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            else if (dataEmpleados.Listar().Find(x => x.Legajo == txtTelefono.Text && x.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
             {
                 lblRegistro.Visible = true;
                 lblRegistro.Text = "Ya existe un empleado con ese Legajo...";
@@ -136,7 +136,7 @@ namespace GP05_CallCenter
             nuevo.Legajo = txtTelefono.Text;
             nuevo.Nombre = txtNombre.Text;
             nuevo.Apellido = txtApellido.Text;
-            nuevo.DNI = txtDNI.Text;
+            nuevo.Dni = txtDNI.Text;
 
             dataUser.ModificarUsuario(user);
             dataEmpleados.ModificarEmpleado(nuevo);
@@ -149,7 +149,7 @@ namespace GP05_CallCenter
             AccesoClientes dataClientes = new AccesoClientes();
             Cliente nuevo = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
 
-            if (dataEmpleados.listar().Find(x => x.DNI == txtDNI.Text && x.IDUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.DNI == txtDNI.Text && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
+            if (dataEmpleados.Listar().Find(x => x.Dni == txtDNI.Text && x.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.Dni == txtDNI.Text && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
             {
                 lblRegistro.Visible = true;
                 lblRegistro.Text = "Ya existe un usuario con ese DNI...";
@@ -168,8 +168,8 @@ namespace GP05_CallCenter
                 return false;
             }
 
-            nuevo.Categoria.IDCategoria = int.Parse(ddlCategoria.SelectedValue);
-            nuevo.DNI = txtDNI.Text;
+            nuevo.Categoria.IdCategoria = int.Parse(ddlCategoria.SelectedValue);
+            nuevo.Dni = txtDNI.Text;
             nuevo.Nombre = txtNombre.Text;
             nuevo.Apellido = txtApellido.Text;
             nuevo.Telefono = txtTelefono.Text;
@@ -184,7 +184,7 @@ namespace GP05_CallCenter
             dataClientes.ModificarCliente(nuevo);
             return true;
         }
-        public void cargarCategoria()
+        public void CargarCategoria()
         {
             AccesoCategorias datos = new AccesoCategorias();
             try

@@ -7,12 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
 
 
     public partial class Incidencia
     {
+
+        /// <summary>
+        /// lblFyH control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFyH;
 
         /// <summary>
         /// lblFechaYHora control.
@@ -24,22 +33,22 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.Label lblFechaYHora;
 
         /// <summary>
-        /// lblIdCliente control.
+        /// lblDni control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIdCliente;
+        protected global::System.Web.UI.WebControls.Label lblDni;
 
         /// <summary>
-        /// txtIdCliente control.
+        /// txtDNI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdCliente;
+        protected global::System.Web.UI.WebControls.TextBox txtDNI;
 
         /// <summary>
         /// lblMail control.
@@ -60,6 +69,42 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.TextBox txtMail;
 
         /// <summary>
+        /// lblNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombre;
+
+        /// <summary>
+        /// txtNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+
+        /// <summary>
+        /// lblApellido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblApellido;
+
+        /// <summary>
+        /// txtApellido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtApellido;
+
+        /// <summary>
         /// lblTelefono control.
         /// </summary>
         /// <remarks>
@@ -78,22 +123,22 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.TextBox txtTelefono;
 
         /// <summary>
-        /// lblDireccion control.
+        /// lblCategoria control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDireccion;
+        protected global::System.Web.UI.WebControls.Label lblCategoria;
 
         /// <summary>
-        /// txtDireccion control.
+        /// ddlCategoria control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDireccion;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
 
         /// <summary>
         /// lblTipo control.
@@ -105,13 +150,13 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.Label lblTipo;
 
         /// <summary>
-        /// txtTipo control.
+        /// ddlTipo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
 
         /// <summary>
         /// lblDescripcion control.
@@ -130,6 +175,33 @@ namespace GP05_CallCenter
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+
+        /// <summary>
+        /// lblPlantilla control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPlantilla;
+
+        /// <summary>
+        /// ddlPlantillas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPlantillas;
+
+        /// <summary>
+        /// btnAplicarPlantilla control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAplicarPlantilla;
 
         /// <summary>
         /// lblEstadoActual control.
@@ -159,13 +231,13 @@ namespace GP05_CallCenter
         protected global::System.Web.UI.WebControls.Label lblPrioridad;
 
         /// <summary>
-        /// txtPrioridad control.
+        /// ddlPrioridad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrioridad;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPrioridad;
 
         /// <summary>
         /// lblResolucion control.
@@ -192,7 +264,7 @@ namespace GP05_CallCenter
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCargar;
+        protected global::System.Web.UI.WebControls.LinkButton btnCargar;
 
         /// <summary>
         /// btnCancelar control.
@@ -201,6 +273,33 @@ namespace GP05_CallCenter
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelar;
+
+        /// <summary>
+        /// btnActualizar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnActualizar;
+
+        /// <summary>
+        /// btnActualizarCliente control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnActualizarCliente;
+
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
     }
 }

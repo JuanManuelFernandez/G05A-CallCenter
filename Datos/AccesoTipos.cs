@@ -21,7 +21,7 @@ namespace Datos
                 {
                     TiposIncidente aux = new TiposIncidente
                     {
-                        IDTipo = datos.Lector["IDTipo"] != DBNull.Value ? (int)datos.Lector["IDTipo"] : 0,
+                        IdTipo = datos.Lector["IDTipo"] != DBNull.Value ? (int)datos.Lector["IDTipo"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty
                     };
@@ -47,7 +47,7 @@ namespace Datos
                 {
                     TiposIncidente aux = new TiposIncidente
                     {
-                        IDTipo = datos.Lector["IDTipo"] != DBNull.Value ? (int)datos.Lector["IDTipo"] : 0,
+                        IdTipo = datos.Lector["IDTipo"] != DBNull.Value ? (int)datos.Lector["IDTipo"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty
                     };
@@ -87,7 +87,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE TiposIncidente SET Eliminado = 1 WHERE IDTipo = @IDTipo");
-                datos.SetearParametro("@IDTipo", nuevo.IDTipo);
+                datos.SetearParametro("@IDTipo", nuevo.IdTipo);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -106,7 +106,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE TiposIncidente SET Eliminado = 0 WHERE IDTipo = @IDTipo");
-                datos.SetearParametro("@IDTipo", nuevo.IDTipo);
+                datos.SetearParametro("@IDTipo", nuevo.IdTipo);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -127,7 +127,7 @@ namespace Datos
                 datos.Consultar("UPDATE TiposIncidente SET Nombre = @Nombre, Descripcion = @Descripcion WHERE IDTipo = @IDTipo");
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Descripcion", nuevo.Descripcion);
-                datos.SetearParametro("@IDTipo", nuevo.IDTipo);
+                datos.SetearParametro("@IDTipo", nuevo.IdTipo);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)

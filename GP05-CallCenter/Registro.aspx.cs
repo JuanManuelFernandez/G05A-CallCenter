@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using Datos;
 
@@ -35,7 +30,7 @@ namespace CallCenter
                 }
                 else
                 {
-                    Response.Redirect("Inicio.aspx");
+                    Response.Redirect("inicio.aspx");
                 }
             }
         }
@@ -64,7 +59,7 @@ namespace CallCenter
             AccesoClientes accesoCliente = new AccesoClientes();
             Usuario user = (Usuario)Session["usuario"];
             {
-                nuevoCliente.DNI = dni.Text;
+                nuevoCliente.Dni = dni.Text;
                 nuevoCliente.Nombre = nombre.Text;
                 nuevoCliente.Apellido = apellido.Text;
                 nuevoCliente.Telefono = telefono.Text;
@@ -93,11 +88,11 @@ namespace CallCenter
             {
                 if (accesoCliente.VerificaReactivar(nuevoCliente))
                 {
-                    nuevoCliente.Usuario.IdUsuario = accesoCliente.BuscarClientePorDNI(nuevoCliente.DNI).Usuario.IdUsuario;
+                    nuevoCliente.Usuario.IdUsuario = accesoCliente.BuscarClientePorDni(nuevoCliente.Dni).Usuario.IdUsuario;
                     accesoUsuario.ActivarUsuarioConEmail(email.Text);
                     accesoClientes.ModificarCliente(nuevoCliente);
                 }
-                else if (accesoCliente.VerificarDNI(nuevoCliente.DNI) || accesoEmpleados.VerificarDNI(nuevoCliente.DNI))
+                else if (accesoCliente.VerificarDni(nuevoCliente.Dni) || accesoEmpleados.VerificarDni(nuevoCliente.Dni))
                 {
                     lblRegistro.Visible = true;
                     lblRegistro.Text = "Ya existe un usuario con ese DNI.";
@@ -125,7 +120,7 @@ namespace CallCenter
                 if(user.TipoUsuario != TipoUsuario.Empleado)
                 {
                     Session.Add("usuario", (Usuario)accesoUsuario.Listar().Find(x => x.Email == nuevoCliente.Usuario.Email));
-                    Response.Redirect("Inicio.aspx", false);
+                    Response.Redirect("inicio.aspx", false);
                 }
                 if(user.TipoUsuario == TipoUsuario.Empleado)
                 {
@@ -145,7 +140,7 @@ namespace CallCenter
             Empleado nuevo = new Empleado();
             Usuario user = new Usuario();
             {
-                nuevo.DNI = dni.Text;
+                nuevo.Dni = dni.Text;
                 nuevo.Legajo = telefono.Text;
                 nuevo.Nombre = nombre.Text;
                 nuevo.Apellido = apellido.Text;
@@ -157,7 +152,7 @@ namespace CallCenter
             }
             try
             {
-                if (dataEmp.VerificarDNI(nuevo.DNI) || dataCli.VerificarDNI(nuevo.DNI))
+                if (dataEmp.VerificarDni(nuevo.Dni) || dataCli.VerificarDni(nuevo.Dni))
                 {
                     lblRegistro.Visible = true;
                     lblRegistro.Text = "Ya existe un usuario con ese DNI.";
@@ -180,7 +175,7 @@ namespace CallCenter
                 }
 
                 dataUser.AgregarUsuario(user);
-                nuevo.IDUsuario = (dataUser.Listar()[(dataUser.Listar().Count) - 1]).IdUsuario;
+                nuevo.IdUsuario = (dataUser.Listar()[(dataUser.Listar().Count) - 1]).IdUsuario;
                 dataEmp.AgregarEmpleado(nuevo);
             }
             catch (Exception er)
@@ -188,7 +183,7 @@ namespace CallCenter
 
                 throw er;
             }
-            Response.Redirect("Inicio.aspx");
+            Response.Redirect("inicio.aspx");
         }
     }
 }

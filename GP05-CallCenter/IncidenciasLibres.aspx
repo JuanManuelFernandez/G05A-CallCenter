@@ -1,14 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="IncidenciasLibres.aspx.cs" Inherits="GP05_CallCenter.IndicenciasLibres" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="incidenciaslibres.aspx.cs" Inherits="CallCenter.IndicenciasLibres" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main>
         <div>
-            <h1>Incidencias libres</h1>
+            <h1>incidencia libres</h1>
         </div>
 
-        <asp:GridView ID="dgvIncidenciasLibres" runat="server" class="table table-bordered" AutoGenerateColumns="False" OnRowCommand="DgvIncidenciasLibres_RowCommand" DataKeyNames="IDIncidencia">
+        <asp:GridView ID="dgvIncidenciasLibres" runat="server" class="table table-bordered" AutoGenerateColumns="False" OnRowCommand="DgvIncidenciasLibres_RowCommand" DataKeyNames="IDIncidencias">
             <Columns>
-                <asp:BoundField DataField="IDIncidencia" HeaderText="ID" />
+                <asp:BoundField DataField="IDIncidencias" HeaderText="ID" />
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
                 <asp:BoundField DataField="IDEmpleado" HeaderText="Empleado asignado" />
                 <asp:TemplateField HeaderText="Acciones">

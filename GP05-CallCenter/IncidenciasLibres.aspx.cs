@@ -1,12 +1,9 @@
 ﻿using Datos;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public partial class IndicenciasLibres : System.Web.UI.Page
     {
@@ -19,15 +16,15 @@ namespace GP05_CallCenter
                 if (Session["usuario"] == null)
                 {
                     Session.Add("error", "Debes loguearte para acceder a esta pagina");
-                    Response.Redirect("Error.aspx");
+                    Response.Redirect("error.aspx");
                 }
                 else if (user.TipoUsuario == TipoUsuario.Empleado)
                 {
-                    //listar incidencias que no tengan IDEmpleado asignado
-                    int SinEmpleado = 0;
-                    var FiltroIncidencia = datos.Listar().Where(i => i.IdEmpleado == SinEmpleado).ToList();
+                    //listar incidencia que no tengan IDEmpleado asignado
+                    int sinEmpleado = 0;
+                    var filtroIncidencia = datos.Listar().Where(i => i.IdEmpleado == sinEmpleado).ToList();
 
-                    dgvIncidenciasLibres.DataSource = FiltroIncidencia;
+                    dgvIncidenciasLibres.DataSource = filtroIncidencia;
                     dgvIncidenciasLibres.DataBind();
                 }
             }
@@ -39,16 +36,16 @@ namespace GP05_CallCenter
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 GridViewRow row = dgvIncidenciasLibres.Rows[index];
-                int IDIncidencia = Convert.ToInt32(dgvIncidenciasLibres.DataKeys[index].Value);
+                int idIncidencia = Convert.ToInt32(dgvIncidenciasLibres.DataKeys[index].Value);
                 AccesoEmpleados  emp = new AccesoEmpleados();
                 Usuario user = (Usuario)Session["usuario"];
 
                 if (user.TipoUsuario == TipoUsuario.Empleado)
                 {
-                    int IDEmpleado = emp.ObtenerIDEmpleadoLogueado(user.IdUsuario);
+                    int idEmpleado = emp.ObtenerIdEmpleadoLogueado(user.IdUsuario);
 
                     AccesoIncidencias datos = new AccesoIncidencias();
-                    bool pudoAsignarse = datos.AsignarIncidencia(IDIncidencia, IDEmpleado);
+                    bool pudoAsignarse = datos.AsignarIncidencia(idIncidencia, idEmpleado);
 
                     if (pudoAsignarse)
                     {

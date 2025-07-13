@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="GP05_CallCenter.Inicio" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="inicio.aspx.cs" Inherits="CallCenter.Inicio" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -32,12 +32,12 @@
 
                 <asp:LinkButton ID="btnIncidenciasLibres" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="BtnIncidenciasLibres_Click">
                 <img src="Assets/InciLibres.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                Incidencias libres
+                incidencia libres
                 </asp:LinkButton>
 
                 <asp:LinkButton ID="btnDiarios" runat="server" CssClass="btn btn-primary btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="BtnDiarios_Click">
                 <img src="Assets/Diarios.png" style="width: 30px; height: 30px; margin-right: 10px;" />
-                Diarios
+                diarios
                 </asp:LinkButton>
 
                 <asp:LinkButton ID="btnRegistrarCliente" runat="server" CssClass="btn btn-success btn-lg d-flex justify-content-center align-items-center" Visible="false" OnClick="BtnDarDeAltaUsuario_Click">

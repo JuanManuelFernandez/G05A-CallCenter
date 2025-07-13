@@ -1,10 +1,5 @@
 ﻿using Datos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CallCenter
 {
@@ -21,7 +16,7 @@ namespace CallCenter
             btnConfirmarCambio.Visible = false;
             if (Session["usuario"] == null)
             {
-                Response.Redirect("LogIn.aspx");
+                Response.Redirect("login.aspx");
             }
         }
 
@@ -48,9 +43,9 @@ namespace CallCenter
         {
             AccesoUsuario data = new AccesoUsuario();
             Usuario user = (Usuario)Session["usuario"];
-            data.EliminarUsuarioID(user.IdUsuario);
+            data.EliminarUsuarioId(user.IdUsuario);
             Session.Clear();
-            Response.Redirect("Default.aspx");
+            Response.Redirect("landing.aspx");
         }
         protected void btnConfirmarCambio_Click(object sender, EventArgs e)
         {
@@ -64,7 +59,7 @@ namespace CallCenter
                     user.Clave = txtPass.Text;
                     data.ModificarUsuario(user);
                     Session.Clear();
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("landing.aspx");
                 }
                 else
                 {

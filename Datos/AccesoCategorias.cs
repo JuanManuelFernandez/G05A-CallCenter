@@ -22,7 +22,7 @@ namespace Datos
                 {
                     CategoriasCliente aux = new CategoriasCliente
                     {
-                        IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
+                        IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty
                     };
@@ -53,7 +53,7 @@ namespace Datos
                 {
                     CategoriasCliente aux = new CategoriasCliente
                     {
-                        IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
+                        IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty
                     };
@@ -97,7 +97,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE CategoriasCliente SET Eliminado = 1 WHERE IDCategoria = @IDCategoria");
-                datos.SetearParametro("@IDCategoria", nuevo.IDCategoria);
+                datos.SetearParametro("@IDCategoria", nuevo.IdCategoria);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -116,7 +116,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE CategoriasCliente SET Eliminado = 0 WHERE IDCategoria = @IDCategoria");
-                datos.SetearParametro("@IDCategoria", nuevo.IDCategoria);
+                datos.SetearParametro("@IDCategoria", nuevo.IdCategoria);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -137,7 +137,7 @@ namespace Datos
                 datos.Consultar("UPDATE CategoriasCliente SET Nombre = @Nombre, Descripcion = @Descripcion WHERE IDCategoria = @IDCategoria");
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Descripcion", nuevo.Descripcion);
-                datos.SetearParametro("@IDCategoria", nuevo.IDCategoria);
+                datos.SetearParametro("@IDCategoria", nuevo.IdCategoria);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)

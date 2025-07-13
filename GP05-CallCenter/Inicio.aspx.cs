@@ -1,7 +1,7 @@
 ﻿using Datos;
 using System;
 
-namespace GP05_CallCenter
+namespace CallCenter
 {
     public partial class Inicio : System.Web.UI.Page
     {
@@ -10,7 +10,7 @@ namespace GP05_CallCenter
         {
             if (Session["usuario"] == null)
             {
-                Response.Redirect("Default.aspx");
+                Response.Redirect("landing.aspx");
             }
             AccesoClientes data = new AccesoClientes();
             AccesoEmpleados dataEmp = new AccesoEmpleados();
@@ -19,7 +19,7 @@ namespace GP05_CallCenter
             if (user.TipoUsuario == TipoUsuario.Empleado)
             {
                 NombreDeUsuario = dataEmp.BuscarPorIdUsuario(user.IdUsuario).Nombre;
-                btnMisReclamos.Text = "Reclamos";
+                btnMisReclamos.Text = "reclamos";
                 btnRegistrarCliente.Visible = true;
                 btnIncidenciasLibres.Visible = true;
             }
@@ -28,12 +28,12 @@ namespace GP05_CallCenter
             {
                 NombreDeUsuario = (data.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).Nombre;
             }
-            // Admin
+            // admin
             else
             {
                 NombreDeUsuario = "Administrador/a";
                 btnMisDatos.Text = "Cargar Empleado";
-                btnMisReclamos.Text = "Incidencias";
+                btnMisReclamos.Text = "incidencia";
                 btnCargar.Text = "Usuarios";
                 btnModificarTipos.Visible = true;
                 btnDiarios.Visible = true;
@@ -44,46 +44,46 @@ namespace GP05_CallCenter
             Usuario user = (Usuario)Session["usuario"];
             if (user.TipoUsuario == TipoUsuario.Admin)
             {
-                Response.Redirect("Registro.aspx");
+                Response.Redirect("registro.aspx");
             }
             else
             {
-                Response.Redirect("MisDatos.aspx");
+                Response.Redirect("misdatos.aspx");
             }
         }
         protected void BtnReclamos_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Formularios.aspx");
+            Response.Redirect("reclamos.aspx");
         }
         protected void BtnCargar_Click(object sender, EventArgs e)
         {
             Usuario user = (Usuario)Session["usuario"];
             if (user.TipoUsuario != TipoUsuario.Admin)
             {
-                Response.Redirect("Incidencias.aspx");
+                Response.Redirect("incidencia.aspx");
             }
             else
             {
-                Response.Redirect("Admin.aspx");
+                Response.Redirect("admin.aspx");
             }
         }
         protected void BtnModificarTipos_Click(object sender, EventArgs e)
         {
-            Response.Redirect("EdicionDatos.aspx");
+            Response.Redirect("editardatos.aspx");
         }
         protected void BtnDarDeAltaUsuario_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Registro.aspx");
+            Response.Redirect("registro.aspx");
         }
         
         protected void BtnDiarios_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Diarios.aspx");
+            Response.Redirect("diarios.aspx");
         }
 
         protected void BtnIncidenciasLibres_Click(object sender, EventArgs e)
         {
-            Response.Redirect("IncidenciasLibres.aspx");
+            Response.Redirect("incidenciaslibres.aspx");
 
         }
     }

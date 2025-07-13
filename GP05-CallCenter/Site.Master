@@ -43,7 +43,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container d-flex justify-content-center">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="Default">
+                    <a class="navbar-brand" href="landing">
                         <img src="assets/UTN-blancoSobreNegro.svg" alt="" width="38" height="32" class="d-inline-block align-text-top">
                         Callcenter UTN
                     </a>

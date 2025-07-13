@@ -28,7 +28,7 @@ namespace Datos
                         IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
                         Categoria = new CategoriasCliente
                         {
-                            IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
+                            IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
                         },
                         Usuario = new Usuario
                         {
@@ -38,7 +38,7 @@ namespace Datos
                             Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty,
                             Eliminado = datos.Lector["Eliminado"] == DBNull.Value || (bool)datos.Lector["Eliminado"]
                         },
-                        DNI = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
+                        Dni = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty,
                         Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty
@@ -78,11 +78,11 @@ namespace Datos
                 datos.Conectar();
                 datos.Consultar("INSERT INTO Clientes (IDUsuario, DNI, Nombre, Apellido, Telefono, IDCategoria) VALUES (@IDUsuario, @DNI, @Nombre, @Apellido, @Telefono, @IDCategoria)");
                 datos.SetearParametro("@IDUsuario", auxiliar.Listar()[(auxiliar.Listar().Count) - 1].IdUsuario);
-                datos.SetearParametro("@DNI", nuevo.DNI);
+                datos.SetearParametro("@DNI", nuevo.Dni);
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Apellido", nuevo.Apellido);
                 datos.SetearParametro("@Telefono", nuevo.Telefono);
-                if (nuevo.Categoria != null) datos.SetearParametro("@IDCategoria", nuevo.Categoria.IDCategoria);
+                if (nuevo.Categoria != null) datos.SetearParametro("@IDCategoria", nuevo.Categoria.IdCategoria);
                 else datos.SetearParametro("@IDCategoria", DBNull.Value);
 
                     datos.EjecutarNonQuery();
@@ -111,7 +111,7 @@ namespace Datos
                     IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
                     Categoria = new CategoriasCliente()
                 };
-                aux.Categoria.IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0;
+                aux.Categoria.IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0;
                 aux.Usuario = new Usuario
                 {
                     IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
@@ -119,7 +119,7 @@ namespace Datos
                     Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
                     Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
                 };
-                aux.DNI = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty;
+                aux.Dni = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty;
                 aux.Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty;
                 aux.Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty;
                 aux.Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty;
@@ -158,7 +158,7 @@ namespace Datos
             }
         }
         //REVISAR ESTA FUNCION
-        public Cliente BuscarClientePorDNI(string dni)
+        public Cliente BuscarClientePorDni(string dni)
         {
             datos = new AccesoDatos();
             Cliente aux = null;
@@ -176,7 +176,7 @@ namespace Datos
                         IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
                         Categoria = new CategoriasCliente
                         {
-                            IDCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
+                            IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
                         },
                         Usuario = new Usuario
                         {
@@ -185,7 +185,7 @@ namespace Datos
                             Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
                             Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
                         },
-                        DNI = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
+                        Dni = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty,
                         Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty
@@ -215,15 +215,15 @@ namespace Datos
 
                 datos.Conectar();
                 datos.Consultar("UPDATE Clientes SET IDCategoria = @IDCategoria, DNI = @DNI, Nombre = @Nombre, Apellido = @Apellido, Telefono = @Telefono WHERE IDUsuario = @IDUsuario");
-                if (mod.Categoria == null || mod.Categoria.IDCategoria == 0)
+                if (mod.Categoria == null || mod.Categoria.IdCategoria == 0)
                 {
                     datos.SetearParametro("@IDCategoria", DBNull.Value);
                 }
                 else
                 {
-                    datos.SetearParametro("@IDCategoria", mod.Categoria.IDCategoria);
+                    datos.SetearParametro("@IDCategoria", mod.Categoria.IdCategoria);
                 }
-                datos.SetearParametro("@DNI", mod.DNI);
+                datos.SetearParametro("@DNI", mod.Dni);
                 datos.SetearParametro("@Nombre", mod.Nombre);
                 datos.SetearParametro("@Apellido", mod.Apellido);
                 datos.SetearParametro("@Telefono", mod.Telefono);
@@ -239,13 +239,13 @@ namespace Datos
                 datos.Cerrar();
             }
         }
-        public bool VerificarDNI(string DNI)
+        public bool VerificarDni(string dni)
         {
             datos = new AccesoDatos();
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE Eliminado = 0 AND DNI = '" + DNI + "'");
+                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE Eliminado = 0 AND DNI = '" + dni + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }
@@ -264,7 +264,7 @@ namespace Datos
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.DNI + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Email + "'");
+                datos.Consultar("SELECT 1 FROM Clientes C INNER JOIN Usuarios U ON C.IDUsuario = U.IDUsuario WHERE U.Eliminado = 1 AND C.DNI = '" + aux.Dni + "' AND U.Clave = '" + aux.Usuario.Clave + "' AND U.Email = '" + aux.Usuario.Email + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }
@@ -277,13 +277,13 @@ namespace Datos
                 datos.Cerrar();
             }
         }
-        public bool VerificarTelefono(string Telefono)
+        public bool VerificarTelefono(string telefono)
         {
             datos = new AccesoDatos();
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM Clientes WHERE Telefono = '" + Telefono + "'");
+                datos.Consultar("SELECT 1 FROM Clientes WHERE Telefono = '" + telefono + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }

@@ -39,7 +39,7 @@
             </section>
         </div>
         <div class="text-center mt-1">
-            <asp:Label ID="lblRegistro" runat="server" Text="Registro realizado con éxito" Visible="false" ForeColor="Green" />
+            <asp:Label ID="lblRegistro" runat="server" Text="registro realizado con éxito" Visible="false" ForeColor="Green" />
         </div>
 
     </main>

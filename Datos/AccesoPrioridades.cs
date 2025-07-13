@@ -21,7 +21,7 @@ namespace Datos
                 {
                     PrioridadesIncidente aux = new PrioridadesIncidente
                     {
-                        IDPrioridad = datos.Lector["IDPrioridad"] != DBNull.Value ? (int)datos.Lector["IDPrioridad"] : 0,
+                        IdPrioridad = datos.Lector["IDPrioridad"] != DBNull.Value ? (int)datos.Lector["IDPrioridad"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty
                     };
@@ -47,7 +47,7 @@ namespace Datos
                 {
                     PrioridadesIncidente aux = new PrioridadesIncidente
                     {
-                        IDPrioridad = datos.Lector["IDPrioridad"] != DBNull.Value ? (int)datos.Lector["IDPrioridad"] : 0,
+                        IdPrioridad = datos.Lector["IDPrioridad"] != DBNull.Value ? (int)datos.Lector["IDPrioridad"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
                         Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : string.Empty
                     };
@@ -106,7 +106,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE PrioridadesIncidente SET Eliminado = 1 WHERE IDPrioridad = @IDPrioridad");
-                datos.SetearParametro("@IDPrioridad", nuevo.IDPrioridad);
+                datos.SetearParametro("@IDPrioridad", nuevo.IdPrioridad);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -125,7 +125,7 @@ namespace Datos
             {
                 datos.Conectar();
                 datos.Consultar("UPDATE PrioridadesIncidente SET Eliminado = 0 WHERE IDPrioridad = @IDPrioridad");
-                datos.SetearParametro("@IDPrioridad", nuevo.IDPrioridad);
+                datos.SetearParametro("@IDPrioridad", nuevo.IdPrioridad);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)
@@ -146,7 +146,7 @@ namespace Datos
                 datos.Consultar("UPDATE PrioridadesIncidente SET Nombre = @Nombre, Descripcion = @Descripcion WHERE IDPrioridad = @IDPrioridad");
                 datos.SetearParametro("@Nombre", nuevo.Nombre);
                 datos.SetearParametro("@Descripcion", nuevo.Descripcion);
-                datos.SetearParametro("@IDPrioridad", nuevo.IDPrioridad);
+                datos.SetearParametro("@IDPrioridad", nuevo.IdPrioridad);
                 datos.EjecutarNonQuery();
             }
             catch (Exception er)

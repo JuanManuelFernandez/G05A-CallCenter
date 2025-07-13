@@ -189,7 +189,7 @@ namespace Datos
             }
             return aux;
         }
-        public void EliminarUsuarioID(int id)
+        public void EliminarUsuarioId(int id)
         {
             datos = new AccesoDatos();
             try
@@ -267,13 +267,13 @@ namespace Datos
                 datos.Cerrar();
             }
         }
-        public bool VerificarEmail(string Email)
+        public bool VerificarEmail(string email)
         {
             datos = new AccesoDatos();
             try
             {
                 datos.Conectar();
-                datos.Consultar("SELECT 1 FROM USUARIOS WHERE Email = '" + Email + "'");
+                datos.Consultar("SELECT 1 FROM USUARIOS WHERE Email = '" + email + "'");
                 datos.Leer();
                 return datos.Lector.Read();
             }
