@@ -30,7 +30,6 @@ namespace CallCenter
             txtRePass.Visible = true;
             btnConfirmarCambio.Visible = true;
         }
-
         protected void BntDel_Click(object sender, EventArgs e)
         {
             lblConfirmar.Text = "Seguro que desea eliminar su cuenta?";
@@ -38,19 +37,18 @@ namespace CallCenter
             btnConfirmar.Visible = true;
 
         }
-
         protected void btnConfirmar_Click(object sender, EventArgs e)
         {
-            AccesoUsuario data = new AccesoUsuario();
-            Usuario user = (Usuario)Session["usuario"];
+            var data = new AccesoUsuario();
+            var user = (Usuario)Session["usuario"];
             data.EliminarUsuarioId(user.IdUsuario);
             Session.Clear();
             Response.Redirect("landing.aspx");
         }
         protected void btnConfirmarCambio_Click(object sender, EventArgs e)
         {
-            AccesoUsuario data = new AccesoUsuario();
-            Usuario user = (Usuario)Session["usuario"];
+            var data = new AccesoUsuario();
+            var user = (Usuario)Session["usuario"];
 
             if (txtPass.Text != null)
             {

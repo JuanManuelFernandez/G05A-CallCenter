@@ -21,7 +21,7 @@ namespace Datos
 
                 while (datos.Lector.Read())
                 {
-                    Plantilla aux = new Plantilla
+                    var aux = new Plantilla
                     {
                         IdPlantilla = datos.Lector["IDPlantilla"] != DBNull.Value ? (int)datos.Lector["IDPlantilla"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
@@ -43,7 +43,7 @@ namespace Datos
         public Plantilla Buscar(int id)
         {
             datos = new AccesoDatos();
-            Plantilla aux = new Plantilla();
+            var aux = new Plantilla();
             try
             {
                 datos.Conectar();

@@ -11,60 +11,65 @@ namespace CallCenter
         {
             if (!IsPostBack)
             {
-                AccesoIncidencias datos = new AccesoIncidencias();
+                var datos = new AccesoIncidencias();
                 if (Session["usuario"] == null)
                 {
                     Session.Add("error", "Debes loguearte para acceder a esta pagina");
                     Response.Redirect("error.aspx");
                 }
-                Usuario user = (Usuario)Session["usuario"];
-                //Pagina para...
-                // admin
-                if (user.TipoUsuario == TipoUsuario.Admin)
+                var user = (Usuario)Session["usuario"];
+                switch (user.TipoUsuario)
                 {
-                    foreach (DataControlField col in dgvIncidencias.Columns)
+                    //Pagina para...
+                    // Admin
+                    case TipoUsuario.Admin:
                     {
-                        if (col.HeaderText == "Asignar Empleado")
+                        foreach (DataControlField col in dgvIncidencias.Columns)
                         {
-                            col.Visible = true;
-                            break;
+                            if (col.HeaderText == "Asignar Empleado")
+                            {
+                                col.Visible = true;
+                                break;
+                            }
                         }
+                        var aux = new CommandField
+                        {
+                            ShowSelectButton = true,
+                            SelectText = "Abrir"
+                        };
+                        dgvIncidencias.Columns.Add(aux);
+                        Session.Add("listaCasos", datos.Listar());
+                        dgvIncidencias.DataSource = Session["listaCasos"]; // Capturo lista en Session
+                        break;
                     }
-                    CommandField aux = new CommandField
+                    //Empleado
+                    case TipoUsuario.Empleado:
                     {
-                        ShowSelectButton = true,
-                        SelectText = "Abrir"
-                    };
-                    dgvIncidencias.Columns.Add(aux);
-                    Session.Add("listaCasos", datos.Listar());
-                    dgvIncidencias.DataSource = Session["listaCasos"]; // Capturo lista en Session
-                    dgvIncidencias.DataBind();
-                }
-                //Empleado
-                else if (user.TipoUsuario == TipoUsuario.Empleado)
-                {
-                    AccesoEmpleados datosEmp = new AccesoEmpleados();
-                    Empleado emp = datosEmp.BuscarPorIdUsuario(user.IdUsuario);
-                    CommandField aux = new CommandField
+                        var datosEmp = new AccesoEmpleados();
+                        var emp = datosEmp.BuscarPorIdUsuario(user.IdUsuario);
+                        var aux = new CommandField
+                        {
+                            ShowSelectButton = true,
+                            SelectText = "Abrir"
+                        };
+                        dgvIncidencias.Columns.Add(aux);
+                        Session.Add("listaCasos", datos.ListarIncidenciasEmpleado(emp.IdEmpleado));
+                        dgvIncidencias.DataSource = Session["listaCasos"]; // Capturo lista en Session
+                        break;
+                    }
+                    //Cliente
+                    default:
                     {
-                        ShowSelectButton = true,
-                        SelectText = "Abrir"
-                    };
-                    dgvIncidencias.Columns.Add(aux);
-                    Session.Add("listaCasos", datos.ListarIncidenciasEmpleado(emp.IdEmpleado));
-                    dgvIncidencias.DataSource = Session["listaCasos"]; // Capturo lista en Session
-                    dgvIncidencias.DataBind();
+                        var dataCli = new AccesoClientes();
+                        var cli = dataCli.BuscarClientePorIdUsuario(user.IdUsuario);
+                        Session.Add("listaCasos", datos.ListarIncidenciasCliente(cli.IdCliente));
+                        dgvIncidencias.DataSource = Session["listaCasos"]; // Capturo lista en Session
+                        AgregarDgvCliente();
+                        break;
+                    }
                 }
-                //Cliente
-                else
-                {
-                    AccesoClientes dataCli = new AccesoClientes();
-                    Cliente cli = dataCli.BuscarClientePorIdUsuario(user.IdUsuario);
-                    Session.Add("listaCasos", datos.ListarIncidenciasCliente(cli.IdCliente));
-                    dgvIncidencias.DataSource = Session["listaCasos"]; // Capturo lista en Session
-                    AgregarDgvCliente();
-                    dgvIncidencias.DataBind();
-                }
+                dgvIncidencias.DataBind();
+
                 ddlTipo.Items.Add("Seleccionar...");
                 ddlTipo.Items.Add("Prioridad");
                 ddlTipo.Items.Add("Estado Actual");
@@ -77,53 +82,53 @@ namespace CallCenter
         {
             ddlPrioridad.Items.Clear();
 
-            if (ddlTipo.SelectedItem.Text == "Seleccionar...")
+            switch (ddlTipo.SelectedItem.Text)
             {
-                ddlPrioridad.Visible = false;
-                txtBuscar.Visible = false;
-                btnBuscar.Enabled = false;
-            }
-            if (ddlTipo.SelectedItem.Text == "Prioridad")
-            {
-                ddlPrioridad.Visible = true;
-                txtBuscar.Visible = false;
-                btnBuscar.Enabled = false;
-                ddlPrioridad.Items.Add("Cualquiera");
-                ddlPrioridad.Items.Add("Alta");
-                ddlPrioridad.Items.Add("Media");
-                ddlPrioridad.Items.Add("Baja");
-            }
-            else if (ddlTipo.SelectedItem.Text == "Estado Actual")
-            {
-                ddlPrioridad.Visible = false;
-                txtBuscar.Visible = true;
-                btnBuscar.Enabled = true;
+                case "Seleccionar...":
+                    ddlPrioridad.Visible = false;
+                    txtBuscar.Visible = false;
+                    btnBuscar.Enabled = false;
+                    break;
+                case "Prioridad":
+                    ddlPrioridad.Visible = true;
+                    txtBuscar.Visible = false;
+                    btnBuscar.Enabled = false;
+                    ddlPrioridad.Items.Add("Cualquiera");
+                    ddlPrioridad.Items.Add("Alta");
+                    ddlPrioridad.Items.Add("Media");
+                    ddlPrioridad.Items.Add("Baja");
+                    break;
+                case "Estado Actual":
+                    ddlPrioridad.Visible = false;
+                    txtBuscar.Visible = true;
+                    btnBuscar.Enabled = true;
+                    break;
             }
         }
         public void DdlPrioridad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Incidencias> lista = (List<Incidencias>)Session["listaCasos"];
+            var lista = (List<Incidencias>)Session["listaCasos"];
             if (ddlPrioridad.SelectedValue == "Cualquiera")
             {
                 dgvIncidencias.DataSource = lista;
             }
             else
             {
-                List<Incidencias> listaFiltrada = lista.FindAll(x => x.Prioridad.Nombre == ddlPrioridad.SelectedValue);
+                var listaFiltrada = lista.FindAll(x => x.Prioridad.Nombre == ddlPrioridad.SelectedValue);
                 dgvIncidencias.DataSource = listaFiltrada;
             }
             dgvIncidencias.DataBind();
         }
         public void BtnBuscar_Click(object sender, EventArgs e)
         {
-            List<Incidencias> lista = (List<Incidencias>)Session["listaCasos"];
-            List<Incidencias> listaFiltrada = lista.FindAll(x => x.EstadoActual.ToUpper().Contains(txtBuscar.Text.ToUpper()));
+            var lista = (List<Incidencias>)Session["listaCasos"];
+            var listaFiltrada = lista.FindAll(x => x.EstadoActual.ToUpper().Contains(txtBuscar.Text.ToUpper()));
             dgvIncidencias.DataSource = listaFiltrada;
             dgvIncidencias.DataBind();
         }
         public void AgregarDgvCliente()
         {
-            BoundField aux = new BoundField
+            var aux = new BoundField
             {
                 HeaderText = "Descripcion",
                 DataField = "Descripcion"
@@ -138,9 +143,9 @@ namespace CallCenter
         protected void DgvIncidencias_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType != DataControlRowType.DataRow) return;
-            AccesoEmpleados data = new AccesoEmpleados();
-            Incidencias inc = (Incidencias)e.Row.DataItem;
-            DropDownList aux = (DropDownList)e.Row.FindControl("ddlEmpleados");
+            var data = new AccesoEmpleados();
+            var inc = (Incidencias)e.Row.DataItem;
+            var aux = (DropDownList)e.Row.FindControl("ddlEmpleados");
             aux.DataSource = data.Listar();
             aux.DataValueField = "IDEmpleado";
             aux.DataTextField = "Legajo";
@@ -151,21 +156,15 @@ namespace CallCenter
                 aux.Items.Insert(0, new ListItem("Asignar"));
                 aux.SelectedIndex = 0;
             }
-            if (!(string.IsNullOrEmpty(inc.Resolucion)))
-            {
-                aux.Enabled = false;
-            }
-            else
-            {
-                aux.Enabled = true;
-            }
+            aux.Enabled = string.IsNullOrEmpty(inc.Resolucion);
         }
         protected void DdlEmpleados_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DropDownList lista = (DropDownList)sender;
-            GridViewRow fila = (GridViewRow)lista.NamingContainer;
-            AccesoIncidencias data = new AccesoIncidencias();
-            Incidencias inc = data.Listar().Find(x => x.IdIncidencia == int.Parse(dgvIncidencias.DataKeys[fila.RowIndex].Value.ToString()));
+            var lista = (DropDownList)sender;
+            var fila = (GridViewRow)lista.NamingContainer;
+            var data = new AccesoIncidencias();
+            var inc = data.Listar().Find(x =>
+                x.IdIncidencia == int.Parse(dgvIncidencias.DataKeys[fila.RowIndex].Value.ToString()));
             if (lista.SelectedItem.Text == "Asignar") return;
             inc.IdEmpleado = int.Parse(lista.SelectedValue);
             inc.Resolucion = string.Empty;
@@ -176,8 +175,8 @@ namespace CallCenter
         {
             if (e.CommandName == "Abrir")
             {
-                int index = Convert.ToInt32(e.CommandArgument);
-                var id = dgvIncidencias.DataKeys[index].Value.ToString();
+                var index = Convert.ToInt32(e.CommandArgument);
+                var id = dgvIncidencias.DataKeys[index]?.Value.ToString();
                 Response.Redirect("historial.aspx?id=" + id);
             }
         }

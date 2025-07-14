@@ -19,29 +19,34 @@ namespace CallCenter
             user = (Usuario)Session["usuario"];
             if (!IsPostBack)
             {
-                if (user.TipoUsuario == TipoUsuario.Cliente)
+                switch (user.TipoUsuario)
                 {
-                    AccesoClientes data = new AccesoClientes();
-                    cliente = data.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
-                    txtEmail.Text = cliente.Usuario.Email;
-                    txtDNI.Text = cliente.Dni.ToString();
-                    txtNombre.Text = cliente.Nombre;
-                    txtApellido.Text = cliente.Apellido;
-                    txtTelefono.Text = cliente.Telefono;
-                }
-                else if (user.TipoUsuario == TipoUsuario.Empleado)
-                {
-                    lblTelefono.Text = "Legajo";
-                    txtTelefono.Enabled = false;
-                    txtEmail.Enabled = false;
-                    btnModificar.Visible = false;
-                    AccesoEmpleados data = new AccesoEmpleados();
-                    empleado = data.BuscarPorIdUsuario(user.IdUsuario);
-                    txtEmail.Text = user.Email;
-                    txtDNI.Text = empleado.Dni.ToString();
-                    txtNombre.Text = empleado.Nombre;
-                    txtApellido.Text = empleado.Apellido;
-                    txtTelefono.Text = empleado.Legajo;
+                    case TipoUsuario.Cliente:
+                    {
+                        var data = new AccesoClientes();
+                        cliente = data.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
+                        txtEmail.Text = cliente.Usuario.Email;
+                        txtDNI.Text = cliente.Dni.ToString();
+                        txtNombre.Text = cliente.Nombre;
+                        txtApellido.Text = cliente.Apellido;
+                        txtTelefono.Text = cliente.Telefono;
+                        break;
+                    }
+                    case TipoUsuario.Empleado:
+                    {
+                        lblTelefono.Text = "Legajo";
+                        txtTelefono.Enabled = false;
+                        txtEmail.Enabled = false;
+                        btnModificar.Visible = false;
+                        var data = new AccesoEmpleados();
+                        empleado = data.BuscarPorIdUsuario(user.IdUsuario);
+                        txtEmail.Text = user.Email;
+                        txtDNI.Text = empleado.Dni.ToString();
+                        txtNombre.Text = empleado.Nombre;
+                        txtApellido.Text = empleado.Apellido;
+                        txtTelefono.Text = empleado.Legajo;
+                        break;
+                    }
                 }
             }
         }
@@ -50,11 +55,11 @@ namespace CallCenter
         {
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
-                AccesoClientes dataCli = new AccesoClientes();
-                AccesoUsuario dataUser = new AccesoUsuario();
-                AccesoEmpleados dataEmp = new AccesoEmpleados();
+                var dataCli = new AccesoClientes();
+                var dataUser = new AccesoUsuario();
+                var dataEmp = new AccesoEmpleados();
 
-                string aux = txtTelefono.Text;
+                var aux = txtTelefono.Text;
 
                 if (aux.Length < 8 || aux.Length > 15)
                 {

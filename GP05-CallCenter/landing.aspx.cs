@@ -10,7 +10,7 @@ namespace CallCenter
         {
             if (Session["usuario"] != null)
             {
-                Usuario user = (Usuario)Session["usuario"];
+                var user = (Usuario)Session["usuario"];
                 if (user.TipoUsuario == TipoUsuario.Admin)
                 {
                     Response.Redirect("inicio.aspx");

@@ -23,7 +23,7 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Cliente aux = new Cliente
+                    var aux = new Cliente
                     {
                         IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
                         Categoria = new CategoriasCliente
@@ -60,7 +60,7 @@ namespace Datos
         public void AgregarCliente(Cliente nuevo)
         {
             datos = new AccesoDatos();
-            AccesoUsuario auxiliar = new AccesoUsuario();
+            var auxiliar = new AccesoUsuario();
 
             try
             {
@@ -109,21 +109,22 @@ namespace Datos
                 aux = new Cliente
                 {
                     IdCliente = datos.Lector["IDCliente"] != DBNull.Value ? (int)datos.Lector["IDCliente"] : 0,
-                    Categoria = new CategoriasCliente()
+                    Categoria = new CategoriasCliente
+                    {
+                        IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0
+                    },
+                    Usuario = new Usuario
+                    {
+                        IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
+                        TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente,
+                        Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
+                        Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
+                    },
+                    Dni = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty,
+                    Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
+                    Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty,
+                    Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty
                 };
-                aux.Categoria.IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0;
-                aux.Usuario = new Usuario
-                {
-                    IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
-                    TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : TipoUsuario.Cliente,
-                    Email = datos.Lector["Email"] != DBNull.Value ? (string)datos.Lector["Email"] : string.Empty,
-                    Clave = datos.Lector["Clave"] != DBNull.Value ? (string)datos.Lector["Clave"] : string.Empty
-                };
-                aux.Dni = datos.Lector["DNI"] != DBNull.Value ? (string)datos.Lector["DNI"] : string.Empty;
-                aux.Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty;
-                aux.Apellido = datos.Lector["Apellido"] != DBNull.Value ? (string)datos.Lector["Apellido"] : string.Empty;
-                aux.Telefono = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : string.Empty;
-
             }
             catch (Exception er)
             {
@@ -146,11 +147,7 @@ namespace Datos
                 datos.Leer();
                 datos.Lector.Read();
 
-                if (datos.Lector["Email"] != DBNull.Value)
-                {
-                    return true;
-                }
-                return false;
+                return datos.Lector["Email"] != DBNull.Value;
             }
             finally
             {
@@ -206,7 +203,7 @@ namespace Datos
         public void ModificarCliente(Cliente mod)
         {
             datos = new AccesoDatos();
-            AccesoUsuario dataUsuarios = new AccesoUsuario();
+            var dataUsuarios = new AccesoUsuario();
             try
             {
                 datos.Conectar();

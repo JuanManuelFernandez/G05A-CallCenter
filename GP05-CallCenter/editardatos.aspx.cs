@@ -44,10 +44,12 @@ namespace CallCenter
             {
                 case "Categorias Cliente":
                 {
-                    AccesoCategorias datos = new AccesoCategorias();
-                    CategoriasCliente nuevo = new CategoriasCliente();
-                    nuevo.Nombre = txtNombre.Text;
-                    nuevo.Descripcion = txtDescripcion.Text;
+                    var datos = new AccesoCategorias();
+                    var nuevo = new CategoriasCliente
+                    {
+                        Nombre = txtNombre.Text,
+                        Descripcion = txtDescripcion.Text
+                    };
                     if (datos.Listar().Find(x => x.Nombre == nuevo.Nombre) != null)
                     {
                         lblRegistro.Visible = true;
@@ -62,10 +64,12 @@ namespace CallCenter
                 }
                 case "Tipos Incidente":
                 {
-                    AccesoTipos datos = new AccesoTipos();
-                    TiposIncidente nuevo = new TiposIncidente();
-                    nuevo.Nombre = txtNombre.Text;
-                    nuevo.Descripcion = txtDescripcion.Text;
+                    var datos = new AccesoTipos();
+                    var nuevo = new TiposIncidente
+                    {
+                        Nombre = txtNombre.Text,
+                        Descripcion = txtDescripcion.Text
+                    };
                     if (datos.Listar().Find(x => x.Nombre == nuevo.Nombre) != null)
                     {
                         lblRegistro.Visible = true;
@@ -80,10 +84,12 @@ namespace CallCenter
                 }
                 case "Prioridades Incidente":
                 {
-                    AccesoPrioridades datos = new AccesoPrioridades();
-                    PrioridadesIncidente nuevo = new PrioridadesIncidente();
-                    nuevo.Nombre = txtNombre.Text;
-                    nuevo.Descripcion = txtDescripcion.Text;
+                    var datos = new AccesoPrioridades();
+                    var nuevo = new PrioridadesIncidente
+                    {
+                        Nombre = txtNombre.Text,
+                        Descripcion = txtDescripcion.Text
+                    };
                     if (datos.Listar().Find(x => x.Nombre == nuevo.Nombre) != null)
                     {
                         lblRegistro.Visible = true;
@@ -104,33 +110,39 @@ namespace CallCenter
             {
                 case "Categorias Cliente":
                 {
-                    AccesoCategorias datos = new AccesoCategorias();
-                    CategoriasCliente nuevo = new CategoriasCliente();
-                    nuevo.Nombre = ddlDato.SelectedItem.Text;
-                    nuevo.Descripcion = txtDescripcion.Text;
-                    nuevo.IdCategoria = int.Parse(ddlDato.SelectedValue);
+                    var datos = new AccesoCategorias();
+                    var nuevo = new CategoriasCliente
+                    {
+                        Nombre = ddlDato.SelectedItem.Text,
+                        Descripcion = txtDescripcion.Text,
+                        IdCategoria = int.Parse(ddlDato.SelectedValue)
+                    };
                     datos.EliminarCategoria(nuevo);
                     Response.Redirect("inicio.aspx");
                     break;
                 }
                 case "Tipos Incidente":
                 {
-                    AccesoTipos datos = new AccesoTipos();
-                    TiposIncidente nuevo = new TiposIncidente();
-                    nuevo.Nombre = ddlDato.SelectedItem.Text;
-                    nuevo.Descripcion = txtDescripcion.Text;
-                    nuevo.IdTipo = int.Parse(ddlDato.SelectedValue);
+                    var datos = new AccesoTipos();
+                    var nuevo = new TiposIncidente
+                    {
+                        Nombre = ddlDato.SelectedItem.Text,
+                        Descripcion = txtDescripcion.Text,
+                        IdTipo = int.Parse(ddlDato.SelectedValue)
+                    };
                     datos.EliminarTipos(nuevo);
                     Response.Redirect("inicio.aspx");
                     break;
                 }
                 case "Prioridades Incidente":
                 {
-                    AccesoPrioridades datos = new AccesoPrioridades();
-                    PrioridadesIncidente nuevo = new PrioridadesIncidente();
-                    nuevo.Nombre = ddlDato.SelectedItem.Text;
-                    nuevo.Descripcion = txtDescripcion.Text;
-                    nuevo.IdPrioridad = int.Parse(ddlDato.SelectedValue);
+                    var datos = new AccesoPrioridades();
+                    var nuevo = new PrioridadesIncidente
+                    {
+                        Nombre = ddlDato.SelectedItem.Text,
+                        Descripcion = txtDescripcion.Text,
+                        IdPrioridad = int.Parse(ddlDato.SelectedValue)
+                    };
                     datos.EliminarPrioridades(nuevo);
                     Response.Redirect("inicio.aspx");
                     break;
@@ -143,33 +155,39 @@ namespace CallCenter
             {
                 case "Categorias Cliente":
                 {
-                    AccesoCategorias datos = new AccesoCategorias();
-                    CategoriasCliente nuevo = new CategoriasCliente();
-                    nuevo.Nombre = ddlDato.SelectedItem.Text;
-                    nuevo.Descripcion = txtDescripcion.Text;
-                    nuevo.IdCategoria = int.Parse(ddlDato.SelectedValue);
+                    var datos = new AccesoCategorias();
+                    var nuevo = new CategoriasCliente
+                    {
+                        Nombre = ddlDato.SelectedItem.Text,
+                        Descripcion = txtDescripcion.Text,
+                        IdCategoria = int.Parse(ddlDato.SelectedValue)
+                    };
                     datos.ModificarCategoria(nuevo);
                     Response.Redirect("inicio.aspx");
                     break;
                 }
                 case "Tipos Incidente":
                 {
-                    AccesoTipos datos = new AccesoTipos();
-                    TiposIncidente nuevo = new TiposIncidente();
-                    nuevo.Nombre = ddlDato.SelectedItem.Text;
-                    nuevo.Descripcion = txtDescripcion.Text;
-                    nuevo.IdTipo = int.Parse(ddlDato.SelectedValue);
+                    var datos = new AccesoTipos();
+                    var nuevo = new TiposIncidente
+                    {
+                        Nombre = ddlDato.SelectedItem.Text,
+                        Descripcion = txtDescripcion.Text,
+                        IdTipo = int.Parse(ddlDato.SelectedValue)
+                    };
                     datos.ModificarTipos(nuevo);
                     Response.Redirect("inicio.aspx");
                     break;
                 }
                 case "Prioridades Incidente":
                 {
-                    AccesoPrioridades datos = new AccesoPrioridades();
-                    PrioridadesIncidente nuevo = new PrioridadesIncidente();
-                    nuevo.Nombre = ddlDato.SelectedItem.Text;
-                    nuevo.Descripcion = txtDescripcion.Text;
-                    nuevo.IdPrioridad = int.Parse(ddlDato.SelectedValue);
+                    var datos = new AccesoPrioridades();
+                    var nuevo = new PrioridadesIncidente
+                    {
+                        Nombre = ddlDato.SelectedItem.Text,
+                        Descripcion = txtDescripcion.Text,
+                        IdPrioridad = int.Parse(ddlDato.SelectedValue)
+                    };
                     datos.ModificarPrioridades(nuevo);
                     Response.Redirect("inicio.aspx");
                     break;
@@ -178,7 +196,7 @@ namespace CallCenter
         }
         public void ListarCategoria()
         {
-            AccesoCategorias data = new AccesoCategorias(); ddlDato.DataSource = data.Listar();
+            var data = new AccesoCategorias(); ddlDato.DataSource = data.Listar();
             ddlDato.DataValueField = "IDCategoria";
             ddlDato.DataTextField = "Nombre";
             ddlDato.DataBind();
@@ -186,7 +204,7 @@ namespace CallCenter
         }
         public void ListarTipos()
         {
-            AccesoTipos data = new AccesoTipos();
+            var data = new AccesoTipos();
             ddlDato.DataSource = data.Listar();
             ddlDato.DataValueField = "IDTipo";
             ddlDato.DataTextField = "Nombre";
@@ -195,7 +213,7 @@ namespace CallCenter
         }
         public void ListarPrioridades()
         {
-            AccesoPrioridades data = new AccesoPrioridades();
+            var data = new AccesoPrioridades();
             ddlDato.DataSource = data.Listar();
             ddlDato.DataValueField = "IDPrioridad";
             ddlDato.DataTextField = "Nombre";
@@ -223,19 +241,19 @@ namespace CallCenter
             {
                 case "Categorias Cliente":
                 {
-                    AccesoCategorias data = new AccesoCategorias();
+                    var data = new AccesoCategorias();
                     txtDescripcion.Text = (data.Listar().Find(x => x.IdCategoria == int.Parse(ddlDato.SelectedValue))).Descripcion;
                     break;
                 }
                 case "Tipos Incidente":
                 {
-                    AccesoTipos data = new AccesoTipos();
+                    var data = new AccesoTipos();
                     txtDescripcion.Text = (data.Listar().Find(x => x.IdTipo == int.Parse(ddlDato.SelectedValue))).Descripcion;
                     break;
                 }
                 case "Prioridades Incidente":
                 {
-                    AccesoPrioridades data = new AccesoPrioridades();
+                    var data = new AccesoPrioridades();
                     txtDescripcion.Text = (data.Listar().Find(x => x.IdPrioridad == int.Parse(ddlDato.SelectedValue))).Descripcion;
                     break;
                 }

@@ -20,7 +20,7 @@ namespace Datos
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
-                    Usuario aux = new Usuario
+                    var aux = new Usuario
                     {
                         IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                         TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
@@ -53,7 +53,7 @@ namespace Datos
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
-                    Usuario aux = new Usuario
+                    var aux = new Usuario
                     {
                         IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                         TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,
@@ -87,7 +87,7 @@ namespace Datos
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
-                    Usuario aux = new Usuario
+                    var aux = new Usuario
                     {
                         IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
                         TipoUsuario = datos.Lector["TipoUsuario"] != DBNull.Value ? (TipoUsuario)datos.Lector["TipoUsuario"] : 0,

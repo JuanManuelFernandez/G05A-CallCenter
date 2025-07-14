@@ -14,7 +14,7 @@ namespace CallCenter
             ParrafoP = "¿Tu primera vez acá? Registrate y tomaremos tu pedido lo más pronto posible";
             if (Session["usuario"] != null)
             {
-                Usuario user = (Usuario)Session["usuario"];
+                var user = (Usuario)Session["usuario"];
                 if (user.TipoUsuario == TipoUsuario.Admin)
                 {
                     telefono.TextMode = TextBoxMode.SingleLine;
@@ -36,7 +36,7 @@ namespace CallCenter
         }
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
-            Usuario user = (Usuario)Session["usuario"];
+            var user = (Usuario)Session["usuario"];
             if(user.TipoUsuario == TipoUsuario.Empleado)
             {
                 CargarCliente();
@@ -52,12 +52,12 @@ namespace CallCenter
         }
         public void CargarCliente()
         {
-            AccesoClientes accesoClientes = new AccesoClientes();
-            AccesoEmpleados accesoEmpleados = new AccesoEmpleados();
-            Cliente nuevoCliente = new Cliente();
-            AccesoUsuario accesoUsuario = new AccesoUsuario();
-            AccesoClientes accesoCliente = new AccesoClientes();
-            Usuario user = (Usuario)Session["usuario"];
+            var accesoClientes = new AccesoClientes();
+            var accesoEmpleados = new AccesoEmpleados();
+            var nuevoCliente = new Cliente();
+            var accesoUsuario = new AccesoUsuario();
+            var accesoCliente = new AccesoClientes();
+            var user = (Usuario)Session["usuario"];
             {
                 nuevoCliente.Dni = dni.Text;
                 nuevoCliente.Nombre = nombre.Text;
@@ -134,11 +134,11 @@ namespace CallCenter
         }
         public void CargarEmpleado()
         {
-            AccesoEmpleados dataEmp = new AccesoEmpleados();
-            AccesoClientes dataCli = new AccesoClientes();
-            AccesoUsuario dataUser = new AccesoUsuario();
-            Empleado nuevo = new Empleado();
-            Usuario user = new Usuario();
+            var dataEmp = new AccesoEmpleados();
+            var dataCli = new AccesoClientes();
+            var dataUser = new AccesoUsuario();
+            var nuevo = new Empleado();
+            var user = new Usuario();
             {
                 nuevo.Dni = dni.Text;
                 nuevo.Legajo = telefono.Text;

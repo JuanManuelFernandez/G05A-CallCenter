@@ -18,7 +18,7 @@ namespace Dominio
 
         private static void CallbackMethod(object state)
         {
-            DateTime ahora = DateTime.Now;
+            var ahora = DateTime.Now;
 
             // Ejecutar SOLO a las 8:00 AM, una sola vez por día
             if (ahora.Hour == 8)
@@ -39,29 +39,29 @@ namespace Dominio
         }
         public static void EnviarReportes()
         {
-            EmailService emailService = new EmailService();
-            AccesoIncidencias datosInc = new AccesoIncidencias();
-            AccesoEmpleados datosEmp = new AccesoEmpleados();
-            AccesoUsuario datosUsr = new AccesoUsuario();
+            var emailService = new EmailService();
+            var datosInc = new AccesoIncidencias();
+            var datosEmp = new AccesoEmpleados();
+            var datosUsr = new AccesoUsuario();
 
-            foreach (Empleado empAux in datosEmp.Listar())
+            foreach (var empAux in datosEmp.Listar())
             {
                 var usrAux = datosUsr.BuscarUsuarioPorId(empAux.IdUsuario);
 
-                bool estadoReporte = usrAux.Reporte;
-                int idUsuario = usrAux.IdUsuario;
+                var estadoReporte = usrAux.Reporte;
+                var idUsuario = usrAux.IdUsuario;
 
                 if (empAux != null &&  datosUsr.BuscarUsuarioPorId(empAux.IdUsuario).Reporte == true)
                 {
-                    int alta = 0;
-                    int media = 0;
-                    int baja = 0;
-                    string emailBody = string.Empty;
+                    var alta = 0;
+                    var media = 0;
+                    var baja = 0;
+                    var emailBody = string.Empty;
 
                     //int idUsuario = 
-                    Usuario usr = datosUsr.BuscarUsuarioPorId(idUsuario); // Acceso a Email
-                    Empleado emp = datosEmp.BuscarPorIdUsuario(idUsuario);
-                    foreach (Incidencias inc in datosInc.Listar())
+                    var usr = datosUsr.BuscarUsuarioPorId(idUsuario); // Acceso a Email
+                    var emp = datosEmp.BuscarPorIdUsuario(idUsuario);
+                    foreach (var inc in datosInc.Listar())
                     {
                         if (inc.IdEmpleado == emp.IdEmpleado)
                         {

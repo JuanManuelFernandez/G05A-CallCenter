@@ -11,8 +11,8 @@ namespace CallCenter
         {
             if(!IsPostBack)
             {
-                AccesoIncidencias datos = new AccesoIncidencias();
-                Usuario user = (Usuario)Session["usuario"];
+                var datos = new AccesoIncidencias();
+                var user = (Usuario)Session["usuario"];
                 if (Session["usuario"] == null)
                 {
                     Session.Add("error", "Debes loguearte para acceder a esta pagina");
@@ -21,7 +21,7 @@ namespace CallCenter
                 else if (user.TipoUsuario == TipoUsuario.Empleado)
                 {
                     //listar incidencia que no tengan IDEmpleado asignado
-                    int sinEmpleado = 0;
+                    var sinEmpleado = 0;
                     var filtroIncidencia = datos.Listar().Where(i => i.IdEmpleado == sinEmpleado).ToList();
 
                     dgvIncidenciasLibres.DataSource = filtroIncidencia;
@@ -34,18 +34,18 @@ namespace CallCenter
         {
             if (e.CommandName == "Tomar")
             {
-                int index = Convert.ToInt32(e.CommandArgument);
-                GridViewRow row = dgvIncidenciasLibres.Rows[index];
-                int idIncidencia = Convert.ToInt32(dgvIncidenciasLibres.DataKeys[index].Value);
-                AccesoEmpleados  emp = new AccesoEmpleados();
-                Usuario user = (Usuario)Session["usuario"];
+                var index = Convert.ToInt32(e.CommandArgument);
+                var row = dgvIncidenciasLibres.Rows[index];
+                var idIncidencia = Convert.ToInt32(dgvIncidenciasLibres.DataKeys[index].Value);
+                var  emp = new AccesoEmpleados();
+                var user = (Usuario)Session["usuario"];
 
                 if (user.TipoUsuario == TipoUsuario.Empleado)
                 {
-                    int idEmpleado = emp.ObtenerIdEmpleadoLogueado(user.IdUsuario);
+                    var idEmpleado = emp.ObtenerIdEmpleadoLogueado(user.IdUsuario);
 
-                    AccesoIncidencias datos = new AccesoIncidencias();
-                    bool pudoAsignarse = datos.AsignarIncidencia(idIncidencia, idEmpleado);
+                    var datos = new AccesoIncidencias();
+                    var pudoAsignarse = datos.AsignarIncidencia(idIncidencia, idEmpleado);
 
                     if (pudoAsignarse)
                     {

@@ -20,7 +20,7 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Incidencias aux = new Incidencias
+                    var aux = new Incidencias
                     {
                         IdIncidencia = (int)datos.Lector["IDIncidencia"],
                         IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
@@ -63,7 +63,7 @@ namespace Datos
         public Incidencias Buscar(string id)
         {
             datos = new AccesoDatos();
-            Incidencias aux = new Incidencias();
+            var aux = new Incidencias();
             datos.Conectar();
             datos.Consultar("SELECT I.IDIncidencia, I.IDEmpleado, I.IDCliente, I.IDTipo, T.Nombre AS NombreTipo, T.Descripcion AS DescripcionTipo, I.IDPrioridad, P.Nombre AS NombrePriori, P.Descripcion AS DescripcionPriori, I.EstadoActual, I.Descripcion, I.FechaYHoraCreacion, I.FechaYHoraResolucion, I.Resolucion FROM Incidencias I INNER JOIN TiposIncidente T ON I.IDTipo = T.IDTipo INNER JOIN PrioridadesIncidente P ON I.IDPrioridad = P.IDPrioridad WHERE IDIncidencia = " + id);
             datos.Leer();
@@ -117,7 +117,7 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Incidencias aux = new Incidencias
+                    var aux = new Incidencias
                     {
                         IdIncidencia = (int)datos.Lector["IDIncidencia"],
                         IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
@@ -169,7 +169,7 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Incidencias aux = new Incidencias
+                    var aux = new Incidencias
                     {
                         IdIncidencia = (int)datos.Lector["IDIncidencia"],
                         IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
@@ -212,7 +212,7 @@ namespace Datos
         }
         public int AgregarIncidencia(Incidencias nueva)
         {
-            AccesoHistorial hist = new AccesoHistorial();
+            var hist = new AccesoHistorial();
             datos = new AccesoDatos();
             try
             {
@@ -226,7 +226,7 @@ namespace Datos
                 datos.SetearParametro("@ESTADOACTUAL", nueva.EstadoActual);
                 datos.SetearParametro("@DESCRIPCION", nueva.Descripcion);
                 datos.SetearParametro("@FECHAYHORACREACION", nueva.FechaYHoraCreacion);
-                int id = (int)datos.EjectuarScalar();
+                var id = (int)datos.EjectuarScalar();
                 nueva.IdIncidencia = id;
                 hist.Agregar(nueva);
                 return id;
@@ -242,7 +242,7 @@ namespace Datos
         }
         public void ModificarIncidencia(Incidencias nueva)
         {
-            AccesoHistorial hist = new AccesoHistorial();
+            var hist = new AccesoHistorial();
             datos = new AccesoDatos();
             try
             {
@@ -279,7 +279,7 @@ namespace Datos
         }
         public void ReactivarIncidencia(Incidencias react)
         {
-            AccesoHistorial hist = new AccesoHistorial();
+            var hist = new AccesoHistorial();
             datos = new AccesoDatos();
             try
             {
@@ -304,7 +304,7 @@ namespace Datos
         }
         public bool AsignarIncidencia(int idIncidencia, int idEmpleado)
         {
-            AccesoHistorial hist = new AccesoHistorial();
+            var hist = new AccesoHistorial();
             datos = new AccesoDatos();
             try
             {
@@ -313,7 +313,7 @@ namespace Datos
                 datos.SetearParametro("@IDEmpleado", idEmpleado);
                 datos.SetearParametro("@IDIncidencia", idIncidencia);
                 datos.EjecutarNonQuery();
-                Incidencias inc = Listar().Find(x => x.IdIncidencia == idIncidencia);
+                var inc = Listar().Find(x => x.IdIncidencia == idIncidencia);
                 hist.Agregar(inc);
 
                 return true;

@@ -19,7 +19,7 @@ namespace Datos
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
-                    PrioridadesIncidente aux = new PrioridadesIncidente
+                    var aux = new PrioridadesIncidente
                     {
                         IdPrioridad = datos.Lector["IDPrioridad"] != DBNull.Value ? (int)datos.Lector["IDPrioridad"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
@@ -45,7 +45,7 @@ namespace Datos
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
-                    PrioridadesIncidente aux = new PrioridadesIncidente
+                    var aux = new PrioridadesIncidente
                     {
                         IdPrioridad = datos.Lector["IDPrioridad"] != DBNull.Value ? (int)datos.Lector["IDPrioridad"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
@@ -63,7 +63,7 @@ namespace Datos
         public PrioridadesIncidente BuscarPorId(int id)
         {
             datos = new AccesoDatos();
-            PrioridadesIncidente valor = new PrioridadesIncidente();
+            var valor = new PrioridadesIncidente();
             try
             {
                 datos.Conectar();

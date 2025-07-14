@@ -20,7 +20,7 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Empleado aux = new Empleado
+                    var aux = new Empleado
                     {
                         IdEmpleado = datos.Lector["IDEmpleado"] != DBNull.Value ? (int)datos.Lector["IDEmpleado"] : 0,
                         IdUsuario = datos.Lector["IDUsuario"] != DBNull.Value ? (int)datos.Lector["IDUsuario"] : 0,
@@ -47,7 +47,7 @@ namespace Datos
         {
             datos = new AccesoDatos();
             empleados = new List<Empleado>();
-            Empleado aux = new Empleado();
+            var aux = new Empleado();
 
             datos.Conectar();
             datos.Consultar("SELECT IDEmpleado, IDUsuario, Legajo, DNI, Nombre, Apellido FROM Empleados WHERE IDUsuario = " + id);
@@ -158,7 +158,7 @@ namespace Datos
         public int ObtenerIdEmpleadoLogueado(int idUsuario)
         {
             datos = new AccesoDatos();
-            int idEmpleado = 0;
+            var idEmpleado = 0;
 
             try
             {

@@ -11,7 +11,7 @@ namespace CallCenter
             lblRegistro.Visible = false;
             if (Session["usuario"] != null)
             {
-                Usuario user = (Usuario)Session["usuario"];
+                var user = (Usuario)Session["usuario"];
                 // Cliente no puede editar sus datos
                 if (user.TipoUsuario == TipoUsuario.Cliente)
                 {
@@ -26,53 +26,53 @@ namespace CallCenter
             {
                 if ((Request.QueryString["IdUsuario"]) != null)
                 {
-                    AccesoUsuario dataUser = new AccesoUsuario();
-                    AccesoEmpleados dataEmp = new AccesoEmpleados();
-                    AccesoClientes dataClientes = new AccesoClientes();
-                    Usuario user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
+                    var dataUser = new AccesoUsuario();
+                    var dataEmp = new AccesoEmpleados();
+                    var dataClientes = new AccesoClientes();
+                    var user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
 
                     if (user.Eliminado)
                     {
                         btnEliminar.Text = "Activar";
                         btnEliminar.CssClass = "btn btn-success btn-lg";
                     }
-                    if (user.TipoUsuario.ToString() == "Cliente")
+                    switch (user.TipoUsuario.ToString())
                     {
-                        CargarCategoria();
-                        Cliente cliente = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
-                        txtDNI.Text = cliente.Dni.ToString();
-                        txtNombre.Text = cliente.Nombre.ToString();
-                        txtApellido.Text = cliente.Apellido.ToString();
-                        txtEmail.Text = cliente.Usuario.Email.ToString();
-                        txtTelefono.Text = cliente.Telefono.ToString();
-                        ddlCategoria.SelectedValue = cliente.Categoria.IdCategoria.ToString();
-                    }
-                    else if (user.TipoUsuario.ToString() == "Empleado")
-                    {
-                        Empleado emp = dataEmp.BuscarPorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
-                        lblCategoria.Visible = false;
-                        ddlCategoria.Visible = false;
-                        lblTelefono.Text = "Legajo";
-                        txtTelefono.TextMode = TextBoxMode.SingleLine;
-                        txtDNI.Text = emp.Dni.ToString();
-                        txtNombre.Text = emp.Nombre;
-                        txtApellido.Text = emp.Apellido;
-                        txtEmail.Text = user.Email;
-                        txtTelefono.Text = emp.Legajo.ToString();
-
+                        case "Cliente":
+                        {
+                            CargarCategoria();
+                            var cliente = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+                            txtDNI.Text = cliente.Dni.ToString();
+                            txtNombre.Text = cliente.Nombre.ToString();
+                            txtApellido.Text = cliente.Apellido.ToString();
+                            txtEmail.Text = cliente.Usuario.Email.ToString();
+                            txtTelefono.Text = cliente.Telefono.ToString();
+                            ddlCategoria.SelectedValue = cliente.Categoria.IdCategoria.ToString();
+                            break;
+                        }
+                        case "Empleado":
+                        {
+                            var emp = dataEmp.BuscarPorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+                            lblCategoria.Visible = false;
+                            ddlCategoria.Visible = false;
+                            lblTelefono.Text = "Legajo";
+                            txtTelefono.TextMode = TextBoxMode.SingleLine;
+                            txtDNI.Text = emp.Dni.ToString();
+                            txtNombre.Text = emp.Nombre;
+                            txtApellido.Text = emp.Apellido;
+                            txtEmail.Text = user.Email;
+                            txtTelefono.Text = emp.Legajo.ToString();
+                            break;
+                        }
                     }
                     return;
-                }
-                else
-                {
-
                 }
             }
         }
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            AccesoUsuario dataUser = new AccesoUsuario();
-            Usuario user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
+            var dataUser = new AccesoUsuario();
+            var user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
             if (user.TipoUsuario.ToString() == "Cliente")
             {
                 if (ModificarCliente()) {
@@ -91,25 +91,25 @@ namespace CallCenter
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            AccesoUsuario data = new AccesoUsuario();
+            var data = new AccesoUsuario();
             if (btnEliminar.Text == "Activar")
             {
                 data.ActivarUsuario(int.Parse(Request.QueryString["IdUsuario"]));
-                Response.Redirect("admin.aspx");
             }
             else
             {
                 data.EliminarUsuarioId(int.Parse(Request.QueryString["IdUsuario"]));
-                Response.Redirect("admin.aspx");
             }
+
+            Response.Redirect("admin.aspx");
         }
         public bool ModificarEmpleado()
         {
-            AccesoClientes dataClientes = new AccesoClientes();
-            AccesoUsuario dataUser = new AccesoUsuario();
-            Usuario user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
-            AccesoEmpleados dataEmpleados = new AccesoEmpleados();
-            Empleado nuevo = dataEmpleados.BuscarPorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+            var dataClientes = new AccesoClientes();
+            var dataUser = new AccesoUsuario();
+            var user = dataUser.BuscarUsuarioPorId(int.Parse(Request.QueryString["IdUsuario"]));
+            var dataEmpleados = new AccesoEmpleados();
+            var nuevo = dataEmpleados.BuscarPorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
 
 
 
@@ -144,10 +144,10 @@ namespace CallCenter
         }
         public bool ModificarCliente()
         {
-            AccesoEmpleados dataEmpleados = new AccesoEmpleados();
-            AccesoUsuario dataUser = new AccesoUsuario();
-            AccesoClientes dataClientes = new AccesoClientes();
-            Cliente nuevo = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
+            var dataEmpleados = new AccesoEmpleados();
+            var dataUser = new AccesoUsuario();
+            var dataClientes = new AccesoClientes();
+            var nuevo = dataClientes.BuscarClientePorIdUsuario(int.Parse(Request.QueryString["IdUsuario"]));
 
             if (dataEmpleados.Listar().Find(x => x.Dni == txtDNI.Text && x.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null || dataClientes.Listar().Find(x => x.Dni == txtDNI.Text && x.Usuario.IdUsuario != int.Parse(Request.QueryString["IdUsuario"])) != null)
             {
@@ -186,7 +186,7 @@ namespace CallCenter
         }
         public void CargarCategoria()
         {
-            AccesoCategorias datos = new AccesoCategorias();
+            var datos = new AccesoCategorias();
             try
             {
                 ddlCategoria.DataSource = datos.Listar();

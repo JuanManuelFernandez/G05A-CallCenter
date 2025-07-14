@@ -20,7 +20,7 @@ namespace Datos
 
                 while (datos.Lector.Read())
                 {
-                    CategoriasCliente aux = new CategoriasCliente
+                    var aux = new CategoriasCliente
                     {
                         IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
@@ -51,7 +51,7 @@ namespace Datos
 
                 while (datos.Lector.Read())
                 {
-                    CategoriasCliente aux = new CategoriasCliente
+                    var aux = new CategoriasCliente
                     {
                         IdCategoria = datos.Lector["IDCategoria"] != DBNull.Value ? (int)datos.Lector["IDCategoria"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,

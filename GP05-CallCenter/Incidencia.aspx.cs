@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.UI.WebControls;
 using Datos;
 using Dominio;
@@ -9,11 +10,15 @@ namespace CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarTipo();
-            CargarPrioridad();
-            CargarCategoria();
-            CargarPlantilla();
-            Usuario user = (Usuario)Session["usuario"];
+            if (!IsPostBack)
+            {
+                CargarTipo();
+                CargarPrioridad();
+                CargarCategoria();
+                CargarPlantilla();
+            }
+
+            var user = (Usuario)Session["usuario"];
             if (Session["usuario"] == null)
             {
                 Response.Redirect("inicio.aspx");
@@ -68,14 +73,14 @@ namespace CallCenter
             btnCargar.Text = "Aceptar";
             if (!IsPostBack)
             {
-                string id = Request.QueryString["id"].ToString();
+                var id = Request.QueryString["id"].ToString();
 
-                AccesoIncidencias datosInc = new AccesoIncidencias();
-                AccesoClientes datosCli = new AccesoClientes();
-                AccesoEmpleados datosEmp = new AccesoEmpleados();
-                Incidencias incActual = datosInc.Listar().Find(x => x.IdIncidencia == int.Parse(id));
-                Cliente cliente = datosCli.Listar().Find(x => x.IdCliente == incActual.IdCliente);
-                Empleado empleado = datosEmp.Listar().Find(x => x.IdEmpleado == incActual.IdEmpleado);
+                var datosInc = new AccesoIncidencias();
+                var datosCli = new AccesoClientes();
+                var datosEmp = new AccesoEmpleados();
+                var incActual = datosInc.Listar().Find(x => x.IdIncidencia == int.Parse(id));
+                var cliente = datosCli.Listar().Find(x => x.IdCliente == incActual.IdCliente);
+                var empleado = datosEmp.Listar().Find(x => x.IdEmpleado == incActual.IdEmpleado);
 
                 txtDNI.Text = cliente.Dni.ToString();
                 txtMail.Text = cliente.Usuario.Email;
@@ -111,15 +116,15 @@ namespace CallCenter
         }
         protected void BtnCargar_Click(object sender, EventArgs e)
         {
-            AccesoIncidencias dataInc = new AccesoIncidencias();
-            Usuario user = (Usuario)Session["usuario"];
-            EmailService emailService = new EmailService();
-            AccesoClientes dataCli = new AccesoClientes();
-            AccesoEmpleados dataEmp = new AccesoEmpleados();
+            var dataInc = new AccesoIncidencias();
+            var user = (Usuario)Session["usuario"];
+            var emailService = new EmailService();
+            var dataCli = new AccesoClientes();
+            var dataEmp = new AccesoEmpleados();
 
             if (user.TipoUsuario == TipoUsuario.Cliente)
             {
-                Incidencias nuevaInc = new Incidencias
+                var nuevaInc = new Incidencias
                 {
                     EstadoActual = "Pendiente",
                     IdCliente = (dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario)).IdCliente,
@@ -142,7 +147,7 @@ namespace CallCenter
                     lblError.Visible = true;
                     return;
                 }
-                int idIncidencia = dataInc.AgregarIncidencia(nuevaInc);
+                var idIncidencia = dataInc.AgregarIncidencia(nuevaInc);
                 nuevaInc.IdIncidencia = idIncidencia;
                 nuevaInc.EstadoActual = "Pendiente";
                 emailService.ArmarCorreo(txtMail.Text, "Creacion de Incidencias #" + idIncidencia, "Descripcion: <br>" + txtDescripcion.Text);
@@ -152,7 +157,7 @@ namespace CallCenter
             {
                 if (Request.QueryString["id"] != null)
                 {
-                    Incidencias nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
+                    var nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
                     if (nuevaInc.FechaYHoraResolucion != DateTime.MaxValue)
                     {
                         dataInc.ReactivarIncidencia(nuevaInc);
@@ -190,8 +195,8 @@ namespace CallCenter
                 {
                     if (ValidacionesCliente())
                     {
-                        AccesoUsuario dataUser = new AccesoUsuario();
-                        Cliente nuevoCli = new Cliente
+                        var dataUser = new AccesoUsuario();
+                        var nuevoCli = new Cliente
                         {
                             Usuario = new Usuario
                             {
@@ -208,29 +213,23 @@ namespace CallCenter
                                 IdCategoria = int.Parse(ddlCategoria.SelectedValue),
                             }
                         };
-                        foreach (Usuario usuario in dataUser.Listar())
+                        if (dataUser.Listar().Any(usuario => usuario.Email == txtMail.Text && usuario.TipoUsuario != TipoUsuario.Cliente))
                         {
-                            if (usuario.Email == txtMail.Text && usuario.TipoUsuario != TipoUsuario.Cliente)
-                            {
-                                lblError.Text = "El mail ya se encuentra registrado...";
-                                lblError.Visible = true;
-                                return;
-                            }
+                            lblError.Text = "El mail ya se encuentra registrado...";
+                            lblError.Visible = true;
+                            return;
                         }
-                        foreach (Empleado emp in dataEmp.Listar())
+                        if (dataEmp.Listar().Any(emp => emp.Dni == txtDNI.Text))
                         {
-                            if (emp.Dni == txtDNI.Text)
-                            {
-                                lblError.Text = "El DNI ya se encuentra registrado...";
-                                lblError.Visible = true;
-                                return;
-                            }
+                            lblError.Text = "El DNI ya se encuentra registrado...";
+                            lblError.Visible = true;
+                            return;
                         }
 
                         dataCli.AgregarCliente(nuevoCli);
                     }
 
-                    Incidencias inc = new Incidencias
+                    var inc = new Incidencias
                     {
                         IdCliente = (dataCli.Listar().Find(x => x.Dni == txtDNI.Text)).IdCliente,
                         IdEmpleado = (dataEmp.Listar().Find(x => x.IdUsuario == user.IdUsuario)).IdEmpleado,
@@ -259,7 +258,7 @@ namespace CallCenter
                         lblError.Visible = true;
                         return;
                     }
-                    int idIncidencia = dataInc.AgregarIncidencia(inc);
+                    var idIncidencia = dataInc.AgregarIncidencia(inc);
                     emailService.ArmarCorreo(txtMail.Text, "Creacion de Incidencias #" + idIncidencia, "Descripcion: <br>" + txtDescripcion.Text);
                 }
             }
@@ -277,10 +276,10 @@ namespace CallCenter
         }
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
-            AccesoIncidencias dataInc = new AccesoIncidencias();
-            Usuario user = (Usuario)Session["usuario"];
-            AccesoClientes dataCli = new AccesoClientes(); ;
-            
+            var dataInc = new AccesoIncidencias();
+            var user = (Usuario)Session["usuario"];
+            var dataCli = new AccesoClientes(); ;
+
             //BORRAR?
 
             //if (user.TipoUsuario == TipoUsuario.Cliente)
@@ -330,7 +329,7 @@ namespace CallCenter
             //}
             if (Request.QueryString["id"] != null)
             {
-                Incidencias nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
+                var nuevaInc = dataInc.Listar().Find(x => x.IdIncidencia == int.Parse(Request.QueryString["id"]));
                 if (nuevaInc != null)
                 {
                     nuevaInc.Tipo.IdTipo = int.Parse(ddlTipo.SelectedValue);
@@ -350,45 +349,39 @@ namespace CallCenter
         }
         protected void BtnActualizarCliente_Click(object sender, EventArgs e)
         {
-            AccesoClientes dataCli = new AccesoClientes();
-            Cliente cli = dataCli.Listar().Find(x => x.Dni == txtDNI.Text);
+            var dataCli = new AccesoClientes();
+            var cli = dataCli.Listar().Find(x => x.Dni == txtDNI.Text);
             var id = cli.Usuario.IdUsuario;
             Response.Redirect("editarcuenta.aspx?IdUsuario=" + id);
         }
         public void CargarTipo()
         {
-            if (!IsPostBack)
+            var datos = new AccesoTipos();
+            try
             {
-                AccesoTipos datos = new AccesoTipos();
-                try
-                {
-                    ddlTipo.DataSource = datos.Listar();
-                    ddlTipo.DataValueField = "IDTipo";
-                    ddlTipo.DataTextField = "Nombre";
-                    ddlTipo.DataBind();
-                }
-                catch (Exception er)
-                {
-                    throw er;
-                }
+                ddlTipo.DataSource = datos.Listar();
+                ddlTipo.DataValueField = "IDTipo";
+                ddlTipo.DataTextField = "Nombre";
+                ddlTipo.DataBind();
+            }
+            catch (Exception er)
+            {
+                throw er;
             }
         }
         public void CargarPrioridad()
         {
-            if (!IsPostBack)
+            var datos = new AccesoPrioridades();
+            try
             {
-                AccesoPrioridades datos = new AccesoPrioridades();
-                try
-                {
-                    ddlPrioridad.DataSource = datos.Listar();
-                    ddlPrioridad.DataValueField = "IDPrioridad";
-                    ddlPrioridad.DataTextField = "Nombre";
-                    ddlPrioridad.DataBind();
-                }
-                catch (Exception er)
-                {
-                    throw er;
-                }
+                ddlPrioridad.DataSource = datos.Listar();
+                ddlPrioridad.DataValueField = "IDPrioridad";
+                ddlPrioridad.DataTextField = "Nombre";
+                ddlPrioridad.DataBind();
+            }
+            catch (Exception er)
+            {
+                throw er;
             }
         }
         protected void BtnCancelar_Click(object sender, EventArgs e)
@@ -397,9 +390,9 @@ namespace CallCenter
         }
         public void CargarDatosCliente()
         {
-            Usuario user = ((Usuario)Session["usuario"]);
-            AccesoClientes dataCli = new AccesoClientes();
-            Cliente cli = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
+            var user = ((Usuario)Session["usuario"]);
+            var dataCli = new AccesoClientes();
+            var cli = dataCli.Listar().Find(x => x.Usuario.IdUsuario == user.IdUsuario);
             txtApellido.Enabled = false;
             txtResolucion.Visible = false;
             lblResolucion.Visible = false;
@@ -424,141 +417,134 @@ namespace CallCenter
         }
         public void CargarCategoria()
         {
-            if (!IsPostBack)
+            var datos = new AccesoCategorias();
+            try
             {
-                AccesoCategorias datos = new AccesoCategorias();
-                try
-                {
-                    ddlCategoria.DataSource = datos.Listar();
-                    ddlCategoria.DataValueField = "IDCategoria";
-                    ddlCategoria.DataTextField = "Nombre";
-                    ddlCategoria.DataBind();
-                }
-                catch (Exception er)
-                {
-                    throw er;
-                }
+                ddlCategoria.DataSource = datos.Listar();
+                ddlCategoria.DataValueField = "IDCategoria";
+                ddlCategoria.DataTextField = "Nombre";
+                ddlCategoria.DataBind();
+            }
+            catch (Exception er)
+            {
+                throw er;
             }
         }
         public void CargarPlantilla()
         {
-            if (!IsPostBack)
+            var datos = new AccesoPlantillas();
+            try
             {
-                AccesoPlantillas datos = new AccesoPlantillas();
-                try
-                {
-                    ddlPlantillas.DataSource = datos.Listar();
-                    ddlPlantillas.DataValueField = "IDPlantilla";
-                    ddlPlantillas.DataTextField = "Nombre";
-                    ddlPlantillas.DataBind();
-                }
-                catch (Exception er)
-                {
-                    throw er;
-                }
+                ddlPlantillas.DataSource = datos.Listar();
+                ddlPlantillas.DataValueField = "IDPlantilla";
+                ddlPlantillas.DataTextField = "Nombre";
+                ddlPlantillas.DataBind();
+            }
+            catch (Exception er)
+            {
+                throw er;
             }
         }
         protected void BtnAplicarPlantilla_Click(object sender, EventArgs e)
         {
-            if (ddlPlantillas.SelectedItem.Text == "Caso inactivo")
+            if (ddlPlantillas.SelectedValue != null)
             {
-                AccesoPlantillas data = new AccesoPlantillas();
-                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
+                var data = new AccesoPlantillas();
+                int idPlantilla = int.Parse(ddlPlantillas.SelectedValue);
+                var plantilla = data.Listar().Find(x => x.IdPlantilla == idPlantilla);
+                if (plantilla != null)
+                {
+                    txtDescripcion.Text = plantilla.Descripcion;
+                }
             }
-            else if (ddlPlantillas.SelectedItem.Text == "Completar datos")
-            {
-                AccesoPlantillas data = new AccesoPlantillas();
-                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
-            }
-            else if (ddlPlantillas.SelectedItem.Text == "Derivaciones")
-            {
-                AccesoPlantillas data = new AccesoPlantillas();
-                txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
-            }
+
+            //if (ddlPlantillas.SelectedItem.Text == "Caso inactivo")
+            //{
+            //    var data = new AccesoPlantillas();
+            //    txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
+            //}
+            //else if (ddlPlantillas.SelectedItem.Text == "Completar datos")
+            //{
+            //    var data = new AccesoPlantillas();
+            //    txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
+            //}
+            //else if (ddlPlantillas.SelectedItem.Text == "Derivaciones")
+            //{
+            //    var data = new AccesoPlantillas();
+            //    txtDescripcion.Text = (data.Listar().Find(x => x.IdPlantilla == int.Parse(ddlPlantillas.SelectedValue))).Descripcion;
+            //}
         }
 
         public bool ValidacionesCliente()
         {
-            AccesoClientes dataCli = new AccesoClientes();
-            foreach (Cliente aux in dataCli.Listar())
+            var dataCli = new AccesoClientes();
+            foreach (var aux in dataCli.Listar().Where(aux => txtDNI.Text == aux.Dni || txtTelefono.Text == aux.Telefono))
             {
-                if (txtDNI.Text == aux.Dni || txtTelefono.Text == aux.Telefono)
-                {
-                    txtDNI.Text = aux.Dni;
-                    txtNombre.Text = aux.Nombre;
-                    txtApellido.Text = aux.Apellido;
-                    txtMail.Text = aux.Usuario.Email;
-                    txtTelefono.Text = aux.Telefono;
-                    txtDNI.Enabled = false;
-                    txtNombre.Enabled = false;
-                    txtTelefono.Enabled = false;
-                    ddlCategoria.Enabled = false;
-                    return false;
-                }
+                txtDNI.Text = aux.Dni;
+                txtNombre.Text = aux.Nombre;
+                txtApellido.Text = aux.Apellido;
+                txtMail.Text = aux.Usuario.Email;
+                txtTelefono.Text = aux.Telefono;
+                txtDNI.Enabled = false;
+                txtNombre.Enabled = false;
+                txtTelefono.Enabled = false;
+                ddlCategoria.Enabled = false;
+                return false;
             }
             return true;
         }
         protected void TxtMail_TextChanged(object sender, EventArgs e)
         {
-            AccesoClientes dataCli = new AccesoClientes();
-            foreach (Cliente aux in dataCli.Listar())
+            var dataCli = new AccesoClientes();
+            foreach (var aux in dataCli.Listar().Where(aux => txtMail.Text == aux.Usuario.Email))
             {
-                if (txtMail.Text == aux.Usuario.Email)
-                {
-                    txtDNI.Text = aux.Dni;
-                    txtNombre.Text = aux.Nombre;
-                    txtApellido.Text = aux.Apellido;
-                    txtMail.Text = aux.Usuario.Email;
-                    txtTelefono.Text = aux.Telefono;
-                    txtApellido.Enabled = false;
-                    txtDNI.Enabled = false;
-                    txtNombre.Enabled = false;
-                    txtTelefono.Enabled = false;
-                    ddlCategoria.Enabled = false;
-                    return;
-                }
+                txtDNI.Text = aux.Dni;
+                txtNombre.Text = aux.Nombre;
+                txtApellido.Text = aux.Apellido;
+                txtMail.Text = aux.Usuario.Email;
+                txtTelefono.Text = aux.Telefono;
+                txtApellido.Enabled = false;
+                txtDNI.Enabled = false;
+                txtNombre.Enabled = false;
+                txtTelefono.Enabled = false;
+                ddlCategoria.Enabled = false;
+                return;
             }
         }
         protected void TxtDNI_TextChanged(object sender, EventArgs e)
         {
-            AccesoClientes dataCli = new AccesoClientes();
-            foreach (Cliente aux in dataCli.Listar())
+            var dataCli = new AccesoClientes();
+            foreach (var aux in dataCli.Listar().Where(aux => txtDNI.Text == aux.Dni))
             {
-                if (txtDNI.Text == aux.Dni)
-                {
-                    txtDNI.Text = aux.Dni;
-                    txtNombre.Text = aux.Nombre;
-                    txtApellido.Text = aux.Apellido;
-                    txtMail.Text = aux.Usuario.Email;
-                    txtTelefono.Text = aux.Telefono;
-                    txtApellido.Enabled = false;
-                    txtMail.Enabled = false;
-                    txtNombre.Enabled = false;
-                    txtTelefono.Enabled = false;
-                    ddlCategoria.Enabled = false;
-                    return;
-                }
+                txtDNI.Text = aux.Dni;
+                txtNombre.Text = aux.Nombre;
+                txtApellido.Text = aux.Apellido;
+                txtMail.Text = aux.Usuario.Email;
+                txtTelefono.Text = aux.Telefono;
+                txtApellido.Enabled = false;
+                txtMail.Enabled = false;
+                txtNombre.Enabled = false;
+                txtTelefono.Enabled = false;
+                ddlCategoria.Enabled = false;
+                return;
             }
         }
         protected void TxtTelefono_TextChanged(object sender, EventArgs e)
         {
-            AccesoClientes dataCli = new AccesoClientes();
-            foreach (Cliente aux in dataCli.Listar())
+            var dataCli = new AccesoClientes();
+            foreach (var aux in dataCli.Listar().Where(aux => txtTelefono.Text == aux.Telefono))
             {
-                if (txtTelefono.Text == aux.Telefono)
-                {
-                    txtDNI.Text = aux.Dni;
-                    txtNombre.Text = aux.Nombre;
-                    txtApellido.Text = aux.Apellido;
-                    txtMail.Text = aux.Usuario.Email;
-                    txtTelefono.Text = aux.Telefono;
-                    txtApellido.Enabled = false;
-                    txtMail.Enabled = false;
-                    txtNombre.Enabled = false;
-                    txtDNI.Enabled = false;
-                    ddlCategoria.Enabled = false;
-                    return;
-                }
+                txtDNI.Text = aux.Dni;
+                txtNombre.Text = aux.Nombre;
+                txtApellido.Text = aux.Apellido;
+                txtMail.Text = aux.Usuario.Email;
+                txtTelefono.Text = aux.Telefono;
+                txtApellido.Enabled = false;
+                txtMail.Enabled = false;
+                txtNombre.Enabled = false;
+                txtDNI.Enabled = false;
+                ddlCategoria.Enabled = false;
+                return;
             }
         }
     }

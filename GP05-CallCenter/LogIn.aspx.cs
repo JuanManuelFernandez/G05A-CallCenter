@@ -14,11 +14,16 @@ namespace CallCenter
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-            Usuario usuario;
-            AccesoUsuario accesoUsuario = new AccesoUsuario();
+            var accesoUsuario = new AccesoUsuario();
             try
             {
-                usuario = accesoUsuario.Listar().Find(x => x.Email == txtEmail.Text && x.Clave == txtClave.Text && x.Eliminado == false) != null ? accesoUsuario.Listar().Find(x => x.Email == txtEmail.Text && x.Clave == txtClave.Text) : new Usuario();
+                var usuario = accesoUsuario.Listar().Find(x => 
+                    x.Email == txtEmail.Text &&
+                    x.Clave == txtClave.Text && x.Eliminado == false) != null ?
+                    accesoUsuario.Listar().Find(x =>
+                        x.Email == txtEmail.Text &&
+                        x.Clave == txtClave.Text) : new Usuario();
+
                 if (accesoUsuario.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);

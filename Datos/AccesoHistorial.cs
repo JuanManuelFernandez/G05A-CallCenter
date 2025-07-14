@@ -20,7 +20,7 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Historial aux = new Historial
+                    var aux = new Historial
                     {
                         IdHistorial = datos.Lector["IDHistorial"] != DBNull.Value ? (int)datos.Lector["IDHistorial"] : 0,
                         IdIncidencia = datos.Lector["IDIncidencia"] != DBNull.Value ? (int)datos.Lector["IDIncidencia"] : 0,
@@ -52,7 +52,7 @@ namespace Datos
             {
                 while (datos.Lector.Read())
                 {
-                    Historial aux = new Historial
+                    var aux = new Historial
                     {
                         IdHistorial = datos.Lector["IDHistorial"] != DBNull.Value ? (int)datos.Lector["IDHistorial"] : 0,
                         IdIncidencia = datos.Lector["IDIncidencia"] != DBNull.Value ? (int)datos.Lector["IDIncidencia"] : 0,

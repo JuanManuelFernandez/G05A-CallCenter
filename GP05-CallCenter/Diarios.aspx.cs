@@ -11,12 +11,12 @@ namespace CallCenter
         {
             if (Session["usuario"] != null)
             {
-                Usuario user = (Usuario)Session["usuario"];
+                var user = (Usuario)Session["usuario"];
                 if (user.TipoUsuario == TipoUsuario.Admin)
                 {
                     if (!IsPostBack)
                     {
-                        AccesoUsuario datosUsers = new AccesoUsuario();
+                        var datosUsers = new AccesoUsuario();
                         dgvEmpleados.DataSource = datosUsers.ListarEmpleados();
                         dgvEmpleados.DataBind();
                     }
@@ -27,25 +27,25 @@ namespace CallCenter
         }
         protected void BtnActualizar_Click(object sender, EventArgs e)
         {
-            AccesoIncidencias datosInc = new AccesoIncidencias();
-            AccesoEmpleados datosEmp = new AccesoEmpleados();
-            AccesoUsuario datosUsr = new AccesoUsuario();
-            EmailService emailService = new EmailService();
+            var datosInc = new AccesoIncidencias();
+            var datosEmp = new AccesoEmpleados();
+            var datosUsr = new AccesoUsuario();
+            var emailService = new EmailService();
 
             foreach (GridViewRow row in dgvEmpleados.Rows)
             {
-                CheckBox chk = (CheckBox)row.FindControl("chkEnviar");
+                var chk = (CheckBox)row.FindControl("chkEnviar");
                 if (chk != null && chk.Checked)
                 {
-                    int alta = 0;
-                    int media = 0;
-                    int baja = 0;
-                    string emailBody = string.Empty;
+                    var alta = 0;
+                    var media = 0;
+                    var baja = 0;
+                    var emailBody = string.Empty;
 
-                    int idUsuario = Convert.ToInt32(dgvEmpleados.DataKeys[row.RowIndex].Value);
-                    Usuario usr = datosUsr.BuscarUsuarioPorId(idUsuario); // Acceso a Email
-                    Empleado emp = datosEmp.BuscarPorIdUsuario(idUsuario);
-                    foreach (Incidencias inc in datosInc.Listar())
+                    var idUsuario = Convert.ToInt32(dgvEmpleados.DataKeys[row.RowIndex].Value);
+                    var usr = datosUsr.BuscarUsuarioPorId(idUsuario); // Acceso a Email
+                    var emp = datosEmp.BuscarPorIdUsuario(idUsuario);
+                    foreach (var inc in datosInc.Listar())
                     {
                         if (inc.IdEmpleado == emp.IdEmpleado)
                         {

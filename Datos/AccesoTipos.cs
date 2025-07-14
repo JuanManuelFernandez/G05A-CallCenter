@@ -19,7 +19,7 @@ namespace Datos
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
-                    TiposIncidente aux = new TiposIncidente
+                    var aux = new TiposIncidente
                     {
                         IdTipo = datos.Lector["IDTipo"] != DBNull.Value ? (int)datos.Lector["IDTipo"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,
@@ -45,7 +45,7 @@ namespace Datos
                 datos.Leer();
                 while (datos.Lector.Read())
                 {
-                    TiposIncidente aux = new TiposIncidente
+                    var aux = new TiposIncidente
                     {
                         IdTipo = datos.Lector["IDTipo"] != DBNull.Value ? (int)datos.Lector["IDTipo"] : 0,
                         Nombre = datos.Lector["Nombre"] != DBNull.Value ? (string)datos.Lector["Nombre"] : string.Empty,

@@ -7,9 +7,9 @@ namespace CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AccesoHistorial data = new AccesoHistorial();
+            var data = new AccesoHistorial();
 
-            int idIncidencia = int.Parse(Request.QueryString["id"]);
+            var idIncidencia = int.Parse(Request.QueryString["id"]);
             dgvHistorial.DataSource = data.ListarPorIdIncidencia(idIncidencia);
 
             dgvHistorial.DataBind();
